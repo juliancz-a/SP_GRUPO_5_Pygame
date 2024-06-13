@@ -1,10 +1,8 @@
 import json
 import pprint
 def update_data (path:str, data):
-    
     with open(path, "w", encoding="utf8") as archive:
         data = json.dump(data, archive,indent=4)
-        
 
 data = [
     {"P, R, O, A, E, S": 
@@ -28,32 +26,5 @@ data = [
     ]
     }
     ]
-pprint.pprint(data, indent=4)
-# update_data(r"code\data\data.json", data)
 
-# import json
-# print()
-# import re
-
-
-# def repl_func(match: re.Match):
-#     return " ".join(match.group().split())
-
-
-# def main():
-#     data = {
-#         "lists": [
-#             [1, 2, 3],
-#             [4, 5, 6]
-#         ],
-#         "who": "me"
-#     }
-
-#     json_str = json.dumps(data, indent=4)
-#     print(json_str)
-#     print()
-    
-#     json_str = re.sub(r"(?<=\[)[^\[\]]+(?=])", repl_func, json_str)
-#     print(json_str)
-
-# main()
+update_data(r"code\data\data.json", data)
