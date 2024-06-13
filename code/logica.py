@@ -1,6 +1,7 @@
 letras = ['L', 'A', 'C', 'E', 'T', 'O']
 
 from functools import reduce
+import pygame
 import random
 
 def swap (lista:list, a:int, b:int):
@@ -14,5 +15,5 @@ def shuffle (letras:list[str]) -> list[str]:
         swap(letras, i, new_index)
 
     return letras
-    # test = reduce(lambda last, actual)
-print(shuffle(letras))
+
+
