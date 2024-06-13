@@ -29,6 +29,7 @@ diccionario = [
         "trapeo", "trapo", "par", "topar", "pare", "pato",
         "tope", "rap", "rateo", "rapto", "tropa", "pote", 
         "peor", "taper", "parte", "arte", "aro", "por", "rato"
-    ]
+        "opera", "peta", "opta", "poeta", "ropa", "ore"
+    ],
     }
     ]
