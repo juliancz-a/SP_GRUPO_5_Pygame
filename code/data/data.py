@@ -1,9 +1,15 @@
 import json
-import pprint
+
 def update_data (path:str, data):
     with open(path, "w", encoding="utf8") as archive:
-        data = json.dump(data, archive,indent=4)
-#test
+        data = json.dump(data,archive,indent=4)
+
+def read_data(path:str) -> list[dict]:
+    with open(path, "r", encoding="utf8") as archive:
+        data = json.load(archive)
+    
+    return data
+
 data = [
     {"P, R, O, A, E, S": 
     [
@@ -14,15 +20,25 @@ data = [
         "sopare", "sopear", "sopera", "pares",
         "opera", "preso", "sopar", "rapos", "paseo",
         "pera", "pose", "paro", "ropa", "sapo", 
-        "repo", "rapo", "pos", "rap", "res", "par"
+        "repo", "rapo", "pos", "rap", "res", "par", "por"
     ],
 
-    "R, C, A, E, S, E": 
+    "A, S, R, C, E, A": 
     [
         "aceras", "acreas", "arcase", "arceas",
         "careas", "caresa", "casare", "casera",
-        "resaca", "sacare", "sacare", "secara",
-        "cesara", "cesara", "escara"
+        "resaca", "sacare", "secara", "resaca",
+        "cesara", "escara", "seca", "caer", "rasca",
+        "res", "casar", "arcas", "asear", "secar",
+        "ser", "era", "cera", "crea", "esa", "sea",
+        "cara", "ras", "arca"
+    ],
+    "A, R, P, O, T, E": 
+    [
+        "aporte", "apreto", "atrope", "optare", "patero", 
+        "poetar", "portea", "potare", "potear", "potera", 
+        "potrea", "ropeta", "topare", "topear", "topera", 
+        "trapeo", "trapo", ""
     ]
     }
     ]
