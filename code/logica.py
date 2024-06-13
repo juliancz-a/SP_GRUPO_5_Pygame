@@ -46,3 +46,14 @@ def sumar_puntaje (lista_coincidencias:list[str]) -> int:
         suma_puntaje += int(len(coincidencia))
 
     return suma_puntaje 
+
+import time
+
+contador = 90
+
+while contador > 0:
+    print(contador)
+    time.sleep(1)
+    contador -= 1
+
+print("YAATA!!")
