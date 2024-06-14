@@ -40,3 +40,16 @@ def coincidencias(combinacion: dict[str], diccionario):
 palabra = coincidencias("P, R, O, A, E, S", diccionario)
 print("Coincidencia:", palabra)
 
+
+    return suma_puntaje 
+
+import time
+
+contador = 90
+
+while contador > 0:
+    print(contador)
+    time.sleep(1)
+    contador -= 1
+
+print("YAATA!!")
