@@ -32,8 +32,8 @@ diccionario = [
         "opera", "peta", "opta", "poeta", "ropa", "ore"
     ],
     "C, A, E, R, T, O": [
-        "acerto", "tocare", "tacero", "rector", "cortar",
-        "torea", "torca", "tarco", "recta", "recto", "cetro",
+        "tocare", "tacero", "rector", "cortar","torea",
+        "torca", "tarco", "recta", "recto", "cetro",
         "corte", "corta", "actor", "toca", "taco", "rato",
         "roca", "crea", "cero", "arte", "acre", "caro", "ora",
         "era", "ceo", "oca", "ate", "caer", "careto"
