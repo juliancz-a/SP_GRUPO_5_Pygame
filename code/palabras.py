@@ -36,7 +36,7 @@ diccionario = [
         "torea", "torca", "tarco", "recta", "recto", "cetro",
         "corte", "corta", "actor", "toca", "taco", "rato",
         "roca", "crea", "cero", "arte", "acre", "caro", "ora",
-        "era", "ceo", "oca", "ate"
+        "era", "ceo", "oca", "ate", "caer", "careto"
         ]
     }
     ]

@@ -40,6 +40,10 @@ def coincidencias(combinacion: dict[str], diccionario):
 palabra = coincidencias("P, R, O, A, E, S", diccionario)
 print("Coincidencia:", palabra)
 
+def sumar_puntaje (lista_coincidencias:list[str]) -> int:
+    suma_puntaje = 0
+    for coincidencia in lista_coincidencias:
+        suma_puntaje += int(len(coincidencia))
 
     return suma_puntaje 
 
