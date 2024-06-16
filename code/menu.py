@@ -1,5 +1,5 @@
 import pygame
-import class_box
+from class_box import *
 #Colores
 BLANCO = (255, 255, 255)
 NEGRO = (0, 0, 0)
@@ -28,6 +28,10 @@ activo = False
 text = "Jugar"
 flag_run = True
 
+cajita = Box((150, 50), (150, 150))
+Box.set_text(cajita, "MARCELA")
+Box.set_color(cajita, VERDE)
+
 while flag_run:
     #manejador central
     lista_eventos = pygame.event.get()
@@ -37,6 +41,8 @@ while flag_run:
         elif evento.type == pygame.MOUSEBUTTONDOWN:
             if play_button.collidepoint(evento.pos):
                 print("JUGAR")
+            elif cajita.collidepoint(evento.pos):
+                print("AYUDAAAAAAAAAA")
 
 
     ventana_principal.fill(BLANCO)
@@ -44,9 +50,9 @@ while flag_run:
     text_surface = fuente.render(text, True, NEGRO)
     # ventana_principal.blit(text_surface, (input_box.x + 5, input_box.y + 5))
 
-
     #rectangulo fisico
     pygame.draw.rect(ventana_principal, play_button_color, play_button)
+    Box.render_box(cajita, ventana_principal)
 
     pygame.display.update()
 
