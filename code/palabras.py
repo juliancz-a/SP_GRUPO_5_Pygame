@@ -1,17 +1,37 @@
 diccionario = [
     {"P, R, O, A, E, S":
     [
-        "aperos", "apreso", "aproes", "arpeos",
-        "aspero", "espora", "operas", "opresa",
-        "pareos", "pasero", "peoras", "posera", 
-        "raspeo", "repaso", "reposa", "separo",
+        "aperos", "apreso", "aproes", "arpeos", "aspero",
+        "espora", "operas", "opresa", "pareos", "pasero",
+        "peoras", "posera", "raspeo", "repaso", "reposa", "separo",
         "sopear", "sopera", "pares", "sopar", "rapos", "paseo",
         "pera", "pose", "paro", "ropa", "sapo", "opera", "preso",
         "repo", "rapo", "pos", "rap", "res", "par", "por",
         "presa", "pesar", "persa", "peras", "paros", "aspeo",
         "proa", "prea", "rape", "prosa"
     ],
-
+    "R, A, C, E, N, E":
+    [
+        "aceren", "acreen", "careen", "carene", "carnee", "cenare",
+        "cenera", "cernea", "encare", "encera", "necear", "recaen",
+        "renace", "enrace", "nacere", "caere", "crean", "acere",
+        "recae", "cenar", "arcen", "carne", "creen", "recen",
+        "acne", "arce", "acre", "caer", "caen", "cera", "cena", "cene",
+        "nace", "cree", "rece", "eran", "era", "cae", "crea", "caree",
+        "cereo", "aren"
+    ],
+    "O, T, R, S, A, E": 
+    [
+        "aserto", "astero", "atores", "esotra", "estora",
+        "oraste", "orates", "rateos", "reatos", "roseta",
+        "rotase", "sortea", "sotera", "toreas", "artes", "ateos",
+        "estar", "orase", "astro", "artos", "arto", "oreas", "osare",
+        "ostra", "otras", "rateo", "ratos", "oseta", "resta", "retos",
+        "rosa", "terso", "retas", "resto", "rotas", "tarso", "tesar",
+        "osar", "esto", "ateo", "aseo", "arte", "aros", "ores", "oras",
+        "otra", "raso", "reta", "reto", "roes", "sera", "sota", "aro",
+        "era", "esa", "ora", "ore", "res", "ser", "tos", "ase", "aso"
+    ],
     "A, S, R, C, E, A": 
     [
         "aceras", "acreas", "arcase", "arceas",
@@ -26,17 +46,17 @@ diccionario = [
     ],
     "A, R, P, O, T, E": 
     [
-        "aporte", "apreto", "atrope", "patero", "apero"
+        "aporte", "apreto", "atrope", "patero", "apero",
         "poetar", "portea", "potear", "potera", 
         "potrea", "ropeta", "topare", "topear", "topera", 
         "trapeo", "trapo", "par", "topar", "pare", "pato",
         "tope", "rap", "rateo", "rapto", "tropa", "pote", 
-        "peor", "taper", "parte", "arte", "aro", "por", "rato"
+        "peor", "taper", "parte", "arte", "aro", "por", "rato",
         "opera", "peta", "opta", "poeta", "ropa", "ore", "pera",
         "pero", "petar", "torpe", "parto", "optar", "arpeo",
         "reo", "pare", "epa", "ero", "roe", "ate", "top", "apto",
-        "opte", "rape", "rapo", "tape", "tapo", "arpe", "ateo"
-        "otra", "arte", "arto", "potra", "trape", "peta", "topa"
+        "opte", "rape", "rapo", "tape", "tapo", "arpe", "ateo",
+        "otra", "arte", "arto", "potra", "trape", "peta", "topa",
     ],
     "C, A, E, R, T, O": 
     [
@@ -44,11 +64,11 @@ diccionario = [
         "torca", "tarco", "recta", "recto", "cetro",
         "corte", "corta", "actor", "toca", "taco", "rato",
         "roca", "crea", "cero", "arte", "acre", "caro", "ora",
-        "era", "ceo", "oca", "ate", "caer", "careto", "arco"
+        "era", "ceo", "oca", "ate", "caer", "careto", "arco",
         "tera", "tero", "toc", "tac", "acero", "aceto", "cetra",
-        "roce", "trace", "acto", "cera", "ocre", "terco", "terca"
-        "recta", "cotar", "acote", "cateo", "toce", "creo", "ateo"
-        "rota", "peta", "petar", "topa", "top", "tapo", "tocar"
+        "roce", "trace", "acto", "cera", "ocre", "terco", "terca",
+        "recta", "cotar", "acote", "cateo", "toce", "creo", "ateo",
+        "rota", "peta", "petar", "topa", "top", "tapo", "tocar",
         "eco", "tace", "cera", "roe", 
     ],
     "R, L, T, E, O, M": 
@@ -68,7 +88,7 @@ diccionario = [
     ],
     "M, A, S, T, R, O": 
     [
-        "tramos", "astro", "moras", "morsa", "ramos", "tramo"
+        "tramos", "astro", "moras", "morsa", "ramos", "tramo",
         "ostra", "otras", "ramo", "ratos", "rato", "tarso",
         "rotas", "maso", "mar", "amor", "tomas", "soma", "mas"
         "osar", "aros", "amo", "rota", "toma", "armo", "mato",
@@ -79,7 +99,7 @@ diccionario = [
     [
         "cristo", "ricos", "crios", "risco", "rico", "tirso",
         "tios", "tiro", "trio", "rios", "tic", "rio", "rito",
-        "tics", "tiros", "cito", "tris", "tos", "tio", "oir"
+        "tics", "tiros", "cito", "tris", "tos", "tio", "oir",
         "ritos", "crio"
     ],
     "T, N, R, E, S, O": 
@@ -87,23 +107,57 @@ diccionario = [
         "restos", "trenso", "torna", "seno", "nortes", "norte",
         "rento", "ternos", "terno", "entro", "netos", "neto",
         "renos", "reno", "rones", "ron", "tenor", "teson",
-        "toser", "tos", "tose", "trone", "esto", "oren", "eon"
-        "roe", "ore", "ser", "son", "ten", "eso", "reto", "roen"
+        "toser", "tos", "tose", "trone", "esto", "oren", "eon",
+        "roe", "ore", "ser", "son", "ten", "eso", "reto", "roen",
         "tren", "osen", "ose", "roes", "note"
     ],
     "M, A, N, T, R, O":
     [
         "montar", "manto", "monta", "toman", "tomar", "toma",
         "tramo", "amor", "armo", "mano", "mato", "ramo", "toma",
-        "antro", "raton", "torna", "trona", "rotan", "amo", "nota"
-        "notar", "rato", "otra", "oran", "nato", "ron", "mar", "mona"
+        "antro", "raton", "torna", "trona", "rotan", "amo", "nota",
+        "notar", "rato", "otra", "oran", "nato", "ron", "mar", "mona",
         "norma", "maton", "mota", "ano", "ora", "orna", "noma"
     ],
     "V, O, T, I, N, A":
     [
-        "nativo", "novia", "votan", "vota", "ovni", "nova", "vino"
+        "nativo", "novia", "votan", "vota", "ovni", "nova", "vino",
         "ovina", "navio", "avion", "avino", "via", "nota", "nato",
-        "tina", "ano", "tino", "anti", "atino", "vio"
+        "tina", "ano", "tino", "anti", "atino", "vio", "oian", "oia",
+        "vito", "vano", "ova"
+    ],
+    "A, M, I, L, O, N":
+    [
+        "molian", "inmola", "animo", "lamio", "liman", "limon",
+        "malon", "molia", "mina", "iman", "lima", "limo", "loma",
+        "mano", "mino", "moai", "mani", "lamo", "ola", "ano",
+        "lio", "lia", "oian", "olian", "lona", "mal", "mona",
+        "moli"
+    ],
+    "R, S, E, A, A, M":
+    [
+        "amares", "amarse", "ameras", "armase", "asarme",
+        "mareas", "masare", "masear", "masera", "mearas",
+        "mesara", "rameas", "reamas", "remasa",
+        "armas", "amare", "amase", "armes", "marea", "mares",
+        "meara", "ramas", "ramea", "resma", "remas", "asma",
+        "mear", "meas", "mesa", "rama", "rema", "ames", "amas",
+        "area", "aras", "asar", "eras", "rasa", "reas", "sera",
+        "ara", "are", "asa", "era", "esa", "ras", "rea", "res"
+        "sea", "ser"
+    ],
+    "L, R, S, E, A, O":
+    [
+        "aleros", "eslora", "loares", "losare", "raleo"
+        "oleras", "orales", "orlase", "roela", "rolase",
+        "salero", "solear", "solera", "alero", "lares",
+        "laser", "loras", "lorea", "orale", "orase", "osare",
+        "oreas", "rasel", "rolas", "solar", "soler", "roles",
+        "saleo", "aloe", "aros", "lora", "oler", "oral", "oras",
+        "orea", "osar", "osea", "real", "rola", "rosa", "rose",
+        "reos", "ralo", "orla", "les", "los", "ola", "ore", "ora",
+        "ras", "reo", "rea", "res", "sal", "ser", "sol", "sea",
+        "ose", "osa", "las", "eso", "esa", "ase", "aso", "sor"
     ]
     }
     ]
