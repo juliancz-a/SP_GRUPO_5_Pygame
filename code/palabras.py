@@ -57,13 +57,53 @@ diccionario = [
         "lote", "mote", "rote", "tremo", "telo", "tero"
         "merol", "temor", "remo", "oler", "ore", "reo", "rol",
         "leo", "trol", "lero", "reto", "mol", "meto", "termo",
-        "motel", "ero", "roel", "more", "tome"
+        "motel", "ero", "roel", "tome"
     ],
     "L, C, I, O, N, A": 
     [
         "colina", "caolin", "clona", "clon", "loca", "cal",
         "clan", "cian", "inca", "laico", "licaon", "col",
-        "lanio", "lona", "ocal", "canil"
+        "lanio", "lona", "ocal", "alcino", "cola", "anclo",
+        "ion", "lio", "lia", "ola", "loa"
+    ],
+    "M, A, S, T, R, O": 
+    [
+        "tramos", "astro", "moras", "morsa", "ramos", "tramo"
+        "ostra", "otras", "ramo", "ratos", "rato", "tarso",
+        "rotas", "maso", "mar", "amor", "tomas", "soma", "mas"
+        "osar", "aros", "amo", "rota", "toma", "armo", "mato",
+        "osta", "mora", "mota", "tamo", "tamos", "tomar", "ora",
+        "aso", "tos"
+    ],
+    "C, I, R, O, T, S": 
+    [
+        "cristo", "ricos", "crios", "risco", "rico", "tirso",
+        "tios", "tiro", "trio", "rios", "tic", "rio", "rito",
+        "tics", "tiros", "cito", "tris", "tos", "tio", "oir"
+        "ritos", "crio"
+    ],
+    "T, N, R, E, S, O": 
+    [
+        "restos", "trenso", "torna", "seno", "nortes", "norte",
+        "rento", "ternos", "terno", "entro", "netos", "neto",
+        "renos", "reno", "rones", "ron", "tenor", "teson",
+        "toser", "tos", "tose", "trone", "esto", "oren", "eon"
+        "roe", "ore", "ser", "son", "ten", "eso", "reto", "roen"
+        "tren", "osen", "ose", "roes", "note"
+    ],
+    "M, A, N, T, R, O":
+    [
+        "montar", "manto", "monta", "toman", "tomar", "toma",
+        "tramo", "amor", "armo", "mano", "mato", "ramo", "toma",
+        "antro", "raton", "torna", "trona", "rotan", "amo", "nota"
+        "notar", "rato", "otra", "oran", "nato", "ron", "mar", "mona"
+        "norma", "maton", "mota", "ano", "ora", "orna", "noma"
+    ],
+    "V, O, T, I, N, A":
+    [
+        "nativo", "novia", "votan", "vota", "ovni", "nova", "vino"
+        "ovina", "navio", "avion", "avino", "via", "nota", "nato",
+        "tina", "ano", "tino", "anti", "atino", "vio"
     ]
     }
     ]
