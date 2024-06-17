@@ -43,4 +43,3 @@ data = [
     }
     ]
 
-update_data(r"code\data\data.json", data)
