@@ -100,28 +100,33 @@ class Box:
         surface.blit(text_surface, text_rect)
 
 pygame.init()
-clock = pygame.time.Clock()
 
-caja = Box((65,100), (400,200), "deepskyblue3", "deepskyblue4")
+# from class_window import Window
 
-ventana = pygame.display.set_mode((800,600))
+# clock = pygame.time.Clock()
 
-flag_run = True
-while flag_run:
-    clock.tick(20)
-    #manejador central
-    lista_eventos = pygame.event.get()
-    for evento in lista_eventos:
-        if evento.type == pygame.QUIT:
-            flag_run = False
-        caja.interactuar (evento)
+# caja = Box((65,100), (400,200), "deepskyblue3", "deepskyblue4")
+
+# ventana = Window((800,600), "Juego", r"code\data\img\image.png")
+# ventana = ventana.render_window()
+
+# flag_run = True
+# while flag_run:
     
-    ventana.fill("black")
+#     clock.tick(20)
+#     #manejador central
+#     lista_eventos = pygame.event.get()
+#     for evento in lista_eventos:
+#         if evento.type == pygame.QUIT:
+#             flag_run = False
+#         caja.interactuar (evento)
+    
+#     ventana.fill("black")
             
-    caja.set_color("gray77", "gray85", "gray85")
-    caja.draw_box(ventana, border_radius=20, border = True, border_width=6)
-    caja.set_text(ventana, "Jugar", "black", "System", font_size=50)
+#     caja.set_color("gray77", "gray85", "gray85")
+#     caja.draw_box(ventana, border_radius=20, border = True, border_width=6)
+#     caja.set_text(ventana, "Jugar", "black", "System", font_size=50)
 
-    pygame.display.update()
+#     pygame.display.update()
 
-pygame.quit()
+# pygame.quit()
