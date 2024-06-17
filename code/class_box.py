@@ -36,11 +36,14 @@ class Box:
             pygame.draw.rect(ventana, self.color_secundario, self.rectangulo, width = border_width, border_radius = border_radius)
         
 
-    def set_color (self, first_color:tuple, secondary_color:tuple = None):
+    def set_color (self, first_color:tuple, secondary_color:tuple = None, hover_color:tuple = None):
         self.color_principal = first_color
 
         if secondary_color != None:
             self.color_secundario = secondary_color
+        
+        if self.hover != False:
+            self.color_hover = hover_color
 
     def interactuar (self, event) -> bool:
         accion = False
@@ -54,6 +57,7 @@ class Box:
                 self.rectangulo.width = self.reduccion[0]
                 self.rectangulo.height = self.reduccion[1]
                 self.rectangulo.center = center
+
                 pygame.mixer.music.load(r"code\data\sound\mixkit-arcade-game-jump-coin-216.wav")
                 pygame.mixer.music.play(0)
                 pygame.mixer.music.set_volume(0.05)
@@ -75,10 +79,12 @@ class Box:
         return accion
 
         
-    def set_text(self, surface: pygame.Surface , text: str, text_color: str| tuple, font:str, font_size:int):
+    def set_text(self, surface: pygame.Surface , text: str, text_color: str| tuple, font:str, font_size:int = 20):
 
         x = self.posiciones[0] 
         y = self.posiciones[1] 
+
+        font_size = font_size * self.rectangulo.width // 300
 
         fuente = pygame.font.SysFont(font, font_size)
 
@@ -112,9 +118,10 @@ while flag_run:
     
     ventana.fill("black")
             
+    caja.set_color("gray77", "gray85", "gray85")
     caja.draw_box(ventana, border_radius=20, border = True, border_width=6)
-    caja.set_color("cadetblue1", secondary_color="deepskyblue3")
-    caja.set_text(ventana, "Jugar", "black", "Arial", 20)
+    caja.set_text(ventana, "Jugar", "black", "System", font_size=50)
+
     pygame.display.update()
 
 pygame.quit()
