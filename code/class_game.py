@@ -1,52 +1,50 @@
 import pygame
-from class_window import Window
+import sys
 from class_box import Box
+from class_window import Window
+
+boxes_menu = [{"colors": ["gray77", "gray85", "gray85"], "coords": (150,150), "size" : (300,300), "border_width" : 0, "text" : None},
+              {"colors": ["gray77", "gray85", "gray85"], "coords": (500,500), "size" : (100,50), "border_width" : 0, "text" : None}]
+
+
 class Game:
 
-    def __init__(self, size, title, icon) -> None:
-        self.window = Window(size, title, icon)
-        self.running = None
-        self.clock = None
-
-    def run(self):
-
-        
-        self.running = True
+    def __init__(self, size, title, icon:str, box_list:list[dict]) -> None:
 
         pygame.init()
 
-        self.window.render_window()
+        self.surface = pygame.display.set_mode((size))
+        self.window = Window(self.surface, box_list)
 
-        self.clock = pygame.time.Clock()
-        self.clock.tick(15)
+        
+        pygame.display.set_caption(title)
 
-        while self.running:
-            print("JUGAR!")
+        icon = pygame.image.load(icon)
+        pygame.display.set_icon(icon)
+
+    def run(self):
+        event_l = []
+        run = True
+        
+        while run:
+            self.surface.fill("black")
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    run = False
+                    pygame.quit()
+                    sys.exit()
+
+                if event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.MOUSEBUTTONUP or event.type == pygame.MOUSEMOTION:
+                    event_l.append(event)
+
+            self.window.draw_boxes(event_l)
+            
+            pygame.display.update()
+
+    def update_window(self):
+        self.window(self.surface)
 
 
-    def quit(self):
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                self.running = False
-        pygame.quit()
-
-    def get_box (posiciones:tuple, dimensiones:tuple, color_principal:tuple, color_hover):
-        box = Box(posiciones, dimensiones, color_principal, color_hover)
-        return box
-
-
-
-
-
-
-
-
-
-
-
-juego = Game((800,600), "a jugar ", r"code\data\img\image.png")
-
+juego = Game((800,600), "a jugar ", r"code\data\img\image.png", boxes_menu)
 juego.run()
-
-juego.quit()

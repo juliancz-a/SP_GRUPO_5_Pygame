@@ -26,10 +26,11 @@ class Box:
     
     def draw_box (self, ventana, border_radius = -1, border = None, border_width = 0):
 
-        pygame.draw.rect(ventana, self.color_principal, self.rectangulo, border_radius = border_radius)
-
         if self.hover:
             pygame.draw.rect(ventana, self.color_hover, self.rectangulo, border_radius = border_radius)
+        else:
+            pygame.draw.rect(ventana, self.color_principal, self.rectangulo, border_radius = border_radius)
+
         
 
         if border: 
@@ -45,37 +46,40 @@ class Box:
         if self.hover != False:
             self.color_hover = hover_color
 
-    def interactuar (self, event) -> bool:
+    def interactuar (self, event_l) -> bool:
         accion = False
         center = self.rectangulo.center
+        for event in event_l:
+            if event.type == pygame.MOUSEBUTTONDOWN:  
+                if self.rectangulo.collidepoint(event.pos):
+                    self.presionado = True
 
-        if event.type == pygame.MOUSEBUTTONDOWN:  
-            if self.rectangulo.collidepoint(event.pos):
-                self.presionado = True
+                    
+                    self.rectangulo.width = self.reduccion[0]
+                    self.rectangulo.height = self.reduccion[1]
+                    self.rectangulo.center = center
 
-                
-                self.rectangulo.width = self.reduccion[0]
-                self.rectangulo.height = self.reduccion[1]
+                    pygame.mixer.music.load(r"code\data\sound\mixkit-arcade-game-jump-coin-216.wav")
+                    pygame.mixer.music.play(0)
+                    pygame.mixer.music.set_volume(0.05)
+                    accion = True
+
+            elif event.type == pygame.MOUSEBUTTONUP:
+
+                self.presionado = False
+
+                self.rectangulo.width = self.dimensiones[0]
+                self.rectangulo.height = self.dimensiones[1]
                 self.rectangulo.center = center
+                accion = True
 
-                pygame.mixer.music.load(r"code\data\sound\mixkit-arcade-game-jump-coin-216.wav")
-                pygame.mixer.music.play(0)
-                pygame.mixer.music.set_volume(0.05)
+            elif event.type == pygame.MOUSEMOTION:
+                if self.rectangulo.collidepoint(event.pos):
+                    self.hover = True
+                else:
+                    self.hover = False
 
-        elif event.type == pygame.MOUSEBUTTONUP:
-
-            self.presionado = False
-
-            self.rectangulo.width = self.dimensiones[0]
-            self.rectangulo.height = self.dimensiones[1]
-            self.rectangulo.center = center
-
-        elif event.type == pygame.MOUSEMOTION:
-            if self.rectangulo.collidepoint(event.pos):
-                self.hover = True
-            else:
-                self.hover = False
-        
+                accion = True
         return accion
 
         
@@ -99,16 +103,15 @@ class Box:
 
         surface.blit(text_surface, text_rect)
 
-pygame.init()
-
-# from class_window import Window
+# pygame.init()
 
 # clock = pygame.time.Clock()
 
 # caja = Box((65,100), (400,200), "deepskyblue3", "deepskyblue4")
 
-# ventana = Window((800,600), "Juego", r"code\data\img\image.png")
-# ventana = ventana.render_window()
+
+# ventana = pygame.display.set_mode((800,600))
+
 
 # flag_run = True
 # while flag_run:
