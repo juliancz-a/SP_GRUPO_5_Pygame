@@ -119,7 +119,6 @@ class Box:
         font_size = font_size * self.rectangulo.width // 300
 
         fuente = pygame.font.Font(font, font_size)
-
         text_surface = fuente.render(text, True, text_color)
 
         #Obtener coordenadas del centro de la caja, y asignarselas al texto en formato rect

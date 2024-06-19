@@ -1,5 +1,5 @@
 [
-    {"P, R, O, A, E, S":
+    {"P,R,O,A,E,S":
     [
         "aperos", "apreso", "aproes", "arpeos", "aspero",
         "espora", "operas", "opresa", "pareos", "pasero",
@@ -11,7 +11,7 @@
         "proa", "prea", "rape", "prosa", "peso", "pesa", "pero",
         "sopa"
     ],
-    "R, A, C, E, N, E":
+    "R,A,C,E,N,E":
     [
         "aceren", "acreen", "careen", "carene", "carnee", "cenare",
         "cenera", "cernea", "encare", "encera", "necear", "recaen",
@@ -21,7 +21,7 @@
         "nace", "cree", "rece", "eran", "era", "cae", "crea", "caree",
         "cereo", "aren"
     ],
-    "O, T, R, S, A, E": 
+    "O,T,R,S,A,E": 
     [
         "aserto", "astero", "atores", "esotra", "estora",
         "oraste", "orates", "rateos", "reatos", "roseta",
@@ -33,7 +33,7 @@
         "otra", "raso", "reta", "reto", "roes", "sera", "sota", "aro",
         "era", "esa", "ora", "ore", "res", "ser", "tos", "ase", "aso"
     ],
-    "A, S, R, C, E, A": 
+    "A,S,R,C,E,A": 
     [
         "aceras", "acreas", "arcase", "arceas",
         "careas", "caresa", "casare", "casera",
@@ -45,7 +45,7 @@
         "sacre", "cesar", "ceras", "caras", "caera", "carea",
         "asca", "cas", "aca", "cea", "asa", "ara"
     ],
-    "A, R, P, O, T, E": 
+    "A,R,P,O,T,E": 
     [
         "aporte", "apreto", "atrope", "patero", "apero",
         "poetar", "portea", "potear", "potera", 
@@ -59,7 +59,7 @@
         "opte", "rape", "rapo", "tape", "tapo", "arpe", "ateo",
         "otra", "arte", "arto", "potra", "trape", "peta", "topa"
     ],
-    "C, A, E, R, T, O": 
+    "C,A,E,R,T,O": 
     [
         "tocare", "tacero", "rector", "cortar", "torea",
         "torca", "tarco", "recta", "recto", "cetro",
@@ -72,7 +72,7 @@
         "rota", "peta", "petar", "topa", "top", "tapo", "tocar",
         "eco", "tace", "cera", "roe"
     ],
-    "R, L, T, E, O, M": 
+    "R,L,T,E,O,M": 
     [
         "merlot", "metro", "merlo", "moler", "tole", "mole",
         "lote", "mote", "rote", "tremo", "telo", "tero",
@@ -80,14 +80,14 @@
         "leo", "trol", "lero", "reto", "mol", "meto", "termo",
         "motel", "ero", "roel", "tome"
     ],
-    "L, C, I, O, N, A": 
+    "L,C,I,O,N,A": 
     [
         "colina", "caolin", "clona", "clon", "loca", "cal",
         "clan", "cian", "inca", "laico", "licaon", "col",
         "lanio", "lona", "ocal", "alcino", "cola", "anclo",
         "ion", "lio", "lia", "ola", "loa"
     ],
-    "M, A, S, T, R, O": 
+    "M,A,S,T,R,O": 
     [
         "tramos", "astro", "moras", "morsa", "ramos", "tramo",
         "ostra", "otras", "ramo", "ratos", "rato", "tarso",
@@ -96,14 +96,14 @@
         "osta", "mora", "mota", "tamo", "tamos", "tomar", "ora",
         "aso", "tos"
     ],
-    "C, I, R, O, T, S": 
+    "C,I,R,O,T,S": 
     [
         "cristo", "ricos", "crios", "risco", "rico", "tirso",
         "tios", "tiro", "trio", "rios", "tic", "rio", "rito",
         "tics", "tiros", "cito", "tris", "tos", "tio", "oir",
         "ritos", "crio"
     ],
-    "T, N, R, E, S, O": 
+    "T,N,R,E,S,O": 
     [
         "restos", "trenso", "torna", "seno", "nortes", "norte",
         "rento", "ternos", "terno", "entro", "netos", "neto",
@@ -112,7 +112,7 @@
         "roe", "ore", "ser", "son", "ten", "eso", "reto", "roen",
         "tren", "osen", "ose", "roes", "note", "tenso", "tensor"
     ],
-    "M, A, N, T, R, O":
+    "M,A,N,T,R,O":
     [
         "montar", "manto", "monta", "toman", "tomar", "toma",
         "tramo", "amor", "armo", "mano", "mato", "ramo", "toma",
@@ -120,14 +120,14 @@
         "notar", "rato", "otra", "oran", "nato", "ron", "mar", "mona",
         "norma", "maton", "mota", "ano", "ora", "orna", "noma"
     ],
-    "V, O, T, I, N, A":
+    "V,O,T,I,N,A":
     [
         "nativo", "novia", "votan", "vota", "ovni", "nova", "vino",
         "ovina", "navio", "avion", "avino", "via", "nota", "nato",
         "tina", "ano", "tino", "anti", "atino", "vio", "oian", "oia",
         "vito", "vano", "ova"
     ],
-    "A, M, I, L, O, N":
+    "A,M,I,L,O,N":
     [
         "molian", "inmola", "animo", "lamio", "liman", "limon",
         "malon", "molia", "mina", "iman", "lima", "limo", "loma",
@@ -135,7 +135,7 @@
         "lio", "lia", "oian", "olian", "lona", "mal", "mona",
         "moli"
     ],
-    "R, S, E, A, A, M":
+    "R,S,E,A,A,M":
     [
         "amares", "amarse", "ameras", "armase", "asarme",
         "mareas", "masare", "masear", "masera", "mearas",
@@ -147,7 +147,7 @@
         "ara", "are", "asa", "era", "esa", "ras", "rea", "res",
         "sea", "ser"
     ],
-    "L, R, S, E, A, O":
+    "L,R,S,E,A,O":
     [
         "aleros", "eslora", "loares", "losare", "raleo",
         "oleras", "orales", "orlase", "roela", "rolase",

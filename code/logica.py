@@ -37,8 +37,8 @@ def coincidencias(combinacion, diccionario):
 
     return retorno
 
-palabra = coincidencias("P, R, O, A, E, S", diccionario)
-print("Coincidencia:", palabra)
+# palabra = coincidencias("P, R, O, A, E, S", diccionario)
+# print("Coincidencia:", palabra)
 
 def sumar_puntaje (lista_coincidencias:list[str]) -> int:
     suma_puntaje = 0
@@ -49,11 +49,11 @@ def sumar_puntaje (lista_coincidencias:list[str]) -> int:
 
 import time
 
-contador = 90
+# contador = 90
 
-while contador > 0:
-    print(contador)
-    time.sleep(1)
-    contador -= 1
+# while contador > 0:
+#     print(contador)
+#     time.sleep(1)
+#     contador -= 1
 
-print("YAATA!!")
+# print("YAATA!!")

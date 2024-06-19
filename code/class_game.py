@@ -22,10 +22,12 @@ class Game:
         
         while True:
             game_state = self.window.render()
-
-            if game_state is False:
+            print(game_state[0])
+            if game_state[0] is False:
                 break
-            Game.update_window(self, game_state)
+            Game.update_window(self, game_state[0])
+
+            self.surface = game_state[1]
             
 
     def update_window(self, game_state):

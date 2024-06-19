@@ -2,6 +2,21 @@ import pygame
 from constantes import *
 from class_box import Box
 
+
+from data.config.config import *
+import random
+
+
+lista = read_data(r"code\data\config\palabras.json")
+combinaciones = list(lista[0].items())
+
+
+palabra_secretita = random.choice(combinaciones)
+
+letras = palabra_secretita[0]
+print(letras)
+palabras_a_encontrar = palabra_secretita[1]
+
 class Play:
     def __init__(self, surface:pygame.Surface, music_file = None) -> None:
         self.surface = surface
@@ -14,7 +29,10 @@ class Play:
         self.background = PLAY_BACKGROUND_1
         
     def render(self):
+        print(f"resolucion : {self.surface.get_size()}")
 
+        self.menu_button.resize(self.surface.get_size())
+        self.play_title.resize(self.surface.get_size())
         self.menu_button.set_color("red", "yellow", "grey")
         menu = False
         Play.set_music(self)
@@ -24,14 +42,14 @@ class Play:
             background = pygame.image.load(self.background)
             background = pygame.transform.scale(background, (self.surface.get_width(), self.surface.get_height()))
             if menu:
-                return "menu"
+                return "menu", self.surface
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     return False
 
                 elif event.type == pygame.VIDEORESIZE:
-                    
+
                     self.surface = pygame.display.set_mode((event.w, event.h), pygame.RESIZABLE)
 
                     self.menu_button.resize(event.size)
@@ -46,7 +64,7 @@ class Play:
             self.surface.fill("black")
             self.surface.blit(background, (0,0))
 
-            draw_cards(self.surface, card_list)
+            draw_cards(self.surface, card_list, letras)
 
             self.menu_button.draw_box(self.surface, border_radius=5, border=True, border_width=5)
             self.menu_button.draw_text(self.surface, "Volver al menú", "white", FUENTE_1, 30)
@@ -63,19 +81,24 @@ class Play:
         
     
 def set_cards(surface, cards_counter:Box) -> list:
+    
     card_list = []
     initial_pos_x = 50
     for i in range(cards_counter):
         card = Box(surface.get_size(),(initial_pos_x,400), (100,128), image=r"code\data\img\card_example.png", press_sound=r"code\data\sound\card_click.wav")
+        
         card_list.append(card)
         initial_pos_x += 105
     
     return card_list
 
-def draw_cards(surface, card_list):
-    for card in card_list:
-        card.draw_image(surface)
+def draw_cards(surface, card_list, letras):
+    letras = letras.split(",")
 
+    for i in range (len(card_list)):
+        card_list[i].draw_image(surface)
+        card_list[i].draw_text(surface, letras[i], "black", FUENTE_1, 100)
+        
 def set_cards_interaction(event, card_list):
     for card in card_list:
         card.interaction(event)
@@ -83,3 +106,4 @@ def set_cards_interaction(event, card_list):
 def cards_resize(event, card_list):
     for card in card_list:
         card.resize(event.size)
+
