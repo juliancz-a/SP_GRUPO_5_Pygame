@@ -1,5 +1,5 @@
 import pygame
-from class_box import *
+
 #Colores
 BLANCO = (255, 255, 255)
 NEGRO = (0, 0, 0)
@@ -22,15 +22,22 @@ ventana_principal.fill(BLANCO)
 fuente = pygame.font.SysFont("Arial", 20)
 
 #Cuadro de texto (Orientarlo a objetos reciba dimensiones, colores, donde lo quiero ubicar, preguntarle si quiere tener un texto por default)
-play_button = pygame.Rect(50,50,200,32) # rectangulo lógico
+play_button = pygame.Rect(50,50,50,50) # rectangulo lógico
 play_button_color = AZUL_CLARO
 activo = False
 text = "Jugar"
 flag_run = True
 
-cajita = Box((150, 50), (150, 150))
-Box.set_text(cajita, "MARCELA")
-Box.set_color(cajita, VERDE)
+gato = pygame.image.load(r"code\data\img\image.png")
+
+gato_rect = gato.get_rect()
+
+gato_rect.center = ((ANCHO_VENTANA/2, ALTO_VENTANA/2))
+
+print(gato_rect)
+# cajita = Box((150, 50), (150, 150))
+# Box.set_text(cajita, "MARCELA")
+# Box.set_color(cajita, "firebrick1")
 
 while flag_run:
     #manejador central
@@ -41,8 +48,8 @@ while flag_run:
         elif evento.type == pygame.MOUSEBUTTONDOWN:
             if play_button.collidepoint(evento.pos):
                 print("JUGAR")
-            elif cajita.collidepoint(evento.pos):
-                print("AYUDAAAAAAAAAA")
+            # elif cajita.collidepoint(evento.pos):
+            #     print("AYUDAAAAAAAAAA")
 
 
     ventana_principal.fill(BLANCO)
@@ -51,9 +58,10 @@ while flag_run:
     # ventana_principal.blit(text_surface, (input_box.x + 5, input_box.y + 5))
 
     #rectangulo fisico
-    pygame.draw.rect(ventana_principal, play_button_color, play_button)
-    Box.render_box(cajita, ventana_principal)
+    pygame.draw.rect(ventana_principal, "firebrick1", play_button, border_radius=5 )
+    # Box.render_box(cajita, ventana_principal)
 
+    ventana_principal.blit(gato, gato_rect)
     pygame.display.update()
 
 pygame.quit()

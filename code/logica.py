@@ -1,9 +1,9 @@
 from functools import reduce
 import pygame
 import random
-from data.data import *
+from data.config.config import *
 
-diccionario = read_data(r"code\data\data.json")
+diccionario = read_data(r"code\data\config\palabras.json")
 
 def swap (lista:list, a:int, b:int):
     aux = lista[a]
