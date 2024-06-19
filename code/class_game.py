@@ -11,7 +11,7 @@ boxes_menu = [{"colors": ["gray77", "gray85", "gray85"], "coords": (150,150), "s
 
 class Game:
 
-    def __init__(self, size, title, icon:str, box_list:list[dict]) -> None:
+    def __init__(self, size, title, icon:str) -> None:
 
         pygame.init()
 
@@ -24,13 +24,11 @@ class Game:
         pygame.display.set_icon(icon)
 
     def run(self):
-        run = True
         
-        while run:
+        while True:
             game_state = self.window.render()
 
             if game_state is False:
-                run = False
                 break
             Game.update_window(self, game_state)
             
@@ -38,13 +36,16 @@ class Game:
     def update_window(self, game_state):
         match game_state:
             case "menu":
-                Menu()
-                pass
+                self.window = Menu(self.surface)
             case "play":   
                 self.window = Play(self.surface)
+            # case "options":
+            #     self.window = Options(self.surface)
+            # case "scoreboard":
+            #     self.window = Scoreboard(self.surface)
 
 
 
-juego = Game((800,600), "a jugar ", r"code\data\img\image.png", boxes_menu)
+juego = Game((800,600), "a jugar ", r"code\data\img\image.png")
 juego.run()
 
