@@ -9,7 +9,6 @@ class Game:
     def __init__(self, size, title, icon:str) -> None:
 
         pygame.init()
-
         self.surface = pygame.display.set_mode((size), pygame.RESIZABLE)
         self.window = Menu(self.surface)
 
@@ -42,6 +41,6 @@ class Game:
 
 
 
-juego = Game((1280,720), "a jugar ", r"code\data\img\image.png")
+juego = Game((1280,720), "POP THE CARD", r"code\data\img\image.png")
 juego.run()
 

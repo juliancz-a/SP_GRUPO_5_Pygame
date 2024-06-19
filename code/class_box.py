@@ -103,7 +103,7 @@ class Box:
 
         return action
     def draw_text(self, surface: pygame.Surface , text: str, text_color: str| tuple, font:str, font_size:int = 20, 
-                border = None, border_thickness = 0, border_color = None):
+                border = False, border_thickness = 1, border_color = "black"):
 
         x,y = self.rectangulo.x, self.rectangulo.y
 
@@ -112,9 +112,6 @@ class Box:
         fuente = pygame.font.Font(font, font_size)
 
         text_surface = fuente.render(text, True, text_color)
-
-        border_thickness = 1
-        border_color = "gray0"
 
         #Obtener coordenadas del centro de la caja, y asignarselas al texto en formato rect
         width_center = self.dimensiones[0] / 2
@@ -130,6 +127,7 @@ class Box:
                     if dx != 0 or dy != 0:
                         offset_rect = text_rect.copy()
                         offset_rect.move_ip(dx, dy)
+                        
                         surface.blit(fuente.render(text, True, border_color), offset_rect)
 
         surface.blit(text_surface, text_rect)
