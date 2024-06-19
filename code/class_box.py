@@ -102,8 +102,8 @@ class Box:
                 self.hover = False
 
         return action
-        
-    def draw_text(self, surface: pygame.Surface , text: str, text_color: str| tuple, font:str, font_size:int = 20):
+    def draw_text(self, surface: pygame.Surface , text: str, text_color: str| tuple, font:str, font_size:int = 20, 
+                border = None, border_thickness = 0, border_color = None):
 
         x,y = self.rectangulo.x, self.rectangulo.y
 
@@ -123,13 +123,14 @@ class Box:
         text_rect = text_surface.get_rect()
         text_rect.center = (x + width_center, y + height_center)
 
-        for dx in range(-border_thickness, border_thickness + 1):
-            for dy in range(-border_thickness, border_thickness + 1):
-                # No renderizar en la posición central (evitar duplicar el texto original)
-                if dx != 0 or dy != 0:
-                    offset_rect = text_rect.copy()
-                    offset_rect.move_ip(dx, dy)
-                    surface.blit(fuente.render(text, True, border_color), offset_rect)
+        if border:
+            for dx in range(-border_thickness, border_thickness + 1):
+                for dy in range(-border_thickness, border_thickness + 1):
+                    # No renderizar en la posición central (evitar duplicar el texto original)
+                    if dx != 0 or dy != 0:
+                        offset_rect = text_rect.copy()
+                        offset_rect.move_ip(dx, dy)
+                        surface.blit(fuente.render(text, True, border_color), offset_rect)
 
         surface.blit(text_surface, text_rect)
 

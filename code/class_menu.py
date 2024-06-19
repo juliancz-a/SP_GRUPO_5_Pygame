@@ -1,5 +1,5 @@
 import pygame
-
+from constantes import *
 from class_box import Box
 
 class Menu:
@@ -45,11 +45,13 @@ class Menu:
 
             self.title.draw_text(self.surface, "POP THE CARD", "dodgerblue4", r"code\data\vinque rg.otf", 50)
             pygame.display.update()
-   
+
     def set_bg():
         pass
 
-    def set_music():
-        pass
+    def set_music(self):
+        pygame.mixer.music.load(self.music)
+        pygame.mixer.music.play(0)
+        pygame.mixer.music.set_volume(0.1)
 
 
