@@ -1,5 +1,6 @@
 import pygame
 import sys
+from constantes import * 
 from class_box import Box
 from class_menu import Menu
 from class_play import Play
@@ -10,7 +11,7 @@ class Game:
 
         pygame.init()
         self.surface = pygame.display.set_mode((size), pygame.RESIZABLE)
-        self.window = Menu(self.surface)
+        self.window = Menu(self.surface, music_file = MENU_MUSIC)
 
         pygame.display.set_caption(title)
 
@@ -31,9 +32,9 @@ class Game:
         match game_state:
 
             case "menu":
-                self.window = Menu(self.surface)
+                self.window = Menu(self.surface, music_file= MENU_MUSIC)
             case "play":   
-                self.window = Play(self.surface)
+                self.window = Play(self.surface, music_file= PLAY_MUSIC)
             # case "options":
             #     self.window = Options(self.surface)
             # case "scoreboard":

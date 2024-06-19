@@ -4,16 +4,18 @@ from class_box import Box
 
 class Menu:
 
-    def __init__(self, surface:pygame.Surface) -> None:
+    def __init__(self, surface:pygame.Surface, music_file = None) -> None:
         self.surface = surface
         self.background = MENU_BACKGROUND
 
-        self.play_button = Box(surface.get_size(), (300,200), (200,75))
-        self.options_button = Box(surface.get_size(), (300,300), (200,75))
-        self.exit_button = Box(surface.get_size(), (300,400), (200,75))
+        self.play_button = Box(surface.get_size(), (300,200), (200,75), press_sound=PRESS_SOUND)
+        self.options_button = Box(surface.get_size(), (300,300), (200,75), press_sound=PRESS_SOUND)
+        self.exit_button = Box(surface.get_size(), (300,400), (200,75), press_sound=PRESS_SOUND)
+
 
         self.title = Box((surface.get_size()), (200,50), (400,50))
-        self.music = MUSICA_MENÚ
+        
+        self.music = music_file
 
 
     def render(self):
@@ -43,6 +45,7 @@ class Menu:
                     return False
                 
                 elif event.type == pygame.VIDEORESIZE:
+
                     self.resize_surface = pygame.display.set_mode((event.w, event.h), pygame.RESIZABLE)
                     self.play_button.resize(event.size)
                     self.title.resize(event.size)
@@ -73,8 +76,9 @@ class Menu:
         pass
 
     def set_music(self):
-        pygame.mixer.music.load(self.music)
-        pygame.mixer.music.play(0)
-        pygame.mixer.music.set_volume(0.1)
+        if self.music != None:
+            pygame.mixer.music.load(self.music)
+            pygame.mixer.music.play(-1)
+            pygame.mixer.music.set_volume(0.1)
 
 
