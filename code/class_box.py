@@ -95,6 +95,8 @@ class Box:
 
         text_surface = fuente.render(text, True, text_color)
 
+        border_thickness = 2
+        border_color = "gray0"
 
         #Obtener coordenadas del centro de la caja, y asignarselas al texto en formato rect
         width_center = self.dimensiones[0] / 2
@@ -102,6 +104,14 @@ class Box:
 
         text_rect = text_surface.get_rect()
         text_rect.center = (x + width_center, y + height_center)
+
+        for dx in range(-border_thickness, border_thickness + 1):
+            for dy in range(-border_thickness, border_thickness + 1):
+                # No renderizar en la posición central (evitar duplicar el texto original)
+                if dx != 0 or dy != 0:
+                    offset_rect = text_rect.copy()
+                    offset_rect.move_ip(dx, dy)
+                    surface.blit(fuente.render(text, True, border_color), offset_rect)
 
         surface.blit(text_surface, text_rect)
 
