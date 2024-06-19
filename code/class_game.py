@@ -10,7 +10,7 @@ class Game:
 
         pygame.init()
 
-        self.surface = pygame.display.set_mode((size))
+        self.surface = pygame.display.set_mode((size), pygame.RESIZABLE)
         self.window = Menu(self.surface)
 
         pygame.display.set_caption(title)
@@ -30,6 +30,7 @@ class Game:
 
     def update_window(self, game_state):
         match game_state:
+
             case "menu":
                 self.window = Menu(self.surface)
             case "play":   

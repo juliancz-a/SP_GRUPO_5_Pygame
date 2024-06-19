@@ -4,12 +4,15 @@ import pygame
 
 class Box:
     #CONSTRUCTOR
-    def __init__(self, posiciones:tuple, dimensiones:tuple):
-
+    def __init__(self, window_size, posiciones:tuple, dimensiones:tuple):
+        self.original_posiciones = posiciones
+        self.original_dimensiones = dimensiones
 
         self.posiciones = posiciones
         self.dimensiones = dimensiones
-        self.rectangulo = pygame.Rect(posiciones, dimensiones)
+        self.rectangulo = pygame.Rect(self.posiciones, self.dimensiones)
+
+        self.window_size = window_size
 
         #Color
         self.color_principal = None
@@ -24,14 +27,30 @@ class Box:
         self.color_hover = None
 
     
-    def draw_box (self, ventana, border_radius = -1, border = None, border_width = 0):
-        pygame.draw.rect(ventana, self.color_principal, self.rectangulo, border_radius = border_radius)
+    def resize(self, new_window_size):
+        # Calculate the new position and dimensions based on the new window size
+        self.posiciones = (
+            int(self.original_posiciones[0] * new_window_size[0] / self.window_size[0]),
+            int(self.original_posiciones[1] * new_window_size[1] / self.window_size[1])
+        )
+        self.dimensiones = (
+            int(self.original_dimensiones[0] * new_window_size[0] / self.window_size[0]),
+            int(self.original_dimensiones[1] * new_window_size[1] / self.window_size[1])
+        )
+        self.rectangulo = pygame.Rect(self.posiciones, self.dimensiones)
+        self.reduccion = (self.dimensiones[0] * 0.95, self.dimensiones[1] * 0.95)
+
+    
+    def draw_box (self, surface, border_radius = -1, border = None, border_width = 0):
+
+
+        pygame.draw.rect(surface, self.color_principal, self.rectangulo, border_radius = border_radius)
 
         if self.hover:
-            pygame.draw.rect(ventana, self.color_hover, self.rectangulo, border_radius = border_radius)
+            pygame.draw.rect(surface, self.color_hover, self.rectangulo, border_radius = border_radius)
         
         if border: 
-            pygame.draw.rect(ventana, self.color_secundario, self.rectangulo, width = border_width, border_radius = border_radius)
+            pygame.draw.rect(surface, self.color_secundario, self.rectangulo, width = border_width, border_radius = border_radius)
         
 
     def set_color (self, first_color:tuple, secondary_color:tuple, hover_color:tuple):
@@ -86,8 +105,7 @@ class Box:
         
     def draw_text(self, surface: pygame.Surface , text: str, text_color: str| tuple, font:str, font_size:int = 20):
 
-        x = self.posiciones[0] 
-        y = self.posiciones[1] 
+        x,y = self.rectangulo.x, self.rectangulo.y
 
         font_size = font_size * self.rectangulo.width // 300
 
@@ -95,7 +113,7 @@ class Box:
 
         text_surface = fuente.render(text, True, text_color)
 
-        border_thickness = 2
+        border_thickness = 1
         border_color = "gray0"
 
         #Obtener coordenadas del centro de la caja, y asignarselas al texto en formato rect
