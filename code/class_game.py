@@ -10,8 +10,11 @@ class Game:
     def __init__(self, size, title, icon:str) -> None:
 
         pygame.init()
-        self.surface = pygame.display.set_mode((size), pygame.RESIZABLE)
-        self.window = Menu(self.surface, music_file = MENU_MUSIC)
+
+        self.surface_size = size
+        self.surface = pygame.display.set_mode((self.surface_size), pygame.RESIZABLE)
+
+        self.window = Menu(size, self.surface, music_file = MENU_MUSIC)
 
         pygame.display.set_caption(title)
 
@@ -22,21 +25,23 @@ class Game:
         
         while True:
             game_state = self.window.render()
-            print(game_state[0])
             if game_state[0] is False:
                 break
-            Game.update_window(self, game_state[0])
 
-            self.surface = game_state[1]
-            
+            info = pygame.display.Info()
+            self.surface_size = info.current_w, info.current_h
+            print(self.surface_size)
+            print(self.surface)
+            Game.update_window(self, game_state[1], game_state[0])
 
-    def update_window(self, game_state):
+
+    def update_window(self, wh, game_state):
         match game_state:
 
             case "menu":
-                self.window = Menu(self.surface, music_file= MENU_MUSIC)
+                self.window = Menu(wh, self.surface, music_file= MENU_MUSIC)
             case "play":   
-                self.window = Play(self.surface, music_file= PLAY_MUSIC)
+                self.window = Play(wh, self.surface, music_file= PLAY_MUSIC)
             # case "options":
             #     self.window = Options(self.surface)
             # case "scoreboard":

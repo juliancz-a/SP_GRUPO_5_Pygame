@@ -18,10 +18,11 @@ print(letras)
 palabras_a_encontrar = palabra_secretita[1]
 
 class Play:
-    def __init__(self, surface:pygame.Surface, music_file = None) -> None:
+    def __init__(self, wh, surface:pygame.Surface, music_file = None) -> None:
         self.surface = surface
-        self.menu_button = Box(surface.get_size(),(400,300), (200,100))
-        self.play_title = Box(surface.get_size(),(200,50), (400,50))
+        self.original_wh = wh
+        self.menu_button = Box(wh,(400,300), (200,100))
+        self.play_title = Box(wh,(200,50), (400,50))
 
         self.cards = 6 
 
@@ -29,20 +30,24 @@ class Play:
         self.background = PLAY_BACKGROUND_1
         
     def render(self):
-        print(f"resolucion : {self.surface.get_size()}")
 
-        self.menu_button.resize(self.surface.get_size())
-        self.play_title.resize(self.surface.get_size())
+        print(f"resolucion : {self.surface.get_size()}")
+        print(f"resolución antigua: {self.original_wh}")
+
         self.menu_button.set_color("red", "yellow", "grey")
         menu = False
         Play.set_music(self)
         card_list = set_cards(self.surface, self.cards)
 
+        self.menu_button.resize((self.surface.get_size()))
+        self.play_title.resize((self.surface.get_size()))
+        cards_resize((self.surface.get_size()), card_list)
+
         while True:
             background = pygame.image.load(self.background)
             background = pygame.transform.scale(background, (self.surface.get_width(), self.surface.get_height()))
             if menu:
-                return "menu", self.surface
+                return "menu", self.original_wh
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -54,7 +59,7 @@ class Play:
 
                     self.menu_button.resize(event.size)
                     self.play_title.resize(event.size)
-                    cards_resize(event, card_list)
+                    cards_resize(event.size, card_list)
 
                 menu = self.menu_button.interaction(event)
                 set_cards_interaction(event, card_list)
@@ -105,5 +110,5 @@ def set_cards_interaction(event, card_list):
 
 def cards_resize(event, card_list):
     for card in card_list:
-        card.resize(event.size)
+        card.resize(event)
 

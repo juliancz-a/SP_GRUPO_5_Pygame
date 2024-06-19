@@ -6,14 +6,14 @@ class Box:
     #CONSTRUCTOR
     def __init__(self, window_size, posiciones:tuple, dimensiones:tuple, press_sound = None, image = None):
 
+        self.window_size = window_size
+        self.window_ratio = window_size[0] // window_size[1]
         self.original_posiciones = posiciones
         self.original_dimensiones = dimensiones
 
         self.posiciones = posiciones
         self.dimensiones = dimensiones
         self.rectangulo = pygame.Rect(self.posiciones, self.dimensiones)
-
-        self.window_size = window_size
 
         #Color
         self.color_principal = None
@@ -48,6 +48,9 @@ class Box:
     
     def draw_box (self, surface, border_radius = -1, border = None, border_width = 0):
 
+        self.rectangulo.size = (self.rectangulo.width * self.window_ratio, self.rectangulo.height * self.window_ratio)
+        self.rectangulo.x = (self.rectangulo.x * self.window_ratio)
+        self.rectangulo.y = (self.rectangulo.y * self.window_ratio)
 
         pygame.draw.rect(surface, self.color_principal, self.rectangulo, border_radius = border_radius)
 
