@@ -4,7 +4,8 @@ import pygame
 
 class Box:
     #CONSTRUCTOR
-    def __init__(self, window_size, posiciones:tuple, dimensiones:tuple):
+    def __init__(self, window_size, posiciones:tuple, dimensiones:tuple, press_sound = None, image = None):
+
         self.original_posiciones = posiciones
         self.original_dimensiones = dimensiones
 
@@ -26,6 +27,10 @@ class Box:
         self.hover = False
         self.color_hover = None
 
+        #Sonido
+        self.sound = press_sound
+        #imagen 
+        self.image = image
     
     def resize(self, new_window_size):
         # Calculate the new position and dimensions based on the new window size
@@ -68,12 +73,13 @@ class Box:
         if event.type == pygame.MOUSEBUTTONDOWN:  
 
             if self.rectangulo.collidepoint(event.pos):
-
+                print("presione el boton")
                 self.presionado = True
 
-                pygame.mixer.music.load(r"code\data\sound\mixkit-arcade-game-jump-coin-216.wav")
-                pygame.mixer.music.play(0)
-                pygame.mixer.music.set_volume(0.05)
+                if self.sound != None:
+                    sound = pygame.mixer.Sound(self.sound)
+                    pygame.mixer.Sound.play(sound)
+                    pygame.mixer.Sound.set_volume(sound, 0.10)
 
                 self.rectangulo.width = self.reduccion[0]
                 self.rectangulo.height = self.reduccion[1]
@@ -89,7 +95,7 @@ class Box:
                 self.rectangulo.center = center
 
                 action = True
-
+                return action
             else: 
                 self.rectangulo.width = self.dimensiones[0]
                 self.rectangulo.height = self.dimensiones[1]
@@ -98,11 +104,13 @@ class Box:
         elif event.type == pygame.MOUSEMOTION:
             
             if self.rectangulo.collidepoint(event.pos):
+                print("mouse porarriba")
                 self.hover = True
             else:
                 self.hover = False
 
         return action
+    
     def draw_text(self, surface: pygame.Surface , text: str, text_color: str| tuple, font:str, font_size:int = 20, 
                 border = False, border_thickness = 1, border_color = "black"):
 
@@ -133,5 +141,8 @@ class Box:
 
         surface.blit(text_surface, text_rect)
 
-    def set_image ():
-        pass
+    def draw_image (self, surface:pygame.Surface):
+        if self.image != None:
+            image = pygame.image.load(self.image)
+            surface.blit(image, self.rectangulo)
+
