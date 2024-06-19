@@ -87,6 +87,7 @@ class Box:
                 self.rectangulo.width = self.dimensiones[0]
                 self.rectangulo.height = self.dimensiones[1]
                 self.rectangulo.center = center
+
                 action = True
 
             else: 
@@ -127,7 +128,7 @@ class Box:
                     if dx != 0 or dy != 0:
                         offset_rect = text_rect.copy()
                         offset_rect.move_ip(dx, dy)
-                        
+
                         surface.blit(fuente.render(text, True, border_color), offset_rect)
 
         surface.blit(text_surface, text_rect)
