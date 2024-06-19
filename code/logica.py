@@ -47,7 +47,7 @@ def sumar_puntaje (lista_coincidencias:list[str]) -> int:
 
     return suma_puntaje 
 
-import time
+# import time
 
 # contador = 90
 
