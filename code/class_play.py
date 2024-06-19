@@ -37,7 +37,7 @@ class Play:
         self.menu_button.set_color("red", "yellow", "grey")
         menu = False
         Play.set_music(self)
-        card_list = set_cards(self.surface, self.cards)
+        card_list = set_cards(self.original_wh, self.cards)
 
         self.menu_button.resize((self.surface.get_size()))
         self.play_title.resize((self.surface.get_size()))
@@ -85,19 +85,19 @@ class Play:
             pygame.mixer.music.set_volume(0.1)
         
     
-def set_cards(surface, cards_counter:Box) -> list:
+def set_cards(wh, cards_counter:Box) -> list:
     
     card_list = []
     initial_pos_x = 50
     for i in range(cards_counter):
-        card = Box(surface.get_size(),(initial_pos_x,400), (100,128), image=r"code\data\img\card_example.png", press_sound=r"code\data\sound\card_click.wav")
+        card = Box(wh,(initial_pos_x,400), (100,128), image=r"code\data\img\card_example.png", press_sound=r"code\data\sound\card_click.wav")
         
         card_list.append(card)
         initial_pos_x += 105
     
     return card_list
 
-def draw_cards(surface, card_list, letras):
+def draw_cards(surface, card_list:list[Box], letras):
     letras = letras.split(",")
 
     for i in range (len(card_list)):
@@ -108,7 +108,8 @@ def set_cards_interaction(event, card_list):
     for card in card_list:
         card.interaction(event)
 
-def cards_resize(event, card_list):
+def cards_resize(event, card_list:list[Box]):
     for card in card_list:
+        print(card.rectangulo.x, card.rectangulo.y)
         card.resize(event)
 

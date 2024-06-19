@@ -28,10 +28,6 @@ class Game:
             if game_state[0] is False:
                 break
 
-            info = pygame.display.Info()
-            self.surface_size = info.current_w, info.current_h
-            print(self.surface_size)
-            print(self.surface)
             Game.update_window(self, game_state[1], game_state[0])
 
 

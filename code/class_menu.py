@@ -9,12 +9,12 @@ class Menu:
         self.original_wh = wh
         self.background = MENU_BACKGROUND
 
-        self.play_button = Box(surface.get_size(), (300,300), (200,75), press_sound=PRESS_SOUND)
-        self.options_button = Box(surface.get_size(), (300,400), (200,75), press_sound=PRESS_SOUND)
-        self.exit_button = Box(surface.get_size(), (300,500), (200,75), press_sound=PRESS_SOUND)
+        self.play_button = Box(self.original_wh, (300,300), (200,75), press_sound=PRESS_SOUND)
+        self.options_button = Box(self.original_wh, (300,400), (200,75), press_sound=PRESS_SOUND)
+        self.exit_button = Box(self.original_wh, (300,500), (200,75), press_sound=PRESS_SOUND)
 
 
-        self.title = Box((surface.get_size()), (200,50), (400,50))
+        self.title = Box((self.original_wh), (200,50), (400,50))
         
         self.music = music_file
 
@@ -30,8 +30,9 @@ class Menu:
         self.exit_button.set_color("darkslategray4", "darkslategrey", "grey")
 
         print(f"resolucion : {self.surface.get_size()}")
-
+        print(f" Size del boton: {self.play_button.rectangulo.size}")
         self.play_button.resize(self.surface.get_size())
+        print(self.play_button.rectangulo.size)
         self.title.resize(self.surface.get_size())
         self.exit_button.resize(self.surface.get_size())
         self.options_button.resize(self.surface.get_size())

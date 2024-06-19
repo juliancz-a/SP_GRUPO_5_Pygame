@@ -33,6 +33,9 @@ class Box:
         self.image = image
     
     def resize(self, new_window_size):
+
+        print(new_window_size)
+        print(self.window_size)
         # Calculate the new position and dimensions based on the new window size
         self.posiciones = (
             int(self.original_posiciones[0] * new_window_size[0] / self.window_size[0]),
@@ -42,6 +45,7 @@ class Box:
             int(self.original_dimensiones[0] * new_window_size[0] / self.window_size[0]),
             int(self.original_dimensiones[1] * new_window_size[1] / self.window_size[1])
         )
+
         self.rectangulo = pygame.Rect(self.posiciones, self.dimensiones)
         self.reduccion = (self.dimensiones[0] * 0.95, self.dimensiones[1] * 0.95)
 
@@ -145,6 +149,9 @@ class Box:
 
     def draw_image (self, surface:pygame.Surface):
         if self.image != None:
+            
             image = pygame.image.load(self.image)
+            image = pygame.transform.scale(image, self.rectangulo.size)
+            
             surface.blit(image, self.rectangulo)
 
