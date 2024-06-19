@@ -4,7 +4,7 @@ import pygame
 
 class Box:
     #CONSTRUCTOR
-    def __init__(self, posiciones:tuple, dimensiones:tuple, color_principal:tuple, color_hover:tuple):
+    def __init__(self, posiciones:tuple, dimensiones:tuple):
 
 
         self.posiciones = posiciones
@@ -12,7 +12,7 @@ class Box:
         self.rectangulo = pygame.Rect(posiciones, dimensiones)
 
         #Color
-        self.color_principal = color_principal
+        self.color_principal = None
         self.color_secundario = (255,255,255)
 
         #Animación
@@ -21,69 +21,70 @@ class Box:
 
         #Hover
         self.hover = False
-        self.color_hover = color_hover
+        self.color_hover = None
 
     
     def draw_box (self, ventana, border_radius = -1, border = None, border_width = 0):
+        pygame.draw.rect(ventana, self.color_principal, self.rectangulo, border_radius = border_radius)
 
         if self.hover:
             pygame.draw.rect(ventana, self.color_hover, self.rectangulo, border_radius = border_radius)
-        else:
-            pygame.draw.rect(ventana, self.color_principal, self.rectangulo, border_radius = border_radius)
-
         
-
         if border: 
             pygame.draw.rect(ventana, self.color_secundario, self.rectangulo, width = border_width, border_radius = border_radius)
         
 
-    def set_color (self, first_color:tuple, secondary_color:tuple = None, hover_color:tuple = None):
+    def set_color (self, first_color:tuple, secondary_color:tuple, hover_color:tuple):
         self.color_principal = first_color
 
-        if secondary_color != None:
-            self.color_secundario = secondary_color
-        
-        if self.hover != False:
-            self.color_hover = hover_color
+        self.color_secundario = secondary_color
 
-    def interactuar (self, event_l) -> bool:
-        accion = False
+        self.color_hover = hover_color
+
+    def interaction (self, event) -> bool:
+        action = False
+
         center = self.rectangulo.center
-        for event in event_l:
-            if event.type == pygame.MOUSEBUTTONDOWN:  
-                if self.rectangulo.collidepoint(event.pos):
-                    self.presionado = True
+       
+        if event.type == pygame.MOUSEBUTTONDOWN:  
 
-                    
-                    self.rectangulo.width = self.reduccion[0]
-                    self.rectangulo.height = self.reduccion[1]
-                    self.rectangulo.center = center
+            if self.rectangulo.collidepoint(event.pos):
 
-                    pygame.mixer.music.load(r"code\data\sound\mixkit-arcade-game-jump-coin-216.wav")
-                    pygame.mixer.music.play(0)
-                    pygame.mixer.music.set_volume(0.05)
-                    accion = True
+                self.presionado = True
 
-            elif event.type == pygame.MOUSEBUTTONUP:
+                pygame.mixer.music.load(r"code\data\sound\mixkit-arcade-game-jump-coin-216.wav")
+                pygame.mixer.music.play(0)
+                pygame.mixer.music.set_volume(0.05)
 
+                self.rectangulo.width = self.reduccion[0]
+                self.rectangulo.height = self.reduccion[1]
+                self.rectangulo.center = center
+
+        elif event.type == pygame.MOUSEBUTTONUP:
+
+            if self.rectangulo.collidepoint(event.pos):
                 self.presionado = False
 
                 self.rectangulo.width = self.dimensiones[0]
                 self.rectangulo.height = self.dimensiones[1]
                 self.rectangulo.center = center
-                accion = True
+                action = True
 
-            elif event.type == pygame.MOUSEMOTION:
-                if self.rectangulo.collidepoint(event.pos):
-                    self.hover = True
-                else:
-                    self.hover = False
+            else: 
+                self.rectangulo.width = self.dimensiones[0]
+                self.rectangulo.height = self.dimensiones[1]
+                self.rectangulo.center = center
 
-                accion = True
-        return accion
+        elif event.type == pygame.MOUSEMOTION:
+            
+            if self.rectangulo.collidepoint(event.pos):
+                self.hover = True
+            else:
+                self.hover = False
 
+        return action
         
-    def set_text(self, surface: pygame.Surface , text: str, text_color: str| tuple, font:str, font_size:int = 20):
+    def draw_text(self, surface: pygame.Surface , text: str, text_color: str| tuple, font:str, font_size:int = 20):
 
         x = self.posiciones[0] 
         y = self.posiciones[1] 
@@ -103,33 +104,5 @@ class Box:
 
         surface.blit(text_surface, text_rect)
 
-# pygame.init()
-
-# clock = pygame.time.Clock()
-
-# caja = Box((65,100), (400,200), "deepskyblue3", "deepskyblue4")
-
-
-# ventana = pygame.display.set_mode((800,600))
-
-
-# flag_run = True
-# while flag_run:
-    
-#     clock.tick(20)
-#     #manejador central
-#     lista_eventos = pygame.event.get()
-#     for evento in lista_eventos:
-#         if evento.type == pygame.QUIT:
-#             flag_run = False
-#         caja.interactuar (evento)
-    
-#     ventana.fill("black")
-            
-#     caja.set_color("gray77", "gray85", "gray85")
-#     caja.draw_box(ventana, border_radius=20, border = True, border_width=6)
-#     caja.set_text(ventana, "Jugar", "black", "System", font_size=50)
-
-#     pygame.display.update()
-
-# pygame.quit()
+    def set_image ():
+        pass
