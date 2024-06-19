@@ -12,7 +12,7 @@ class Menu:
 
     def render(self):
         background = pygame.image.load(self.background)
-        background = pygame.transform.scale(background, (800,600))
+        background = pygame.transform.scale(background, (1280,720))
 
         play_button = Box((300,200), (200,100))
         play_button.set_color("darkslategray4", "darkslategrey", "grey")
