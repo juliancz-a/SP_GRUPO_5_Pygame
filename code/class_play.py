@@ -29,9 +29,19 @@ class Play:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     return False
-                
+
+                elif event.type == pygame.VIDEORESIZE:
+                    
+                    self.surface = pygame.display.set_mode((event.w, event.h), pygame.RESIZABLE)
+
+                    self.menu_button.resize(event.size)
+                    self.play_title.resize(event.size)
+                    cards_resize(event, card_list)
+
                 menu = self.menu_button.interaction(event)
                 set_cards_interaction(event, card_list)
+
+
 
             self.surface.fill("black")
             self.surface.blit(background, (0,0))
@@ -69,3 +79,7 @@ def draw_cards(surface, card_list):
 def set_cards_interaction(event, card_list):
     for card in card_list:
         card.interaction(event)
+
+def cards_resize(event, card_list):
+    for card in card_list:
+        card.resize(event.size)
