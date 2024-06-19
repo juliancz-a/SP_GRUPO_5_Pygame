@@ -46,7 +46,7 @@ class Menu:
                 
                 elif event.type == pygame.VIDEORESIZE:
 
-                    self.resize_surface = pygame.display.set_mode((event.w, event.h), pygame.RESIZABLE)
+                    self.surface = pygame.display.set_mode((event.w, event.h), pygame.RESIZABLE)
                     self.play_button.resize(event.size)
                     self.title.resize(event.size)
                     self.exit_button.resize(event.size)
