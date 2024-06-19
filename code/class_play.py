@@ -18,10 +18,11 @@ print(letras)
 palabras_a_encontrar = palabra_secretita[1]
 
 class Play:
-    def __init__(self, surface:pygame.Surface, music_file = None) -> None:
+    def __init__(self, wh, surface:pygame.Surface, music_file = None) -> None:
         self.surface = surface
-        self.menu_button = Box(surface.get_size(),(400,300), (200,100))
-        self.play_title = Box(surface.get_size(),(200,50), (400,50))
+        self.original_wh = wh
+        self.menu_button = Box(wh,(400,300), (200,100))
+        self.play_title = Box(wh,(200,50), (400,50))
 
         self.cards = 6 
 
@@ -29,20 +30,24 @@ class Play:
         self.background = PLAY_BACKGROUND_1
         
     def render(self):
-        print(f"resolucion : {self.surface.get_size()}")
 
-        self.menu_button.resize(self.surface.get_size())
-        self.play_title.resize(self.surface.get_size())
+        print(f"resolucion : {self.surface.get_size()}")
+        print(f"resolución antigua: {self.original_wh}")
+
         self.menu_button.set_color("red", "yellow", "grey")
         menu = False
         Play.set_music(self)
-        card_list = set_cards(self.surface, self.cards)
+        card_list = set_cards(self.original_wh, self.cards)
+
+        self.menu_button.resize((self.surface.get_size()))
+        self.play_title.resize((self.surface.get_size()))
+        cards_resize((self.surface.get_size()), card_list)
 
         while True:
             background = pygame.image.load(self.background)
             background = pygame.transform.scale(background, (self.surface.get_width(), self.surface.get_height()))
             if menu:
-                return "menu", self.surface
+                return "menu", self.original_wh
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -54,7 +59,7 @@ class Play:
 
                     self.menu_button.resize(event.size)
                     self.play_title.resize(event.size)
-                    cards_resize(event, card_list)
+                    cards_resize(event.size, card_list)
 
                 menu = self.menu_button.interaction(event)
                 set_cards_interaction(event, card_list)
@@ -80,19 +85,19 @@ class Play:
             pygame.mixer.music.set_volume(0.1)
         
     
-def set_cards(surface, cards_counter:Box) -> list:
+def set_cards(wh, cards_counter:Box) -> list:
     
     card_list = []
     initial_pos_x = 50
     for i in range(cards_counter):
-        card = Box(surface.get_size(),(initial_pos_x,400), (100,128), image=r"code\data\img\card_example.png", press_sound=r"code\data\sound\card_click.wav")
+        card = Box(wh,(initial_pos_x,400), (100,128), image=r"code\data\img\card_example.png", press_sound=r"code\data\sound\card_click.wav")
         
         card_list.append(card)
         initial_pos_x += 105
     
     return card_list
 
-def draw_cards(surface, card_list, letras):
+def draw_cards(surface, card_list:list[Box], letras):
     letras = letras.split(",")
 
     for i in range (len(card_list)):
@@ -103,7 +108,8 @@ def set_cards_interaction(event, card_list):
     for card in card_list:
         card.interaction(event)
 
-def cards_resize(event, card_list):
+def cards_resize(event, card_list:list[Box]):
     for card in card_list:
-        card.resize(event.size)
+        print(card.rectangulo.x, card.rectangulo.y)
+        card.resize(event)
 

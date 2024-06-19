@@ -6,14 +6,14 @@ class Box:
     #CONSTRUCTOR
     def __init__(self, window_size, posiciones:tuple, dimensiones:tuple, press_sound = None, image = None):
 
+        self.window_size = window_size
+        self.window_ratio = window_size[0] // window_size[1]
         self.original_posiciones = posiciones
         self.original_dimensiones = dimensiones
 
         self.posiciones = posiciones
         self.dimensiones = dimensiones
         self.rectangulo = pygame.Rect(self.posiciones, self.dimensiones)
-
-        self.window_size = window_size
 
         #Color
         self.color_principal = None
@@ -33,6 +33,9 @@ class Box:
         self.image = image
     
     def resize(self, new_window_size):
+
+        print(new_window_size)
+        print(self.window_size)
         # Calculate the new position and dimensions based on the new window size
         self.posiciones = (
             int(self.original_posiciones[0] * new_window_size[0] / self.window_size[0]),
@@ -42,12 +45,16 @@ class Box:
             int(self.original_dimensiones[0] * new_window_size[0] / self.window_size[0]),
             int(self.original_dimensiones[1] * new_window_size[1] / self.window_size[1])
         )
+
         self.rectangulo = pygame.Rect(self.posiciones, self.dimensiones)
         self.reduccion = (self.dimensiones[0] * 0.95, self.dimensiones[1] * 0.95)
 
     
     def draw_box (self, surface, border_radius = -1, border = None, border_width = 0):
 
+        self.rectangulo.size = (self.rectangulo.width * self.window_ratio, self.rectangulo.height * self.window_ratio)
+        self.rectangulo.x = (self.rectangulo.x * self.window_ratio)
+        self.rectangulo.y = (self.rectangulo.y * self.window_ratio)
 
         pygame.draw.rect(surface, self.color_principal, self.rectangulo, border_radius = border_radius)
 
@@ -142,6 +149,9 @@ class Box:
 
     def draw_image (self, surface:pygame.Surface):
         if self.image != None:
+            
             image = pygame.image.load(self.image)
+            image = pygame.transform.scale(image, self.rectangulo.size)
+            
             surface.blit(image, self.rectangulo)
 

@@ -4,18 +4,17 @@ from class_box import Box
 
 class Menu:
 
-    def __init__(self, surface:pygame.Surface, music_file = None) -> None:
+    def __init__(self, wh, surface:pygame.Surface, music_file = None) -> None:
         self.surface = surface
-
-        self.original_surface = surface 
+        self.original_wh = wh
         self.background = MENU_BACKGROUND
 
-        self.play_button = Box(surface.get_size(), ((surface.get_width() // 3), (surface.get_height() // 3)), (200,75), press_sound=PRESS_SOUND)
-        self.options_button = Box(surface.get_size(), (300,300), (200,75), press_sound=PRESS_SOUND)
-        self.exit_button = Box(surface.get_size(), (300,400), (200,75), press_sound=PRESS_SOUND)
+        self.play_button = Box(self.original_wh, (300,300), (200,75), press_sound=PRESS_SOUND)
+        self.options_button = Box(self.original_wh, (300,400), (200,75), press_sound=PRESS_SOUND)
+        self.exit_button = Box(self.original_wh, (300,500), (200,75), press_sound=PRESS_SOUND)
 
 
-        self.title = Box((surface.get_size()), (200,50), (400,50))
+        self.title = Box((self.original_wh), (200,50), (400,50))
         
         self.music = music_file
 
@@ -29,20 +28,23 @@ class Menu:
         self.play_button.set_color("darkslategray4", "darkslategrey", "grey")
         self.options_button.set_color("darkslategray4", "darkslategrey", "grey")
         self.exit_button.set_color("darkslategray4", "darkslategrey", "grey")
+
         print(f"resolucion : {self.surface.get_size()}")
+        print(f" Size del boton: {self.play_button.rectangulo.size}")
+        self.play_button.resize(self.surface.get_size())
+        print(self.play_button.rectangulo.size)
+        self.title.resize(self.surface.get_size())
+        self.exit_button.resize(self.surface.get_size())
+        self.options_button.resize(self.surface.get_size())
+
         Menu.set_music(self)
 
         while True:
-            self.play_button.resize(self.surface.get_size())
-            self.title.resize(self.surface.get_size())
-            self.exit_button.resize(self.surface.get_size())
-            self.options_button.resize(self.surface.get_size())
-
             background = pygame.image.load(self.background)
             background = pygame.transform.scale(background, (self.surface.get_width(), self.surface.get_height()))
             
             if play:
-                return "play", self.surface
+                return "play", self.original_wh
             elif option:
                 return "option"
             
@@ -51,7 +53,7 @@ class Menu:
                 if event.type == pygame.QUIT or exit:
                     return False
                 
-                elif event.type == pygame.VIDEORESIZE or self.original_surface != self.surface:
+                elif event.type == pygame.VIDEORESIZE:
 
                     self.surface = pygame.display.set_mode((event.w, event.h), pygame.RESIZABLE)
                     self.play_button.resize(event.size)
