@@ -9,7 +9,7 @@ class Menu:
         self.original_wh = wh
         self.background = MENU_BACKGROUND
 
-        self.play_button = Box(self.original_wh, (100,300), (210,95), press_sound=PRESS_SOUND)
+        self.play_button = Box(self.original_wh, (100,300), (210,95), press_sound=PRESS_SOUND, image=r"code\data\img\wood_texture.jpg")
         self.options_button = Box(self.original_wh, (100,420), (210,95), press_sound=PRESS_SOUND)
         self.exit_button = Box(self.original_wh, (100,540), (210,95), press_sound=PRESS_SOUND)
 
@@ -73,6 +73,7 @@ class Menu:
             self.options_button.draw_text(self.surface, "Opciones", LETRAS_2, FUENTE_1, 60, shadow=True, border_thickness=1, border_color=BORDE_2)
 
             self.play_button.draw_box(self.surface, border_radius=15, border=True, border_width=5)
+            self.play_button.draw_image(self.surface)
             self.play_button.draw_text(self.surface, "Jugar", LETRAS_2, FUENTE_1, 60, shadow=True, border_thickness=1, border_color=BORDE_2)
 
             self.title.draw_text(self.surface, "Pop The Card", COLOR_LETRAS, FUENTE_1, 80, border=True, border_thickness=2, border_color=TITULO)

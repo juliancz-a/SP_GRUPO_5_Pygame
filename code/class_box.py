@@ -33,7 +33,7 @@ class Box:
         self.image = image
         #letra de la carta
         self.letter = None
-    
+
     def resize(self, new_window_size):
         # Calcular nueva pos y nuevo tamaño según la división entre la pantalla nueva y la vieja
 
