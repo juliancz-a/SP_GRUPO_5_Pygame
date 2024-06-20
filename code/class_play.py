@@ -2,7 +2,6 @@ import pygame
 from constantes import *
 from class_box import Box
 
-
 from data.config.config import *
 import random
 
@@ -21,8 +20,8 @@ class Play:
     def __init__(self, wh, surface:pygame.Surface, music_file = None) -> None:
         self.surface = surface
         self.original_wh = wh
-        self.menu_button = Box(wh,(400,300), (200,100))
-        self.play_title = Box(wh,(200,50), (400,50))
+        self.menu_button = Box(wh,(1160,650), (100,50))
+        # self.play_title = Box(wh,(200,50), (400,50))
 
         self.cards = 6 
 
@@ -31,16 +30,13 @@ class Play:
         
     def render(self):
 
-        print(f"resolucion : {self.surface.get_size()}")
-        print(f"resolución antigua: {self.original_wh}")
-
         self.menu_button.set_color("red", "yellow", "grey")
         menu = False
         Play.set_music(self)
         card_list = set_cards(self.original_wh, self.cards)
 
         self.menu_button.resize((self.surface.get_size()))
-        self.play_title.resize((self.surface.get_size()))
+        # self.play_title.resize((self.surface.get_size()))
         cards_resize((self.surface.get_size()), card_list)
 
         while True:
@@ -58,7 +54,7 @@ class Play:
                     self.surface = pygame.display.set_mode((event.w, event.h), pygame.RESIZABLE)
 
                     self.menu_button.resize(event.size)
-                    self.play_title.resize(event.size)
+                    # self.play_title.resize(event.size)
                     cards_resize(event.size, card_list)
 
                 menu = self.menu_button.interaction(event)
@@ -72,9 +68,9 @@ class Play:
             draw_cards(self.surface, card_list, letras)
 
             self.menu_button.draw_box(self.surface, border_radius=5, border=True, border_width=5)
-            self.menu_button.draw_text(self.surface, "Volver al menú", "white", FUENTE_1, 30)
+            self.menu_button.draw_text(self.surface, "Volver al menú", "white", FUENTE_1, 40)
 
-            self.play_title.draw_text(self.surface, "A jugar!", "red", FUENTE_1, 50)
+            # self.play_title.draw_text(self.surface, "A jugar!", "red", FUENTE_1, 50)
             pygame.display.update()
 
     
@@ -85,19 +81,25 @@ class Play:
             pygame.mixer.music.set_volume(0.1)
         
     
-def set_cards(wh, cards_counter:Box) -> list:
-    
+def set_cards(wh, cards_counter) -> list:
+
+    center = wh[0] // 2 #x // 2 (1280 // 2)
+
     card_list = []
-    initial_pos_x = 50
+    initial_pos_x = -315
     for i in range(cards_counter):
-        card = Box(wh,(initial_pos_x,400), (100,128), image=CARTAS, press_sound=CARTAS_SOUND)
-        
+        card = Box(wh,(initial_pos_x + center,100), (100,128), image=CARTAS, press_sound=CARTAS_SOUND)
         card_list.append(card)
+            
         initial_pos_x += 105
+
     
     return card_list
 
-def draw_cards(surface, card_list:list[Box], letras):
+def set_empty_cards(wh, cards_counter):
+    pass
+
+def draw_cards(surface:pygame.Surface, card_list:list[Box], letras):
     letras = letras.split(",")
 
     for i in range (len(card_list)):

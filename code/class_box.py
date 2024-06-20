@@ -7,7 +7,7 @@ class Box:
     def __init__(self, window_size, posiciones:tuple, dimensiones:tuple, press_sound = None, image = None):
 
         self.window_size = window_size
-        self.window_ratio = window_size[0] // window_size[1]
+      
         self.original_posiciones = posiciones
         self.original_dimensiones = dimensiones
 
@@ -33,10 +33,8 @@ class Box:
         self.image = image
     
     def resize(self, new_window_size):
+        # Calcular nueva pos y nuevo tamaño según la división entre la pantalla nueva y la vieja
 
-        print(new_window_size)
-        print(self.window_size)
-        # Calculate the new position and dimensions based on the new window size
         self.posiciones = (
             int(self.original_posiciones[0] * new_window_size[0] / self.window_size[0]),
             int(self.original_posiciones[1] * new_window_size[1] / self.window_size[1])
@@ -52,10 +50,6 @@ class Box:
     
     def draw_box (self, surface, border_radius = -1, border = None, border_width = 0):
 
-        self.rectangulo.size = (self.rectangulo.width * self.window_ratio, self.rectangulo.height * self.window_ratio)
-        self.rectangulo.x = (self.rectangulo.x * self.window_ratio)
-        self.rectangulo.y = (self.rectangulo.y * self.window_ratio)
-
         pygame.draw.rect(surface, self.color_principal, self.rectangulo, border_radius = border_radius)
 
         if self.hover:
@@ -66,6 +60,7 @@ class Box:
         
 
     def set_color (self, first_color:tuple, secondary_color:tuple, hover_color:tuple):
+        
         self.color_principal = first_color
 
         self.color_secundario = secondary_color
@@ -91,6 +86,7 @@ class Box:
                 self.rectangulo.width = self.reduccion[0]
                 self.rectangulo.height = self.reduccion[1]
                 self.rectangulo.center = center
+                
 
         elif event.type == pygame.MOUSEBUTTONUP:
 
@@ -100,9 +96,8 @@ class Box:
                 self.rectangulo.width = self.dimensiones[0]
                 self.rectangulo.height = self.dimensiones[1]
                 self.rectangulo.center = center
-
                 action = True
-                return action
+
             else: 
                 self.rectangulo.width = self.dimensiones[0]
                 self.rectangulo.height = self.dimensiones[1]
@@ -129,8 +124,8 @@ class Box:
         text_surface = fuente.render(text, True, text_color)
 
         #Obtener coordenadas del centro de la caja, y asignarselas al texto en formato rect
-        width_center = self.dimensiones[0] / 2
-        height_center = self.dimensiones[1] / 2
+        width_center = self.rectangulo.size[0] / 2
+        height_center = self.rectangulo.size[1] / 2
 
         text_rect = text_surface.get_rect()
         text_rect.center = (x + width_center, y + height_center)
@@ -143,7 +138,11 @@ class Box:
                         offset_rect = text_rect.copy()
                         offset_rect.move_ip(1, 1)
 
-                        surface.blit(fuente.render(text, True, border_color), offset_rect)
+        #                 surface.blit(fuente.render(text, True, border_color), offset_rect)
+
+        border = fuente.render(text, True, border_color)
+        border.get_offset()
+        surface.blit(border, text_rect)
 
         surface.blit(text_surface, text_rect)
 

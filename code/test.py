@@ -89,26 +89,79 @@
 #     main()
 
 
-import pygame
-from pygame.locals import *
+# import pygame
+# from pygame.locals import *
 
-def main():
-    pygame.init()
-    screen = pygame.display.set_mode((200, 200),HWSURFACE|DOUBLEBUF|RESIZABLE)
-    fake_screen = screen.copy()
-    pic = pygame.surface.Surface((50, 50))
-    pic.fill((255, 100, 200))
+# def main():
+#     pygame.init()
+#     screen = pygame.display.set_mode((200, 200),HWSURFACE|DOUBLEBUF|RESIZABLE)
+#     fake_screen = screen.copy()
+#     pic = pygame.surface.Surface((50, 50))
+#     pic.fill((255, 100, 200))
 
-    while True:
-        for event in pygame.event.get():
-            if event.type == QUIT: 
-                pygame.display.quit()
-            elif event.type == VIDEORESIZE:
-                screen = pygame.display.set_mode(event.size, HWSURFACE|DOUBLEBUF|RESIZABLE)
+#     while True:
+#         for event in pygame.event.get():
+#             if event.type == QUIT: 
+#                 pygame.display.quit()
+#             elif event.type == VIDEORESIZE:
+#                 screen = pygame.display.set_mode(event.size, HWSURFACE|DOUBLEBUF|RESIZABLE)
 
-        fake_screen.fill('black')
-        fake_screen.blit(pic, (100, 100))
-        screen.blit(pygame.transform.scale(fake_screen, screen.get_rect().size), (0, 0))
-        pygame.display.flip()
+#         fake_screen.fill('black')
+#         fake_screen.blit(pic, (100, 100))
+#         screen.blit(pygame.transform.scale(fake_screen, screen.get_rect().size), (0, 0))
+#         pygame.display.flip()
     
-main()   
+# main()   
+
+import pygame
+
+pygame.init()
+
+# Font constants
+ARIALNARROW_40 = font = pygame.font.Font(r"code\data\vinque rg.otf", 40)
+ARIALNARROW_42 = font = pygame.font.Font(r"code\data\vinque rg.otf", 42)
+
+# Screen size
+WIDTH = 900
+HEIGHT = 600
+
+def text_speech(font, text, color, x, y, bold):
+    font.set_bold(bold)
+    rendered_text = font.render(text, True, color)
+
+    # Directly center the rect upon its creation
+    text_rect = rendered_text.get_rect(center=(x,y))
+    return text_rect, rendered_text
+
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+
+inner_rect, inner_text = text_speech(
+    ARIALNARROW_40, 'Hello', (255, 255, 255),
+    (WIDTH / 2), (HEIGHT / 2), False
+)
+
+# For your outline
+outline_rect, outline_text = text_speech(
+    ARIALNARROW_42, 'Hello', (255, 0, 0),
+    (WIDTH / 2), (HEIGHT / 2), False
+)
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit()
+
+
+    # Paint our screen
+    screen.fill((0,0,0))
+
+    if inner_rect.collidepoint(pygame.mouse.get_pos()):
+        # Touching our text! Render outline
+        screen.blit(outline_text, outline_rect)
+
+    screen.blit(inner_text, inner_rect)
+
+
+    # Enact our display changes
+    pygame.display.update()
