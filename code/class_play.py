@@ -33,7 +33,9 @@ class Play:
         self.menu_button.set_color("red", "yellow", "grey")
         menu = False
         Play.set_music(self)
-        card_list = set_cards(self.original_wh, self.cards)
+
+        card_list = set_cards(self.original_wh, self.cards, 100)
+        empty_card_lsit = set_cards
 
         self.menu_button.resize((self.surface.get_size()))
         # self.play_title.resize((self.surface.get_size()))
@@ -60,8 +62,6 @@ class Play:
                 menu = self.menu_button.interaction(event)
                 set_cards_interaction(event, card_list)
 
-
-
             self.surface.fill("black")
             self.surface.blit(background, (0,0))
 
@@ -81,23 +81,19 @@ class Play:
             pygame.mixer.music.set_volume(0.1)
         
     
-def set_cards(wh, cards_counter) -> list:
+def set_cards(wh, cards_counter, y) -> list:
 
     center = wh[0] // 2 #x // 2 (1280 // 2)
 
     card_list = []
     initial_pos_x = -315
     for i in range(cards_counter):
-        card = Box(wh,(initial_pos_x + center,100), (100,128), image=CARTAS, press_sound=CARTAS_SOUND)
+        card = Box(wh,(initial_pos_x + center,y), (100,128), image=CARTAS, press_sound=CARTAS_SOUND)
         card_list.append(card)
             
         initial_pos_x += 105
-
     
     return card_list
-
-def set_empty_cards(wh, cards_counter):
-    pass
 
 def draw_cards(surface:pygame.Surface, card_list:list[Box], letras):
     letras = letras.split(",")
