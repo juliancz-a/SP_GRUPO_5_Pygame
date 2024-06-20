@@ -30,7 +30,6 @@ class Game:
 
             Game.update_window(self, game_state[1], game_state[0])
 
-
     def update_window(self, wh, game_state):
         match game_state:
 
