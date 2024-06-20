@@ -90,7 +90,7 @@ def set_cards(wh, cards_counter:Box) -> list:
     card_list = []
     initial_pos_x = 50
     for i in range(cards_counter):
-        card = Box(wh,(initial_pos_x,400), (100,128), image=r"code\data\img\card_example.png", press_sound=r"code\data\sound\card_click.wav")
+        card = Box(wh,(initial_pos_x,400), (100,128), image=CARTAS, press_sound=CARTAS_SOUND)
         
         card_list.append(card)
         initial_pos_x += 105

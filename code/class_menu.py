@@ -14,7 +14,7 @@ class Menu:
         self.exit_button = Box(self.original_wh, (300,500), (200,75), press_sound=PRESS_SOUND)
 
 
-        self.title = Box((self.original_wh), (200,50), (400,50))
+        self.title = Box((self.original_wh), (200,100), (400,50))
         
         self.music = music_file
 
@@ -69,15 +69,15 @@ class Menu:
             self.surface.blit(background, (0,0))
 
             self.exit_button.draw_box(self.surface, border_radius=5, border=True, border_width=5)
-            self.exit_button.draw_text(self.surface, "Salir", "dodgerblue4", FUENTE_1, 50, border=True, border_thickness=1, border_color="red")
+            self.exit_button.draw_text(self.surface, "Salir", COLOR_LETRAS, FUENTE_1, 50, border=True, border_thickness=1, border_color=BORDE_LETRAS)
 
             self.options_button.draw_box(self.surface, border_radius=5, border=True, border_width=5)
-            self.options_button.draw_text(self.surface, "Opciones", "dodgerblue4", FUENTE_1, 50, border=True, border_thickness=1, border_color="red")
+            self.options_button.draw_text(self.surface, "Opciones", COLOR_LETRAS, FUENTE_1, 50, border=True, border_thickness=1, border_color=BORDE_LETRAS)
 
             self.play_button.draw_box(self.surface, border_radius=5, border=True, border_width=5)
-            self.play_button.draw_text(self.surface, "Jugar", "dodgerblue4", FUENTE_1, 50, border=True, border_thickness=1, border_color="red")
+            self.play_button.draw_text(self.surface, "Jugar", COLOR_LETRAS, FUENTE_1, 50, border=True, border_thickness=1, border_color=BORDE_LETRAS)
 
-            self.title.draw_text(self.surface, "POP THE CARD", "dodgerblue4", FUENTE_1, 50, border=True)
+            self.title.draw_text(self.surface, "Pop The Card", COLOR_LETRAS, FUENTE_1, 72, border=True, border_thickness=2, border_color=BORDE_LETRAS)
 
             pygame.display.update()
 

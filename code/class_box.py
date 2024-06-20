@@ -141,7 +141,7 @@ class Box:
                     # No renderizar en la posición central (evitar duplicar el texto original)
                     if dx != 0 or dy != 0:
                         offset_rect = text_rect.copy()
-                        offset_rect.move_ip(dx, dy)
+                        offset_rect.move_ip(1, 1)
 
                         surface.blit(fuente.render(text, True, border_color), offset_rect)
 
