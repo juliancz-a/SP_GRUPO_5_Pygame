@@ -25,9 +25,9 @@ class Menu:
         option = False
         exit = False
 
-        self.play_button.set_color("darkslategray4", "darkslategrey", "grey")
-        self.options_button.set_color("darkslategray4", "darkslategrey", "grey")
-        self.exit_button.set_color("darkslategray4", "darkslategrey", "grey")
+        self.play_button.set_color(COLOR_BOX, BORDE_BOX, "grey")
+        self.options_button.set_color(COLOR_BOX, BORDE_BOX, "grey")
+        self.exit_button.set_color(COLOR_BOX, BORDE_BOX, "grey")
 
         self.play_button.resize(self.surface.get_size())
     
@@ -66,16 +66,16 @@ class Menu:
             self.surface.fill("black")
             self.surface.blit(background, (0,0))
 
-            self.exit_button.draw_box(self.surface, border_radius=40, border=True, border_width=5)
-            self.exit_button.draw_text(self.surface, "Salir", "dodgerblue4", FUENTE_1, 50, shadow=True, border_thickness=2, border_color="red")
+            self.exit_button.draw_box(self.surface, border_radius=15, border=True, border_width=5)
+            self.exit_button.draw_text(self.surface, "Salir", COLOR_LETRAS, FUENTE_1, 50, shadow=True, border_thickness=2, border_color=BORDE_LETRAS)
 
-            self.options_button.draw_box(self.surface, border_radius=40, border=True, border_width=5)
-            self.options_button.draw_text(self.surface, "Opciones", "dodgerblue4", FUENTE_1, 50, shadow=True, border_thickness=2, border_color="red")
+            self.options_button.draw_box(self.surface, border_radius=15, border=True, border_width=5)
+            self.options_button.draw_text(self.surface, "Opciones", COLOR_LETRAS, FUENTE_1, 50, shadow=True, border_thickness=2, border_color=BORDE_LETRAS)
 
-            self.play_button.draw_box(self.surface, border_radius=40, border=True, border_width=5)
-            self.play_button.draw_text(self.surface, "Jugar", "dodgerblue4", FUENTE_1, 50, shadow=True, border_thickness=2, border_color="red")
+            self.play_button.draw_box(self.surface, border_radius=15, border=True, border_width=5)
+            self.play_button.draw_text(self.surface, "Jugar", COLOR_LETRAS, FUENTE_1, 50, shadow=True, border_thickness=2, border_color=BORDE_LETRAS)
 
-            self.title.draw_text(self.surface, "POP THE CARD", "dodgerblue4", FUENTE_1, 50, border=True, border_thickness=1, border_color="white")
+            self.title.draw_text(self.surface, "Pop The Card", COLOR_LETRAS, FUENTE_1, 72, border=True, border_thickness=2, border_color=BORDE_LETRAS)
 
             pygame.display.update()
 
