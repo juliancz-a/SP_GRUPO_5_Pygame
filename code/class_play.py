@@ -63,8 +63,10 @@ class Play:
 
                 menu = self.menu_button.interaction(event)
                 set_cards_interaction(event, card_list, letras_seleccionadas)
+
             if len(letras_seleccionadas) > 0 :
                 print(letras_seleccionadas)
+
             self.surface.fill("black")
             self.surface.blit(background, (0,0))
 
@@ -108,17 +110,21 @@ def draw_cards(surface:pygame.Surface, card_list:list[Box], letras):
 
         card_list[i].assign_letter(letras[i])
 
-def draw_empty_cards(surface:pygame.Surface, card_list:list[Box], letras = None):
+def draw_empty_cards(surface:pygame.Surface, card_list:list[Box], letras):
     for i in range (len(card_list)):
         card_list[i].draw_image(surface, transparency=75)
 
         # if letras != None:
         #     card_list[i].draw_text(surface, letras[i], "black", FUENTE_1, 100)
+
 def set_cards_interaction(event, card_list:list[Box], selected_letters):
     for card in card_list:
         action = card.interaction(event)
         if action:
-            selected_letters.append(card.letter)
+            occurrences = card_list.count(card.letter)
+            if selected_letters.count(card.letter) <= occurrences:
+                selected_letters.append(card.letter)
+
     
 
 def cards_resize(event, card_list:list[Box]):
