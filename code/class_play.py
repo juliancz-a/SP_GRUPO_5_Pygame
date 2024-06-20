@@ -119,6 +119,7 @@ def set_cards_interaction(event, card_list:list[Box], selected_letters):
         action = card.interaction(event)
         if action:
             selected_letters.append(card.letter)
+            
     
 
 def cards_resize(event, card_list:list[Box]):
