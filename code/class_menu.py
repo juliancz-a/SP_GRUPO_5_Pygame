@@ -9,7 +9,7 @@ class Menu:
         self.original_wh = wh
         self.background = MENU_BACKGROUND
 
-        self.play_button = Box(self.original_wh, (100,300), (210,95), press_sound=PRESS_SOUND, image=r"code\data\img\wood_texture.jpg")
+        self.play_button = Box(self.original_wh, (100,300), (210,95), press_sound=PRESS_SOUND)
         self.options_button = Box(self.original_wh, (100,420), (210,95), press_sound=PRESS_SOUND)
         self.exit_button = Box(self.original_wh, (100,540), (210,95), press_sound=PRESS_SOUND)
 
@@ -25,9 +25,9 @@ class Menu:
         option = False
         exit = False
 
-        self.play_button.set_color(COLOR_BOX, BORDE_BOX, "grey")
-        self.options_button.set_color(COLOR_BOX, BORDE_BOX, "grey")
-        self.exit_button.set_color(COLOR_BOX, BORDE_BOX, "grey")
+        self.play_button.set_color(COLOR_BOX, BORDE_BOX, HOVER_BOX)
+        self.options_button.set_color(COLOR_BOX, BORDE_BOX, HOVER_BOX)
+        self.exit_button.set_color(COLOR_BOX, BORDE_BOX, HOVER_BOX)
 
         self.play_button.resize(self.surface.get_size())
     
