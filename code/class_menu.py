@@ -14,7 +14,7 @@ class Menu:
         self.exit_button = Box(self.original_wh, (300,500), (200,75), press_sound=PRESS_SOUND)
 
 
-        self.title = Box((self.original_wh), (200,50), (400,50))
+        self.title = Box((self.original_wh), (200,100), (400,50))
         
         self.music = music_file
 
