@@ -29,10 +29,8 @@ class Menu:
         self.options_button.set_color("darkslategray4", "darkslategrey", "grey")
         self.exit_button.set_color("darkslategray4", "darkslategrey", "grey")
 
-        print(f"resolucion : {self.surface.get_size()}")
-        print(f" Size del boton: {self.play_button.rectangulo.size}")
         self.play_button.resize(self.surface.get_size())
-        print(self.play_button.rectangulo.size)
+    
         self.title.resize(self.surface.get_size())
         self.exit_button.resize(self.surface.get_size())
         self.options_button.resize(self.surface.get_size())
@@ -68,13 +66,13 @@ class Menu:
             self.surface.fill("black")
             self.surface.blit(background, (0,0))
 
-            self.exit_button.draw_box(self.surface, border_radius=5, border=True, border_width=5)
+            self.exit_button.draw_box(self.surface, border_radius=40, border=True, border_width=5)
             self.exit_button.draw_text(self.surface, "Salir", "dodgerblue4", FUENTE_1, 50, shadow=True, border_thickness=2, border_color="red")
 
-            self.options_button.draw_box(self.surface, border_radius=5, border=True, border_width=5)
+            self.options_button.draw_box(self.surface, border_radius=40, border=True, border_width=5)
             self.options_button.draw_text(self.surface, "Opciones", "dodgerblue4", FUENTE_1, 50, shadow=True, border_thickness=2, border_color="red")
 
-            self.play_button.draw_box(self.surface, border_radius=5, border=True, border_width=5)
+            self.play_button.draw_box(self.surface, border_radius=40, border=True, border_width=5)
             self.play_button.draw_text(self.surface, "Jugar", "dodgerblue4", FUENTE_1, 50, shadow=True, border_thickness=2, border_color="red")
 
             self.title.draw_text(self.surface, "POP THE CARD", "dodgerblue4", FUENTE_1, 50, border=True, border_thickness=1, border_color="white")

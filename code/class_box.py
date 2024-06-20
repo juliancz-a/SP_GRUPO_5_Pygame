@@ -146,11 +146,16 @@ class Box:
 
         surface.blit(text_surface, text_rect)
 
-    def draw_image (self, surface:pygame.Surface):
+    def draw_image (self, surface:pygame.Surface, transparency:int = None):
         if self.image != None:
             
             image = pygame.image.load(self.image)
             image = pygame.transform.scale(image, self.rectangulo.size)
-            
-            surface.blit(image, self.rectangulo)
+            if transparency != None:
 
+                image = image.convert_alpha()
+                image.set_alpha(transparency)
+
+                rect = pygame.draw.rect(surface, (47,79,79,50), self.rectangulo, border_radius=10)
+            surface.blit(image, self.rectangulo)
+      
