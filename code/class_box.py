@@ -128,7 +128,7 @@ class Box:
         height_center = self.rectangulo.size[1] / 2
 
         text_rect = text_surface.get_rect()
-        text_rect.center = (x + width_center, y + height_center)
+        text_rect.center = (x + width_center, y - 3 + height_center)
 
         if border:
             for dx in range(-border_thickness, border_thickness + 1):
