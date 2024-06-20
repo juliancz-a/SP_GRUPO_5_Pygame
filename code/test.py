@@ -113,55 +113,120 @@
     
 # main()   
 
-import pygame
+# import pygame
 
-pygame.init()
+# pygame.init()
 
-# Font constants
-ARIALNARROW_40 = font = pygame.font.Font(r"code\data\vinque rg.otf", 40)
-ARIALNARROW_42 = font = pygame.font.Font(r"code\data\vinque rg.otf", 42)
+# # Font constants
+# ARIALNARROW_40 = font = pygame.font.Font(r"code\data\vinque rg.otf", 40)
+# ARIALNARROW_42 = font = pygame.font.Font(r"code\data\vinque rg.otf", 42)
 
-# Screen size
-WIDTH = 900
-HEIGHT = 600
+# # Screen size
+# WIDTH = 900
+# HEIGHT = 600
 
-def text_speech(font, text, color, x, y, bold):
-    font.set_bold(bold)
-    rendered_text = font.render(text, True, color)
+# def text_speech(font, text, color, x, y, bold):
+#     font.set_bold(bold)
+#     rendered_text = font.render(text, True, color)
 
-    # Directly center the rect upon its creation
-    text_rect = rendered_text.get_rect(center=(x,y))
-    return text_rect, rendered_text
+#     # Directly center the rect upon its creation
+#     text_rect = rendered_text.get_rect(center=(x,y))
+#     return text_rect, rendered_text
 
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
+# screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
-inner_rect, inner_text = text_speech(
-    ARIALNARROW_40, 'Hello', (255, 255, 255),
-    (WIDTH / 2), (HEIGHT / 2), False
-)
+# inner_rect, inner_text = text_speech(
+#     ARIALNARROW_40, 'Hello', (255, 255, 255),
+#     (WIDTH / 2), (HEIGHT / 2), False
+# )
 
-# For your outline
-outline_rect, outline_text = text_speech(
-    ARIALNARROW_42, 'Hello', (255, 0, 0),
-    (WIDTH / 2), (HEIGHT / 2), False
-)
+# # For your outline
+# outline_rect, outline_text = text_speech(
+#     ARIALNARROW_42, 'Hello', (255, 0, 0),
+#     (WIDTH / 2), (HEIGHT / 2), False
+# )
 
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            exit()
-
-
-    # Paint our screen
-    screen.fill((0,0,0))
-
-    if inner_rect.collidepoint(pygame.mouse.get_pos()):
-        # Touching our text! Render outline
-        screen.blit(outline_text, outline_rect)
-
-    screen.blit(inner_text, inner_rect)
+# while True:
+#     for event in pygame.event.get():
+#         if event.type == pygame.QUIT:
+#             pygame.quit()
+#             exit()
 
 
-    # Enact our display changes
-    pygame.display.update()
+#     # Paint our screen
+#     screen.fill((0,0,0))
+
+#     if inner_rect.collidepoint(pygame.mouse.get_pos()):
+#         # Touching our text! Render outline
+#         screen.blit(outline_text, outline_rect)
+
+#     screen.blit(inner_text, inner_rect)
+
+
+#     # Enact our display changes
+#     pygame.display.update()
+
+import os, sys, pygame, pygame.font, pygame.image
+from pygame.locals import *
+
+
+def textHollow(font, message, fontcolor):
+    notcolor = [c^0xFF for c in fontcolor]
+    base = font.render(message, 0, fontcolor, notcolor)
+    size = base.get_width() + 2, base.get_height() + 2
+    img = pygame.Surface(size, 16)
+    img.fill(notcolor)
+    base.set_colorkey(0)
+    img.blit(base, (0, 0))
+    img.blit(base, (2, 0))
+    img.blit(base, (0, 2))
+    img.blit(base, (2, 2))
+    base.set_colorkey(0)
+    base.set_palette_at(1, notcolor)
+    img.blit(base, (1, 1))
+    img.set_colorkey(notcolor)
+    return img
+
+def textOutline(font, message, fontcolor, outlinecolor):
+    base = font.render(message, 0, fontcolor)
+    outline = textHollow(font, message, outlinecolor)
+    img = pygame.Surface(outline.get_size(), 16)
+    img.blit(base, (1, 1))
+    img.blit(outline, (0, 0))
+    img.set_colorkey(0)
+    return img
+
+
+entry_info1 = 'Hollow, by Pete Shinners'
+entry_info2 = 'Outlined, by Pete Shinners'
+
+#this code will display our work, if the script is run...
+if __name__ == '__main__':
+    pygame.init()
+
+    #create our fancy text
+    white = 255, 255, 255
+    grey = 100, 100, 100
+    bigfont = pygame.font.Font(None, 60)
+    text1 = textHollow(bigfont, entry_info1, white)
+    text2 = textOutline(bigfont, entry_info2, grey, white)
+
+    #create a window the correct size
+    width = max(text1.get_width(), text2.get_width())
+    height = text1.get_height() + text2.get_height()
+    win = pygame.display.set_mode((width, height))
+    win.fill((20, 20, 80), (0, 0, width, 30))
+    win.fill((20, 20, 80), (0, height-30, width, 30))
+
+    win.blit(text1, (0, 0))
+    win.blit(text2, (0, text1.get_height()))
+    pygame.display.flip()
+    
+    #wait for the finish
+    while 1:
+        event = pygame.event.wait()
+        if event.type is KEYDOWN and event.key == K_s: #save it
+            name = os.path.splitext(sys.argv[0])[0] + '.bmp'
+            pygame.image.save(win, name)
+        elif event.type in (QUIT,KEYDOWN,MOUSEBUTTONDOWN):
+            break
