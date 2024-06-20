@@ -14,6 +14,7 @@ class Box:
         self.posiciones = posiciones
         self.dimensiones = dimensiones
         self.rectangulo = pygame.Rect(self.posiciones, self.dimensiones)
+        self.original_rectangulo = pygame.Rect(self.posiciones, self.dimensiones)
 
         #Color
         self.color_principal = None
@@ -33,6 +34,7 @@ class Box:
         self.image = image
         #letra de la carta
         self.letter = None
+        self.pos = None
         self.append = False
 
     def resize(self, new_window_size):
@@ -78,7 +80,6 @@ class Box:
         if event.type == pygame.MOUSEBUTTONDOWN:  
 
             if self.rectangulo.collidepoint(event.pos):
-                print("presione el boton")
                 self.presionado = True
 
                 if self.sound != None:
@@ -109,7 +110,6 @@ class Box:
         elif event.type == pygame.MOUSEMOTION:
             
             if self.rectangulo.collidepoint(event.pos):
-                print("mouse porarriba")
                 self.hover = True
             else:
                 self.hover = False
@@ -159,12 +159,15 @@ class Box:
                 image = image.convert_alpha()
                 image.set_alpha(transparency)
 
-                rect = pygame.draw.rect(surface, (128,128,128,50), self.rectangulo, border_radius=10)
+                pygame.draw.rect(surface, (128,128,128,50), self.rectangulo, border_radius=10)
 
             surface.blit(image, self.rectangulo)
     
-    def assign_letter(self, letter:str):
+    def assign_letter(self, letter:str, pos):
         self.letter = letter
+        self.pos = pos
     
     def check_append(self, append):
         self.append = append
+    
+   
