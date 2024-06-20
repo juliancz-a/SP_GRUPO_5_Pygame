@@ -50,9 +50,9 @@ class Box:
         self.reduccion = (self.dimensiones[0] * 0.95, self.dimensiones[1] * 0.95)
 
     
-    def draw_box (self, surface, border_radius = -1, border = None, border_width = 0):
+    def draw_box (self, surface, border_radius = -1, border = None, border_width = 0, transparency = 255):
 
-        pygame.draw.rect(surface, self.color_principal, self.rectangulo, border_radius = border_radius)
+        pygame.draw.rect(surface, (self.color_principal[0],self.color_principal[1],  self.color_principal[2], transparency), self.rectangulo, border_radius = border_radius)
 
         if self.hover:
             pygame.draw.rect(surface, self.color_hover, self.rectangulo, border_radius = border_radius)
