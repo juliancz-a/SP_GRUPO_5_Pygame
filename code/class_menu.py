@@ -29,10 +29,8 @@ class Menu:
         self.options_button.set_color(COLOR_BOX, BORDE_BOX, "grey")
         self.exit_button.set_color(COLOR_BOX, BORDE_BOX, "grey")
 
-        print(f"resolucion : {self.surface.get_size()}")
-        print(f" Size del boton: {self.play_button.rectangulo.size}")
         self.play_button.resize(self.surface.get_size())
-        print(self.play_button.rectangulo.size)
+    
         self.title.resize(self.surface.get_size())
         self.exit_button.resize(self.surface.get_size())
         self.options_button.resize(self.surface.get_size())
