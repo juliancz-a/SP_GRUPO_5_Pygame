@@ -31,6 +31,8 @@ class Box:
         self.sound = press_sound
         #imagen 
         self.image = image
+        #letra de la carta
+        self.letter = None
     
     def resize(self, new_window_size):
         # Calcular nueva pos y nuevo tamaño según la división entre la pantalla nueva y la vieja
@@ -156,6 +158,9 @@ class Box:
                 image = image.convert_alpha()
                 image.set_alpha(transparency)
 
-                rect = pygame.draw.rect(surface, (47,79,79,50), self.rectangulo, border_radius=10)
+                rect = pygame.draw.rect(surface, (128,128,128,50), self.rectangulo, border_radius=10)
+
             surface.blit(image, self.rectangulo)
-      
+    
+    def assign_letter(self, letter:str):
+        self.letter = letter
