@@ -38,7 +38,7 @@ class Play:
         empty_card_list = set_cards(self.original_wh, self.cards, 250)
 
         self.menu_button.resize((self.surface.get_size()))
-       
+    
         cards_resize((self.surface.get_size()), card_list)
 
         while True:
@@ -101,7 +101,7 @@ def draw_cards(surface:pygame.Surface, card_list:list[Box], letras):
 
     for i in range (len(card_list)):
         card_list[i].draw_image(surface)
-        card_list[i].draw_text(surface, letras[i], "black", FUENTE_1, 100)
+        card_list[i].draw_text(surface, letras[i], (255,255,255), FUENTE_1, 100, border=True, border_thickness=2)
 
 def draw_empty_cards(surface:pygame.Surface, card_list:list[Box]):
     for i in range (len(card_list)):
