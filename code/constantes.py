@@ -9,8 +9,10 @@ LETRAS = "gold2"
 BORDE_2 = (47, 26, 21)
 LETRAS_2 = (88, 37, 25)
 COLOR_LETRAS = (60, 6, 98)
+
 COLOR_BOX = (138, 96, 74)
 BORDE_BOX = (60, 39, 28)
+HOVER_BOX = (121, 101, 85)
 
 #RESOURCES
 PRESS_SOUND = r"code\data\sound\press_button.wav"
