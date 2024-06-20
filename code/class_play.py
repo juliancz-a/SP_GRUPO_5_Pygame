@@ -43,6 +43,8 @@ class Play:
     
         cards_resize((self.surface.get_size()), card_list)
 
+        append = 0
+
         while True:
             background = pygame.image.load(self.background)
             background = pygame.transform.scale(background, (self.surface.get_width(), self.surface.get_height()))
@@ -61,17 +63,16 @@ class Play:
                     # self.play_title.resize(event.size)
                     cards_resize(event.size, card_list)
 
+                #elif evento.type == pygame.JOIN
+
                 menu = self.menu_button.interaction(event)
                 set_cards_interaction(event, card_list, letras_seleccionadas)
-
-            if len(letras_seleccionadas) > 0 :
-                print(letras_seleccionadas)
 
             self.surface.fill("black")
             self.surface.blit(background, (0,0))
 
+            draw_empty_cards(self.surface, card_list, empty_card_list, letras_seleccionadas, append)
             draw_cards(self.surface, card_list, letras)
-            draw_empty_cards(self.surface, empty_card_list, letras_seleccionadas)
 
             self.menu_button.draw_box(self.surface, border_radius=5, border=True, border_width=5)
             self.menu_button.draw_text(self.surface, "Volver al menú", "white", FUENTE_1, 40)
@@ -96,6 +97,7 @@ def set_cards(wh, cards_counter, y) -> list:
     for i in range(cards_counter):
         card = Box(wh,(initial_pos_x + center,y), (100,128), image=CARTAS, press_sound=CARTAS_SOUND)
         card_list.append(card)
+        
             
         initial_pos_x += 105
     
@@ -110,25 +112,44 @@ def draw_cards(surface:pygame.Surface, card_list:list[Box], letras):
 
         card_list[i].assign_letter(letras[i])
 
-def draw_empty_cards(surface:pygame.Surface, card_list:list[Box], letras):
+def draw_empty_cards(surface:pygame.Surface, card_list:list[Box], empty_card_list:list[Box], letras:list, append):
     for i in range (len(card_list)):
-        card_list[i].draw_image(surface, transparency=75)
+        empty_card_list[i].draw_image(surface, transparency=75)
 
-        # if letras != None:
-        #     card_list[i].draw_text(surface, letras[i], "black", FUENTE_1, 100)
+        print(card_list[i].rectangulo)
+        if len(letras) > 0 and append < len(letras):
+            print(card_list[i].rectangulo)
+            card_list[i].rectangulo.y = 250
+            empty_card_list[i].rectangulo.y = 100
+            append += 1
+    return append
 
 def set_cards_interaction(event, card_list:list[Box], selected_letters):
+    occurrences = []
+    for card in card_list:
+        occurrences.append(card.letter)
+
     for card in card_list:
         action = card.interaction(event)
         if action:
-            occurrences = card_list.count(card.letter)
-            if selected_letters.count(card.letter) <= occurrences:
+            occurrences = occurrences.count(card.letter)
+            print(f"numero de ocurrencias : {occurrences}")
+            
+            if selected_letters.count(card.letter) < occurrences and not card.append:
                 selected_letters.append(card.letter)
-
-    
+                card.check_append(True)
 
 def cards_resize(event, card_list:list[Box]):
     for card in card_list:
         print(card.rectangulo.x, card.rectangulo.y)
         card.resize(event)
 
+
+
+
+# lista = ["M", "A", "L", "O"]
+
+# x = "".join(lista)
+# x = x.lower()
+
+# print(x)

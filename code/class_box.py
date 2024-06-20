@@ -33,6 +33,7 @@ class Box:
         self.image = image
         #letra de la carta
         self.letter = None
+        self.append = False
 
     def resize(self, new_window_size):
         # Calcular nueva pos y nuevo tamaño según la división entre la pantalla nueva y la vieja
@@ -50,9 +51,9 @@ class Box:
         self.reduccion = (self.dimensiones[0] * 0.95, self.dimensiones[1] * 0.95)
 
     
-    def draw_box (self, surface, border_radius = -1, border = None, border_width = 0, transparency = 255):
+    def draw_box (self, surface, border_radius = -1, border = None, border_width = 0):
 
-        pygame.draw.rect(surface, (self.color_principal[0],self.color_principal[1],  self.color_principal[2], transparency), self.rectangulo, border_radius = border_radius)
+        pygame.draw.rect(surface, self.color_principal, self.rectangulo, border_radius = border_radius)
 
         if self.hover:
             pygame.draw.rect(surface, self.color_hover, self.rectangulo, border_radius = border_radius)
@@ -130,7 +131,7 @@ class Box:
         height_center = self.rectangulo.size[1] / 2
 
         text_rect = text_surface.get_rect()
-        text_rect.center = (x + width_center, y + height_center)
+        text_rect.center = (x + width_center, y + height_center - 3)
 
         if border:
             for dx in range(-border_thickness, border_thickness + 1):
@@ -164,3 +165,6 @@ class Box:
     
     def assign_letter(self, letter:str):
         self.letter = letter
+    
+    def check_append(self, append):
+        self.append = append
