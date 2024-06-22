@@ -21,6 +21,7 @@ class Play:
         self.surface = surface
         self.original_wh = wh
         self.menu_button = Box(wh,(1160,650), (100,50))
+        self.join_button = Box(wh, (750,420), (80,50))
 
         self.cards = 6
 
@@ -28,8 +29,10 @@ class Play:
         self.background = r"code\data\img\newbg.png"
 
     def render(self):
-
+        
         self.menu_button.set_color("red", "yellow", "grey")
+        self.join_button.set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
+        
         menu = False
         Play.set_music(self)
 
@@ -41,15 +44,15 @@ class Play:
         empty_card_list = set_cards(empty_card_list, self.original_wh, self.cards, 250)
 
         self.menu_button.resize((self.surface.get_size()))
+        self.join_button.resize((self.surface.get_size()))
 
         cards_resize((self.surface.get_size()), card_list)
 
         append = 0
-        pos = 0
         p_list = [0,1,2,3,4,5]
         free_spaces = []
 
-
+        join = pygame.USEREVENT + 1
         while True:
             background = pygame.image.load(self.background)
             background = pygame.transform.scale(background, (self.surface.get_width(), self.surface.get_height()))
@@ -70,10 +73,13 @@ class Play:
 
                 #elif evento.type == pygame.JOIN
 
+                join = self.join_button.interaction(event)
                 menu = self.menu_button.interaction(event)
-                pos = set_cards_interaction(event, card_list, letras_seleccionadas, p_list, free_spaces)
+                set_cards_interaction(event, card_list, letras_seleccionadas, p_list, free_spaces)
+                
 
-                # if event.type == move_card:
+                # if event.type == join:
+                  
                 #     draw_cards(self.surface, letras_seleccionadas, )
 
 
@@ -82,6 +88,9 @@ class Play:
 
             draw_empty_cards(self.surface, card_list, empty_card_list, letras_seleccionadas, append)
             draw_cards(self.surface, card_list, letras)
+
+            self.join_button.draw_box(self.surface, 10, True, 5)
+            self.join_button.draw_text(self.surface, "¡Unir!", "navy", FUENTE_1, 60)
 
             self.menu_button.draw_box(self.surface, border_radius=5, border=True, border_width=5)
             self.menu_button.draw_text(self.surface, "Volver al menú", "white", FUENTE_1, 40)
@@ -159,7 +168,6 @@ def set_cards_interaction(event, card_list:list[Box], selected_letters:list, pos
                 print(f"lista posiciones : {position_list}")
 
                 card.rectangulo.x, card.rectangulo.y = card_list[pos].original_rectangulo.x, 250
-
                 
                 free_spaces.append(card.pos)
                 card.pos = pos
@@ -176,15 +184,7 @@ def set_cards_interaction(event, card_list:list[Box], selected_letters:list, pos
                 
                 card.check_append(False)
 
-
                 card.rectangulo.x, card.rectangulo.y = card_list[card.pos].original_rectangulo.x, 100
-
-
-                #puede servir tambien
-                # print(card.letter)
-                # selected_letters.remove(card.letter)
-                # card.reset_position()
-                # card.check_append(False)
 
 
 def cards_resize(event, card_list:list[Box]):
@@ -194,6 +194,24 @@ def cards_resize(event, card_list:list[Box]):
 
 def change_card_pos (selected_card:Box, card_list):
     selected_card.rectangulo
+
+def join (selected_letters:list):
+    retorno = False
+    if len(selected_letters) >= 3:
+        palabra = "".join(selected_letters)
+
+        set_dict = set(combinaciones)
+        
+        palabra_set = {palabra}
+
+        intersec = set_dict.intersection(palabra_set)
+
+        if len(intersec) > 0:
+            retorno = palabra
+        else:
+            retorno = False
+
+    return retorno
 
 
 # class Card:
