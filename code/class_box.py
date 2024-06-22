@@ -4,7 +4,7 @@ import pygame
 
 class Box:
     #CONSTRUCTOR
-    def __init__(self, window_size, posiciones:tuple, dimensiones:tuple, press_sound = None, image = None):
+    def __init__(self, window_size, posiciones:tuple, dimensiones:tuple, press_sound = None, image = None, card_pos = None):
 
         self.window_size = window_size
       
@@ -14,6 +14,7 @@ class Box:
         self.posiciones = posiciones
         self.dimensiones = dimensiones
         self.rectangulo = pygame.Rect(self.posiciones, self.dimensiones)
+        self.original_rectangulo = pygame.Rect(self.posiciones, self.dimensiones)
 
         #Color
         self.color_principal = None
@@ -33,6 +34,8 @@ class Box:
         self.image = image
         #letra de la carta
         self.letter = None
+        self.pos = card_pos
+        self.append = False
 
     def resize(self, new_window_size):
         # Calcular nueva pos y nuevo tamaño según la división entre la pantalla nueva y la vieja
@@ -77,7 +80,6 @@ class Box:
         if event.type == pygame.MOUSEBUTTONDOWN:  
 
             if self.rectangulo.collidepoint(event.pos):
-                print("presione el boton")
                 self.presionado = True
 
                 if self.sound != None:
@@ -108,7 +110,6 @@ class Box:
         elif event.type == pygame.MOUSEMOTION:
             
             if self.rectangulo.collidepoint(event.pos):
-                print("mouse porarriba")
                 self.hover = True
             else:
                 self.hover = False
@@ -130,7 +131,7 @@ class Box:
         height_center = self.rectangulo.size[1] / 2
 
         text_rect = text_surface.get_rect()
-        text_rect.center = (x + width_center, y + height_center)
+        text_rect.center = (x + width_center, y + height_center - 3)
 
         if border:
             for dx in range(-border_thickness, border_thickness + 1):
@@ -158,9 +159,15 @@ class Box:
                 image = image.convert_alpha()
                 image.set_alpha(transparency)
 
-                rect = pygame.draw.rect(surface, (128,128,128,50), self.rectangulo, border_radius=10)
+                pygame.draw.rect(surface, (128,128,128,50), self.rectangulo, border_radius=10)
 
             surface.blit(image, self.rectangulo)
     
     def assign_letter(self, letter:str):
         self.letter = letter
+       
+    
+    def check_append(self, append):
+        self.append = append
+    
+   
