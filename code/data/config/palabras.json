@@ -1,45 +1,40 @@
 [
     {"P,R,O,A,E,S":
     [
-        "aperos", "apreso", "aproes", "arpeos", "aspero",
-        "espora", "operas", "opresa", "pareos", "pasero",
-        "peoras", "posera", "raspeo", "repaso", "reposa", "separo",
-        "sopear", "sopera", "pares", "sopar", "rapos", "paseo",
+        "apreso", "arpeos", "aspero", "espora", "operas",
+        "opresa", "raspeo", "repaso", "reposa", "separo",
+        "sopear", "sopera", "pares", "sopar", "paseo",
         "pera", "pose", "paro", "ropa", "sapo", "opera", "preso",
         "repo", "rapo", "pos", "rap", "res", "par", "por",
         "presa", "pesar", "persa", "peras", "paros", "aspeo",
         "proa", "prea", "rape", "prosa", "peso", "pesa", "pero",
-        "sopa", "paso", "pasa", "pase", "rosa", "ropas"
+        "sopa", "paso", "pasa", "pase", "rosa", "ropas", "pareo"
     ],
     "R,A,C,E,N,E":
     [
-        "aceren", "acreen", "careen", "carene", "carnee", "cenare",
-        "cenera", "cernea", "encare", "encera", "necear", "recaen",
-        "renace", "enrace", "nacere", "caere", "crean", "acere",
-        "recae", "cenar", "arcen", "carne", "creen", "recen",
-        "acne", "arce", "acre", "caer", "caen", "cera", "cena", "cene",
-        "nace", "cree", "rece", "eran", "era", "cae", "crea", "caree",
-        "cereo", "aren", "nacer"
+        "aceren", "careen", "carnee", "cenare", "encare",
+        "encera", "necear", "recaen", "renace", "nacere",
+        "caere", "crean", "acere", "recae", "cenar",
+        "carne", "creen", "recen", "acne", "arce", "acre", "caer",
+        "caen", "cera", "cena", "cene", "nace", "cree", "rece",
+        "eran", "era", "cae", "crea", "aren", "nacer"
     ],
     "O,T,R,S,A,E": 
     [
-        "aserto", "astero", "atores", "esotra", "estora",
-        "oraste", "orates", "rateos", "reatos", "roseta",
-        "rotase", "sortea", "sotera", "toreas", "artes", "ateos",
-        "estar", "orase", "astro", "artos", "arto", "oreas", "osare",
-        "ostra", "otras", "rateo", "ratos", "oseta", "resta", "retos",
-        "rosa", "terso", "retas", "resto", "rotas", "tarso", "tesar",
-        "osar", "esto", "ateo", "aseo", "arte", "aros", "ores", "oras",
-        "otra", "raso", "reta", "reto", "roes", "sera", "sota", "aro",
-        "era", "esa", "ora", "ore", "res", "ser", "tos", "ase", "aso",
-        "rota"
+        "aserto", "atores", "oraste", "rateos", "esta",
+        "rotase", "sortea", "toreas", "artes", "ateos",
+        "estar", "orase", "astro", "osare", "ostra", "otras",
+        "rateo", "ratos", "resta", "retos", "rosa", "retas",
+        "resto", "rotas", "osar", "esto", "ateo", "aseo",
+        "arte", "aros", "ores", "oras", "otra", "raso", "rota",
+        "reta", "reto", "roes", "sera", "sota", "tero", "aro", "ate",
+        "era", "esa", "ora", "ore", "res", "ser", "tos", "ase", "aso"
     ],
     "A,S,R,C,E,A": 
     [
-        "aceras", "acreas", "arcase", "arceas",
-        "careas", "caresa", "casare", "casera",
-        "resaca", "sacare", "secara", "casa",
-        "cesara", "escara", "seca", "caer", "rasca",
+        "aceras", "arceas", "casare", "casera",
+        "resaca", "sacare", "secara", "casa", "saca",
+        "cesara", "seca", "caer", "rasca", "ceras",
         "res", "casar", "arcas", "asear", "secar",
         "ser", "era", "cera", "crea", "esa", "sea",
         "cara", "ras", "arca", "acera", "arce", "caes",
@@ -48,31 +43,27 @@
     ],
     "A,R,P,O,T,E": 
     [
-        "aporte", "apreto", "atrope", "patero", "apero",
-        "poetar", "portea", "potear", "potera", 
-        "potrea", "ropeta", "topare", "topear", "topera", 
-        "trapeo", "trapo", "par", "topar", "pare", "pato",
-        "tope", "rap", "rateo", "rapto", "tropa", "pote", 
-        "peor", "taper", "parte", "arte", "aro", "por", "rato",
-        "opera", "peta", "opta", "poeta", "ropa", "ore", "pera",
-        "pero", "petar", "torpe", "parto", "optar", "arpeo",
-        "reo", "pare", "epa", "ero", "roe", "ate", "top", "apto",
-        "opte", "rape", "rapo", "tape", "tapo", "arpe", "ateo",
-        "otra", "arte", "arto", "potra", "trape", "peta", "topa",
-        "rota", "reto", "rea"
+        "aporte", "apreto", "atrope", "patero", "poetar",
+        "portea", "potera", "potrea", "trapeo",
+        "trapo", "par", "topar", "pare", "pato", "tope",
+        "rap", "rapto", "tropa", "pote", "peor",
+        "taper", "parte", "arte", "aro", "por", "rato",
+        "opera", "opta", "poeta", "ropa", "ore", "pera",
+        "pero", "torpe", "parto", "optar", "arpeo", "reo",
+        "pare", "epa", "ero", "roe", "ate", "top", "apto",
+        "opte", "rape", "rapo", "tape", "tapo", "ateo", "otra",
+        "arte", "potra", "topa", "rota", "reto", "rea"
     ],
     "C,A,E,R,T,O": 
     [
         "tocare", "tacero", "rector", "cortar", "torea",
-        "torca", "tarco", "recta", "recto", "cetro",
-        "corte", "corta", "actor", "toca", "taco", "rato",
-        "roca", "crea", "cero", "arte", "acre", "caro", "ora",
-        "era", "ceo", "oca", "ate", "caer", "careto", "arco",
-        "tero", "toc", "tac", "acero", "aceto", "cetra",
-        "roce", "trace", "acto", "cera", "ocre", "terco", "terca",
-        "recta", "cotar", "acote", "cateo", "toce", "creo", "ateo",
-        "rota", "peta", "petar", "topa", "top", "tapo", "tocar",
-        "eco", "tace", "cera", "roe", "aro", "reto"
+        "recta", "recto", "cetro", "corte", "corta", "actor",
+        "toca", "taco", "rato", "roca", "crea", "cero", "arte",
+        "acre", "caro", "ora", "era", "oca", "caer", "careto",
+        "arco", "tero", "toc", "tac", "acero", "roce", "trace",
+        "acto", "cera", "ocre", "terco", "terca", "recta", "acote",
+        "cateo", "toce", "creo", "ateo", "rota", "topa", "top",
+        "tapo", "tocar", "eco", "tace", "cera", "roe", "aro", "reto"
     ],
     "R,L,T,E,O,M": 
     [
@@ -103,25 +94,26 @@
         "cristo", "ricos", "crios", "risco", "rico", "tirso",
         "tios", "tiro", "trio", "rios", "tic", "rio", "rito",
         "tics", "tiros", "cito", "tris", "tos", "tio", "oir",
-        "ritos", "crio", "toc", "tosi"
+        "ritos", "crio", "toc", "tosi", "cosi"
     ],
     "T,N,R,E,S,O": 
     [
-        "resto", "trenso", "torna", "seno", "nortes", "norte",
+        "resto", "trenso", "torna", "seno", "norte",
         "rento", "ternos", "terno", "entro", "netos", "neto",
         "renos", "reno", "rones", "ron", "tenor", "teson",
         "toser", "tos", "tose", "trone", "esto", "oren", "eon",
         "roe", "ore", "ser", "son", "ten", "eso", "reto", "roen",
         "tren", "osen", "ose", "roes", "note", "tenso", "tensor",
-        "retos", "tosen"
+        "retos", "tosen", "tero"
     ],
     "M,A,N,T,R,O":
     [
         "montar", "manto", "monta", "toman", "tomar", "toma",
-        "tramo", "amor", "armo", "mano", "mato", "ramo", "toma",
+        "tramo", "amor", "armo", "mano", "mato", "ramo",
         "antro", "raton", "torna", "trona", "rotan", "amo", "nota",
         "notar", "rato", "otra", "oran", "nato", "ron", "mar", "mona",
-        "norma", "maton", "mota", "ano", "ora", "orna", "noma", "rota"
+        "norma", "maton", "mota", "ano", "ora", "orna", "noma", "rota",
+        "tan"
     ],
     "V,O,T,I,N,A":
     [
@@ -152,16 +144,16 @@
     ],
     "L,R,S,E,A,O":
     [
-        "aleros", "eslora", "loares", "losare", "raleo",
-        "oleras", "orales", "orlase", "roela", "rolase",
+        "aleros", "raleo",
+        "oleras", "orales", "orlase", "roela",
         "salero", "solear", "solera", "alero", "lares",
-        "laser", "loras", "lorea", "orale", "orase", "osare",
+        "laser", "lorea", "orale", "orase", "osare",
         "oreas", "rasel", "rolas", "solar", "soler", "roles",
         "saleo", "aloe", "aros", "lora", "oler", "oral", "oras",
         "orea", "osar", "osea", "real", "rola", "rosa", "rose",
-        "reos", "ralo", "orla", "les", "los", "ola", "ore", "ora",
+        "reos", "ralo", "los", "ola", "ore", "ora",
         "ras", "reo", "rea", "res", "sal", "ser", "sol", "sea",
-        "ose", "osa", "las", "eso", "esa", "ase", "aso", "sor",
+        "ose", "osa", "las", "eso", "esa", "ase", "aso",
         "aseo", "losa", "aro", "ara"
     ]
     }
