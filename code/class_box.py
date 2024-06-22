@@ -39,6 +39,9 @@ class Box:
         self.pos = card_pos
         self.append = False
 
+        #palabra anexada
+        self.annexed_word = None
+
     def resize(self, new_window_size):
         # Calcular nueva pos y nuevo tamaño según la división entre la pantalla nueva y la vieja
 
