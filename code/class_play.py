@@ -56,9 +56,11 @@ class Play:
 
         join = False
         score = 0
-
+        activate_comodin = 0
+        comodin = False
+        random_letter = None
         JOIN_CARDS = pygame.USEREVENT + 1
-
+    
         while True:
             background = pygame.image.load(self.background)
             background = pygame.transform.scale(background, (self.surface.get_width(), self.surface.get_height()))
@@ -90,7 +92,12 @@ class Play:
                 #     # print(event.unicode)
                 menu = self.menu_button.interaction(event)
                 set_cards_interaction(event, card_list, letras_seleccionadas, p_list, free_spaces)
-                comodin = self.comodin_button.interaction(event)
+                if comodin is False:
+                    comodin = self.comodin_button.interaction(event)
+
+            if comodin and activate_comodin == 0:
+                random_letter = select_random_letter(combinaciones)
+                activate_comodin += 1
 
 
             self.surface.fill("black")
@@ -116,7 +123,7 @@ class Play:
 
             self.score.draw_text(self.surface, f"Puntaje: {str(score)}", "darkslateblue", FUENTE_4, font_size=125, center=True, shadow=True, border_thickness=2)
 
-            draw_words(self.original_wh, self.surface, self.words_matrix, palabras_encontradas)
+            draw_words(self.original_wh, self.surface, self.words_matrix, palabras_encontradas, comodin, random_letter)
 
             self.comodin_button.draw_image(self.surface)
             pygame.display.update()
@@ -237,7 +244,7 @@ def join_cards (selected_letters:list, words_founded:list, combinaciones):
 
     return retorno
 
-def draw_words (wh, surface, matrix, words_founded:list):
+def draw_words (wh, surface, matrix, words_founded:list, comodin, random_letter):
     
     x = 55
     
@@ -251,13 +258,21 @@ def draw_words (wh, surface, matrix, words_founded:list):
                 y = 530
                 x += 100
                 printed = 0
-            else:
+
+            elif j == len(matrix[i]) - 1 and printed == 6:
                 printed = 0
 
             if matrix[i][j] != 0:
                 word = matrix[i][j]
                 word_text = word
                 word = Box(wh, (x, y), (40, 100))
+
+                if comodin:
+                    letter = use_comodin(random_letter, words_founded, word_text)
+                    if letter[0] != False:
+                        letter_box = Box(wh, (x + letter[1],y), (40,100))
+                        letter_box.draw_text(surface, letter[0], COLOR_PALABRA, FUENTE_3, font_size=200, shadow=1)
+
                 for word_founded in words_founded:
                     if word_founded == matrix[i][j]:
                         word.draw_text(surface,word_text, COLOR_PALABRA, FUENTE_3, font_size=200, shadow=1)
@@ -267,7 +282,7 @@ def draw_words (wh, surface, matrix, words_founded:list):
                 
                 y += 20
                 printed +=1
-                
+    return comodin
 
 
 def sum_score(scoreboard:int, word):
@@ -312,5 +327,34 @@ def swap(list:list[dict], a:int, b:int):
     list[a] = list[b]
     list[b] = aux
 
-def use_comodin (comodin, words_matrix, combinaciones:list):
-    pass
+def select_random_letter (combinaciones):
+
+
+    elemento_random = random.randint(0, len(combinaciones) - 1)
+    palabra = combinaciones[elemento_random]
+    
+    letra = palabra[random.randint(0, len(palabra) - 1)]
+
+    return letra
+
+def use_comodin (letter, words_founded, word_text):
+    pos = 0
+    coincidence = False
+    if len(words_founded) == 0:
+        for matrix_letter in word_text:
+            if matrix_letter == letter:
+                coincidence = True
+                break
+            pos += 12
+    else:
+        pos = 0
+        for word in words_founded:
+            if word != word_text:
+                for matrix_letter in word_text:
+                    if matrix_letter == letter:
+                        coincidence = True
+                        break
+                    pos += 12
+    if coincidence == False:
+        letter, pos = False, False
+    return letter,pos
