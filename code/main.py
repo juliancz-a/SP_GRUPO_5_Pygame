@@ -24,7 +24,7 @@ VERDE = (0, 255, 0)
 ROJO = (255, 0, 0)
 TIEMPO_LIMITE = 30
 
-def coincidencias(combinaciones, letras):
+def coincidencias(combinaciones, l):
 
     set_dict = set(combinaciones)
 

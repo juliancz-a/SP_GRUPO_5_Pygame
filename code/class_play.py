@@ -7,13 +7,13 @@ import random
 
 
 lista = read_data(r"code\data\config\palabras.json")
-combinaciones = list(lista[0].items())
+combinaciones = list(lista[0].keys())
 
 
 palabra_secretita = random.choice(combinaciones)
-
-letras = palabra_secretita[0]
-print(letras)
+combinaciones = lista[0][palabra_secretita]
+print(palabra_secretita)
+print(combinaciones)
 palabras_a_encontrar = palabra_secretita[1]
 
 class Play:
@@ -39,6 +39,7 @@ class Play:
         letras_seleccionadas = []
         card_list = []
         empty_card_list = []
+        palabras_encontradas = []
 
         card_list = set_cards(card_list, self.original_wh, self.cards, 100)
         empty_card_list = set_cards(empty_card_list, self.original_wh, self.cards, 250)
@@ -48,11 +49,9 @@ class Play:
 
         cards_resize((self.surface.get_size()), card_list)
 
-        append = 0
         p_list = [0,1,2,3,4,5]
         free_spaces = []
-
-        join = pygame.USEREVENT + 1
+        join = False
         while True:
             background = pygame.image.load(self.background)
             background = pygame.transform.scale(background, (self.surface.get_width(), self.surface.get_height()))
@@ -72,8 +71,9 @@ class Play:
                     cards_resize(event.size, card_list)
 
                 #elif evento.type == pygame.JOIN
+                elif len(letras_seleccionadas) >= 3:
+                    join = self.join_button.interaction(event)
 
-                join = self.join_button.interaction(event)
                 menu = self.menu_button.interaction(event)
                 set_cards_interaction(event, card_list, letras_seleccionadas, p_list, free_spaces)
                 
@@ -82,15 +82,18 @@ class Play:
                   
                 #     draw_cards(self.surface, letras_seleccionadas, )
 
-
+            if join:
+                card = join_cards(letras_seleccionadas)
+                print(card)
             self.surface.fill("black")
             self.surface.blit(background, (0,0))
 
-            draw_empty_cards(self.surface, card_list, empty_card_list, letras_seleccionadas, append)
-            draw_cards(self.surface, card_list, letras)
+            draw_empty_cards(self.surface, card_list, empty_card_list)
+            draw_cards(self.surface, card_list, palabra_secretita)
 
-            self.join_button.draw_box(self.surface, 10, True, 5)
-            self.join_button.draw_text(self.surface, "¡Unir!", "navy", FUENTE_1, 60)
+            if len(letras_seleccionadas) >= 3:
+                self.join_button.draw_box(self.surface, 10, True, 5)
+                self.join_button.draw_text(self.surface, "¡Unir!", "navy", FUENTE_1, 60)
 
             self.menu_button.draw_box(self.surface, border_radius=5, border=True, border_width=5)
             self.menu_button.draw_text(self.surface, "Volver al menú", "white", FUENTE_1, 40)
@@ -132,18 +135,9 @@ def draw_cards(surface:pygame.Surface, card_list:list[Box], letras):
         card_list[i].assign_letter(letras[i])
         pos += 1
 
-def draw_empty_cards(surface:pygame.Surface, card_list:list[Box], empty_card_list:list[Box], letras:list, append):
+def draw_empty_cards(surface:pygame.Surface, card_list:list[Box], empty_card_list:list[Box]):
     for i in range (len(card_list)):
         empty_card_list[i].draw_image(surface, transparency=75)
-
-        # print(card_list[i].rectangulo)
-        if len(letras) > 0 and append < len(letras):
-            # print(card_list[i].rectangulo)
-            #arreglar indice
-            # card_list[i].rectangulo.y = 250
-            # empty_card_list[i].rectangulo.y = 100
-            append += 1
-    return append
 
 def set_cards_interaction(event, card_list:list[Box], selected_letters:list, position_list, free_spaces):
     occurrences_list = []
@@ -192,24 +186,22 @@ def cards_resize(event, card_list:list[Box]):
         print(card.rectangulo.x, card.rectangulo.y)
         card.resize(event)
 
-def change_card_pos (selected_card:Box, card_list):
-    selected_card.rectangulo
 
-def join (selected_letters:list):
+def join_cards (selected_letters:list):
     retorno = False
-    if len(selected_letters) >= 3:
-        palabra = "".join(selected_letters)
 
-        set_dict = set(combinaciones)
-        
-        palabra_set = {palabra}
+    palabra = "".join(selected_letters).lower()
 
-        intersec = set_dict.intersection(palabra_set)
+    set_dict = set(combinaciones)
+    
+    palabra_set = {palabra}
 
-        if len(intersec) > 0:
-            retorno = palabra
-        else:
-            retorno = False
+    intersec = set_dict.intersection(palabra_set)
+
+    if len(intersec) > 0:
+        retorno = palabra
+    else:
+        retorno = False
 
     return retorno
 
