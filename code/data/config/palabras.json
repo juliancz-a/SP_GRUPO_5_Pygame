@@ -19,7 +19,7 @@
         "recae", "cenar", "arcen", "carne", "creen", "recen",
         "acne", "arce", "acre", "caer", "caen", "cera", "cena", "cene",
         "nace", "cree", "rece", "eran", "era", "cae", "crea", "caree",
-        "cereo", "aren"
+        "cereo", "aren", "nacer"
     ],
     "O,T,R,S,A,E": 
     [
@@ -31,7 +31,8 @@
         "rosa", "terso", "retas", "resto", "rotas", "tarso", "tesar",
         "osar", "esto", "ateo", "aseo", "arte", "aros", "ores", "oras",
         "otra", "raso", "reta", "reto", "roes", "sera", "sota", "aro",
-        "era", "esa", "ora", "ore", "res", "ser", "tos", "ase", "aso", "rota"
+        "era", "esa", "ora", "ore", "res", "ser", "tos", "ase", "aso",
+        "rota"
     ],
     "A,S,R,C,E,A": 
     [
@@ -135,7 +136,7 @@
         "malon", "molia", "mina", "iman", "lima", "limo", "loma",
         "mano", "mino", "moai", "mani", "lamo", "ola", "ano",
         "lio", "lia", "oian", "olian", "lona", "mal", "mona",
-        "moli", "malo", "amo"
+        "moli", "malo", "amo", "mio", "mia"
     ],
     "R,S,E,A,A,M":
     [
@@ -161,7 +162,7 @@
         "reos", "ralo", "orla", "les", "los", "ola", "ore", "ora",
         "ras", "reo", "rea", "res", "sal", "ser", "sol", "sea",
         "ose", "osa", "las", "eso", "esa", "ase", "aso", "sor",
-        "aseo"
+        "aseo", "losa", "aro", "ara"
     ]
     }
     ]
