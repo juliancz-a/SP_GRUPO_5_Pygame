@@ -2,6 +2,7 @@
 
 #FONTS
 FUENTE_1 = r"code\data\vinque rg.otf"
+FUENTE_2 = r"code\data\NarniaBll-2Odv.ttf"
 
 #COLORS
 TITULO = "magenta3"

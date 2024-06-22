@@ -106,7 +106,7 @@ def draw_cards(surface:pygame.Surface, card_list:list[Box], letras):
 
     for i in range (len(card_list)):
         card_list[i].draw_image(surface)
-        card_list[i].draw_text(surface, letras[i], (255,255,255), FUENTE_1, 100, border=True, border_thickness=2)
+        card_list[i].draw_text(surface, letras[i], (255,255,255), FUENTE_2, 86, border=True, border_thickness=2)
 
         card_list[i].assign_letter(letras[i])
 
