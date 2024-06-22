@@ -4,7 +4,7 @@ import pygame
 
 class Box:
     #CONSTRUCTOR
-    def __init__(self, window_size, posiciones:tuple, dimensiones:tuple, press_sound = None, image = None):
+    def __init__(self, window_size, posiciones:tuple, dimensiones:tuple, press_sound = None, image = None, card_pos = None):
 
         self.window_size = window_size
       
@@ -34,7 +34,7 @@ class Box:
         self.image = image
         #letra de la carta
         self.letter = None
-        self.pos = None
+        self.pos = card_pos
         self.append = False
 
     def resize(self, new_window_size):
@@ -163,9 +163,9 @@ class Box:
 
             surface.blit(image, self.rectangulo)
     
-    def assign_letter(self, letter:str, pos):
+    def assign_letter(self, letter:str):
         self.letter = letter
-        self.pos = pos
+       
     
     def check_append(self, append):
         self.append = append
