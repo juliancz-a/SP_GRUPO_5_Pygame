@@ -3,6 +3,8 @@
 #FONTS
 FUENTE_1 = r"code\data\vinque rg.otf"
 FUENTE_2 = r"code\data\NarniaBll-2Odv.ttf"
+FUENTE_3 = r"code\data\ErinGoBragh-ZVA3x.ttf"
+FUENTE_4 = r"code\data\Trickster-Reg.ttf"
 
 #COLORS
 TITULO = "magenta3"
@@ -10,6 +12,7 @@ LETRAS = "gold2"
 BORDE_2 = (47, 26, 21)
 LETRAS_2 = (88, 37, 25)
 COLOR_LETRAS = (60, 6, 98)
+COLOR_PALABRA = (120, 23, 6)
 
 COLOR_BOX = (138, 96, 74)
 BORDE_BOX = (60, 39, 28)
@@ -24,3 +27,5 @@ CARTAS_SOUND = r"code\data\sound\card_click.wav"
 
 MENU_BACKGROUND = r"code\data\img\House 2.png"
 PLAY_BACKGROUND_1 = r"code\data\img\Play_background_1.png"
+
+TIEMPO_LIMITE = 90

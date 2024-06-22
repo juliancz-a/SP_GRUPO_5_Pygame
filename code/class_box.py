@@ -117,7 +117,7 @@ class Box:
         return action
     
     def draw_text(self, surface: pygame.Surface , text: str, text_color: str| tuple, font:str, font_size:int = 20, 
-                border = False, shadow = False, border_thickness = 1, border_color = "black"):
+                border = False, shadow = False, border_thickness = 1, border_color = "black", center = False):
 
         x,y = self.rectangulo.x, self.rectangulo.y
 
@@ -131,7 +131,11 @@ class Box:
         height_center = self.rectangulo.size[1] / 2
 
         text_rect = text_surface.get_rect()
-        text_rect.center = (x + width_center, y + height_center - 3)
+
+        if center:
+            text_rect.center = (x + width_center, y + height_center - 3)
+        else:
+            text_rect.topleft = x,y
 
         if border:
             for dx in range(-border_thickness, border_thickness + 1):
@@ -166,7 +170,6 @@ class Box:
     def assign_letter(self, letter:str):
         self.letter = letter
        
-    
     def check_append(self, append):
         self.append = append
     

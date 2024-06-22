@@ -67,16 +67,16 @@ class Menu:
             self.surface.blit(background, (0,0))
 
             self.exit_button.draw_box(self.surface, border_radius=15, border=True, border_width=5)
-            self.exit_button.draw_text(self.surface, "Salir", LETRAS_2, FUENTE_1, 60, shadow=True, border_thickness=1, border_color=BORDE_2)
+            self.exit_button.draw_text(self.surface, "Salir", LETRAS_2, FUENTE_1, 60, shadow=True, border_thickness=1, border_color=BORDE_2, center=True)
 
             self.options_button.draw_box(self.surface, border_radius=15, border=True, border_width=5)
-            self.options_button.draw_text(self.surface, "Opciones", LETRAS_2, FUENTE_1, 60, shadow=True, border_thickness=1, border_color=BORDE_2)
+            self.options_button.draw_text(self.surface, "Opciones", LETRAS_2, FUENTE_1, 60, shadow=True, border_thickness=1, border_color=BORDE_2, center=True)
 
             self.play_button.draw_image(self.surface)
             self.play_button.draw_box(self.surface, border_radius=15, border=True, border_width=5)
-            self.play_button.draw_text(self.surface, "Jugar", LETRAS_2, FUENTE_1, 60, shadow=True, border_thickness=1, border_color=BORDE_2)
+            self.play_button.draw_text(self.surface, "Jugar", LETRAS_2, FUENTE_1, 60, shadow=True, border_thickness=1, border_color=BORDE_2, center=True)
 
-            self.title.draw_text(self.surface, "Pop The Card", COLOR_LETRAS, FUENTE_1, 80, border=True, border_thickness=2, border_color=TITULO)
+            self.title.draw_text(self.surface, "Pop The Card", COLOR_LETRAS, FUENTE_1, 80, border=True, border_thickness=2, border_color=TITULO, center=True)
 
             pygame.display.update()
 
