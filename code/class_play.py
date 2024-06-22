@@ -52,6 +52,8 @@ class Play:
         p_list = [0,1,2,3,4,5]
         free_spaces = []
         join = False
+
+        JOIN_CARDS = pygame.USEREVENT + 1
         while True:
             background = pygame.image.load(self.background)
             background = pygame.transform.scale(background, (self.surface.get_width(), self.surface.get_height()))
@@ -63,28 +65,24 @@ class Play:
                     return False
 
                 elif event.type == pygame.VIDEORESIZE:
-
                     self.surface = pygame.display.set_mode((event.w, event.h), pygame.RESIZABLE)
-
                     self.menu_button.resize(event.size)
-                    # self.play_title.resize(event.size)
                     cards_resize(event.size, card_list)
 
-                #elif evento.type == pygame.JOIN
-                elif len(letras_seleccionadas) >= 3:
+                elif event.type == JOIN_CARDS:
+                    card = join_cards(letras_seleccionadas)
+                    if card != False:
+                        print("Palabra encontrada")
+                        palabras_encontradas.append(card)
+
+                elif len(letras_seleccionadas) > 2:
                     join = self.join_button.interaction(event)
+                    if join:
+                        pygame.event.post(pygame.event.Event(JOIN_CARDS))
 
                 menu = self.menu_button.interaction(event)
                 set_cards_interaction(event, card_list, letras_seleccionadas, p_list, free_spaces)
-                
-
-                # if event.type == join:
-                  
-                #     draw_cards(self.surface, letras_seleccionadas, )
-
-            if join:
-                card = join_cards(letras_seleccionadas)
-                print(card)
+        
             self.surface.fill("black")
             self.surface.blit(background, (0,0))
 
@@ -97,6 +95,9 @@ class Play:
 
             self.menu_button.draw_box(self.surface, border_radius=5, border=True, border_width=5)
             self.menu_button.draw_text(self.surface, "Volver al menú", "white", FUENTE_1, 40)
+
+            if len(palabras_encontradas) > 0:
+                draw_words(self.original_wh, self.surface, palabras_encontradas)
 
             pygame.display.update()
 
@@ -205,7 +206,12 @@ def join_cards (selected_letters:list):
 
     return retorno
 
-
+def draw_words (wh, surface, words_founded:list):
+    for word in words_founded:
+        word_text = word
+        word = Box(wh, (165, 536), (40, 100))
+    
+        word.draw_text(surface, word_text, "black", FUENTE_2, font_size=150)
 # class Card:
 #     def __init__(self, wh, pos, size) -> None:
 #         self.pos = pos

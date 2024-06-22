@@ -109,7 +109,6 @@ class Box:
                 self.rectangulo.center = center
 
         elif event.type == pygame.MOUSEMOTION:
-            
             if self.rectangulo.collidepoint(event.pos):
                 self.hover = True
             else:
