@@ -92,7 +92,7 @@ class Play:
                 set_cards_interaction(event, card_list, letras_seleccionadas, p_list, free_spaces)
                 comodin = self.comodin_button.interaction(event)
 
-        
+
             self.surface.fill("black")
             self.surface.blit(background, (0,0))
 
@@ -246,10 +246,14 @@ def draw_words (wh, surface, matrix, words_founded:list):
         y = 530
         x += 100
         for j in range (len(matrix[i])):
+
             if printed == 6 and j != len(matrix[i]) - 1:
                 y = 530
                 x += 100
                 printed = 0
+            else:
+                printed = 0
+
             if matrix[i][j] != 0:
                 word = matrix[i][j]
                 word_text = word
@@ -307,3 +311,6 @@ def swap(list:list[dict], a:int, b:int):
     aux = list[a]
     list[a] = list[b]
     list[b] = aux
+
+def use_comodin (comodin, words_matrix, combinaciones:list):
+    pass
