@@ -9,7 +9,7 @@
         "repo", "rapo", "pos", "rap", "res", "par", "por",
         "presa", "pesar", "persa", "peras", "paros", "aspeo",
         "proa", "prea", "rape", "prosa", "peso", "pesa", "pero",
-        "sopa"
+        "sopa", "paso", "pasa", "pase"
     ],
     "R,A,C,E,N,E":
     [
@@ -37,7 +37,7 @@
     [
         "aceras", "acreas", "arcase", "arceas",
         "careas", "caresa", "casare", "casera",
-        "resaca", "sacare", "secara", "resaca",
+        "resaca", "sacare", "secara",
         "cesara", "escara", "seca", "caer", "rasca",
         "res", "casar", "arcas", "asear", "secar",
         "ser", "era", "cera", "crea", "esa", "sea",
