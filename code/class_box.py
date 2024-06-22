@@ -32,7 +32,8 @@ class Box:
         self.sound = press_sound
         #imagen 
         self.image = image
-        #letra de la carta
+
+        #letra de la carta, posicion y append
         self.letter = None
         self.pos = card_pos
         self.append = False

@@ -25,7 +25,6 @@ ROJO = (255, 0, 0)
 TIEMPO_LIMITE = 30
 
 def coincidencias(combinaciones, letras):
-    print(f"LA COMBINACION ES : {shuffle(letras)}")
 
     set_dict = set(combinaciones)
 
