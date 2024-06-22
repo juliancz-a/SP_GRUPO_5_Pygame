@@ -43,6 +43,6 @@ class Game:
 
 
 
-juego = Game((1280,720), "POP THE CARD", r"code\data\img\image.png")
+juego = Game((1280,720), "POP THE CARD", ICON)
 juego.run()
 

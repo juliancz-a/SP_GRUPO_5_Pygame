@@ -5,15 +5,11 @@ from class_box import Box
 from data.config.config import *
 import random
 
-
 lista = read_data(r"code\data\config\palabras.json")
 combinaciones = list(lista[0].keys())
 
-
 palabra_secretita = random.choice(combinaciones)
 combinaciones = lista[0][palabra_secretita]
-print(palabra_secretita)
-print(combinaciones)
 palabras_a_encontrar = palabra_secretita[1]
 
 class Play:
@@ -44,6 +40,8 @@ class Play:
         card_list = []
         empty_card_list = []
         palabras_encontradas = []
+        p_list = [0,1,2,3,4,5]
+        free_spaces = []
 
         card_list = set_cards(card_list, self.original_wh, self.cards, 100)
         empty_card_list = set_cards(empty_card_list, self.original_wh, self.cards, 250)
@@ -53,8 +51,6 @@ class Play:
 
         cards_resize((self.surface.get_size()), card_list)
 
-        p_list = [0,1,2,3,4,5]
-        free_spaces = []
         join = False
 
         JOIN_CARDS = pygame.USEREVENT + 1
@@ -106,12 +102,14 @@ class Play:
             
             tiempo_transcurrido = (pygame.time.get_ticks() - tiempo_inicio) // 1000
             tiempo_restante = TIEMPO_LIMITE - tiempo_transcurrido
+
+            # if tiempo_restante == 0 or len(palabras_encontradas) == len(combinaciones):
+            #     return "scoreboard"
          
             self.timer.draw_text(self.surface, str(tiempo_restante), "white", FUENTE_4, font_size=275, center=True, shadow=True, border_thickness=2)
 
     
             pygame.display.update()
-
 
     def set_music(self):
         if self.music != None:

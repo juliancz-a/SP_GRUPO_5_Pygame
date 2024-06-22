@@ -19,6 +19,7 @@ BORDE_BOX = (60, 39, 28)
 HOVER_BOX = (121, 101, 85)
 
 #RESOURCES
+ICON = r"code\data\img\icon.png"
 PRESS_SOUND = r"code\data\sound\press_button.wav"
 MENU_MUSIC = r"code\data\sound\musica_menu.mp3"
 PLAY_MUSIC = r"code\data\sound\play_music.wav"
