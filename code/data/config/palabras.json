@@ -31,13 +31,13 @@
         "rosa", "terso", "retas", "resto", "rotas", "tarso", "tesar",
         "osar", "esto", "ateo", "aseo", "arte", "aros", "ores", "oras",
         "otra", "raso", "reta", "reto", "roes", "sera", "sota", "aro",
-        "era", "esa", "ora", "ore", "res", "ser", "tos", "ase", "aso"
+        "era", "esa", "ora", "ore", "res", "ser", "tos", "ase", "aso", "rota"
     ],
     "A,S,R,C,E,A": 
     [
         "aceras", "acreas", "arcase", "arceas",
         "careas", "caresa", "casare", "casera",
-        "resaca", "sacare", "secara",
+        "resaca", "sacare", "secara", "casa",
         "cesara", "escara", "seca", "caer", "rasca",
         "res", "casar", "arcas", "asear", "secar",
         "ser", "era", "cera", "crea", "esa", "sea",
@@ -57,7 +57,7 @@
         "pero", "petar", "torpe", "parto", "optar", "arpeo",
         "reo", "pare", "epa", "ero", "roe", "ate", "top", "apto",
         "opte", "rape", "rapo", "tape", "tapo", "arpe", "ateo",
-        "otra", "arte", "arto", "potra", "trape", "peta", "topa"
+        "otra", "arte", "arto", "potra", "trape", "peta", "topa", "rota"
     ],
     "C,A,E,R,T,O": 
     [
@@ -70,7 +70,7 @@
         "roce", "trace", "acto", "cera", "ocre", "terco", "terca",
         "recta", "cotar", "acote", "cateo", "toce", "creo", "ateo",
         "rota", "peta", "petar", "topa", "top", "tapo", "tocar",
-        "eco", "tace", "cera", "roe"
+        "eco", "tace", "cera", "roe", "aro"
     ],
     "R,L,T,E,O,M": 
     [
@@ -94,7 +94,7 @@
         "rotas", "maso", "mar", "amor", "tomas", "soma", "mas",
         "osar", "aros", "amo", "rota", "toma", "armo", "mato",
         "osta", "mora", "mota", "tamo", "tamos", "tomar", "ora",
-        "aso", "tos"
+        "aso", "tos", "rosa"
     ],
     "C,I,R,O,T,S": 
     [
@@ -119,7 +119,7 @@
         "tramo", "amor", "armo", "mano", "mato", "ramo", "toma",
         "antro", "raton", "torna", "trona", "rotan", "amo", "nota",
         "notar", "rato", "otra", "oran", "nato", "ron", "mar", "mona",
-        "norma", "maton", "mota", "ano", "ora", "orna", "noma"
+        "norma", "maton", "mota", "ano", "ora", "orna", "noma", "rota"
     ],
     "V,O,T,I,N,A":
     [
@@ -146,7 +146,7 @@
         "mear", "meas", "mesa", "rama", "rema", "ames", "amas",
         "area", "aras", "asar", "eras", "rasa", "reas", "sera",
         "ara", "are", "asa", "era", "esa", "ras", "rea", "res",
-        "sea", "ser"
+        "sea", "ser", "masa", "mas"
     ],
     "L,R,S,E,A,O":
     [
