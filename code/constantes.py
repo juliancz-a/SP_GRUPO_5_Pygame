@@ -21,6 +21,7 @@ HOVER_BOX = (121, 101, 85)
 #RESOURCES
 ICON = r"code\data\img\icon.png"
 PRESS_SOUND = r"code\data\sound\press_button.wav"
+PRESS_COMODIN_SOUND = r"code\data\sound\comodin_sound.mp3"
 MENU_MUSIC = r"code\data\sound\musica_menu.mp3"
 PLAY_MUSIC = r"code\data\sound\play_music.wav"
 CARTAS = r"code\data\img\card_example.png"

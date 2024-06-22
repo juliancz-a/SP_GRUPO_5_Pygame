@@ -4,7 +4,7 @@ import pygame
 
 class Box:
     #CONSTRUCTOR
-    def __init__(self, window_size, posiciones:tuple, dimensiones:tuple, press_sound = None, image = None, card_pos = None):
+    def __init__(self, window_size, posiciones:tuple, dimensiones:tuple, press_sound = None, image = None, image_hover = None, card_pos = None):
 
         self.window_size = window_size
       
@@ -27,6 +27,7 @@ class Box:
         #Hover
         self.hover = False
         self.color_hover = None
+        self.image_hover = image_hover
 
         #Sonido
         self.sound = press_sound
@@ -166,6 +167,11 @@ class Box:
                 pygame.draw.rect(surface, (128,128,128,50), self.rectangulo, border_radius=10)
 
             surface.blit(image, self.rectangulo)
+
+            if self.image_hover != None and self.hover:
+                hover = pygame.image.load(self.image_hover)
+                hover = pygame.transform.scale(hover, self.rectangulo.size)
+                surface.blit(hover, self.rectangulo)
     
     def assign_letter(self, letter:str):
         self.letter = letter

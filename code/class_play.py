@@ -6,10 +6,11 @@ from data.config.config import *
 import random
 
 lista = read_data(r"code\data\config\palabras.json")
-combinaciones = list(lista[0].keys())
+palabras_secretas = list(lista[0].keys())
 
-palabra_secretita = random.choice(combinaciones)
+palabra_secretita = random.choice(palabras_secretas)
 combinaciones = lista[0][palabra_secretita]
+
 palabras_a_encontrar = palabra_secretita[1]
 
 class Play:
@@ -19,15 +20,17 @@ class Play:
 
         self.menu_button = Box(wh,(1160,650), (100,50))
         self.join_button = Box(wh, (750,420), (80,50))
+        self.comodin_button = Box(wh, (1100, 200), (100,100), press_sound=PRESS_COMODIN_SOUND, image= r"code\data\img\spell_comodin.png", image_hover=r"code\data\img\spell_comodin_hover.png")
         self.timer = Box(wh, (630, 410), (50,50))
-
+        self.score = Box(wh, (400, 410), (100,50))
+   
         self.cards = 6
-
+        self.words_matrix = normalize_words(combinaciones)
         self.music = music_file
         self.background = r"code\data\img\newbg.png"
 
     def render(self):
-        
+       
         tiempo_inicio = pygame.time.get_ticks()
 
         self.menu_button.set_color("red", "yellow", "grey")
@@ -42,7 +45,7 @@ class Play:
         palabras_encontradas = []
         p_list = [0,1,2,3,4,5]
         free_spaces = []
-
+    
         card_list = set_cards(card_list, self.original_wh, self.cards, 100)
         empty_card_list = set_cards(empty_card_list, self.original_wh, self.cards, 250)
 
@@ -52,6 +55,7 @@ class Play:
         cards_resize((self.surface.get_size()), card_list)
 
         join = False
+        score = 0
 
         JOIN_CARDS = pygame.USEREVENT + 1
 
@@ -71,18 +75,23 @@ class Play:
                     cards_resize(event.size, card_list)
 
                 elif event.type == JOIN_CARDS:
-                    card = join_cards(letras_seleccionadas, palabras_encontradas)
-                    if card != False:
-                        palabras_encontradas.append(card)
+                    word = join_cards(letras_seleccionadas, palabras_encontradas, combinaciones)
+                    if word != False:
+                        palabras_encontradas.append(word)
                         reset_pos(card_list, letras_seleccionadas, free_spaces, p_list)
+                        score = sum_score(score, word)
 
                 elif len(letras_seleccionadas) > 2:
                     join = self.join_button.interaction(event)
                     if join:
                         pygame.event.post(pygame.event.Event(JOIN_CARDS))
 
+                # elif event.type == pygame.KEYDOWN:
+                #     # print(event.unicode)
                 menu = self.menu_button.interaction(event)
                 set_cards_interaction(event, card_list, letras_seleccionadas, p_list, free_spaces)
+                comodin = self.comodin_button.interaction(event)
+
         
             self.surface.fill("black")
             self.surface.blit(background, (0,0))
@@ -97,9 +106,6 @@ class Play:
             self.menu_button.draw_box(self.surface, border_radius=5, border=True, border_width=5)
             self.menu_button.draw_text(self.surface, "Volver al menú", "white", FUENTE_1, 40, center=True)
 
-            if len(palabras_encontradas) > 0:
-                draw_words(self.original_wh, self.surface, palabras_encontradas)
-            
             tiempo_transcurrido = (pygame.time.get_ticks() - tiempo_inicio) // 1000
             tiempo_restante = TIEMPO_LIMITE - tiempo_transcurrido
 
@@ -108,7 +114,11 @@ class Play:
          
             self.timer.draw_text(self.surface, str(tiempo_restante), "white", FUENTE_4, font_size=275, center=True, shadow=True, border_thickness=2)
 
-    
+            self.score.draw_text(self.surface, f"Puntaje: {str(score)}", "darkslateblue", FUENTE_4, font_size=125, center=True, shadow=True, border_thickness=2)
+
+            draw_words(self.original_wh, self.surface, self.words_matrix, palabras_encontradas)
+
+            self.comodin_button.draw_image(self.surface)
             pygame.display.update()
 
     def set_music(self):
@@ -147,7 +157,7 @@ def draw_cards(surface:pygame.Surface, card_list:list[Box], letras):
 
 def draw_empty_cards(surface:pygame.Surface, card_list:list[Box], empty_card_list:list[Box]):
     for i in range (len(card_list)):
-        empty_card_list[i].draw_image(surface, transparency=75)
+        empty_card_list[i].draw_image(surface, transparency=100)
 
 def set_cards_interaction(event, card_list:list[Box], selected_letters:list, position_list, free_spaces):
     occurrences_list = []
@@ -207,7 +217,7 @@ def cards_resize(event, card_list:list[Box]):
         card.resize(event)
 
 
-def join_cards (selected_letters:list, words_founded:list):
+def join_cards (selected_letters:list, words_founded:list, combinaciones):
     retorno = False
 
     palabra = "".join(selected_letters).lower()
@@ -227,21 +237,73 @@ def join_cards (selected_letters:list, words_founded:list):
 
     return retorno
 
-def draw_words (wh, surface, words_founded:list) -> int:
-
-    x = 165
-    y = 530
-    printed = 0
-    for i in range (len(words_founded)):
-        if printed == 6:
-            y = 530
-            x += 135
-            printed = 0
-
-        word = words_founded[i]
-        word_text = word
-        word = Box(wh, (x, y), (40, 100))
+def draw_words (wh, surface, matrix, words_founded:list):
     
-        word.draw_text(surface, word_text.upper(), COLOR_PALABRA, FUENTE_3, font_size=200, shadow=1)
-        y += 20
-        printed += 1
+    x = 55
+    
+    for i in range (len(matrix)):
+        printed = 0
+        y = 530
+        x += 100
+        for j in range (len(matrix[i])):
+            if printed == 6 and j != len(matrix[i]) - 1:
+                y = 530
+                x += 100
+                printed = 0
+            if matrix[i][j] != 0:
+                word = matrix[i][j]
+                word_text = word
+                word = Box(wh, (x, y), (40, 100))
+                for word_founded in words_founded:
+                    if word_founded == matrix[i][j]:
+                        word.draw_text(surface,word_text, COLOR_PALABRA, FUENTE_3, font_size=200, shadow=1)
+                        break
+        
+                word.draw_text(surface,f"_"*(6-i), COLOR_PALABRA, FUENTE_3, font_size=250)
+                
+                y += 20
+                printed +=1
+                
+
+
+def sum_score(scoreboard:int, word):
+    scoreboard += len(word)
+    return scoreboard
+
+def normalize_words (combinations):
+    palabras = {3: [], 4: [], 5: [], 6: []}
+
+    for combination in combinations:
+        for key in palabras.keys():
+            if len(combination) == key:
+                palabras[key].append(combination)
+
+    max_len = ordenar_elementos([len(palabras[3]), len(palabras[4]), len(palabras[5]), len(palabras[6])], 1)
+
+    matriz = [[0] * max_len for _ in range(4)]
+
+    for i in range (len(matriz)):
+        for j in range (len(palabras[6-i])):
+                matriz[i][j] = palabras[6-i][j]
+    print(matriz)
+
+    return matriz
+
+    
+def ordenar_elementos (list:list[dict], orden:int):
+
+    for i in range(len(list) - 1):
+        for j in range(i + 1, len(list)):
+            match orden:
+                case 1:
+                    if list[i] >= list[j]:
+                            swap(list, i, j)
+                case 2:
+                    if list[i] <= list[j]:
+                        swap(list, i, j)
+    return list.pop()
+
+def swap(list:list[dict], a:int, b:int):
+    aux = list[a]
+    list[a] = list[b]
+    list[b] = aux
