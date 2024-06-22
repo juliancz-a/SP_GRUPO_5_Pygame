@@ -288,3 +288,70 @@ while run:
 
 pygame.quit()
 exit()
+
+# import pygame
+# import time
+# from PIL import Image
+
+# # Inicializar Pygame
+# pygame.init()
+
+# # Configurar ventana
+# window_size = (800, 600)
+# window = pygame.display.set_mode(window_size)
+# pygame.display.set_caption("Cursor Animado con GIF")
+
+# # Cargar GIF y descomponer en fotogramas usando PIL
+# gif_path = r'code\data\「无」.gif'
+# gif = Image.open(gif_path)
+
+# frames = []
+# try:
+#     while True:
+#         frame = gif.copy()
+#         frames.append(frame)
+#         gif.seek(gif.tell() + 1)
+# except EOFError:
+#     pass
+
+# # Convertir cada fotograma a una superficie de Pygame
+# cursor_frames = [pygame.image.fromstring(frame.tobytes(), frame.size, frame.mode).convert_alpha() for frame in frames]
+
+# # Índice actual del fotograma del cursor
+# current_frame = 0
+# # Tiempo entre cambios de fotograma (en milisegundos)
+# frame_time = gif.info.get('duration', 100)  # Duración del fotograma (predeterminado: 100ms si no está presente)
+# # Reloj para medir el tiempo
+# clock = pygame.time.Clock()
+# # Tiempo acumulado
+# time_accumulated = 0
+
+# running = True
+# while running:
+#     for event in pygame.event.get():
+#         if event.type == pygame.QUIT:
+#             running = False
+
+#     pygame.mouse.set_visible(False)
+#     # Obtener la posición actual del mouse
+#     mouse_pos = pygame.mouse.get_pos()
+
+#     # Actualizar el índice del fotograma del cursor basado en el tiempo acumulado
+#     time_accumulated += clock.get_time()
+#     if time_accumulated >= frame_time:
+#         current_frame = (current_frame + 1) % len(cursor_frames)
+#         time_accumulated = 0
+
+#     # Dibujar fondo
+#     window.fill((255, 255, 255))
+
+#     # Dibujar el cursor animado en la posición del mouse
+#     window.blit(cursor_frames[current_frame], mouse_pos)
+
+#     # Actualizar pantalla
+#     pygame.display.flip()
+
+#     # Mantener el framerate
+#     clock.tick(60)
+
+# pygame.quit()
