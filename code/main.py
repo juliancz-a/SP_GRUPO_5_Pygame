@@ -65,12 +65,12 @@ while jugando:
 
     textito = fuente.render(f"TIEMPO RESTANTE: {tiempo_restante}", True, NEGRO)
     print(tiempo_restante)
-    ventana.blit(textito, (200, 200))
+    ventana.blit(textito, (100, 100))
 
     if tiempo_restante == 0:
         ventana.fill(VERDE)
         termina = fuente.render(f"FELICIDADES, ESPERASTE 30 SEGUNDOS!!!!", True, "red")
-        ventana.blit(termina, (200, 200))
+        ventana.blit(termina, (50, 100))
         pygame.display.update()
         pygame.time.delay(3000)
         jugando = False
