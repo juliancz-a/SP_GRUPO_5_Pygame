@@ -23,14 +23,14 @@ class Play:
         self.comodin_button = Box(wh, (1100, 200), (100,100), press_sound=PRESS_COMODIN_SOUND, image= r"code\data\img\spell_comodin.png", image_hover=r"code\data\img\spell_comodin_hover.png")
         self.timer = Box(wh, (630, 410), (50,50))
         self.score = Box(wh, (400, 410), (100,50))
-   
+    
         self.cards = 6
         self.words_matrix = normalize_words(combinaciones)
         self.music = music_file
         self.background = r"code\data\img\newbg.png"
 
     def render(self):
-       
+        
         tiempo_inicio = pygame.time.get_ticks()
 
         self.menu_button.set_color("red", "yellow", "grey")
@@ -118,7 +118,7 @@ class Play:
 
             # if tiempo_restante == 0 or len(palabras_encontradas) == len(combinaciones):
             #     return "scoreboard"
-         
+            
             self.timer.draw_text(self.surface, str(tiempo_restante), "white", FUENTE_4, font_size=275, center=True, shadow=True, border_thickness=2)
 
             self.score.draw_text(self.surface, f"Puntaje: {str(score)}", "darkslateblue", FUENTE_4, font_size=125, center=True, shadow=True, border_thickness=2)
