@@ -20,7 +20,7 @@ class Play:
 
         self.menu_button = Box(wh,(1160,650), (100,50))
         self.join_button = Box(wh, (750,420), (80,50))
-        self.comodin_button = Box(wh, (1100, 200), (100,100), press_sound=PRESS_COMODIN_SOUND, image= r"code\data\img\spell_comodin.png", image_hover=r"code\data\img\spell_comodin_hover.png")
+        self.comodin_button = Box(wh, (1070, 220), (100,100), press_sound=PRESS_COMODIN_SOUND, image= r"code\data\img\spell_comodin.png", image_hover=r"code\data\img\spell_comodin_hover.png")
         self.timer = Box(wh, (630, 410), (50,50))
         self.score = Box(wh, (400, 410), (100,50))
     
@@ -39,7 +39,7 @@ class Play:
         menu = False
         Play.set_music(self)
 
-        letras_seleccionadas = []
+        letras_seleccionadas = ["", "", "", "", "", ""]
         card_list = []
         empty_card_list = []
         palabras_encontradas = []
@@ -83,7 +83,7 @@ class Play:
                         reset_pos(card_list, letras_seleccionadas, free_spaces, p_list)
                         score = sum_score(score, word)
 
-                elif len(letras_seleccionadas) > 2:
+                elif count_select_letters(letras_seleccionadas) > 2:
                     join = self.join_button.interaction(event)
                     if join:
                         pygame.event.post(pygame.event.Event(JOIN_CARDS))
@@ -106,7 +106,7 @@ class Play:
             draw_empty_cards(self.surface, card_list, empty_card_list)
             draw_cards(self.surface, card_list, palabra_secretita)
 
-            if len(letras_seleccionadas) >= 3:
+            if count_select_letters(letras_seleccionadas) > 2:
                 self.join_button.draw_box(self.surface, 10, True, 5)
                 self.join_button.draw_text(self.surface, "¡Unir!", "navy", FUENTE_1, 60, center=True)
 
@@ -177,14 +177,15 @@ def set_cards_interaction(event, card_list:list[Box], selected_letters:list, pos
 
             if selected_letters.count(card.letter) < occurrences and not card.append:
 
-                selected_letters.append(card.letter)
-                card.check_append(True)
-
                 if position_list:
                     pos = position_list[0]
                     position_list.pop(0)
                 else:
                     pos = len(selected_letters) - 1
+
+                selected_letters[pos] = card.letter
+                print(selected_letters)
+                card.check_append(True)
 
                 print(f"lista posiciones : {position_list}")
 
@@ -196,6 +197,7 @@ def set_cards_interaction(event, card_list:list[Box], selected_letters:list, pos
             elif card.append:
 
                 return_card(card_list, card, selected_letters, free_spaces, position_list)
+                print(selected_letters)
 
 def reset_pos (card_list:list[Box], selected_letters:list, free_spaces, position_list:list):
     for card in card_list:
@@ -205,7 +207,7 @@ def reset_pos (card_list:list[Box], selected_letters:list, free_spaces, position
 
 def return_card (card_list:list[Box], card, selected_letters:list, free_spaces, position_list:list):
 
-    selected_letters.remove(card.letter)
+    selected_letters[card.pos] = ""
     position_list.append(card.pos)
     position_list.sort()
 
@@ -271,6 +273,7 @@ def draw_words (wh, surface, matrix, words_founded:list, comodin, random_letter)
                     letter = use_comodin(random_letter, words_founded, word_text)
                     if letter[0] != False:
                         letter_box = Box(wh, (x + letter[1],y), (40,100))
+
                         letter_box.draw_text(surface, letter[0], COLOR_PALABRA, FUENTE_3, font_size=200, shadow=1)
 
                 for word_founded in words_founded:
@@ -340,21 +343,24 @@ def select_random_letter (combinaciones):
 def use_comodin (letter, words_founded, word_text):
     pos = 0
     coincidence = False
-    if len(words_founded) == 0:
-        for matrix_letter in word_text:
-            if matrix_letter == letter:
-                coincidence = True
-                break
-            pos += 12
-    else:
-        pos = 0
-        for word in words_founded:
-            if word != word_text:
-                for matrix_letter in word_text:
-                    if matrix_letter == letter:
-                        coincidence = True
-                        break
-                    pos += 12
+    for matrix_letter in word_text:
+        if matrix_letter == letter:
+            coincidence = True
+            break
+        pos += 12
+
+    for word_founded in words_founded:
+        if word_founded == word_text:
+            coincidence = False
+
     if coincidence == False:
         letter, pos = False, False
     return letter,pos
+
+def count_select_letters (selected_letters:list) -> int:
+    count = 0
+    for letter in selected_letters:
+        if letter != "":
+            count += 1
+    
+    return count
