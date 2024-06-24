@@ -29,7 +29,7 @@
         "oras", "otra", "raso", "rota", "reta", "reto", "roes", 
         "sera", "sota", "tero", "aro", "ate", "era", "esa", "ora", 
         "ore", "res", "ser", "tos", "ase", "aso", "rato", "roe", 
-        "reo", "rea", "reos", "tres", "trae"
+        "reo", "rea", "reos", "tres", "trae", "taser"
     ],
     "A,S,R,C,E,A": 
     [
@@ -134,12 +134,12 @@
     "R,S,E,A,A,M":
     [
         "amares", "amarse", "ameras", "armase", "asarme", "mareas", 
-        "mearas", "mesara", "reamas", "areas", "armas", "amare", "amase", 
-        "armes", "marea", "mares", "meara", "ramas", "ramea", "resma", 
-        "remas", "asma", "mear", "meas", "mesa", "rama", "rema", "ames", 
-        "amas", "area", "aras", "asar", "eras", "rasa",  "reas", "sera", 
-        "ara", "are", "asa", "era", "esa", "ras", "rea", "res", "sea", 
-        "ser", "masa", "mas", "asea", "asear", "mar", "amar"
+        "mearas", "mesara", "reamas", "remase", "areas", "armas", "amare", 
+        "amase", "armes", "marea", "mares", "meara", "ramas", "ramea", 
+        "resma", "remas", "asma", "mear", "meas", "mesa", "rama", "rema", 
+        "ames", "amas", "area", "aras", "asar", "eras", "rasa",  "reas", 
+        "sera", "ara", "are", "asa", "era", "esa", "ras", "rea", "res", 
+        "sea", "ser", "masa", "mas", "asea", "asear", "mar", "amar"
     ],
     "L,R,S,E,A,O":
     [
