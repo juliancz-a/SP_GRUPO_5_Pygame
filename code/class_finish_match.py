@@ -1,0 +1,44 @@
+import pygame
+from class_box import Box
+from constantes import *
+
+class FinishMatch:
+    def __init__(self, wh, surface:pygame.Surface, match, lista, score) -> None:
+        self.surface = surface
+        self.original_wh = wh
+        self.match = match
+        self.lista = lista
+
+        self.score = score
+        self.score_text = Box(wh, (230, 410), (400,150))
+        self.finish_button = Box(wh, (430, 410), (400,150))
+        self.continue_button = Box(wh, (630, 100), (400,150))
+
+    def render(self):
+        self.continue_button.set_color(COLOR_BOX, BORDE_BOX, HOVER_BOX)
+        self.finish_button.set_color(COLOR_BOX, BORDE_BOX, HOVER_BOX)
+        continuar = False
+        finalizar = False
+        while True:
+            if continuar:
+                return "play", self.original_wh, self.match, self.lista, self.score
+            elif finalizar:
+                return "scoreboard",  self.original_wh, self.match, self.lista, self.score
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    return False
+                continuar = self.continue_button.interaction(event)
+                if self.match > 1:
+                    finalizar = self.finish_button.interaction(event)
+                
+            self.surface.fill("black")
+
+            self.score_text.draw_text(self.surface, f"Tu puntaje total es: {self.score}", "white", FUENTE_1, center=True, font_size=20)
+            self.continue_button.draw_box(self.surface)
+            self.continue_button.draw_text(self.surface, "Continuar", "white", FUENTE_1, center=True, font_size=60)
+            if self.match > 1:
+                self.finish_button.draw_box(self.surface)
+                self.finish_button.draw_text(self.surface, "Definir puntaje", "white", FUENTE_1, center=True, font_size=20)
+
+
+            pygame.display.update()

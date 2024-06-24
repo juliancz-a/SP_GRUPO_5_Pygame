@@ -32,4 +32,7 @@ COMODIN_HOVER = r"code\data\img\spell_comodin_hover.png"
 MENU_BACKGROUND = r"code\data\img\House 2.png"
 PLAY_BACKGROUND_1 = r"code\data\img\Play_background_1.png"
 
-TIEMPO_LIMITE = 5
+TIEMPO_LIMITE = 10
+
+
+SCOREBOARD_PATH = r"code\data\config\scoreboard.csv"

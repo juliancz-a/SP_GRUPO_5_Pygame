@@ -43,7 +43,7 @@ class Menu:
             background = pygame.transform.scale(background, (self.surface.get_width(), self.surface.get_height()))
             
             if play:
-                return ("play", self.original_wh, 0, self.lista)
+                return ("play", self.original_wh, 0, self.lista, 0)
             elif option:
                 return "option"
             

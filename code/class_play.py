@@ -7,7 +7,7 @@ import random
 
 
 class Play:
-    def __init__(self, wh, surface:pygame.Surface, match, lista, music_file = None ) -> None:
+    def __init__(self, wh, surface:pygame.Surface, match, lista, score, music_file = None ) -> None:
         self.lista = lista
 
         self.surface = surface
@@ -17,9 +17,9 @@ class Play:
         self.menu_button = Box(wh,(1160,650), (100,50))
         self.join_button = Box(wh, (750,420), (80,50))
         self.comodin_button = Box(wh, (1070, 220), (100,100), press_sound=PRESS_COMODIN_SOUND, image= r"code\data\img\spell_comodin.png", image_hover=r"code\data\img\spell_comodin_hover.png")
-        self.continue_button = Box(wh, (750,420), (80,50))
         self.timer = Box(wh, (630, 410), (50,50))
-        self.score = Box(wh, (400, 410), (100,50))
+        self.score = score
+        self.score_text = Box(wh, (400, 410), (100,50))
     
         self.cards = 6
         self.words_matrix = None
@@ -36,7 +36,6 @@ class Play:
 
         self.menu_button.set_color("red", "yellow", "grey")
         self.join_button.set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
-        self.comodin_button.set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
         
         menu = False
         Play.set_music(self)
@@ -76,7 +75,8 @@ class Play:
             
             if tiempo_restante == 0 or len(palabras_encontradas) == len(combinaciones):
                 self.match += 1
-                return "play", self.original_wh, self.match, self.lista
+                self.score += score
+                return "finish_match", self.original_wh, self.match, self.lista, self.score
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -117,10 +117,6 @@ class Play:
             draw_empty_cards(self.surface, card_list, empty_card_list)
             draw_cards(self.surface, card_list, palabra_secretita)
 
-            if self.match > 2:
-                self.continue_button.draw_box(self.surface, 10, True, 5)
-                self.continue_button.draw_text(self.surface, "Terminar juego", "navy", FUENTE_1, 60, center=True)
-
             if count_select_letters(letras_seleccionadas) > 2:
                 self.join_button.draw_box(self.surface, 10, True, 5)
                 self.join_button.draw_text(self.surface, "¡Unir!", "navy", FUENTE_1, 60, center=True)
@@ -131,7 +127,7 @@ class Play:
          
             self.timer.draw_text(self.surface, str(tiempo_restante), "white", FUENTE_4, font_size=275, center=True, shadow=True, border_thickness=2)
 
-            self.score.draw_text(self.surface, f"Puntaje: {str(score)}", "darkslateblue", FUENTE_4, font_size=125, center=True, shadow=True, border_thickness=2)
+            self.score_text.draw_text(self.surface, f"Puntaje: {str(score)}", "darkslateblue", FUENTE_4, font_size=125, center=True, shadow=True, border_thickness=2)
 
             draw_words(self.original_wh, self.surface, self.words_matrix, palabras_encontradas, comodin, random_letter)
 
