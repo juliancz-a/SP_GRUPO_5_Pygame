@@ -20,7 +20,7 @@ class Play:
 
         self.menu_button = Box(wh,(1160,650), (100,50))
         self.join_button = Box(wh, (750,420), (80,50))
-        self.comodin_button = Box(wh, (1070, 220), (100,100), press_sound=PRESS_COMODIN_SOUND, image= r"code\data\img\spell_comodin.png", image_hover=r"code\data\img\spell_comodin_hover.png")
+        self.comodin_button = Box(wh, (1070, 220), (100,100), press_sound=PRESS_COMODIN_SOUND, image= COMODIN, image_hover=COMODIN_HOVER)
         self.timer = Box(wh, (630, 410), (50,50))
         self.score = Box(wh, (400, 410), (100,50))
     

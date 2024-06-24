@@ -8,7 +8,7 @@
         "pos", "rap", "res", "par", "por", "presa", "pesar", 
         "persa", "peras", "paros", "proa", "prea", "rape", "prosa", 
         "peso", "pesa", "pero", "sopa", "paso", "pasa", "pase", 
-        "rosa", "ropas", "pareo"
+        "rosa", "ropas", "pareo", "reo", "rea", "reos", "aro"
     ],
     "R,A,C,E,N,E":
     [
@@ -64,7 +64,7 @@
         "acto", "cera", "ocre", "terco", "terca", "recta", "acote",
         "cateo", "toce", "creo", "ateo", "rota", "topa", "top",
         "tapo", "tocar", "eco", "tace", "cera", "roe", "aro", "reto",
-        "reo", "rea"
+        "reo", "rea", "retoca"
     ],
     "R,L,T,E,O,M": 
     [
@@ -129,7 +129,7 @@
         "malon", "molia", "mina", "iman", "lima", "limo", "loma",
         "mano", "mino", "moai", "mani", "lamo", "ola", "ano",
         "lio", "lia", "oian", "olian", "lona", "mal", "mona",
-        "moli", "malo", "amo", "mio", "mia"
+        "moli", "malo", "amo", "mio", "mia", "lino"
     ],
     "R,S,E,A,A,M":
     [

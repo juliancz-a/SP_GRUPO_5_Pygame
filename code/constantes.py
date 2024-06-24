@@ -26,6 +26,8 @@ MENU_MUSIC = r"code\data\sound\musica_menu.mp3"
 PLAY_MUSIC = r"code\data\sound\play_music.wav"
 CARTAS = r"code\data\img\card_example.png"
 CARTAS_SOUND = r"code\data\sound\card_click.wav"
+COMODIN = r"code\data\img\spell_comodin.png"
+COMODIN_HOVER = r"code\data\img\spell_comodin_hover.png"
 
 MENU_BACKGROUND = r"code\data\img\House 2.png"
 PLAY_BACKGROUND_1 = r"code\data\img\Play_background_1.png"
