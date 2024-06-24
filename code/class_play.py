@@ -20,7 +20,7 @@ class Play:
         self.continue_button = Box(wh, (750,420), (80,50))
         self.timer = Box(wh, (630, 410), (50,50))
         self.score = Box(wh, (400, 410), (100,50))
-   
+    
         self.cards = 6
         self.words_matrix = None
         self.music = music_file
