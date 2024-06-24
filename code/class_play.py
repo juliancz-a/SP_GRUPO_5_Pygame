@@ -5,36 +5,38 @@ from class_box import Box
 from data.config.config import *
 import random
 
-lista = read_data(r"code\data\config\palabras.json")
-palabras_secretas = list(lista[0].keys())
-
-palabra_secretita = random.choice(palabras_secretas)
-combinaciones = lista[0][palabra_secretita]
-
-palabras_a_encontrar = palabra_secretita[1]
 
 class Play:
-    def __init__(self, wh, surface:pygame.Surface, music_file = None) -> None:
+    def __init__(self, wh, surface:pygame.Surface, match, lista, music_file = None ) -> None:
+        self.lista = lista
+
         self.surface = surface
         self.original_wh = wh
+        self.match = match
 
         self.menu_button = Box(wh,(1160,650), (100,50))
         self.join_button = Box(wh, (750,420), (80,50))
         self.comodin_button = Box(wh, (1070, 220), (100,100), press_sound=PRESS_COMODIN_SOUND, image= r"code\data\img\spell_comodin.png", image_hover=r"code\data\img\spell_comodin_hover.png")
+        self.continue_button = Box(wh, (750,420), (80,50))
         self.timer = Box(wh, (630, 410), (50,50))
         self.score = Box(wh, (400, 410), (100,50))
    
         self.cards = 6
-        self.words_matrix = normalize_words(combinaciones)
+        self.words_matrix = None
         self.music = music_file
         self.background = r"code\data\img\newbg.png"
 
     def render(self):
-       
+        words_data = set_combination(self.lista)
+        combinaciones = words_data[1]
+        palabra_secretita = words_data[0]
+        self.words_matrix = normalize_words(combinaciones)
+
         tiempo_inicio = pygame.time.get_ticks()
 
         self.menu_button.set_color("red", "yellow", "grey")
         self.join_button.set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
+        self.comodin_button.set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
         
         menu = False
         Play.set_music(self)
@@ -60,12 +62,21 @@ class Play:
         comodin = False
         random_letter = None
         JOIN_CARDS = pygame.USEREVENT + 1
-    
+        print(f"contador de partidas: {self.match}")
+        print(f"Lista : {self.lista}, len: {len(self.lista[0])}")
         while True:
+
+            tiempo_transcurrido = (pygame.time.get_ticks() - tiempo_inicio) // 1000
+            tiempo_restante = TIEMPO_LIMITE - tiempo_transcurrido
+
             background = pygame.image.load(self.background)
             background = pygame.transform.scale(background, (self.surface.get_width(), self.surface.get_height()))
             if menu:
                 return "menu", self.original_wh
+            
+            if tiempo_restante == 0 or len(palabras_encontradas) == len(combinaciones):
+                self.match += 1
+                return "play", self.original_wh, self.match, self.lista
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -106,6 +117,10 @@ class Play:
             draw_empty_cards(self.surface, card_list, empty_card_list)
             draw_cards(self.surface, card_list, palabra_secretita)
 
+            if self.match > 2:
+                self.continue_button.draw_box(self.surface, 10, True, 5)
+                self.continue_button.draw_text(self.surface, "Terminar juego", "navy", FUENTE_1, 60, center=True)
+
             if count_select_letters(letras_seleccionadas) > 2:
                 self.join_button.draw_box(self.surface, 10, True, 5)
                 self.join_button.draw_text(self.surface, "¡Unir!", "navy", FUENTE_1, 60, center=True)
@@ -113,11 +128,6 @@ class Play:
             self.menu_button.draw_box(self.surface, border_radius=5, border=True, border_width=5)
             self.menu_button.draw_text(self.surface, "Volver al menú", "white", FUENTE_1, 40, center=True)
 
-            tiempo_transcurrido = (pygame.time.get_ticks() - tiempo_inicio) // 1000
-            tiempo_restante = TIEMPO_LIMITE - tiempo_transcurrido
-
-            # if tiempo_restante == 0 or len(palabras_encontradas) == len(combinaciones):
-            #     return "scoreboard"
          
             self.timer.draw_text(self.surface, str(tiempo_restante), "white", FUENTE_4, font_size=275, center=True, shadow=True, border_thickness=2)
 
@@ -285,8 +295,6 @@ def draw_words (wh, surface, matrix, words_founded:list, comodin, random_letter)
                 
                 y += 20
                 printed +=1
-    return comodin
-
 
 def sum_score(scoreboard:int, word):
     scoreboard += len(word)
@@ -364,3 +372,13 @@ def count_select_letters (selected_letters:list) -> int:
             count += 1
     
     return count
+
+def set_combination (lista:list[dict]) -> tuple:
+    #key, values
+    palabras_secretas = list(lista[0].keys())
+    palabra_secretita = random.choice(palabras_secretas)
+
+    combinaciones = lista[0].pop(palabra_secretita)
+
+    return palabra_secretita, combinaciones
+

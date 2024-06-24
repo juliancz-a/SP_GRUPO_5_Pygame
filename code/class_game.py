@@ -5,16 +5,21 @@ from class_box import Box
 from class_menu import Menu
 from class_play import Play
 
+import random 
+from data.config.config import *
+
+lista = read_data(r"code\data\config\palabras.json")
+
 class Game:
 
-    def __init__(self, size, title, icon:str) -> None:
+    def __init__(self, size, title, icon:str, lista) -> None:
 
         pygame.init()
 
         self.surface_size = size
         self.surface = pygame.display.set_mode((self.surface_size), pygame.RESIZABLE)
 
-        self.window = Menu(size, self.surface, music_file = MENU_MUSIC)
+        self.window = Menu(size, self.surface, lista, music_file = MENU_MUSIC)
 
         pygame.display.set_caption(title)
 
@@ -27,22 +32,23 @@ class Game:
             game_state = self.window.render()
             if game_state[0] is False:
                 break
-
-            Game.update_window(self, game_state[1], game_state[0])
-    def update_window(self, wh, game_state):
+            Game.update_window(self, game_state[1], game_state[0], game_state[2], game_state[3])
+            
+    def update_window(self, wh, game_state, match, lista):
         match game_state:
 
             case "menu":
                 self.window = Menu(wh, self.surface, music_file= MENU_MUSIC)
             case "play":   
-                self.window = Play(wh, self.surface, music_file= PLAY_MUSIC)
+                self.window = Play(wh, self.surface, match, lista, music_file= PLAY_MUSIC)
+            # case "scoreboard":
+                # self.window = Scoreboard(self.surface)
             # case "options":
             #     self.window = Options(self.surface)
-            # case "scoreboard":
-            #     self.window = Scoreboard(self.surface)
 
 
 
-juego = Game((1280,720), "POP THE CARD", ICON)
+juego = Game((1280,720), "POP THE CARD", ICON, lista)
 juego.run()
+
 

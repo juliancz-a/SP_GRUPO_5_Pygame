@@ -30,4 +30,4 @@ CARTAS_SOUND = r"code\data\sound\card_click.wav"
 MENU_BACKGROUND = r"code\data\img\House 2.png"
 PLAY_BACKGROUND_1 = r"code\data\img\Play_background_1.png"
 
-TIEMPO_LIMITE = 90
+TIEMPO_LIMITE = 5

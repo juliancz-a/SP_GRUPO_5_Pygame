@@ -4,7 +4,8 @@ from class_box import Box
 
 class Menu:
 
-    def __init__(self, wh, surface:pygame.Surface, music_file = None) -> None:
+    def __init__(self, wh, surface:pygame.Surface, lista, music_file = None) -> None:
+        self.lista = lista
         self.surface = surface
         self.original_wh = wh
         self.background = MENU_BACKGROUND
@@ -42,7 +43,7 @@ class Menu:
             background = pygame.transform.scale(background, (self.surface.get_width(), self.surface.get_height()))
             
             if play:
-                return "play", self.original_wh
+                return ("play", self.original_wh, 0, self.lista)
             elif option:
                 return "option"
             

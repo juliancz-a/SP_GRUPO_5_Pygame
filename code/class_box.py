@@ -140,7 +140,7 @@ class Box:
             text_rect.center = (x + width_center, y + height_center - 3)
         else:
             text_rect.topleft = x,y
-
+   
         if border:
             for dx in range(-border_thickness, border_thickness + 1):
                 for dy in range(-border_thickness, border_thickness + 1):
