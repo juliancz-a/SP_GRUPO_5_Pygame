@@ -24,7 +24,7 @@ class Play:
         self.cards = 6
         self.words_matrix = None
         self.music = music_file
-        self.background = r"code\data\img\newbg.png"
+        self.background = PLAY_BACKGROUND_1
 
     def render(self):
         words_data = set_combination(self.lista)
@@ -190,10 +190,8 @@ def set_cards_interaction(event, card_list:list[Box], selected_letters:list, pos
                     pos = len(selected_letters) - 1
 
                 selected_letters[pos] = card.letter
-                print(selected_letters)
+                
                 card.check_append(True)
-
-                print(f"lista posiciones : {position_list}")
 
                 card.rectangulo.x, card.rectangulo.y = card_list[pos].original_rectangulo.x, 250
                 
@@ -201,13 +199,12 @@ def set_cards_interaction(event, card_list:list[Box], selected_letters:list, pos
                 card.pos = pos
                 
             elif card.append:
-
                 return_card(card_list, card, selected_letters, free_spaces, position_list)
-                print(selected_letters)
 
-def reset_pos (card_list:list[Box], selected_letters:list, free_spaces, position_list:list):
+
+def reset_pos (card_list:list[Box], selected_letters:list, free_spaces, position_list:list, all=False):
     for card in card_list:
-        if card.append:
+        if card.append or all:
             return_card(card_list, card, selected_letters, free_spaces, position_list)
 
 
@@ -217,7 +214,6 @@ def return_card (card_list:list[Box], card, selected_letters:list, free_spaces, 
     position_list.append(card.pos)
     position_list.sort()
 
-    print(f"espacios libres: {free_spaces}")
     card.pos = free_spaces[random.randint(0, len(free_spaces) - 1)]
     free_spaces.remove(card.pos)
     
