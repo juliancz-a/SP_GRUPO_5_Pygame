@@ -16,8 +16,8 @@
         "necear", "recaen", "renace", "nacere", "cesar", "caere", 
         "crean", "acere", "recae", "cenar", "cesa", "carne", "creen", 
         "recen", "acne", "arce", "acre", "caer", "caen", "cera", "cena", 
-        "cene", "nace", "cree", "rece","eran", "era", "cae", "crea", 
-        "aren", "nacer", "are"
+        "cene", "nace", "cree", "rece", "eran", "era", "cae", "crea", 
+        "aren", "nacer", "are", "rea"
     ],
     "O,T,R,S,A,E": 
     [
@@ -29,7 +29,7 @@
         "oras", "otra", "raso", "rota", "reta", "reto", "roes", 
         "sera", "sota", "tero", "aro", "ate", "era", "esa", "ora", 
         "ore", "res", "ser", "tos", "ase", "aso", "rato", "roe", 
-        "reo", "rea", "reos", "tres", "trae", "taser"
+        "reo", "rea", "reos", "tres", "trae", "taser", ""
     ],
     "A,S,R,C,E,A": 
     [
@@ -52,7 +52,7 @@
         "parto", "optar", "arpeo", "reo", "pare", "epa", "ero",
         "roe", "ate", "top", "apto", "opte", "rape", "rapo", 
         "tape", "tapo", "ateo", "otra", "arte", "potra", 
-        "topa", "rota", "reto", "rea"
+        "topa", "rota", "reto", "rea", "reta", "tero", "trae"
     ],
     "C,A,E,R,T,O": 
     [
@@ -64,7 +64,7 @@
         "acto", "cera", "ocre", "terco", "terca", "recta", "acote",
         "cateo", "toce", "creo", "ateo", "rota", "topa", "top",
         "tapo", "tocar", "eco", "tace", "cera", "roe", "aro", "reto",
-        "reo", "rea", "retoca"
+        "reo", "rea", "retoca", "reta", "trae"
     ],
     "R,L,T,E,O,M": 
     [
@@ -99,13 +99,13 @@
     ],
     "T,N,R,E,S,O": 
     [
-        "resto", "trenso", "torna", "seno", "norte",
+        "resto", "trenso", "torna", "seno", "norte", "roten",
         "rento", "ternos", "terno", "entro", "netos", "neto",
         "renos", "reno", "rones", "ron", "tenor", "teson",
         "toser", "tos", "tose", "trone", "esto", "oren", "eon",
         "roe", "ore", "ser", "son", "ten", "eso", "reto", "roen",
         "tren", "osen", "ose", "roes", "note", "tenso", "tensor",
-        "retos", "tosen", "tero"
+        "retos", "tosen", "tero", "reo", "reos", "tres", "rote"
     ],
     "M,A,N,T,R,O":
     [
@@ -149,7 +149,8 @@
         "lora", "oler", "oral", "oras", "orea", "osar", "osea", "real", 
         "rosa", "rose", "reos", "ralo", "los", "ola", "ore", "ora", "ras", 
         "reo", "rea", "res", "sal", "ser", "sol", "sea", "ose", "osa", 
-        "las", "eso", "esa", "ase", "aso", "aseo", "losa", "aro", "ara"
+        "las", "eso", "esa", "ase", "aso", "aseo", "losa", "aro", "ara",
+        "sola"
     ]
     }
-    ]
+]
