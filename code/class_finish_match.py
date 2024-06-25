@@ -8,17 +8,22 @@ class FinishMatch:
         self.original_wh = wh
         self.match = match
         self.lista = lista
+        self.background = pygame.image.load(r"code\data\img\play_bg(blur).png")
 
         self.score = score
         self.score_text = Box(wh, (230, 410), (400,150))
-        self.finish_button = Box(wh, (430, 410), (400,150))
-        self.continue_button = Box(wh, (630, 100), (400,150))
+        self.finish_button = Box(wh, (self.surface.get_width() // 6, self.surface.get_height() // 2), (400,150))
+        self.continue_button = Box(wh, (self.surface.get_width() // 2, self.surface.get_height() // 2), (400,150))
 
     def render(self):
         self.continue_button.set_color(COLOR_BOX, BORDE_BOX, HOVER_BOX)
         self.finish_button.set_color(COLOR_BOX, BORDE_BOX, HOVER_BOX)
+        pygame.transform.scale(self.background, (self.surface.get_size()))
+
+
         continuar = False
         finalizar = False
+
         while True:
             if continuar:
                 return "play", self.original_wh, self.match, self.lista, self.score
@@ -32,7 +37,7 @@ class FinishMatch:
                     finalizar = self.finish_button.interaction(event)
                 
             self.surface.fill("black")
-
+            self.surface.blit(self.background, (0,0))
             self.score_text.draw_text(self.surface, f"Tu puntaje total es: {self.score}", "white", FUENTE_1, center=True, font_size=20)
             self.continue_button.draw_box(self.surface)
             self.continue_button.draw_text(self.surface, "Continuar", "white", FUENTE_1, center=True, font_size=60)
