@@ -19,6 +19,7 @@ class FinishMatch:
         self.continue_button.set_color(COLOR_BOX, BORDE_BOX, HOVER_BOX)
         self.finish_button.set_color(COLOR_BOX, BORDE_BOX, HOVER_BOX)
         pygame.transform.scale(self.background, (self.surface.get_size()))
+        
         self.score_text.rectangulo.centerx = self.surface.get_width() // 2
 
         continuar = False
