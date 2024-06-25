@@ -11,7 +11,7 @@ class FinishMatch:
         self.background = pygame.image.load(r"code\data\img\play_bg(blur).png")
 
         self.score = score
-        self.score_text = Box(wh, (230, 410), (400,150))
+        self.score_text = Box(wh, (230, 100), (400,150))
         self.finish_button = Box(wh, (self.surface.get_width() // 6, self.surface.get_height() // 2), (400,150))
         self.continue_button = Box(wh, (self.surface.get_width() // 2, self.surface.get_height() // 2), (400,150))
 
@@ -19,7 +19,7 @@ class FinishMatch:
         self.continue_button.set_color(COLOR_BOX, BORDE_BOX, HOVER_BOX)
         self.finish_button.set_color(COLOR_BOX, BORDE_BOX, HOVER_BOX)
         pygame.transform.scale(self.background, (self.surface.get_size()))
-
+        self.score_text.rectangulo.centerx = self.surface.get_width() // 2
 
         continuar = False
         finalizar = False
