@@ -17,6 +17,7 @@ class Play:
         self.menu_button = Box(wh,(1160,650), (100,50))
         self.join_button = Box(wh, (750,420), (80,50))
         self.comodin_button = Box(wh, (1070, 220), (100,100), press_sound=PRESS_COMODIN_SOUND, image= r"code\data\img\spell_comodin.png", image_hover=r"code\data\img\spell_comodin_hover.png")
+        self.clear_button = Box(wh, (200, 200), (80, 50))
         self.timer = Box(wh, (630, 410), (50,50))
         self.score = score
         self.score_text = Box(wh, (400, 410), (100,50))
@@ -36,6 +37,7 @@ class Play:
 
         self.menu_button.set_color("red", "yellow", "grey")
         self.join_button.set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
+        self.clear_button.set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
         
         menu = False
         Play.set_music(self)
@@ -99,17 +101,17 @@ class Play:
                     if join:
                         pygame.event.post(pygame.event.Event(JOIN_CARDS))
 
-                # elif event.type == pygame.KEYDOWN:
-                #     # print(event.unicode)
                 menu = self.menu_button.interaction(event)
                 set_cards_interaction(event, card_list, letras_seleccionadas, p_list, free_spaces)
                 if comodin is False:
                     comodin = self.comodin_button.interaction(event)
 
+                if self.clear_button.interaction(event):
+                    reset_pos(card_list, letras_seleccionadas, free_spaces, p_list)
+
             if comodin and activate_comodin == 0:
                 random_letter = select_random_letter(combinaciones)
                 activate_comodin += 1
-
 
             self.surface.fill("black")
             self.surface.blit(background, (0,0))
@@ -124,7 +126,9 @@ class Play:
             self.menu_button.draw_box(self.surface, border_radius=5, border=True, border_width=5)
             self.menu_button.draw_text(self.surface, "Volver al menú", "white", FUENTE_1, 40, center=True)
 
-         
+            self.clear_button.draw_box(self.surface, border_radius=5, border=True, border_width=5)
+            self.clear_button.draw_text(self.surface, "CLEAR", "white", FUENTE_1, 40, center=True)
+            
             self.timer.draw_text(self.surface, str(tiempo_restante), "white", FUENTE_4, font_size=275, center=True, shadow=True, border_thickness=2)
 
             self.score_text.draw_text(self.surface, f"Puntaje: {str(score)}", "darkslateblue", FUENTE_4, font_size=125, center=True, shadow=True, border_thickness=2)
