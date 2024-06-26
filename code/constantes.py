@@ -28,6 +28,7 @@ CARTAS = r"code\data\img\card_example.png"
 CARTAS_SOUND = r"code\data\sound\card_click.wav"
 COMODIN = r"code\data\img\spell_comodin.png"
 COMODIN_HOVER = r"code\data\img\spell_comodin_hover.png"
+CHAINS = r"code\data\img\chains2.png"
 
 MENU_BACKGROUND = r"code\data\img\House 2.png"
 PLAY_BACKGROUND_1 = r"code\data\img\play_bg.png"
