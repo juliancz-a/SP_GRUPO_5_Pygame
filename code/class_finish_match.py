@@ -16,10 +16,10 @@ class FinishMatch:
         self.continue_button = Box(wh, (self.surface.get_width() // 2, self.surface.get_height() // 2), (400,150))
 
     def render(self):
-        self.continue_button.set_color(COLOR_BOX, BORDE_BOX, HOVER_BOX)
-        self.finish_button.set_color(COLOR_BOX, BORDE_BOX, HOVER_BOX)
+        self.continue_button.set_color("violetred3", BORDE_BOX, "violetred4")
+        self.finish_button.set_color("violetred3", BORDE_BOX, "violetred4")
         pygame.transform.scale(self.background, (self.surface.get_size()))
-        
+
         self.score_text.rectangulo.centerx = self.surface.get_width() // 2
 
         continuar = False
@@ -39,8 +39,8 @@ class FinishMatch:
                 
             self.surface.fill("black")
             self.surface.blit(self.background, (0,0))
-            self.score_text.draw_text(self.surface, f"Tu puntaje total es: {self.score}", "white", FUENTE_1, center=True, font_size=20)
-            self.continue_button.draw_box(self.surface)
+            self.score_text.draw_text(self.surface, f"Tu puntaje total es: {self.score}", "white", FUENTE_1, center=True, font_size=60, shadow=True)
+            self.continue_button.draw_box(self.surface, border_radius= 5, border_width=1)
             self.continue_button.draw_text(self.surface, "Continuar", "white", FUENTE_1, center=True, font_size=60)
             if self.match > 1:
                 self.finish_button.draw_box(self.surface)
