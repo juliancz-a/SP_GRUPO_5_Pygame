@@ -1,11 +1,14 @@
 import pygame
 from constantes import *
 from class_box import Box
+from draw_scoreboard import Scoreboard_2
 
 class Menu:
 
-    def __init__(self, wh, surface:pygame.Surface, lista, music_file = None) -> None:
+    def __init__(self, wh, surface:pygame.Surface, lista, lista_jugadores, music_file = None) -> None:
+
         self.lista = lista
+        self.lista_jugadores = lista_jugadores
         self.surface = surface
         self.original_wh = wh
         self.background = MENU_BACKGROUND
@@ -21,7 +24,7 @@ class Menu:
 
 
     def render(self):
-
+        print(self.lista_jugadores)
         play = False
         option = False
         exit = False
@@ -79,6 +82,9 @@ class Menu:
 
             self.title.draw_text(self.surface, "Pop The Card", COLOR_LETRAS, FUENTE_1, 80, border=True, border_thickness=2, border_color=TITULO, center=True)
 
+
+            scoreboard = Scoreboard_2(FUENTE_1, self.surface, self.lista_jugadores)
+            scoreboard.draw()
             pygame.display.update()
 
     def set_bg():

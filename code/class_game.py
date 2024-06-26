@@ -25,7 +25,7 @@ class Game:
 
         self.lista_jugadores = lista_jugadores
         self.lista_palabras = lista_palabras
-        self.window = Menu(size, self.surface, self.lista_palabras, music_file = MENU_MUSIC)
+        self.window = Menu(size, self.surface, self.lista_palabras, self.lista_jugadores, music_file = MENU_MUSIC)
 
         pygame.display.set_caption(title)
 
@@ -44,7 +44,7 @@ class Game:
         match game_state[0]:
 
             case "menu":
-                self.window = Menu(game_state[1], self.surface, self.lista_palabras, music_file= MENU_MUSIC)
+                self.window = Menu(game_state[1], self.surface, self.lista_palabras, self.lista_jugadores, music_file= MENU_MUSIC)
             case "play":   
                 self.window = Play(game_state[1], self.surface, game_state[2], self.lista_palabras, game_state[4], music_file= PLAY_MUSIC)
             case "finish_match":
