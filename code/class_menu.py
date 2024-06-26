@@ -16,6 +16,7 @@ class Menu:
         self.play_button = Box(self.original_wh, (100,300), (210,95), press_sound=PRESS_SOUND)
         self.options_button = Box(self.original_wh, (100,420), (210,95), press_sound=PRESS_SOUND)
         self.exit_button = Box(self.original_wh, (100,540), (210,95), press_sound=PRESS_SOUND)
+        self.chains = Box(self.original_wh, (130, 320), (150, 270), press_sound=None, image=CHAINS)
 
 
         self.title = Box((self.original_wh), (200,100), (400,50))
@@ -69,6 +70,8 @@ class Menu:
 
             self.surface.fill("black")
             self.surface.blit(background, (0,0))
+
+            self.chains.draw_image(self.surface)
 
             self.exit_button.draw_box(self.surface, border_radius=15, border=True, border_width=5)
             self.exit_button.draw_text(self.surface, "Salir", LETRAS_2, FUENTE_1, 60, shadow=True, border_thickness=1, border_color=BORDE_2, center=True)
