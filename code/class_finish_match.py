@@ -9,6 +9,7 @@ class FinishMatch:
         self.match = match
         self.lista = lista
         self.background = pygame.image.load(r"code\data\img\play_bg(blur).png")
+        self.music = FINISH_MATCH_BACKGROUND
 
         self.score = score
         self.score_text = Box(wh, (230, 100), (400,150))
@@ -25,6 +26,8 @@ class FinishMatch:
         continuar = False
         finalizar = False
 
+        FinishMatch.set_music(self)
+
         while True:
             if continuar:
                 return "play", self.original_wh, self.match, self.lista, self.score
@@ -39,12 +42,17 @@ class FinishMatch:
                 
             self.surface.fill("black")
             self.surface.blit(self.background, (0,0))
-            self.score_text.draw_text(self.surface, f"Tu puntaje total es: {self.score}", "white", FUENTE_1, center=True, font_size=60, shadow=True)
-            self.continue_button.draw_box(self.surface, border_radius= 5, border_width=1)
+            self.score_text.draw_text(self.surface, f"Tu puntaje total es: {self.score}", "white", FUENTE_1, center=True, font_size=50, border=True, border_thickness=3)
+            self.continue_button.draw_box(self.surface)
             self.continue_button.draw_text(self.surface, "Continuar", "white", FUENTE_1, center=True, font_size=60)
             if self.match > 1:
                 self.finish_button.draw_box(self.surface)
                 self.finish_button.draw_text(self.surface, "Definir puntaje", "white", FUENTE_1, center=True, font_size=20)
 
-
             pygame.display.update()
+
+    def set_music(self):
+        if self.music != None:
+            pygame.mixer.music.load(self.music)
+            pygame.mixer.music.play(-1)
+            pygame.mixer.music.set_volume(0.1)

@@ -31,6 +31,7 @@ COMODIN_HOVER = r"code\data\img\spell_comodin_hover.png"
 
 MENU_BACKGROUND = r"code\data\img\House 2.png"
 PLAY_BACKGROUND_1 = r"code\data\img\play_bg.png"
+FINISH_MATCH_BACKGROUND = r"code\data\sound\finishmatch_music.mp3"
 
 TIEMPO_LIMITE = 10
 
