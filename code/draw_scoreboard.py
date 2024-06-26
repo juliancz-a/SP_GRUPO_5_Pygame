@@ -17,7 +17,6 @@ class Scoreboard_2:
             y += 10
             for header in header_pos:
                 for key,value in header.items():
-                    print(player[key])
                     header_data = self.font.render(str(player[key]), True, "black")
                     self.surface.blit(header_data, (value, y))
 
