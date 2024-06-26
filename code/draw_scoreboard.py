@@ -7,17 +7,19 @@ class Scoreboard_2:
         self.player_list = player_list
         self.draw_pos = (800,40)
 
-        self.font = pygame.font.Font(font)
+        self.font = pygame.font.Font(font, 20)
+     
     def draw (self):
         y = self.draw_pos[1]
         
-        header_pos = Scoreboard_2.draw_header(self.surface, ["nombre", "puntos", "partidas"], self.font, (800, 20))
+        header_pos = Scoreboard_2.draw_header(self.surface, ["nombre", "puntos", "partidas"], self.font,(800, 20))
         
         for player in self.player_list:
-            y += 10
+            y += 50
             for header in header_pos:
+
                 for key,value in header.items():
-                    print(player[key])
+
                     header_data = self.font.render(str(player[key]), True, "black")
                     self.surface.blit(header_data, (value, y))
 
@@ -43,6 +45,6 @@ class Scoreboard_2:
 
             header_pos.append({header: x})
 
-            x += len(header) + 100
+            x += len(header) + 110
        
         return header_pos
