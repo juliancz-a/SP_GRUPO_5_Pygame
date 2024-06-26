@@ -96,10 +96,6 @@ class Play:
                         reset_pos(card_list, letras_seleccionadas, free_spaces, p_list)
                         score = sum_score(score, word)
 
-                elif event.type == pygame.KEYDOWN:
-                    if self.clear_button.interaction(event):
-                        reset_pos(card_list, letras_seleccionadas, free_spaces, p_list)
-
                 elif count_select_letters(letras_seleccionadas) > 2:
                     join = self.join_button.interaction(event)
                     if join:
@@ -109,6 +105,9 @@ class Play:
                 set_cards_interaction(event, card_list, letras_seleccionadas, p_list, free_spaces)
                 if comodin is False:
                     comodin = self.comodin_button.interaction(event)
+
+                if self.clear_button.interaction(event):
+                    reset_pos(card_list, letras_seleccionadas, free_spaces, p_list)
 
             if comodin and activate_comodin == 0:
                 random_letter = select_random_letter(combinaciones)
