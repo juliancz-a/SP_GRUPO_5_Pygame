@@ -7,22 +7,21 @@ import random
 
 
 class Play:
-    def __init__(self, wh, surface:pygame.Surface, match, lista, score, music_file = None ) -> None:
+    def __init__(self, surface:pygame.Surface, match, lista, score, music_file = None ) -> None:
         self.lista = lista
 
         self.surface = surface
-        self.original_wh = wh
         self.match = match
 
-        self.menu_button = Box(wh,(1160,650), (100,50))
-        self.join_button = Box(wh, (750,420), (80,50))
-        self.comodin_button = Box(wh, (1070, 220), (100,100), press_sound=PRESS_COMODIN_SOUND, image= r"code\data\img\spell_comodin.png", image_hover=r"code\data\img\spell_comodin_hover.png")
-        self.clear_button = Box(wh, (200, 200), (80, 50))
-        self.shuffle_button = Box(wh, (200, 265), (80, 50))
+        self.menu_button = Box((1160,650), (100,50))
+        self.join_button = Box( (750,420), (80,50))
+        self.comodin_button = Box( (1070, 220), (100,100), press_sound=PRESS_COMODIN_SOUND, image= r"code\data\img\spell_comodin.png", image_hover=r"code\data\img\spell_comodin_hover.png")
+        self.clear_button = Box( (200, 200), (80, 50))
+        self.shuffle_button = Box( (200, 265), (80, 50))
 
-        self.timer = Box(wh, (630, 410), (50,50))
+        self.timer = Box((630, 410), (50,50))
         self.score = score
-        self.score_text = Box(wh, (400, 410), (100,50))
+        self.score_text = Box((400, 410), (100,50))
     
         self.cards = 6
         self.words_matrix = None
@@ -52,13 +51,9 @@ class Play:
         p_list = [0,1,2,3,4,5]
         free_spaces = []
     
-        card_list = set_cards(card_list, self.original_wh, self.cards, 100, palabra_secretita)
-        empty_card_list = set_cards(empty_card_list, self.original_wh, self.cards, 250, palabra_secretita)
+        card_list = set_cards(self.surface.get_size(), card_list, self.cards, 100, palabra_secretita)
+        empty_card_list = set_cards(self.surface.get_size(), empty_card_list, self.cards, 250, palabra_secretita)
 
-        self.menu_button.resize((self.surface.get_size()))
-        self.join_button.resize((self.surface.get_size()))
-
-        cards_resize((self.surface.get_size()), card_list)
 
         join = False
         score = 0
@@ -75,22 +70,17 @@ class Play:
 
             background = pygame.image.load(self.background)
             background = pygame.transform.scale(background, (self.surface.get_width(), self.surface.get_height()))
-            if menu:
-                return "menu", self.original_wh
             
+            if menu:
+                return "menu"  
             if tiempo_restante == 0 or len(palabras_encontradas) == len(combinaciones):
                 self.match += 1
                 self.score += score
-                return "finish_match", self.original_wh, self.match, self.lista, self.score
+                return "finish_match"
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     return False
-
-                elif event.type == pygame.VIDEORESIZE:
-                    self.surface = pygame.display.set_mode((event.w, event.h), pygame.RESIZABLE)
-                    self.menu_button.resize(event.size)
-                    cards_resize(event.size, card_list)
 
                 elif event.type == JOIN_CARDS:
                     word = join_cards(letras_seleccionadas, palabras_encontradas, combinaciones)
@@ -144,10 +134,20 @@ class Play:
 
             self.score_text.draw_text(self.surface, f"Puntaje: {str(score)}", "darkslateblue", FUENTE_4, font_size=125, center=True, shadow=True, border_thickness=2)
 
-            draw_words(self.original_wh, self.surface, self.words_matrix, palabras_encontradas, comodin, random_letter)
+            draw_words(self.surface, self.words_matrix, palabras_encontradas, comodin, random_letter)
 
             self.comodin_button.draw_image(self.surface)
             pygame.display.update()
+
+    def update(self, match, score, player_list):
+        score = self.score
+        player_list = self.lista
+        match = self.match
+
+        data_updated = (match, score, player_list)
+
+        return data_updated
+            
 
     def set_music(self):
         if self.music != None:
@@ -156,15 +156,15 @@ class Play:
             pygame.mixer.music.set_volume(0.1)
 
 
-def set_cards(card_list, wh, cards_counter, y, letras) -> list:
+def set_cards(surface_size, card_list, cards_counter, y, letras) -> list:
 
-    center = wh[0] // 2 #x // 2 (1280 // 2)
+    center = surface_size[0] // 2 #x // 2 (1280 // 2)
     letras = letras.split(",")
 
     initial_pos_x = -315
     card_pos = 0
     for i in range(cards_counter):
-        card = Box(wh,(initial_pos_x + center,y), (100,128), image=CARTAS, press_sound=CARTAS_SOUND, card_pos = card_pos)
+        card = Box((initial_pos_x + center,y), (100,128), image=CARTAS, press_sound=CARTAS_SOUND, card_pos = card_pos)
         card.assign_letter(letras[i])
         card_list.append(card)
 
@@ -234,12 +234,6 @@ def return_card (card_list:list[Box], card, selected_letters:list, free_spaces, 
     card.rectangulo.x, card.rectangulo.y = card_list[card.pos].original_rectangulo.x, 100
 
 
-def cards_resize(event, card_list:list[Box]):
-    for card in card_list:
-        print(card.rectangulo.x, card.rectangulo.y)
-        card.resize(event)
-
-
 def join_cards (selected_letters:list, words_founded:list, combinaciones):
     retorno = False
 
@@ -260,7 +254,7 @@ def join_cards (selected_letters:list, words_founded:list, combinaciones):
 
     return retorno
 
-def draw_words (wh, surface, matrix, words_founded:list, comodin, random_letter):
+def draw_words (surface, matrix, words_founded:list, comodin, random_letter):
     
     x = 55
     
@@ -281,12 +275,12 @@ def draw_words (wh, surface, matrix, words_founded:list, comodin, random_letter)
             if matrix[i][j] != 0:
                 word = matrix[i][j]
                 word_text = word
-                word = Box(wh, (x, y), (40, 100))
+                word = Box((x, y), (40, 100))
 
                 if comodin:
                     letter = use_comodin(random_letter, words_founded, word_text)
                     if letter[0] != False:
-                        letter_box = Box(wh, (x + letter[1],y), (40,100))
+                        letter_box = Box((x + letter[1],y), (40,100))
 
                         letter_box.draw_text(surface, letter[0], COLOR_PALABRA, FUENTE_3, font_size=200, shadow=1)
 

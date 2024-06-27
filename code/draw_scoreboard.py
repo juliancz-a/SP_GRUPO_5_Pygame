@@ -24,16 +24,6 @@ class Scoreboard_2:
                         header_data = self.font.render(str(self.player_list[i][key]), True, "white")
                         self.surface.blit(header_data, (value, y))
 
-            # player_name = self.font.render(player["nombre"], True, "black")
-            # player_points = self.font.render(str(player["puntos"]), True, "black")
-            # player_matches = self.font.render(str(player["partidas"]), True, "black")
-            # self.surface.blit(player_name, (x,y))
-            # x += 100
-            # self.surface.blit(player_points, (x,y))
-            # x += 100
-            # self.surface.blit(player_matches, (x,y))
-            # x = 800
-            # y += 10
     
     def draw_header (surface:pygame.Surface, header_elements:list[str], font, initial_pos:tuple) -> list:
         x = initial_pos[0]

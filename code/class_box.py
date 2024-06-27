@@ -4,12 +4,7 @@ import pygame
 
 class Box:
     #CONSTRUCTOR
-    def __init__(self, window_size, posiciones:tuple, dimensiones:tuple, press_sound = None, image = None, image_hover = None, card_pos = None):
-
-        self.window_size = window_size
-      
-        self.original_posiciones = posiciones
-        self.original_dimensiones = dimensiones
+    def __init__(self, posiciones:tuple, dimensiones:tuple, press_sound = None, image = None, image_hover = None, card_pos = None):
 
         self.posiciones = posiciones
         self.dimensiones = dimensiones
@@ -39,22 +34,6 @@ class Box:
         self.pos = card_pos
         self.append = False
 
-    def resize(self, new_window_size):
-        # Calcular nueva pos y nuevo tamaño según la división entre la pantalla nueva y la vieja
-
-        self.posiciones = (
-            int(self.original_posiciones[0] * new_window_size[0] / self.window_size[0]),
-            int(self.original_posiciones[1] * new_window_size[1] / self.window_size[1])
-        )
-        self.dimensiones = (
-            int(self.original_dimensiones[0] * new_window_size[0] / self.window_size[0]),
-            int(self.original_dimensiones[1] * new_window_size[1] / self.window_size[1])
-        )
-
-        self.rectangulo = pygame.Rect(self.posiciones, self.dimensiones)
-        self.reduccion = (self.dimensiones[0] * 0.95, self.dimensiones[1] * 0.95)
-
-    
     def draw_box (self, surface, border_radius = -1, border = None, border_width = 0):
 
         pygame.draw.rect(surface, self.color_principal, self.rectangulo, border_radius = border_radius)

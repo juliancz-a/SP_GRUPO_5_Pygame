@@ -6,21 +6,19 @@ from data.config.config import *
 
 
 class Scoreboard:
-    def __init__(self, wh, surface:pygame.Surface, match, lista, score, lista_jugadores) -> None:
+    def __init__(self, surface:pygame.Surface, match, score, lista_jugadores) -> None:
 
         self.lista_jugadores = lista_jugadores
         self.surface = surface
-        self.original_wh = wh
         self.match = match
-        self.lista = lista
 
         self.score = score
 
-        self.title = Box(wh, (230, 20), (400,150))
-        self.score_text = Box(wh, (230, 100), (400,150))
-        self.input_box = Box(wh, (650, 500), (275,50))
-        self.text =  Box(wh, (self.input_box.rectangulo.x + 5, self.input_box.rectangulo.y + 2), (200,20))
-        self.submit_button = Box(wh, (self.input_box.rectangulo.centerx - 275 // 2, self.input_box.rectangulo.y + 75), (275,50))
+        self.title = Box((230, 20), (400,150))
+        self.score_text = Box((230, 100), (400,150))
+        self.input_box = Box((650, 500), (275,50))
+        self.text =  Box((self.input_box.rectangulo.x + 5, self.input_box.rectangulo.y + 2), (200,20))
+        self.submit_button = Box((self.input_box.rectangulo.centerx - 275 // 2, self.input_box.rectangulo.y + 75), (275,50))
 
         self.background = pygame.image.load(r"code\data\img\Runes 3.png")
 
@@ -40,9 +38,11 @@ class Scoreboard:
         while True:
             if submit:
                 self.lista_jugadores.append({"nombre" : text , "puntos" : self.score, "partidas" : self.match})
+                print(self.lista_jugadores)
                 ordenar_elementos(self.lista_jugadores, "puntos", 2)
                 update_score(r"code\data\config\scoreboard.csv", self.lista_jugadores)
-                return "menu", self.original_wh
+
+                return "menu"
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

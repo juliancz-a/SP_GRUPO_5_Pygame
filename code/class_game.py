@@ -20,12 +20,14 @@ class Game:
 
         pygame.init()
 
-        self.surface_size = size
-        self.surface = pygame.display.set_mode((self.surface_size), pygame.RESIZABLE)
+        self.surface = pygame.display.set_mode((size), pygame.RESIZABLE)
 
         self.lista_jugadores = lista_jugadores
         self.lista_palabras = lista_palabras
-        self.window = Menu(size, self.surface, self.lista_palabras, self.lista_jugadores, music_file = MENU_MUSIC)
+        self.window = Menu(self.surface, self.lista_palabras, self.lista_jugadores, music_file = MENU_MUSIC)
+
+        self.match = 0
+        self.score = 0
 
         pygame.display.set_caption(title)
 
@@ -36,21 +38,25 @@ class Game:
         
         while True:
             game_state = self.window.render()
-            if game_state[0] is False:
+            if game_state is False:
                 break
             Game.update_window(self, game_state)
             
     def update_window(self, game_state):
-        match game_state[0]:
+        match game_state:
 
             case "menu":
-                self.window = Menu(game_state[1], self.surface, self.lista_palabras, self.lista_jugadores, music_file= MENU_MUSIC)
+                self.window = Menu( self.surface, self.lista_palabras, self.lista_jugadores, music_file= MENU_MUSIC)
             case "play":   
-                self.window = Play(game_state[1], self.surface, game_state[2], self.lista_palabras, game_state[4], music_file= PLAY_MUSIC)
+                self.window = Play( self.surface, self.match,  self.lista_palabras, self.score, music_file= PLAY_MUSIC)
             case "finish_match":
-                self.window = FinishMatch(game_state[1], self.surface, game_state[2], self.lista_palabras, game_state[4])
+                data_updated = self.window.update(self.match, self.score, self.lista_jugadores)
+                self.match = data_updated[0] 
+                self.score = data_updated[1] 
+                self.lista_jugadores = data_updated[2]
+                self.window = FinishMatch(self.surface, self.match,  self.lista_palabras, self.score)
             case "scoreboard":
-                self.window = Scoreboard(game_state[1], self.surface, game_state[2] , self.lista_jugadores, game_state[4], self.lista_jugadores)
+                self.window = Scoreboard(self.surface, self.match , self.score, self.lista_jugadores)
             # case "options":
             #     self.window = Options(self.surface)
 

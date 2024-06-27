@@ -5,21 +5,20 @@ from draw_scoreboard import Scoreboard_2
 
 class Menu:
 
-    def __init__(self, wh, surface:pygame.Surface, lista, lista_jugadores, music_file = None) -> None:
+    def __init__(self, surface:pygame.Surface, lista, lista_jugadores, music_file = None) -> None:
 
         self.lista = lista
         self.lista_jugadores = lista_jugadores
         self.surface = surface
-        self.original_wh = wh
         self.background = MENU_BACKGROUND
 
-        self.play_button = Box(self.original_wh, (100,300), (210,95), press_sound=PRESS_SOUND)
-        self.options_button = Box(self.original_wh, (100,420), (210,95), press_sound=PRESS_SOUND)
-        self.exit_button = Box(self.original_wh, (100,540), (210,95), press_sound=PRESS_SOUND)
-        self.chains = Box(self.original_wh, (130, 320), (150, 270), press_sound=None, image=CHAINS)
+        self.play_button = Box((100,300), (210,95), press_sound=PRESS_SOUND)
+        self.options_button = Box((100,420), (210,95), press_sound=PRESS_SOUND)
+        self.exit_button = Box((100,540), (210,95), press_sound=PRESS_SOUND)
+        self.chains = Box((130, 320), (150, 270), press_sound=None, image=CHAINS)
 
 
-        self.title = Box((self.original_wh), (200,100), (400,50))
+        self.title = Box((200,100), (400,50))
         
         self.music = music_file
 
@@ -34,12 +33,6 @@ class Menu:
         self.options_button.set_color(COLOR_BOX, BORDE_BOX, HOVER_BOX)
         self.exit_button.set_color(COLOR_BOX, BORDE_BOX, HOVER_BOX)
 
-        self.play_button.resize(self.surface.get_size())
-    
-        self.title.resize(self.surface.get_size())
-        self.exit_button.resize(self.surface.get_size())
-        self.options_button.resize(self.surface.get_size())
-
         Menu.set_music(self)
 
         while True:
@@ -47,22 +40,12 @@ class Menu:
             background = pygame.transform.scale(background, (self.surface.get_width(), self.surface.get_height()))
             
             if play:
-                return ("play", self.original_wh, 0, self.lista, 0)
-            elif option:
-                return "option"
+                return "play"
             
             for event in pygame.event.get():
 
                 if event.type == pygame.QUIT or exit:
                     return False
-                
-                elif event.type == pygame.VIDEORESIZE:
-
-                    self.surface = pygame.display.set_mode((event.w, event.h), pygame.RESIZABLE)
-                    self.play_button.resize(event.size)
-                    self.title.resize(event.size)
-                    self.exit_button.resize(event.size)
-                    self.options_button.resize(event.size)
 
                 play = self.play_button.interaction(event)
                 option = self.options_button.interaction(event)
