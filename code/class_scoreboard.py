@@ -22,11 +22,34 @@ class Scoreboard:
 
         self.background = pygame.image.load(r"code\data\img\Runes 3.png")
 
+    def write_name(self, text, activo) -> tuple|bool:
+        max_chars = 10
+        submit = False
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return False
+            
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if self.input_box.rectangulo.collidepoint(event.pos):
+                    activo = not activo
+
+            elif event.type == pygame.KEYDOWN:
+                if activo:
+                    if event.key == pygame.K_BACKSPACE:
+                        text = text[:-1]
+                    elif event.key == pygame.K_ESCAPE:
+                        text = ""
+                    elif max_chars > len(text):
+                        text += event.unicode
+            if len(text) > 3:
+                submit = self.submit_button.interaction(event)
+
+        return (text, activo, submit)
+
     def render(self):
         text = ""
         activo = False
         submit = False
-        max_chars = 10
 
         pygame.transform.scale(self.background, self.surface.get_size())
 
@@ -41,49 +64,43 @@ class Scoreboard:
                 print(self.lista_jugadores)
                 ordenar_elementos(self.lista_jugadores, "puntos", 2)
                 update_score(r"code\data\config\scoreboard.csv", self.lista_jugadores)
-
-                return "menu"
-
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    return False
-                
-                elif event.type == pygame.MOUSEBUTTONDOWN:
-                    if self.input_box.rectangulo.collidepoint(event.pos):
-                        activo = not activo
-
-                elif event.type == pygame.KEYDOWN:
-                    if activo:
-                        if event.key == pygame.K_BACKSPACE:
-                            text = text[:-1]
-                        elif event.key == pygame.K_ESCAPE:
-                            text = ""
-                        elif max_chars > len(text):
-                            text += event.unicode
-                if len(text) > 3:
-                    submit = self.submit_button.interaction(event)
-        
-            self.surface.fill("red")
-            self.surface.blit(self.background, (0,0))
-
-            self.score_text.draw_text(self.surface, f"Tu puntaje final es de {self.score} puntos",
-                                    "white", FUENTE_1, center=True, font_size=45,border=True, border_thickness=1)
-            self.input_box.draw_box(self.surface, border_radius= 25)
-            self.title.draw_text(self.surface, f"Registra tu nombre", "white", FUENTE_1, center=True, font_size=60, border=True, border_thickness=1)
-            if len(text) > 3:
-                self.submit_button.draw_box(self.surface, border_radius= 25)
-                self.submit_button.draw_text(self.surface, "Listo", "grey90", FUENTE_1, font_size=40, center=True)
+                return "menu", self.original_wh
             
-            if len(text) == 0:
-                self.text.draw_text(self.surface, " Nombre:", "gray59", FUENTE_1, font_size=60)
+            event = self.write_name(text, activo)
+            if event != False:
+                text = event[0]
+                activo = event[1]
+                submit = event[2]
             else:
-                self.text.draw_text(self.surface, text, "black", FUENTE_1, font_size=60)
+                return False
+        
+            self.blit_buttons(text)
 
             pygame.display.update()
 
+    def blit_buttons(self, text):
+        self.surface.fill("red")
+        self.surface.blit(self.background, (0,0))
+
+        self.score_text.draw_text(self.surface, f"Tu puntaje final es de {self.score} puntos",
+                                "white", FUENTE_1, center=True, font_size=45,border=True, border_thickness=1)
+        
+        self.input_box.draw_box(self.surface, border_radius= 25)
+
+        self.title.draw_text(self.surface, f"Registra tu nombre", "white", FUENTE_1, center=True,
+                            font_size=60, border=True, border_thickness=1)
+        
+        if len(text) > 3:
+            self.submit_button.draw_box(self.surface, border_radius= 25)
+            self.submit_button.draw_text(self.surface, "Listo", "grey90", FUENTE_1, font_size=40, center=True)
+        
+        if len(text) == 0:
+            self.text.draw_text(self.surface, " Nombre:", "gray59", FUENTE_1, font_size=60)
+        else:
+            self.text.draw_text(self.surface, text, "black", FUENTE_1, font_size=60)
 
     
-def ordenar_elementos (list:list[dict], key, orden:int):
+def ordenar_elementos (list:list[dict], key: str, orden:int):
 
     for i in range(len(list) - 1):
         for j in range(i + 1, len(list)):
