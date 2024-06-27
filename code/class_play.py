@@ -16,9 +16,13 @@ class Play:
 
         self.menu_button = Box(wh,(1160,650), (100,50))
         self.join_button = Box(wh, (750,420), (80,50))
-        self.comodin_button = Box(wh, (1070, 220), (100,100), press_sound=PRESS_COMODIN_SOUND, image= r"code\data\img\spell_comodin.png", image_hover=r"code\data\img\spell_comodin_hover.png")
         self.clear_button = Box(wh, (200, 200), (80, 50))
         self.shuffle_button = Box(wh, (200, 265), (80, 50))
+
+        self.buttons_list = [self.menu_button, self.join_button, self.clear_button, self.shuffle_button]
+        self.buttons_colors = ["mediumpurple4", "mediumpurple3", "mediumpurple3"]
+
+        self.comodin_button = Box(wh, (1070, 220), (100,100), press_sound=PRESS_COMODIN_SOUND, image= r"code\data\img\spell_comodin.png", image_hover=r"code\data\img\spell_comodin_hover.png")
 
         self.timer = Box(wh, (630, 410), (50,50))
         self.score = score
@@ -29,6 +33,14 @@ class Play:
         self.music = music_file
         self.background = PLAY_BACKGROUND_1
 
+    def buttons_colors(self, button_list):
+        for button in button_list:
+            button.set_color(*self.buttons_colors)
+
+    def draw_buttons(self, button_list):
+        for button in button_list:
+            button.draw_box(self.surface, 10, True, 5)
+
     def render(self):
         words_data = set_combination(self.lista)
         combinaciones = words_data[1]
@@ -37,10 +49,7 @@ class Play:
 
         tiempo_inicio = pygame.time.get_ticks()
 
-        self.menu_button.set_color("red", "yellow", "grey")
-        self.join_button.set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
-        self.clear_button.set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
-        self.shuffle_button.set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
+        Play.buttons_colors(self, self.buttons_list)
         
         menu = False
         Play.set_music(self)
@@ -126,19 +135,21 @@ class Play:
             draw_empty_cards(self.surface, card_list, empty_card_list)
             draw_cards(self.surface, card_list)
 
+
+            Play.draw_buttons(self, self.buttons_list)
+
             if count_select_letters(letras_seleccionadas) > 2:
-                self.join_button.draw_box(self.surface, 10, True, 5)
+                # self.join_button.draw_box(self.surface, 10, True, 5)
                 self.join_button.draw_text(self.surface, "¡Unir!", "navy", FUENTE_1, 60, center=True)
 
-            self.menu_button.draw_box(self.surface, border_radius=5, border=True, border_width=5)
-            self.menu_button.draw_text(self.surface, "Volver al menú", "white", FUENTE_1, 40, center=True)
+            # self.menu_button.draw_box(self.surface, 10, True, 5)
+            self.menu_button.draw_text(self.surface, "Volver al menú", "navy", FUENTE_1, 40, center=True)
 
-            self.clear_button.draw_box(self.surface, border_radius=5, border=True, border_width=5)
-            self.clear_button.draw_text(self.surface, "CLEAR", "white", FUENTE_1, 40, center=True)
+            # self.clear_button.draw_box(self.surface, 10, True, 5)
+            self.clear_button.draw_text(self.surface, "CLEAR", "navy", FUENTE_1, 50, center=True)
 
-            self.shuffle_button.draw_box(self.surface, border_radius=5, border=True, border_width=5)
-            self.shuffle_button.draw_text(self.surface, "SHUFFLE", "white", FUENTE_1, 40, center=True)
-
+            # self.shuffle_button.draw_box(self.surface, 10, True, 5)
+            self.shuffle_button.draw_text(self.surface, "SHUFFLE", "navy", FUENTE_1, 50, center=True)
             
             self.timer.draw_text(self.surface, str(tiempo_restante), "white", FUENTE_4, font_size=275, center=True, shadow=True, border_thickness=2)
 

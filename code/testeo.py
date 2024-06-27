@@ -356,47 +356,97 @@
 
 # pygame.quit()
 
-import pygame
+# import pygame
+# import constantes
 
-# Inicializar Pygame
-pygame.init()
+# # Inicializar Pygame
+# pygame.init()
 
-# Configuración de la pantalla
-screen_width = 800
-screen_height = 600
-screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("Botones y Colisiones")
+# # Configuración de la pantalla
+# screen_width = 1280
+# screen_height = 720
+# screen = pygame.display.set_mode((screen_width, screen_height))
+# pygame.display.set_caption("Botones y Colisiones")
 
-# Colores
-WHITE = (255, 255, 255)
-BLUE = (0, 0, 255)
-RED = (255, 0, 0)
+# # Colores
+# WHITE = (255, 255, 255)
+# BLUE = (0, 0, 255)
+# RED = (255, 0, 0)
 
-# Definir botones como rectángulos
-button1 = pygame.Rect(100, 100, 150, 50)
-button2 = pygame.Rect(300, 300, 150, 50)
+# # Definir botones como rectángulos
+# button1 = pygame.Rect(100, 500, 150, 50)
+# button2 = pygame.Rect(300, 300, 150, 50)
+# mucho_texto = (
+# "Pop the Card es un juego de descubrir las palabras. Se te daran 6 letras, con\n"
+# "las cuales deberás formar la mayor cantidad de palabras posibles, sin repetir\nlas letras."
+# "\nLas palabras a encontrar estarán compuestas de 3, 4, 5 y 6 caracteres, y cada\n"
+# "partida durará 90 segundos, debiendo jugar por lo menos 3 partidas para\npoder guardar tu puntaje."
+# )
 
-# Bucle principal del juego
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            if button1.collidepoint(event.pos):
-                print("Botón 1 presionado")
-            if button2.collidepoint(event.pos):
-                print("Botón 2 presionado")
+# fuente = pygame.font.Font(r"code\data\vinque rg.otf", 36)
 
-    # Rellenar la pantalla con un color de fondo
-    screen.fill(WHITE)
+# def render_multi_line(screen, text, x, y, font_size, color):
+#     lines = text.splitlines()
+#     for i, l in enumerate(lines):
+#         screen.blit(fuente.render(l, 0, color), (x, y + font_size * i))
 
-    # Dibujar los botones
-    pygame.draw.rect(screen, BLUE, button1)
-    pygame.draw.rect(screen, RED, button2)
 
-    # Actualizar la pantalla
-    pygame.display.flip()
+# # Bucle principal del juego
+# running = True
+# texto = False
+# while running:
+#     for event in pygame.event.get():
+#         if event.type == pygame.QUIT:
+#             running = False
+#         elif event.type == pygame.MOUSEBUTTONDOWN:
+#             if button1.collidepoint(event.pos):
+#                 print("Botón 1 presionado")
+#                 texto = True
+#             if button2.collidepoint(event.pos):
+#                 print("Botón 2 presionado")
+#                 texto = False
 
-# Salir de Pygame
-pygame.quit()
+#     # Rellenar la pantalla con un color de fondo
+#     screen.fill("aquamarine4")
+
+#     render_multi_line(screen, mucho_texto, 10, 10, 50, "black")
+
+#     # Dibujar los botones
+#     # pygame.draw.rect(screen, BLUE, button1)
+#     # pygame.draw.rect(screen, RED, button2)
+
+#     # Actualizar la pantalla
+#     pygame.display.flip()
+
+# # Salir de Pygame
+# pygame.quit()
+
+from constantes import *
+from class_box import Box
+
+
+menu_salir = {
+              "box": Box((1280, 720), (100,540), (210,95), press_sound=PRESS_SOUND),
+              "colors": [COLOR_BOX, BORDE_BOX, HOVER_BOX],
+              "config": [15, True, 5],
+              "text": ["Salir", LETRAS_2, FUENTE_1, 60, "shadow", 1, BORDE_2, True]
+              }
+
+menu_jugar = {
+              "box": Box((1280, 720), (100,300), (210,95), press_sound=PRESS_SOUND),
+              "colors": [COLOR_BOX, BORDE_BOX, HOVER_BOX],
+              "config": [15, True, 5],
+              "text": ["Jugar", LETRAS_2, FUENTE_1, 60, "shadow", 1, BORDE_2, True]
+              }
+
+menu_options = {
+              "box": Box((1280, 720), (100,420), (210,95), press_sound=PRESS_SOUND),
+              "colors": [COLOR_BOX, BORDE_BOX, HOVER_BOX],
+              "config": [15, True, 5],
+              "text": ["Opciones", LETRAS_2, FUENTE_1, 60, "shadow", 1, BORDE_2, True]
+              }
+
+
+MENU_LISTA = [menu_jugar, menu_salir, menu_options]
+
+print(menu_jugar["colors"][0], menu_jugar["colors"][1], menu_jugar["colors"][2])

@@ -117,8 +117,8 @@ class Box:
 
         return action
     
-    def draw_text(self, surface: pygame.Surface , text: str, text_color: str| tuple, font:str, font_size:int = 20, 
-                border = False, shadow = False, border_thickness = 1, border_color = "black", center = False):
+    def draw_text(self, surface: pygame.Surface, text, text_color: str| tuple, font:str, font_size:int = 20, 
+                outline=None, outline_thickness = 1, outline_color = "black", center = False):
 
         x,y = self.rectangulo.x, self.rectangulo.y
 
@@ -138,19 +138,19 @@ class Box:
         else:
             text_rect.topleft = x,y
    
-        if border:
-            for dx in range(-border_thickness, border_thickness + 1):
-                for dy in range(-border_thickness, border_thickness + 1):
+        if outline == "border":
+            for dx in range(-outline_thickness, outline_thickness + 1):
+                for dy in range(-outline_thickness, outline_thickness + 1):
                     # No renderizar en la posición central (evitar duplicar el texto original)
                     if dx != 0 or dy != 0:
                         offset_rect = text_rect.copy()
                         offset_rect.move_ip(dx, dy)
 
-                        surface.blit(fuente.render(text, True, border_color), offset_rect)
-        elif shadow:
+                        surface.blit(fuente.render(text, True, outline_color), offset_rect)
+        elif outline == "shadow":
             offset_rect = text_rect.copy()
-            offset_rect.move_ip(border_thickness, border_thickness)
-            surface.blit(fuente.render(text, True, border_color), offset_rect)
+            offset_rect.move_ip(outline_thickness, outline_thickness)
+            surface.blit(fuente.render(text, True, outline_color), offset_rect)
 
         surface.blit(text_surface, text_rect)
 

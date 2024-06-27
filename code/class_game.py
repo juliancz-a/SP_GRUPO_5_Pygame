@@ -51,7 +51,7 @@ class Game:
                 self.window = FinishMatch(game_state[1], self.surface, game_state[2], self.lista_palabras, game_state[4])
             case "scoreboard":
                 self.window = Scoreboard(game_state[1], self.surface, game_state[2] , self.lista_jugadores, game_state[4], self.lista_jugadores)
-            # case "options":
+            # case "how to play":
             #     self.window = Options(self.surface)
 
 
