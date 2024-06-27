@@ -1,6 +1,7 @@
 import pygame
 from constantes import *
 from class_box import Box
+from class_image import Image
 
 from data.config.config import *
 import random
@@ -14,10 +15,10 @@ class Play:
         self.match = match
 
         self.menu_button = Box((1160,650), (100,50))
-        self.join_button = Box( (750,420), (80,50))
-        self.comodin_button = Box( (1070, 220), (100,100), press_sound=PRESS_COMODIN_SOUND, image= r"code\data\img\spell_comodin.png", image_hover=r"code\data\img\spell_comodin_hover.png")
-        self.clear_button = Box( (200, 200), (80, 50))
-        self.shuffle_button = Box( (200, 265), (80, 50))
+        self.join_button = Box((750,420), (80,50))
+        self.comodin_button = Image(COMODIN, (1070, 220), (100,100), press_sound=PRESS_COMODIN_SOUND, image_hover=COMODIN_HOVER)
+        self.clear_button = Box((200, 200), (80, 50))
+        self.shuffle_button = Box((200, 265), (80, 50))
 
         self.timer = Box((630, 410), (50,50))
         self.score = score
@@ -61,8 +62,7 @@ class Play:
         comodin = False
         random_letter = None
         JOIN_CARDS = pygame.USEREVENT + 1
-        print(f"contador de partidas: {self.match}")
-        print(f"Lista : {self.lista}, len: {len(self.lista[0])}")
+     
         while True:
            
             tiempo_transcurrido = (pygame.time.get_ticks() - tiempo_inicio) // 1000
@@ -79,6 +79,7 @@ class Play:
                 return "finish_match"
 
             for event in pygame.event.get():
+             
                 if event.type == pygame.QUIT:
                     return False
 
@@ -139,12 +140,11 @@ class Play:
             self.comodin_button.draw_image(self.surface)
             pygame.display.update()
 
-    def update(self, match, score, player_list):
+    def update(self, match, score):
         score = self.score
-        player_list = self.lista
         match = self.match
 
-        data_updated = (match, score, player_list)
+        data_updated = (match, score)
 
         return data_updated
             

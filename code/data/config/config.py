@@ -25,14 +25,15 @@ def read_score (path, lista_jugadores):
 def update_score (path:str, lista_jugadores:list[dict]):
     """Actualiza un archivo CSV con una lista. Toma como header las keys de cada valor. Luego se escribe el contenido de cada empleado, es decir, cada diccionario.
     Args: path (ruta del archivo CSV con el contenido anterior), lista_jugadores(lista con el contenido actualizado)"""
-    print(lista_jugadores)
     try:
         with open(path, "w", encoding="utf8") as archive:
+        
             header = f"nombre,puntos,partidas\n"
             archive.write(header)
             for jugador in lista_jugadores:
                 data_jugador = f"{jugador["nombre"]},{jugador["puntos"]},{jugador["partidas"]}\n"
                 archive.write(data_jugador)
+        
 
     except FileNotFoundError as e:
         print("Error crítico: no se ha encontrado el archivo solicitado para actualizar la lista. La lista permanecerá con su estado anterior.")
