@@ -40,6 +40,7 @@ class Scoreboard:
         while True:
             if submit:
                 self.lista_jugadores.append({"nombre" : text , "puntos" : self.score, "partidas" : self.match})
+                ordenar_elementos(self.lista_jugadores, "puntos", 2)
                 update_score(r"code\data\config\scoreboard.csv", self.lista_jugadores)
                 return "menu", self.original_wh
 
@@ -78,3 +79,23 @@ class Scoreboard:
                 self.text.draw_text(self.surface, text, "black", FUENTE_1, font_size=60)
 
             pygame.display.update()
+
+
+    
+def ordenar_elementos (list:list[dict], key, orden:int):
+
+    for i in range(len(list) - 1):
+        for j in range(i + 1, len(list)):
+            match orden:
+                case 1:
+                    if list[i][key] >= list[j][key]:
+                            swap(list, i, j)
+                case 2:
+                    if list[i][key] <= list[j][key]:
+                        swap(list, i, j)
+    return list.pop()
+
+def swap(list:list[dict], a:int, b:int):
+    aux = list[a]
+    list[a] = list[b]
+    list[b] = aux

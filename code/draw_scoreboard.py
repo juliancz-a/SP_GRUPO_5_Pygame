@@ -5,14 +5,14 @@ class Scoreboard_2:
     def __init__(self, font, surface, player_list:list[dict]) -> None:
         self.surface = surface
         self.player_list = player_list
-        self.draw_pos = (800,40)
+        self.draw_pos = (870,200)
 
         self.font = pygame.font.Font(font, 20)
      
     def draw (self):
         y = self.draw_pos[1]
         
-        header_pos = Scoreboard_2.draw_header(self.surface, ["nombre", "puntos", "partidas"], self.font,(800, 20))
+        header_pos = Scoreboard_2.draw_header(self.surface, ["nombre", "puntos", "partidas"], self.font,(870, 220))
         
         for player in self.player_list:
             y += 50

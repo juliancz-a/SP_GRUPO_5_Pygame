@@ -18,6 +18,7 @@ class Play:
         self.join_button = Box(wh, (750,420), (80,50))
         self.comodin_button = Box(wh, (1070, 220), (100,100), press_sound=PRESS_COMODIN_SOUND, image= r"code\data\img\spell_comodin.png", image_hover=r"code\data\img\spell_comodin_hover.png")
         self.clear_button = Box(wh, (200, 200), (80, 50))
+        
         self.timer = Box(wh, (630, 410), (50,50))
         self.score = score
         self.score_text = Box(wh, (400, 410), (100,50))
@@ -66,7 +67,7 @@ class Play:
         print(f"contador de partidas: {self.match}")
         print(f"Lista : {self.lista}, len: {len(self.lista[0])}")
         while True:
-
+           
             tiempo_transcurrido = (pygame.time.get_ticks() - tiempo_inicio) // 1000
             tiempo_restante = TIEMPO_LIMITE - tiempo_transcurrido
 
@@ -187,12 +188,9 @@ def set_cards_interaction(event, card_list:list[Box], selected_letters:list, pos
 
             if selected_letters.count(card.letter) < occurrences and not card.append:
 
-                if position_list:
-                    pos = position_list[0]
-                    position_list.pop(0)
-                else:
-                    pos = len(selected_letters) - 1
-
+                pos = position_list[0]
+                position_list.pop(0)
+            
                 selected_letters[pos] = card.letter
                 
                 card.check_append(True)
@@ -208,7 +206,7 @@ def set_cards_interaction(event, card_list:list[Box], selected_letters:list, pos
 
 def reset_pos (card_list:list[Box], selected_letters:list, free_spaces, position_list:list, all=False):
     for card in card_list:
-        if card.append or all:
+        if card.append:
             return_card(card_list, card, selected_letters, free_spaces, position_list)
 
 
@@ -218,7 +216,7 @@ def return_card (card_list:list[Box], card, selected_letters:list, free_spaces, 
     position_list.append(card.pos)
     position_list.sort()
 
-    card.pos = free_spaces[random.randint(0, len(free_spaces) - 1)]
+    card.pos = free_spaces[len(free_spaces) - 1]
     free_spaces.remove(card.pos)
     
     card.check_append(False)
@@ -378,3 +376,9 @@ def set_combination (lista:list[dict]) -> tuple:
 
     return palabra_secretita, combinaciones
 
+
+def shuffle (card_list, selected_letters, free_spaces, position_list):
+    for card in card_list:
+        if card.append is False:
+
+            reset_pos(card_list, selected_letters, free_spaces, position_list)
