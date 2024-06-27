@@ -66,15 +66,16 @@ class Scoreboard:
             self.surface.fill("red")
             self.surface.blit(self.background, (0,0))
 
-            self.score_text.draw_text(self.surface, f"Tu puntaje final es: {self.score}", "white", FUENTE_1, center=True, font_size=45,border=True, border_thickness=1)
+            self.score_text.draw_text(self.surface, f"Tu puntaje final es de {self.score} puntos",
+                                    "white", FUENTE_1, center=True, font_size=45,border=True, border_thickness=1)
             self.input_box.draw_box(self.surface, border_radius= 25)
             self.title.draw_text(self.surface, f"Registra tu nombre", "white", FUENTE_1, center=True, font_size=60, border=True, border_thickness=1)
             if len(text) > 3:
                 self.submit_button.draw_box(self.surface, border_radius= 25)
                 self.submit_button.draw_text(self.surface, "Listo", "grey90", FUENTE_1, font_size=40, center=True)
-             
+            
             if len(text) == 0:
-                self.text.draw_text(self.surface, "Nombre:", "gray59", FUENTE_1, font_size=60)
+                self.text.draw_text(self.surface, " Nombre:", "gray59", FUENTE_1, font_size=60)
             else:
                 self.text.draw_text(self.surface, text, "black", FUENTE_1, font_size=60)
 

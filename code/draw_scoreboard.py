@@ -5,22 +5,24 @@ class Scoreboard_2:
     def __init__(self, font, surface, player_list:list[dict]) -> None:
         self.surface = surface
         self.player_list = player_list
-        self.draw_pos = (870,200)
+        self.draw_pos = (850,200)
 
         self.font = pygame.font.Font(font, 20)
      
     def draw (self):
         y = self.draw_pos[1]
         
-        header_pos = Scoreboard_2.draw_header(self.surface, ["nombre", "puntos", "partidas"], self.font,(870, 220))
+        header_pos = Scoreboard_2.draw_header(self.surface, ["nombre", "puntos", "partidas"], self.font,(850, 220))
         
-        for player in self.player_list:
+        for i in range(len(self.player_list)):
             y += 50
-            for header in header_pos:
+            if i < 7:
+                
+                for header in header_pos:
 
-                for key,value in header.items():
-                    header_data = self.font.render(str(player[key]), True, "black")
-                    self.surface.blit(header_data, (value, y))
+                    for key,value in header.items():
+                        header_data = self.font.render(str(self.player_list[i][key]), True, "white")
+                        self.surface.blit(header_data, (value, y))
 
             # player_name = self.font.render(player["nombre"], True, "black")
             # player_points = self.font.render(str(player["puntos"]), True, "black")
@@ -39,7 +41,7 @@ class Scoreboard_2:
         header_pos = []
 
         for header in header_elements:
-            header_text = font.render(header, True, "black")
+            header_text = font.render(header, True, "white")
             surface.blit(header_text, (x,y))
 
             header_pos.append({header: x})

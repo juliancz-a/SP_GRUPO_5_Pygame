@@ -44,10 +44,10 @@ class FinishMatch:
             self.surface.blit(self.background, (0,0))
             self.score_text.draw_text(self.surface, f"Tu puntaje total es: {self.score}", "white", FUENTE_1, center=True, font_size=50, border=True, border_thickness=3)
             self.continue_button.draw_box(self.surface)
-            self.continue_button.draw_text(self.surface, "Continuar", "white", FUENTE_1, center=True, font_size=60)
+            self.continue_button.draw_text(self.surface, "Continuar", "white", FUENTE_1, center=True, font_size=60, border=True, border_thickness=2)
             if self.match > 1:
                 self.finish_button.draw_box(self.surface)
-                self.finish_button.draw_text(self.surface, "Definir puntaje", "white", FUENTE_1, center=True, font_size=20)
+                self.finish_button.draw_text(self.surface, "Definir puntaje", "white", FUENTE_1, center=True, font_size=40, border=True, border_thickness=2)
 
             pygame.display.update()
 

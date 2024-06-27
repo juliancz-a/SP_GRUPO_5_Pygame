@@ -241,53 +241,53 @@
 # GitHub - PyGameExamplesAndAnswers - vBlending and transparency - Blending
 # https://github.com/Rabbid76/PyGameExamplesAndAnswers/blob/master/documentation/pygame/pygame_blending_and_transaprency.md
 
-import pygame
+# import pygame
 
-pygame.init()
-clock = pygame.time.Clock()
-screen = pygame.display.set_mode((600, 600), 0, 32)
+# pygame.init()
+# clock = pygame.time.Clock()
+# screen = pygame.display.set_mode((600, 600), 0, 32)
 
-def transparentSurface(size):
-    surface = pygame.Surface(screen.get_size()).convert_alpha()
-    surface.fill((0, 0, 0, 0))
-    return surface
+# def transparentSurface(size):
+#     surface = pygame.Surface(screen.get_size()).convert_alpha()
+#     surface.fill((0, 0, 0, 0))
+#     return surface
 
-alpha, increase = 0, 1
-run = True
-while run:
-    clock.tick(60)
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
+# alpha, increase = 0, 1
+# run = True
+# while run:
+#     clock.tick(60)
+#     for event in pygame.event.get():
+#         if event.type == pygame.QUIT:
+#             run = False
 
-    screen.fill(pygame.Color(247, 25, 0,255))
+#     screen.fill(pygame.Color(247, 25, 0,255))
     
-    alpha_surface1 = transparentSurface(screen.get_size())
-    pygame.draw.rect(alpha_surface1, (247, 137, 0, 255), (120, 120, 480, 480))
+#     alpha_surface1 = transparentSurface(screen.get_size())
+#     pygame.draw.rect(alpha_surface1, (247, 137, 0, 255), (120, 120, 480, 480))
 
-    alpha_surface2 =  transparentSurface(screen.get_size())
-    pygame.draw.rect(alpha_surface2, (220, 247, 0, alpha), (240, 240, 360, 360))
+#     alpha_surface2 =  transparentSurface(screen.get_size())
+#     pygame.draw.rect(alpha_surface2, (220, 247, 0, alpha), (240, 240, 360, 360))
 
-    alpha_surface3 =  transparentSurface(screen.get_size())
-    pygame.draw.rect(alpha_surface3, (0, 247, 4), (360, 360, 240, 240) )
+#     alpha_surface3 =  transparentSurface(screen.get_size())
+#     pygame.draw.rect(alpha_surface3, (0, 247, 4), (360, 360, 240, 240) )
 
-    alpha_surface4 =  transparentSurface(screen.get_size())
-    pygame.draw.rect(alpha_surface4, (0, 78, 247, alpha), (480, 480, 120, 120) )
+#     alpha_surface4 =  transparentSurface(screen.get_size())
+#     pygame.draw.rect(alpha_surface4, (0, 78, 247, alpha), (480, 480, 120, 120) )
     
-    screen.blit(alpha_surface1, (0,0))
-    screen.blit(alpha_surface2, (0,0))
-    screen.blit(alpha_surface3, (0,0))
-    screen.blit(alpha_surface4, (0,0))
+#     screen.blit(alpha_surface1, (0,0))
+#     screen.blit(alpha_surface2, (0,0))
+#     screen.blit(alpha_surface3, (0,0))
+#     screen.blit(alpha_surface4, (0,0))
 
-    pygame.display.flip()
+#     pygame.display.flip()
     
-    alpha += increase
-    if alpha < 0 or alpha > 255:
-        increase *= -1
-        alpha = max(0, min(255, alpha))
+#     alpha += increase
+#     if alpha < 0 or alpha > 255:
+#         increase *= -1
+#         alpha = max(0, min(255, alpha))
 
-pygame.quit()
-exit()
+# pygame.quit()
+# exit()
 
 # import pygame
 # import time
@@ -355,3 +355,48 @@ exit()
 #     clock.tick(60)
 
 # pygame.quit()
+
+import pygame
+
+# Inicializar Pygame
+pygame.init()
+
+# Configuración de la pantalla
+screen_width = 800
+screen_height = 600
+screen = pygame.display.set_mode((screen_width, screen_height))
+pygame.display.set_caption("Botones y Colisiones")
+
+# Colores
+WHITE = (255, 255, 255)
+BLUE = (0, 0, 255)
+RED = (255, 0, 0)
+
+# Definir botones como rectángulos
+button1 = pygame.Rect(100, 100, 150, 50)
+button2 = pygame.Rect(300, 300, 150, 50)
+
+# Bucle principal del juego
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if button1.collidepoint(event.pos):
+                print("Botón 1 presionado")
+            if button2.collidepoint(event.pos):
+                print("Botón 2 presionado")
+
+    # Rellenar la pantalla con un color de fondo
+    screen.fill(WHITE)
+
+    # Dibujar los botones
+    pygame.draw.rect(screen, BLUE, button1)
+    pygame.draw.rect(screen, RED, button2)
+
+    # Actualizar la pantalla
+    pygame.display.flip()
+
+# Salir de Pygame
+pygame.quit()
