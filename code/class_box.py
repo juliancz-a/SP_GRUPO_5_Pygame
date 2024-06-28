@@ -4,7 +4,7 @@ import pygame
 
 class Box:
     #CONSTRUCTOR
-    def __init__(self, posiciones:tuple, dimensiones:tuple, color = None, color_secundario = None, color_hover = None, press_sound = None):
+    def __init__(self, posiciones:tuple, dimensiones:tuple, press_sound = None):
 
         self.posiciones = posiciones
         self.dimensiones = dimensiones
@@ -12,8 +12,9 @@ class Box:
         self.original_rectangulo = pygame.Rect(self.posiciones, self.dimensiones)
 
         #Color
-        self.color_principal = color
-        self.color_secundario = color_secundario
+        self.color_principal = None
+        self.color_secundario = None
+        self.color_hover = None
 
         #Animación
         self.presionado = False
@@ -21,19 +22,18 @@ class Box:
 
         #Hover
         self.hover = False
-        self.color_hover = color_hover
-    
+        
         #Sonido
         self.sound = press_sound
 
-    def draw_box (self, surface, border_radius = -1, border = None, border_width = 0):
+    def draw_box (self, surface, border_radius = -1, border_width = 0):
 
         pygame.draw.rect(surface, self.color_principal, self.rectangulo, border_radius = border_radius)
 
         if self.hover:
             pygame.draw.rect(surface, self.color_hover, self.rectangulo, border_radius = border_radius)
         
-        if border: 
+        if border_width > 0: 
             pygame.draw.rect(surface, self.color_secundario, self.rectangulo, width = border_width, border_radius = border_radius)
         
 

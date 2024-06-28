@@ -3,7 +3,7 @@ from class_box import *
 
 class Card:
 
-    def __init__(self, dimensiones, coords, image_path, press_sound, card_letter, card_pos) -> None:
+    def __init__(self, dimensiones, coords, image_path, press_sound, card_pos, card_letter = None) -> None:
 
 
         self.letter = card_letter
@@ -11,14 +11,24 @@ class Card:
         self.append = False
 
         self.card_image = Image(image_path, coords, dimensiones, press_sound= press_sound)
+        self.card_box = self.card_image.image_box
 
-    def draw_card(self, surface:pygame.Surface, letter_color):
+    def draw_card(self, surface:pygame.Surface, letter_color, font, font_size, transparency = 255):
     
-        self.card_image.draw_image(surface)
-        self.card_image.image_box.draw_text(surface, self.letter, (letter_color), FUENTE_2, 86, border=True, border_thickness=2, center=True)
-
+        self.card_image.draw_image(surface, transparency)
+        self.card_box.draw_text(surface, self.letter, letter_color, font, font_size, outline="border", outline_thickness=2, center=True)
     
-    def move_card(self):
-        self.card_image.image_box.rectangulo.y +=
+    # def move_card(self, destino, velocidad):
+    #     velocidad = 1
+    #     x = velocidad
+    #     y = velocidad
 
-        self.card_image.image_box.rectangulo.x, card.rectangulo.y = card_list[pos].original_rectangulo.x, 250
+    #     while self.card_box.rectangulo.y < destino[1]:
+    #         self.card_box.rectangulo.y += x
+    #     # else:
+    #     #     self.card_box.rectangulo.y = destino[1]
+            
+    #     while self.card_box.rectangulo.x < destino[0]:
+    #         self.card_box.rectangulo.x += y
+    #     # else:
+    #     #     self.card_box.rectangulo.y = destino[0]
