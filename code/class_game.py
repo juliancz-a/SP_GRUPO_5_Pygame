@@ -20,8 +20,7 @@ class Game:
 
         pygame.init()
 
-        self.surface_size = size
-        self.surface = pygame.display.set_mode((self.surface_size), pygame.RESIZABLE)
+        self.surface = pygame.display.set_mode((size), pygame.RESIZABLE)
 
         self.lista_jugadores = lista_jugadores
         self.lista_palabras = lista_palabras
@@ -39,12 +38,12 @@ class Game:
         
         while True:
             game_state = self.window.render()
-            if game_state[0] is False:
+            if game_state is False:
                 break
             Game.update_window(self, game_state)
             
     def update_window(self, game_state):
-        match game_state[0]:
+        match game_state:
 
             case "menu":
                 self.match = 0

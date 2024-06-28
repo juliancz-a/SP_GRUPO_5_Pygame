@@ -1,10 +1,10 @@
 #ASSETS
 
 #FONTS
-FUENTE_1 = r"code\data\vinque rg.otf"
-FUENTE_2 = r"code\data\NarniaBll-2Odv.ttf"
-FUENTE_3 = r"code\data\ErinGoBragh-ZVA3x.ttf"
-FUENTE_4 = r"code\data\Trickster-Reg.ttf"
+FUENTE_1 = r"code\data\fonts\vinque rg.otf"
+FUENTE_2 = r"code\data\fonts\NarniaBll-2Odv.ttf"
+FUENTE_3 = r"code\data\fonts\ErinGoBragh-ZVA3x.ttf"
+FUENTE_4 = r"code\data\fonts\Trickster-Reg.ttf"
 
 #COLORS
 TITULO = "magenta3"

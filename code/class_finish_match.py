@@ -3,18 +3,17 @@ from class_box import Box
 from constantes import *
 
 class FinishMatch:
-    def __init__(self, wh, surface:pygame.Surface, match, lista, score) -> None:
+    def __init__(self, surface:pygame.Surface, match, lista, score) -> None:
         self.surface = surface
-        self.original_wh = wh
         self.match = match
         self.lista = lista
         self.background = pygame.image.load(r"code\data\img\play_bg(blur).png")
         self.music = FINISH_MATCH_BACKGROUND
 
         self.score = score
-        self.score_text = Box(wh, (230, 100), (400,150))
-        self.finish_button = Box(wh, (self.surface.get_width() // 6, self.surface.get_height() // 2), (400,150))
-        self.continue_button = Box(wh, (self.surface.get_width() // 2, self.surface.get_height() // 2), (400,150))
+        self.score_text = Box( (230, 100), (400,150))
+        self.finish_button = Box( (self.surface.get_width() // 6, self.surface.get_height() // 2), (400,150))
+        self.continue_button = Box( (self.surface.get_width() // 2, self.surface.get_height() // 2), (400,150))
 
     def render(self):
         self.continue_button.set_color("violetred3", BORDE_BOX, "violetred4")
@@ -30,9 +29,10 @@ class FinishMatch:
 
         while True:
             if continuar:
-                return "play", self.original_wh, self.match, self.lista, self.score
+                return "play"
             elif finalizar:
-                return "scoreboard",  self.original_wh, self.match, self.lista, self.score
+                return "scoreboard"
+            
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     return False

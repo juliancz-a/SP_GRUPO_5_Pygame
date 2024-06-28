@@ -1,5 +1,4 @@
 import pygame
-from testeo import MENU_LISTA
 from constantes import *
 
 from class_box import Box
@@ -29,7 +28,7 @@ class Menu:
 
         self.images = [self.background, self.chains]
 
-        self.title = Box((self.original_wh), (200,100), (400,50))
+        self.title = Box((200,100), (400,50))
         
         self.music = music_file
 
