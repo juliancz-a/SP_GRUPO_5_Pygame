@@ -1,0 +1,13 @@
+
+{"play_button" : 
+
+    {"border_radius" : 15,
+    "border" : true,
+    "border_width" : 5,
+    "text" : "Jugar",
+    "text_font" : "code/data/fonts/vinque rg.otf",
+    "text_color" : [88, 37, 25],
+    "text_outline" : "shadow",
+    "text_ouline_thickness" : 1,
+    "text_outline_color" : "black",
+    "text_pos" : "center" }}

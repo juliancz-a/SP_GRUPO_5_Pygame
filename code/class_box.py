@@ -4,12 +4,7 @@ import pygame
 
 class Box:
     #CONSTRUCTOR
-    def __init__(self, window_size, posiciones:tuple, dimensiones:tuple, press_sound = None, image = None, image_hover = None, card_pos = None):
-
-        self.window_size = window_size
-      
-        self.original_posiciones = posiciones
-        self.original_dimensiones = dimensiones
+    def __init__(self, posiciones:tuple, dimensiones:tuple, press_sound = None):
 
         self.posiciones = posiciones
         self.dimensiones = dimensiones
@@ -18,7 +13,8 @@ class Box:
 
         #Color
         self.color_principal = None
-        self.color_secundario = (255,255,255)
+        self.color_secundario = None
+        self.color_hover = None
 
         #Animación
         self.presionado = False
@@ -26,43 +22,18 @@ class Box:
 
         #Hover
         self.hover = False
-        self.color_hover = None
-        self.image_hover = image_hover
-
+        
         #Sonido
         self.sound = press_sound
-        #imagen 
-        self.image = image
 
-        #letra de la carta, posicion y append
-        self.letter = None
-        self.pos = card_pos
-        self.append = False
-
-    def resize(self, new_window_size):
-        # Calcular nueva pos y nuevo tamaño según la división entre la pantalla nueva y la vieja
-
-        self.posiciones = (
-            int(self.original_posiciones[0] * new_window_size[0] / self.window_size[0]),
-            int(self.original_posiciones[1] * new_window_size[1] / self.window_size[1])
-        )
-        self.dimensiones = (
-            int(self.original_dimensiones[0] * new_window_size[0] / self.window_size[0]),
-            int(self.original_dimensiones[1] * new_window_size[1] / self.window_size[1])
-        )
-
-        self.rectangulo = pygame.Rect(self.posiciones, self.dimensiones)
-        self.reduccion = (self.dimensiones[0] * 0.95, self.dimensiones[1] * 0.95)
-
-    
-    def draw_box (self, surface, border_radius = -1, border = None, border_width = 0):
+    def draw_box (self, surface, border_radius = -1, border_width = 0):
 
         pygame.draw.rect(surface, self.color_principal, self.rectangulo, border_radius = border_radius)
 
         if self.hover:
             pygame.draw.rect(surface, self.color_hover, self.rectangulo, border_radius = border_radius)
         
-        if border: 
+        if border_width > 0: 
             pygame.draw.rect(surface, self.color_secundario, self.rectangulo, width = border_width, border_radius = border_radius)
         
 
@@ -117,8 +88,8 @@ class Box:
 
         return action
     
-    def draw_text(self, surface: pygame.Surface, text, text_color: str| tuple, font:str, font_size:int = 20, 
-                outline=None, outline_thickness = 1, outline_color = "black", center = False):
+    def draw_text(self, surface: pygame.Surface , text: str, text_color: str| tuple, font:str, font_size:int = 20, 
+                outline = None, outline_thickness = 1, outline_color = "black",  center = False):
 
         x,y = self.rectangulo.x, self.rectangulo.y
 
@@ -137,42 +108,25 @@ class Box:
             text_rect.center = (x + width_center, y + height_center - 3)
         else:
             text_rect.topleft = x,y
-   
-        if outline == "border":
-            for dx in range(-outline_thickness, outline_thickness + 1):
-                for dy in range(-outline_thickness, outline_thickness + 1):
-                    # No renderizar en la posición central (evitar duplicar el texto original)
-                    if dx != 0 or dy != 0:
-                        offset_rect = text_rect.copy()
-                        offset_rect.move_ip(dx, dy)
+    
 
-                        surface.blit(fuente.render(text, True, outline_color), offset_rect)
-        elif outline == "shadow":
-            offset_rect = text_rect.copy()
-            offset_rect.move_ip(outline_thickness, outline_thickness)
-            surface.blit(fuente.render(text, True, outline_color), offset_rect)
+        match outline:
+            case "border":
+                for dx in range(-outline_thickness, outline_thickness + 1):
+                    for dy in range(-outline_thickness, outline_thickness + 1):
+                        # No renderizar en la posición central (evitar duplicar el texto original)
+                        if dx != 0 or dy != 0:
+                            offset_rect = text_rect.copy()
+                            offset_rect.move_ip(dx, dy)
+
+                            surface.blit(fuente.render(text, True, outline_color), offset_rect)
+            case "shadow":
+                offset_rect = text_rect.copy()
+                offset_rect.move_ip(outline_thickness, outline_thickness)
+                surface.blit(fuente.render(text, True, outline_color), offset_rect)
 
         surface.blit(text_surface, text_rect)
 
-    def draw_image (self, surface:pygame.Surface, transparency:int = None):
-        if self.image != None:
-            
-            image = pygame.image.load(self.image)
-            image = pygame.transform.scale(image, self.rectangulo.size)
-            if transparency != None:
-
-                image = image.convert_alpha()
-                image.set_alpha(transparency)
-
-                pygame.draw.rect(surface, (128,128,128,50), self.rectangulo, border_radius=10)
-
-            surface.blit(image, self.rectangulo)
-
-            if self.image_hover != None and self.hover:
-                hover = pygame.image.load(self.image_hover)
-                hover = pygame.transform.scale(hover, self.rectangulo.size)
-                surface.blit(hover, self.rectangulo)
-    
     def assign_letter(self, letter:str):
         self.letter = letter
        

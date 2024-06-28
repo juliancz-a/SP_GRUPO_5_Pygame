@@ -8,7 +8,7 @@ import pygame
 import random
 import sys
 from pygame.locals import *
-from logica import *
+
 
 palabra_secretita = random.choice(combianciones)
 letras = palabra_secretita[0]

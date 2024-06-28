@@ -5,7 +5,7 @@ from constantes import *
 from class_menu import Menu
 from class_play import Play
 from class_finish_match import FinishMatch
-from class_scoreboard import Scoreboard
+from class_setscore import SetScore
 
 import random 
 from data.config.config import *
@@ -25,7 +25,10 @@ class Game:
 
         self.lista_jugadores = lista_jugadores
         self.lista_palabras = lista_palabras
-        self.window = Menu(size, self.surface, self.lista_palabras, self.lista_jugadores, music_file = MENU_MUSIC)
+        self.window = Menu(self.surface, self.lista_jugadores, music_file = MENU_MUSIC)
+
+        self.match = 0
+        self.score = 0
 
         pygame.display.set_caption(title)
 
@@ -44,19 +47,27 @@ class Game:
         match game_state[0]:
 
             case "menu":
-                self.window = Menu(game_state[1], self.surface, self.lista_palabras, self.lista_jugadores, music_file= MENU_MUSIC)
+                self.match = 0
+                self.score = 0
+
+                self.window = Menu(self.surface, self.lista_palabras, self.lista_jugadores, music_file= MENU_MUSIC)
+
             case "play":   
-                self.window = Play(game_state[1], self.surface, game_state[2], self.lista_palabras, game_state[4], music_file= PLAY_MUSIC)
+                self.window = Play(self.surface, self.match,  self.lista_palabras, self.score, music_file= PLAY_MUSIC)
+
             case "finish_match":
-                self.window = FinishMatch(game_state[1], self.surface, game_state[2], self.lista_palabras, game_state[4])
+                
+                data_updated = self.window.update(self.match, self.score)
+                self.match = data_updated[0] 
+                self.score = data_updated[1]
+                
+                self.window = FinishMatch(self.surface, self.match,  self.lista_palabras, self.score)
+
             case "scoreboard":
-                self.window = Scoreboard(game_state[1], self.surface, game_state[2] , self.lista_jugadores, game_state[4], self.lista_jugadores)
-            # case "how to play":
-            #     self.window = Options(self.surface)
+                self.window = SetScore(self.surface, self.match , self.score, self.lista_jugadores)
 
 
 
 juego = Game((1280,720), "POP THE CARD", ICON, lista_palabras, lista_jugadores)
 juego.run()
-
 
