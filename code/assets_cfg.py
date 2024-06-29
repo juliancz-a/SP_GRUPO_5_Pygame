@@ -8,21 +8,21 @@ quit_button = {
               "box": Box((100,540), (210,95), press_sound=PRESS_SOUND),
               "colors": [COLOR_BOX, BORDE_BOX, HOVER_BOX],
               "config": [15, 5],
-              "text": ["Salir", LETRAS_2, FUENTE_1, 60, True, 1, BORDE_2, True]
+              "text": ["Salir", LETRAS_2, FUENTE_1, 60, "shadow", 1, BORDE_2, True]
               }
 
 play_button = {
               "box": Box((100,300), (210,95), press_sound=PRESS_SOUND),
               "colors": [COLOR_BOX, BORDE_BOX, HOVER_BOX],
               "config": [15, 5],
-              "text": ["Jugar", LETRAS_2, FUENTE_1, 60, True, 1, BORDE_2, True]
+              "text": ["Jugar", LETRAS_2, FUENTE_1, 60, "shadow", 1, BORDE_2, True]
               }
 
 help_button = {
               "box": Box((100,420), (210,95), press_sound=PRESS_SOUND),
               "colors": [COLOR_BOX, BORDE_BOX, HOVER_BOX],
               "config": [15, 5],
-              "text": ["Cómo jugar", LETRAS_2, FUENTE_1, 50, True, 1, BORDE_2, True]
+              "text": ["Cómo jugar", LETRAS_2, FUENTE_1, 50, "shadow", 1, BORDE_2, True]
               }
 
 menu_title = {
@@ -30,7 +30,7 @@ menu_title = {
               "colors" : [],
               "config" : [],
               "text" :  ["Pop The Card", COLOR_LETRAS, FUENTE_1, 80, "border", 2, TITULO, True]
-}
+              }
 
 MENU_LISTA = [play_button, help_button, quit_button, menu_title]
 
@@ -38,16 +38,17 @@ MENU_LISTA = [play_button, help_button, quit_button, menu_title]
 # PLAY WINDOW ASSETS
 
 back_button = {"box": Box((1160,650), (100,50)),
-                     "colors": ["mediumpurple4", "mediumpurple3", "mediumpurple3"],
-                     "config": [5, 5],
-                     "text": ["Volver al menú", "white", FUENTE_1, 40, True]}
+              "colors": ["mediumpurple4", "mediumpurple3", "mediumpurple3"],
+              "config": [5, 5],
+              "text": ["Volver al menú", "white", FUENTE_1, 40, True]
+              }
 
 clear_button = {
               "box": Box((200, 200), (80, 50)),
               "colors": ["mediumpurple4", "mediumpurple3", "mediumpurple3"],
               "config": [5, 5],
               "text": ["CLEAR", "white", FUENTE_1, 40, True]
-            }
+              }
 
 shuffle_buton = {
               "box": Box((200, 200), (80, 50)),
@@ -55,7 +56,7 @@ shuffle_buton = {
               "config": [5, 5],
               "text": ["CLEAR", "white", FUENTE_1, 40, True],
               "criterio" : 2,
-            }
+              }
 
 
 PLAY_LISTA = [back_button, clear_button, shuffle_buton]

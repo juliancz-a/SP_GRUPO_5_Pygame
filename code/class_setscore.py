@@ -22,6 +22,8 @@ class SetScore:
 
         self.background = pygame.image.load(r"code\data\img\Runes 3.png")
 
+        self.option = None
+
     def render(self):
         text = ""
         activo = False
@@ -84,21 +86,21 @@ class SetScore:
         self.surface.blit(self.background, (0,0))
 
         self.score_text.draw_text(self.surface, f"Tu puntaje final es de {self.score} puntos",
-                                "white", FUENTE_1, center=True, font_size=45,border=True, border_thickness=1)
+                                "white", FUENTE_1, 40, center=True)
         
-        self.input_box.draw_box(self.surface, border_radius= 25)
+        self.input_box.draw_box(self.surface, 5, 5)
 
-        self.title.draw_text(self.surface, f"Registra tu nombre", "white", FUENTE_1, center=True,
-                            font_size=60, border=True, border_thickness=1)
+        self.title.draw_text(self.surface, f"Registra tu nombre", "white", FUENTE_1,
+                            60, center = True)
         
         if len(nickname) > 3:
-            self.submit_button.draw_box(self.surface, border_radius= 25)
-            self.submit_button.draw_text(self.surface, "Listo", "grey90", FUENTE_1, font_size=40, center=True)
+            self.submit_button.draw_box(self.surface, 5, 5)
+            self.submit_button.draw_text(self.surface, "Listo", "grey90", FUENTE_1, 40, center=True)
         
         if len(nickname) == 0:
-            self.text.draw_text(self.surface, " Nombre:", "gray59", FUENTE_1, font_size=60)
+            self.text.draw_text(self.surface, " Nombre:", "gray59", FUENTE_1, 60)
         else:
-            self.text.draw_text(self.surface, nickname, "black", FUENTE_1, font_size=60)
+            self.text.draw_text(self.surface, nickname, "black", FUENTE_1, 60)
 
     
 def ordenar_elementos (list:list[dict], key: str, orden:int):

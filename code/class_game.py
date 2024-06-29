@@ -52,7 +52,7 @@ class Game:
             self.window.render()
 
             game_state = self.window.update()
-            if game_state is "quit":
+            if game_state == "quit":
                 self.quit = True
 
             Game.update_window(self, game_state)
@@ -77,7 +77,7 @@ class Game:
                 
                 self.window = FinishMatch(self.surface, self.match,  self.lista_palabras, self.score)
 
-            case "scoreboard":
+            case "setscore":
                 self.window = SetScore(self.surface, self.match , self.score, self.lista_jugadores)
 
 

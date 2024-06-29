@@ -26,7 +26,6 @@ class Scoreboard:
                     for key,value in header.items():
                         header_data = self.font.render(str(self.player_list[i][key]), True, "white")
                         self.surface.blit(header_data, (value, y))
-
     
     def draw_header (surface:pygame.Surface, header_elements:list[str], font, initial_pos:tuple) -> list:
         x = initial_pos[0]
