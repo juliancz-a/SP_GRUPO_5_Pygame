@@ -24,22 +24,37 @@ class Game:
 
         self.lista_jugadores = lista_jugadores
         self.lista_palabras = lista_palabras
-        self.window = Menu(self.surface, self.lista_jugadores, music_file = MENU_MUSIC)
+        self.window = Menu(self.surface, self.lista_jugadores)
 
         self.match = 0
         self.score = 0
+        self.comodin = 1
+
+        self.quit = False
 
         pygame.display.set_caption(title)
-
         icon = pygame.image.load(icon)
         pygame.display.set_icon(icon)
+    
+    def get_events (self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.quit = True
 
-    def run(self):
+            self.window.handle_event(event)
         
-        while True:
-            game_state = self.window.render()
-            if game_state is False:
-                break
+    def run(self):
+
+        self.window.set_music()
+        
+        while self.quit is False:
+            self.get_events()
+            self.window.render()
+
+            game_state = self.window.update()
+            if game_state is "quit":
+                self.quit = True
+
             Game.update_window(self, game_state)
             
     def update_window(self, game_state):
@@ -49,14 +64,14 @@ class Game:
                 self.match = 0
                 self.score = 0
 
-                self.window = Menu(self.surface, self.lista_palabras, self.lista_jugadores, music_file= MENU_MUSIC)
+                self.window = Menu(self.surface, self.lista_jugadores)
 
             case "play":   
-                self.window = Play(self.surface, self.match,  self.lista_palabras, self.score, music_file= PLAY_MUSIC)
+                self.window = Play(self.surface, self.match,  self.lista_palabras, self.score, self.comodin, music_file= PLAY_MUSIC)
 
             case "finish_match":
                 
-                data_updated = self.window.update(self.match, self.score)
+                data_updated = self.window.update_play_instance()
                 self.match = data_updated[0] 
                 self.score = data_updated[1]
                 

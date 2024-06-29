@@ -26,6 +26,8 @@ class Box:
         #Sonido
         self.sound = press_sound
 
+        self.activo = False
+
     def draw_box (self, surface, border_radius = -1, border_width = 0):
 
         pygame.draw.rect(surface, self.color_principal, self.rectangulo, border_radius = border_radius)
@@ -67,18 +69,14 @@ class Box:
 
         elif event.type == pygame.MOUSEBUTTONUP:
 
+
             if self.rectangulo.collidepoint(event.pos):
                 self.presionado = False
-
-                self.rectangulo.width = self.dimensiones[0]
-                self.rectangulo.height = self.dimensiones[1]
-                self.rectangulo.center = center
                 action = True
-
-            else: 
-                self.rectangulo.width = self.dimensiones[0]
-                self.rectangulo.height = self.dimensiones[1]
-                self.rectangulo.center = center
+                
+            self.rectangulo.width = self.dimensiones[0]
+            self.rectangulo.height = self.dimensiones[1]
+            self.rectangulo.center = center
 
         elif event.type == pygame.MOUSEMOTION:
             if self.rectangulo.collidepoint(event.pos):

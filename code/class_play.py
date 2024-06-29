@@ -11,8 +11,7 @@ import random
 
 
 class Play:
-    def __init__(self, surface:pygame.Surface, match, lista, score, music_file = None ) -> None:
-        self.lista = lista
+    def __init__(self, surface:pygame.Surface, match, lista, score, comodin, music_file = None ) -> None:
 
         self.surface = surface
         self.match = match
@@ -24,22 +23,36 @@ class Play:
         self.shuffle_button = Box((200, 265), (80, 50))
         #TEXTO
         self.timer = Box((630, 410), (50,50)) 
+        self.initial_time = pygame.time.get_ticks()
+
         self.score = score
         self.score_text = Box((400, 410), (100,50))
     
-        self.cards = 6
-        self.words_matrix = None
         self.music = music_file
         #IMG
         self.background = PLAY_BACKGROUND_1
 
-    def render(self):
-        words_data = set_combination(self.lista)
-        combinaciones = words_data[1]
-        palabra_secretita = words_data[0]
-        self.words_matrix = normalize_words(combinaciones)
+        #CARDS
+        datos_palabras = set_combination(lista)
+        self.combinaciones = datos_palabras[1]
+        self.letras = datos_palabras[0]
+        self.matriz_combinaciones = normalize_words(self.combinaciones)
 
-        tiempo_inicio = pygame.time.get_ticks()
+        self.cards_cfg = {"cards_quantity" : 6,
+                          "card_list" : set_cards((self.surface.get_width(),100), 6, self.letras),
+                          "empty_card_list" : set_cards((self.surface.get_width(), 250), 6),
+                          "selected_letters" : ["", "", "", "", "", ""],
+                          "founded_words" : [],
+                          "pos_libres" : [0,1,2,3,4,5],
+                          "pos_ocupadas" : []}
+
+        self.comodin = comodin
+        self.random_letter = None
+
+        self.option = None
+
+    def render(self):
+
 
         self.menu_button.set_color("red", "yellow", "grey")
         self.join_button.set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
@@ -47,121 +60,111 @@ class Play:
         self.shuffle_button.set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
         
         menu = False
-        Play.set_music(self)
-
-        letras_seleccionadas = ["", "", "", "", "", ""]
-        palabras_encontradas = []
-        p_list = [0,1,2,3,4,5]
-        free_spaces = []
     
-        card_list = set_cards(self.surface.get_size(), self.cards, 100, palabra_secretita)
-        empty_card_list = set_cards(self.surface.get_size(), self.cards, 250)
-
-
         join = False
+        
+        tiempo_transcurrido = (pygame.time.get_ticks() - self.initial_time) // 1000
+        tiempo_restante = TIEMPO_LIMITE - tiempo_transcurrido
+
+        if tiempo_restante == 0:
+            self.option = 1
+
+        background = pygame.image.load(self.background)
+        background = pygame.transform.scale(background, (self.surface.get_width(), self.surface.get_height()))
+        
+        self.surface.fill("black")
+        self.surface.blit(background, (0,0))
+
+        draw_cards(self.surface, self.cards_cfg["empty_card_list"], transparency=155)
+        draw_cards(self.surface, self.cards_cfg["card_list"])
+
+        if count_select_letters(self.cards_cfg["selected_letters"]) > 2:
+            self.join_button.draw_box(self.surface, 10, 5)
+            self.join_button.draw_text(self.surface, "¡Unir!", "navy", FUENTE_1, 60, center=True)
+
+        self.menu_button.draw_box(self.surface, border_radius=5, border_width=5)
+        self.menu_button.draw_text(self.surface, "Volver al menú", "white", FUENTE_1, 40, center=True)
+
+        self.clear_button.draw_box(self.surface, border_radius=5, border_width=5)
+        self.clear_button.draw_text(self.surface, "CLEAR", "white", FUENTE_1, 40, center=True)
+
+        self.shuffle_button.draw_box(self.surface, border_radius=5, border_width=5)
+        self.shuffle_button.draw_text(self.surface, "SHUFFLE", "white", FUENTE_1, 40, center=True)
+
+        
+        self.timer.draw_text(self.surface, str(tiempo_restante), "white", FUENTE_4, font_size=275, center=True,outline="shadow", outline_thickness=2)
+
+        self.score_text.draw_text(self.surface, f"Puntaje: {str(self.score)}", "darkslateblue", FUENTE_4, font_size=125, center=True,outline="shadow", outline_thickness=2)
+
+        draw_words(self.surface, self.matriz_combinaciones, self.cards_cfg["founded_words"], self.comodin, self.random_letter)
+
+        self.comodin_button.draw_image(self.surface)
+        pygame.display.update()
+
+    def handle_event (self, event):
         score = 0
-        activate_comodin = 0
-        comodin = False
-        random_letter = None
         JOIN_CARDS = pygame.USEREVENT + 1
-     
-        while True:
-           
-            tiempo_transcurrido = (pygame.time.get_ticks() - tiempo_inicio) // 1000
-            tiempo_restante = TIEMPO_LIMITE - tiempo_transcurrido
 
-            background = pygame.image.load(self.background)
-            background = pygame.transform.scale(background, (self.surface.get_width(), self.surface.get_height()))
+        if event.type == JOIN_CARDS:
+            word = join_cards(self.cards_cfg["selected_letters"], self.cards_cfg["founded_words"], self.combinaciones)
+            if word != False:
+                self.cards_cfg["founded_words"].append(word)
+                reset_pos(self.cards_cfg["card_list"], self.cards_cfg["selected_letters"], self.cards_cfg["pos_ocupadas"], self.cards_cfg["pos_libres"])
+                self.score += sum_score(score, word)
+
+        elif count_select_letters(self.cards_cfg["selected_letters"]) > 2:
+            join = self.join_button.interaction(event)
+            if join:
+                pygame.event.post(pygame.event.Event(JOIN_CARDS))
+
+        menu = self.menu_button.interaction(event)
+        if menu:
+            self.option = 0
+        set_cards_interaction(event, self.cards_cfg["card_list"], self.cards_cfg["selected_letters"], self.cards_cfg["pos_libres"], self.cards_cfg["pos_ocupadas"])
+        if self.comodin == 1:
+            action = self.comodin_button.image_box.interaction(event)
             
-            if menu:
-                return "menu"  
-            if tiempo_restante == 0 or len(palabras_encontradas) == len(combinaciones):
-                self.match += 1
-                self.score += score
-                return "finish_match"
+            if action:
+                self.comodin = 0
+                self.random_letter = select_random_letter(self.combinaciones)
 
-            for event in pygame.event.get():
-             
-                if event.type == pygame.QUIT:
-                    return False
+        if self.clear_button.interaction(event):
+            reset_pos(self.cards_cfg["card_list"], self.cards_cfg["selected_letters"], self.cards_cfg["pos_ocupadas"], self.cards_cfg["pos_libres"])
+        
+        if self.shuffle_button.interaction(event):
+            shuffle(self.cards_cfg["card_list"])
 
-                elif event.type == JOIN_CARDS:
-                    word = join_cards(letras_seleccionadas, palabras_encontradas, combinaciones)
-                    if word != False:
-                        palabras_encontradas.append(word)
-                        reset_pos(card_list, letras_seleccionadas, free_spaces, p_list)
-                        score = sum_score(score, word)
+    def update(self):
+       
+        selection = None
 
-                elif count_select_letters(letras_seleccionadas) > 2:
-                    join = self.join_button.interaction(event)
-                    if join:
-                        pygame.event.post(pygame.event.Event(JOIN_CARDS))
+        match self.option:
+            case 0:
+                selection = "menu"
+            case 1:
+                selection = "finish_match"
 
-                menu = self.menu_button.interaction(event)
-                set_cards_interaction(event, card_list, letras_seleccionadas, p_list, free_spaces)
-                if comodin is False:
-                    comodin = self.comodin_button.image_box.interaction(event)
-
-                if self.clear_button.interaction(event):
-                    reset_pos(card_list, letras_seleccionadas, free_spaces, p_list)
-                
-                if self.shuffle_button.interaction(event):
-                    shuffle(card_list)
-
-
-            if comodin and activate_comodin == 0:
-                random_letter = select_random_letter(combinaciones)
-                activate_comodin += 1
-
-            self.surface.fill("black")
-            self.surface.blit(background, (0,0))
-
-            draw_cards(self.surface, empty_card_list, transparency=155)
-            draw_cards(self.surface, card_list)
-
-            if count_select_letters(letras_seleccionadas) > 2:
-                self.join_button.draw_box(self.surface, 10, 5)
-                self.join_button.draw_text(self.surface, "¡Unir!", "navy", FUENTE_1, 60, center=True)
-
-            self.menu_button.draw_box(self.surface, border_radius=5, border_width=5)
-            self.menu_button.draw_text(self.surface, "Volver al menú", "white", FUENTE_1, 40, center=True)
-
-            self.clear_button.draw_box(self.surface, border_radius=5, border_width=5)
-            self.clear_button.draw_text(self.surface, "CLEAR", "white", FUENTE_1, 40, center=True)
-
-            self.shuffle_button.draw_box(self.surface, border_radius=5, border_width=5)
-            self.shuffle_button.draw_text(self.surface, "SHUFFLE", "white", FUENTE_1, 40, center=True)
-
-            
-            self.timer.draw_text(self.surface, str(tiempo_restante), "white", FUENTE_4, font_size=275, center=True,outline="shadow", outline_thickness=2)
-
-            self.score_text.draw_text(self.surface, f"Puntaje: {str(score)}", "darkslateblue", FUENTE_4, font_size=125, center=True,outline="shadow", outline_thickness=2)
-
-            draw_words(self.surface, self.words_matrix, palabras_encontradas, comodin, random_letter)
-
-            self.comodin_button.draw_image(self.surface)
-            pygame.display.update()
-
-    def update(self, match, score):
-        score = self.score
-        match = self.match
-
-        data_updated = (match, score)
-
-        return data_updated
-            
-
+        return selection
+    
     def set_music(self):
         if self.music != None:
             pygame.mixer.music.load(self.music)
             pygame.mixer.music.play(-1)
             pygame.mixer.music.set_volume(0.1)
+    
+    def update_play_instance (self):
+        self.match += 1
+        
+        data = self.match, self.score
 
-
-def set_cards(surface_size, cards_counter, y, letras = None) -> list:
+        return data
+    
+def set_cards(coords, cards_counter, letras = None) -> list:
     card_list = []
+    x = coords[0]
+    y = coords[1]
 
-    center = surface_size[0] // 2 #x // 2 (1280 // 2)
+    center = x // 2 
     if letras != None:
         letras = letras.split(",")
 
@@ -276,7 +279,7 @@ def draw_words (surface, matrix, words_founded:list, comodin, random_letter):
                 word_text = word
                 word = Box((x, y), (40, 100))
 
-                if comodin:
+                if comodin == 0:
                     letter = use_comodin(random_letter, words_founded, word_text)
                     if letter[0] != False:
                         letter_box = Box((x + letter[1],y), (40,100))
@@ -372,12 +375,14 @@ def count_select_letters (selected_letters:list) -> int:
 
 def set_combination (lista:list[dict]) -> tuple:
     #key, values
-    palabras_secretas = list(lista[0].keys())
-    palabra_secretita = random.choice(palabras_secretas)
+    lista_letras = list(lista[0].keys())
+    letras = random.choice(lista_letras)
 
-    combinaciones = lista[0].pop(palabra_secretita)
+    combinaciones = lista[0].pop(letras)
 
-    return palabra_secretita, combinaciones
+    datos = letras, combinaciones
+
+    return datos
 
 
 def shuffle (card_list):

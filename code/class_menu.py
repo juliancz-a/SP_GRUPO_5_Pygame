@@ -1,82 +1,88 @@
 import pygame
-from constantes import *
 
-from class_box import Box
+from constantes import *
 from scoreboard import Scoreboard
 
 from class_image import Image
 from assets_cfg import *
 
 from draw_functions import *
+
+from class_states import *
 class Menu:
 
-    def __init__(self, surface:pygame.Surface, lista_jugadores, music_file = None) -> None:
+    def __init__(self, surface:pygame.Surface, lista_jugadores) -> None:
 
-        self.lista_jugadores = lista_jugadores
         self.surface = surface
-        
+        self.lista_jugadores = lista_jugadores
         self.background = Image(MENU_BACKGROUND, (0,0), (1280,720))
         self.chains = Image(CHAINS, (130, 320), (150, 270))
 
-        self.lista_cfg = MENU_LISTA
-      
         self.play_button = MENU_LISTA[0]["box"]
         self.options_button = MENU_LISTA[1]["box"]
         self.exit_button = MENU_LISTA[2]["box"]
+        self.title = MENU_LISTA[3]["box"]
 
-        self.buttons_list = [self.play_button, self.options_button, self.exit_button]
+        self.box_list = [self.play_button, self.options_button, self.exit_button, self.title]
 
         self.images = [self.background, self.chains]
 
-        self.title = Box((200,100), (400,50))
-        
-        self.music = music_file
+        self.lista_cfg = MENU_LISTA
 
+        self.option = None
+
+        self.music = MENU_MUSIC
+    
     def render(self):
+
+        set_buttons_colors(self.box_list, self.lista_cfg)
+            
+        self.surface.fill("white")
         
-        play = False
-        option = False
-        exit = False
+        draw_assets(self.surface, self.box_list, self.images, self.lista_cfg)
+        Scoreboard(FUENTE_1, self.surface, self.lista_jugadores).draw()
 
-        set_buttons_colors(self.buttons_list, self.lista_cfg)
-        Menu.set_music(self)
-
-        while True:
-           
-            if play:
-                return "play"
-            elif option:
-                return "how to play"
-            
-            for event in pygame.event.get():
-
-                if event.type == pygame.QUIT or exit:
-                    return False
-                
-                play = self.play_button.interaction(event)
-                help = self.options_button.interaction(event)
-                exit = self.exit_button.interaction(event)
-            
-            self.surface.fill("white")
-            
-            draw_assets(self.surface, self.buttons_list, self.images, self.lista_cfg)
-
-            self.title.draw_text(self.surface, "Pop The Card", COLOR_LETRAS, FUENTE_1, 80, "border", 2, TITULO, True)
-
-            pygame.display.update()
-
-            Scoreboard(FUENTE_1, self.surface, self.lista_jugadores).draw()
+        pygame.display.update()
 
 
-    def set_music(self):
-        if self.music != None:
-            pygame.mixer.music.load(self.music)
-            pygame.mixer.music.play(-1)
-            pygame.mixer.music.set_volume(0.1)
-
-def handle_mouse_events (button_list, event):
-    action_set = set()
-    for button in button_list:
-        action = button.interaction(event)
-        action_set.add(action)
   
+    def handle_event (self, event):
+        
+        self.option = self.button_click_event(event)
+
+    def update (self):
+
+        selection = None
+
+        match self.option:
+            case 0:
+                selection = "play"
+            case 1:
+                selection = "help"
+            case 2:
+                selection = "quit"
+            
+        return selection
+    
+    def set_music(self):
+    
+        pygame.mixer.music.load(self.music)
+        pygame.mixer.music.play(-1)
+        pygame.mixer.music.set_volume(0.1)
+
+    
+    def button_click_event (self, event):
+        lista = [ self.play_button,
+        self.options_button,
+        self.exit_button]
+        
+        button_selected = 0
+        for boton in lista:
+            retorno = boton.interaction(event)
+
+            if retorno:
+                return button_selected
+
+            button_selected += 1
+        
+        return None
