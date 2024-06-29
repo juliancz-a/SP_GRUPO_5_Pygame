@@ -8,6 +8,7 @@ from draw_functions import *
 
 from data.config.config import *
 import random
+from assets_cfg import *
 
 
 class Play:
@@ -16,11 +17,13 @@ class Play:
         self.surface = surface
         self.match = match
         #BOTONES
-        self.menu_button = Box((1160,650), (100,50))
-        self.join_button = Box((750,420), (80,50))
         self.comodin_button = Image(COMODIN, (1070, 220), (100,100), image_hover_path=COMODIN_HOVER,  press_sound=PRESS_COMODIN_SOUND)
-        self.clear_button = Box((200, 200), (80, 50))
-        self.shuffle_button = Box((200, 265), (80, 50))
+        self.join_button = Box((750,420), (80,50))
+        self.menu_button = PLAY_LISTA[0]["box"]
+        self.clear_button = PLAY_LISTA[1]["box"]
+        self.shuffle_button = PLAY_LISTA[2]["box"]
+        self.button_list = [self.menu_button, self.clear_button, self.shuffle_button]
+        self.lista_cfg = PLAY_LISTA
         #TEXTO
         self.timer = Box((630, 410), (50,50)) 
         self.initial_time = pygame.time.get_ticks()
@@ -53,15 +56,8 @@ class Play:
 
     def render(self):
 
-
-        self.menu_button.set_color("red", "yellow", "grey")
         self.join_button.set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
-        self.clear_button.set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
-        self.shuffle_button.set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
-        
-        menu = False
-    
-        join = False
+        set_buttons_colors(self.button_list, self.lista_cfg)
         
         tiempo_transcurrido = (pygame.time.get_ticks() - self.initial_time) // 1000
         tiempo_restante = TIEMPO_LIMITE - tiempo_transcurrido
@@ -78,20 +74,13 @@ class Play:
         draw_cards(self.surface, self.cards_cfg["empty_card_list"], transparency=155)
         draw_cards(self.surface, self.cards_cfg["card_list"])
 
+        draw_boxes(self.surface, self.button_list, self.lista_cfg)
+        draw_boxes_text(self.surface, self.button_list, self.lista_cfg)
+
         if count_select_letters(self.cards_cfg["selected_letters"]) > 2:
             self.join_button.draw_box(self.surface, 10, 5)
             self.join_button.draw_text(self.surface, "¡Unir!", "navy", FUENTE_1, 60, center=True)
 
-        self.menu_button.draw_box(self.surface, border_radius=5, border_width=5)
-        self.menu_button.draw_text(self.surface, "Volver al menú", "white", FUENTE_1, 40, center=True)
-
-        self.clear_button.draw_box(self.surface, border_radius=5, border_width=5)
-        self.clear_button.draw_text(self.surface, "CLEAR", "white", FUENTE_1, 40, center=True)
-
-        self.shuffle_button.draw_box(self.surface, border_radius=5, border_width=5)
-        self.shuffle_button.draw_text(self.surface, "SHUFFLE", "white", FUENTE_1, 40, center=True)
-
-        
         self.timer.draw_text(self.surface, str(tiempo_restante), "white", FUENTE_4, font_size=275, center=True,outline="shadow", outline_thickness=2)
 
         self.score_text.draw_text(self.surface, f"Puntaje: {str(self.score)}", "darkslateblue", FUENTE_4, font_size=125, center=True,outline="shadow", outline_thickness=2)
