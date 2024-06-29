@@ -4,6 +4,8 @@ from class_box import Box
 from class_image import Image
 from class_card import Card
 
+
+from assets_cfg import * 
 from draw_functions import *
 
 from data.config.config import *
@@ -21,6 +23,9 @@ class Play:
         self.comodin_button = Image(COMODIN, (1070, 220), (100,100), image_hover_path=COMODIN_HOVER,  press_sound=PRESS_COMODIN_SOUND)
         self.clear_button = Box((200, 200), (80, 50))
         self.shuffle_button = Box((200, 265), (80, 50))
+
+        self.lista_cfg = PLAY_ASSETS
+        self.box_list = [self.join_button, self.menu_button, self.clear_button, self.shuffle_button]
         #TEXTO
         self.timer = Box((630, 410), (50,50)) 
         self.initial_time = pygame.time.get_ticks()
@@ -30,7 +35,9 @@ class Play:
     
         self.music = music_file
         #IMG
-        self.background = PLAY_BACKGROUND_1
+        self.background = Image(PLAY_BACKGROUND_1, (0,0), (1280,720))
+
+        self.images = [self.background, self.comodin_button]
 
         #CARDS
         datos_palabras = set_combination(lista)
@@ -53,56 +60,36 @@ class Play:
 
     def render(self):
 
+        set_buttons_colors(self.box_list, self.lista_cfg)
 
-        self.menu_button.set_color("red", "yellow", "grey")
-        self.join_button.set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
-        self.clear_button.set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
-        self.shuffle_button.set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
-        
-        menu = False
-    
-        join = False
-        
         tiempo_transcurrido = (pygame.time.get_ticks() - self.initial_time) // 1000
         tiempo_restante = TIEMPO_LIMITE - tiempo_transcurrido
 
         if tiempo_restante == 0:
             self.option = 1
 
-        background = pygame.image.load(self.background)
-        background = pygame.transform.scale(background, (self.surface.get_width(), self.surface.get_height()))
-        
         self.surface.fill("black")
-        self.surface.blit(background, (0,0))
+        draw_assets(self.surface, self.box_list, self.images, self.lista_cfg)
 
         draw_cards(self.surface, self.cards_cfg["empty_card_list"], transparency=155)
         draw_cards(self.surface, self.cards_cfg["card_list"])
 
-        if count_select_letters(self.cards_cfg["selected_letters"]) > 2:
-            self.join_button.draw_box(self.surface, 10, 5)
-            self.join_button.draw_text(self.surface, "¡Unir!", "navy", FUENTE_1, 60, center=True)
+        # if count_select_letters(self.cards_cfg["selected_letters"]) > 2:
+        #     self.join_button.draw_box(self.surface, 10, 5)
+        #     self.join_button.draw_text(self.surface, "¡Unir!", "navy", FUENTE_1, 60, center=True)
 
-        self.menu_button.draw_box(self.surface, border_radius=5, border_width=5)
-        self.menu_button.draw_text(self.surface, "Volver al menú", "white", FUENTE_1, 40, center=True)
-
-        self.clear_button.draw_box(self.surface, border_radius=5, border_width=5)
-        self.clear_button.draw_text(self.surface, "CLEAR", "white", FUENTE_1, 40, center=True)
-
-        self.shuffle_button.draw_box(self.surface, border_radius=5, border_width=5)
-        self.shuffle_button.draw_text(self.surface, "SHUFFLE", "white", FUENTE_1, 40, center=True)
-
-        
         self.timer.draw_text(self.surface, str(tiempo_restante), "white", FUENTE_4, font_size=275, center=True,outline="shadow", outline_thickness=2)
 
         self.score_text.draw_text(self.surface, f"Puntaje: {str(self.score)}", "darkslateblue", FUENTE_4, font_size=125, center=True,outline="shadow", outline_thickness=2)
 
         draw_words(self.surface, self.matriz_combinaciones, self.cards_cfg["founded_words"], self.comodin, self.random_letter)
 
-        self.comodin_button.draw_image(self.surface)
         pygame.display.update()
 
     def handle_event (self, event):
         score = 0
+        join = False
+        menu = False
         JOIN_CARDS = pygame.USEREVENT + 1
 
         if event.type == JOIN_CARDS:

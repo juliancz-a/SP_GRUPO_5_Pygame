@@ -32,10 +32,15 @@ menu_title = {
               "text" :  ["Pop The Card", COLOR_LETRAS, FUENTE_1, 80, "border", 2, TITULO, True]
               }
 
-MENU_LISTA = [play_button, help_button, quit_button, menu_title]
+MENU_ASSETS = [play_button, help_button, quit_button, menu_title]
 
 
 # PLAY WINDOW ASSETS
+join_button = {"box": Box((750,420), (80,50)),
+               "colors": ["mediumpurple4", "mediumpurple3", "mediumpurple3"],
+               "config" : [5, 5],
+               "text" : ["¡Unir!", "white", FUENTE_1, 40, True]
+               }
 
 back_button = {"box": Box((1160,650), (100,50)),
               "colors": ["mediumpurple4", "mediumpurple3", "mediumpurple3"],
@@ -47,7 +52,7 @@ clear_button = {
               "box": Box((200, 200), (80, 50)),
               "colors": ["mediumpurple4", "mediumpurple3", "mediumpurple3"],
               "config": [5, 5],
-              "text": ["CLEAR", "white", FUENTE_1, 40, True]
+              "text": ["CLEAR", "white", FUENTE_1, 40, None, None, None, True]
               }
 
 shuffle_buton = {
@@ -59,7 +64,8 @@ shuffle_buton = {
               }
 
 
-PLAY_LISTA = [back_button, clear_button, shuffle_buton]
+
+PLAY_ASSETS = [join_button, back_button, clear_button, shuffle_buton]
 
 continue_button = {
                   "box": Box((640, 360), (400,150)),

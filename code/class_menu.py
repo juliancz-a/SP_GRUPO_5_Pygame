@@ -18,16 +18,16 @@ class Menu:
         self.background = Image(MENU_BACKGROUND, (0,0), (1280,720))
         self.chains = Image(CHAINS, (130, 320), (150, 270))
 
-        self.play_button = MENU_LISTA[0]["box"]
-        self.options_button = MENU_LISTA[1]["box"]
-        self.exit_button = MENU_LISTA[2]["box"]
-        self.title = MENU_LISTA[3]["box"]
+        self.play_button = MENU_ASSETS[0]["box"]
+        self.options_button = MENU_ASSETS[1]["box"]
+        self.exit_button = MENU_ASSETS[2]["box"]
+        self.title = MENU_ASSETS[3]["box"]
 
         self.box_list = [self.play_button, self.options_button, self.exit_button, self.title]
 
         self.images = [self.background, self.chains]
 
-        self.lista_cfg = MENU_LISTA
+        self.lista_cfg = MENU_ASSETS
 
         self.option = None
 
