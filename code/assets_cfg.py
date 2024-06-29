@@ -45,22 +45,21 @@ join_button = {"box": Box((750,420), (80,50)),
 back_button = {"box": Box((1160,650), (100,50)),
               "colors": ["mediumpurple4", "mediumpurple3", "mediumpurple3"],
               "config": [5, 5],
-              "text": ["Volver al menú", "white", FUENTE_1, 40, True]
+              "text": ["Volver al menú", "white", FUENTE_1, 40, "shadow", 1, "black", True]
               }
 
 clear_button = {
-              "box": Box((200, 200), (80, 50)),
+              "box": Box((200, 150), (80, 50)),
               "colors": ["mediumpurple4", "mediumpurple3", "mediumpurple3"],
               "config": [5, 5],
-              "text": ["CLEAR", "white", FUENTE_1, 40, None, None, None, True]
+              "text": ["CLEAR", "white", FUENTE_1, 50, "shadow", 1, "black", True]
               }
 
 shuffle_buton = {
               "box": Box((200, 200), (80, 50)),
               "colors": ["mediumpurple4", "mediumpurple3", "mediumpurple3"],
               "config": [5, 5],
-              "text": ["CLEAR", "white", FUENTE_1, 40, True],
-              "criterio" : 2,
+              "text": ["SHUFFLE", "white", FUENTE_1, 50, "shadow", 1, "black", True],
               }
 
 

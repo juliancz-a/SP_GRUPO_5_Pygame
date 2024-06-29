@@ -10,6 +10,7 @@ from draw_functions import *
 
 from data.config.config import *
 import random
+from assets_cfg import *
 
 
 class Play:
@@ -18,8 +19,6 @@ class Play:
         self.surface = surface
         self.match = match
         #BOTONES
-        self.menu_button = Box((1160,650), (100,50))
-        self.join_button = Box((750,420), (80,50))
         self.comodin_button = Image(COMODIN, (1070, 220), (100,100), image_hover_path=COMODIN_HOVER,  press_sound=PRESS_COMODIN_SOUND)
         self.clear_button = Box((200, 200), (80, 50))
         self.shuffle_button = Box((200, 265), (80, 50))
