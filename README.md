@@ -2,8 +2,8 @@
 
 ## Integrantes del GRUPO 5
 
-* Cáceres Julian
-* Aieta Federico
+* Cáceres Julian @juliancz-a
+* Aieta Federico @maaaseee
 
 ## Juego que desarrollamos
 
@@ -11,4 +11,4 @@
 
 ## Fecha de entrega
 
-> `rgb(255, 0, 0)`4 de julio
+> 4 de julio
