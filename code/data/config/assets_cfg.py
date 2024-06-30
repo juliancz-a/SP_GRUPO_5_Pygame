@@ -60,7 +60,7 @@ clear_button = {
               }
 
 shuffle_buton = {
-              "box": Box((200, 200), (80, 50)),
+              "box": Box((200, 250), (80, 50)),
               "colors": ["mediumpurple4", "mediumpurple3", "mediumpurple3"],
               "config": [5, 5],
               "text": ["SHUFFLE", "white", FUENTE_1, 50, "shadow", 1, "black", True],

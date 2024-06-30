@@ -1,3 +1,4 @@
+import pygame
 def button_click_event (event, assets_cfg):
     
     selection = None
@@ -14,3 +15,15 @@ def button_click_event (event, assets_cfg):
             button_selected += 1
     
     return selection
+
+
+def handle_mouse_event (rectangulo, event):
+    estado = False
+    mouse_events = [pygame.MOUSEBUTTONDOWN, pygame.MOUSEBUTTONUP, pygame.MOUSEMOTION]
+
+    for mouse_event in mouse_events:
+        if event.type == mouse_event:
+            if rectangulo.collidepoint(event.pos):
+                estado = True
+
+    return estado

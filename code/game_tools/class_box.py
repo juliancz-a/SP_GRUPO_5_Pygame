@@ -1,5 +1,5 @@
 import pygame
-
+from game_tools.event_handle import *
 #animacion: self.dimensiones | self.posiciones
 
 class Box:
@@ -51,6 +51,9 @@ class Box:
         action = False
 
         center = self.rectangulo.center
+
+        self.presionado = handle_mouse_event(self.rectangulo, event)
+        self.hover = handle_mouse_event(self.rectangulo, event)
        
         if event.type == pygame.MOUSEBUTTONDOWN:  
 
@@ -101,7 +104,7 @@ class Box:
         height_center = self.rectangulo.size[1] / 2
 
         text_rect = text_surface.get_rect()
-
+        
         if center:
             text_rect.center = (x + width_center, y + height_center - 3)
         else:
