@@ -2,10 +2,10 @@ import pygame
 import sys
 from constantes import * 
 
-from class_menu import Menu
-from class_play import Play
-from class_finish_match import FinishMatch
-from class_setscore import SetScore
+from game_states.class_menu import Menu
+from game_states.class_play import Play
+from game_states.class_finish_match import FinishMatch
+from game_states.class_setscore import SetScore
 
 import random 
 from data.config.config import *
@@ -24,6 +24,7 @@ class Game:
 
         self.lista_jugadores = lista_jugadores
         self.lista_palabras = lista_palabras
+        
         self.window = Menu(self.surface, self.lista_jugadores)
 
         self.match = 0
@@ -37,6 +38,7 @@ class Game:
         pygame.display.set_icon(icon)
     
     def get_events (self):
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.quit = True
@@ -44,13 +46,11 @@ class Game:
             self.window.handle_event(event)
         
     def run(self):
-
-        self.window.set_music()
         
         while self.quit is False:
             self.get_events()
             self.window.render()
-            
+
             game_state = self.window.update()
             if game_state == "quit":
                 self.quit = True
@@ -68,7 +68,7 @@ class Game:
                 self.window = Menu(self.surface, self.lista_jugadores)
 
             case "play":   
-                self.window = Play(self.surface, self.match,  self.lista_palabras, self.score, self.comodin, music_file= PLAY_MUSIC)
+                self.window = Play(self.surface, self.match,  self.lista_palabras, self.score, self.comodin)
 
             case "finish_match":
                 
@@ -80,7 +80,6 @@ class Game:
 
             case "setscore":
                 self.window = SetScore(self.surface, self.match , self.score, self.lista_jugadores)
-
 
 
 juego = Game((1280,720), "POP THE CARD", ICON, lista_palabras, lista_jugadores)
