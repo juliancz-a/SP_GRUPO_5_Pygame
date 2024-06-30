@@ -67,6 +67,9 @@ class Game:
 
                 self.window = Menu(self.surface, self.lista_jugadores)
 
+            case "help":
+                pass
+
             case "play":   
                 self.window = Play(self.surface, self.match,  self.lista_palabras, self.score, self.comodin)
 
