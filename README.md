@@ -24,7 +24,7 @@
 
 **_Pop the Card_** es un juego de descubrir las palabras. **Se te darán 6 letras**, con las cuales deberás formar la mayor cantidad de palabras posibles, sin repetir las letras elegidas.
 
-<img src= "https://github.com/juliancz-a/SP_GRUPO_5_Pygame/blob/aac86ca862629808fbc6bed3a04f7e954bc1bca6/code/data/markdown/selection_gif.gif" alt="Gif redim" widht= "400" height="400">
+<center> <img src= "https://github.com/juliancz-a/SP_GRUPO_5_Pygame/blob/aac86ca862629808fbc6bed3a04f7e954bc1bca6/code/data/markdown/selection_gif.gif" alt="Gif redim" widht= "400" height="400"> </center>
 
 Las palabras a encontrar estarán compuestas de **3, 4, 5 y 6 caracteres**, y cada partida durará **90 segundos**, debiendo jugar por lo menos 3 partidas para poder guardar tu puntaje.
 Además, contás con los siguientes botones durante una partida:
