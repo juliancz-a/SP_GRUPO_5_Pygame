@@ -1,4 +1,4 @@
-# **Segundo Parcial: Pygame**
+# :video_game: **Segundo Parcial: Pygame**
 
 > Division 111, Turno mañana
 
@@ -27,15 +27,15 @@
 Las palabras a encontrar estarán compuestas de **3, 4, 5 y 6 caracteres**, y cada partida durará **90 segundos**, debiendo jugar por lo menos 3 partidas para poder guardar tu puntaje.
 Además, contás con los siguientes botones durante una partida:
 
--> **Shuffle**
+* **Shuffle** :recycle:
 
 > Cambia el lugar de las letras que se encuentran en pantalla.
 
--> **Clear**
+* **Clear** :x:
 
 > Devuelve a su lugar todas las cartas que se encuentren seleccionadas.
 
--> **Un comodín (libro mágico)**
+* **Un comodín (libro mágico)** :orange_book:
 
 > El libro mágico elige una letra aleatoria, y muestra donde se encuentra la misma en cada palabra. Solo puede ser usado una vez por partida.
 
