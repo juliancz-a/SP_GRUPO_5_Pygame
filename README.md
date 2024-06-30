@@ -11,4 +11,4 @@
 
 ## Fecha de entrega
 
-> 4 de julio
+> `rgb(255, 0, 0)`4 de julio
