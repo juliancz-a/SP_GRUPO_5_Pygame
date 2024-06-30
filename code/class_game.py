@@ -6,6 +6,7 @@ from game_states.class_menu import Menu
 from game_states.class_play import Play
 from game_states.class_finish_match import FinishMatch
 from game_states.class_setscore import SetScore
+from game_states.class_help import Help
 
 import random 
 from data.config.config import *
@@ -68,7 +69,7 @@ class Game:
                 self.window = Menu(self.surface, self.lista_jugadores)
 
             case "help":
-                pass
+                self.window = Help(self.surface)
 
             case "play":   
                 self.window = Play(self.surface, self.match,  self.lista_palabras, self.score, self.comodin)

@@ -77,7 +77,7 @@ def select_random_letter (combinaciones):
 
 def use_comodin (letter, words_founded, word_text):
     pos = 0
-  
+    coincidence = False
     for matrix_letter in word_text:
         if matrix_letter == letter:
             coincidence = True

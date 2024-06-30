@@ -1,22 +1,9 @@
 import pygame
 from game_tools.class_image import *
-# Inicializar Pygame
-pygame.init()
+from data.config.assets_cfg import *
+from game_tools.draw_functions import *
 
-# Configuración de la pantalla
-screen_width = 1280
-screen_height = 720
-screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("Botones y Colisiones")
 
-# Colores
-WHITE = (255, 255, 255)
-BLUE = (0, 0, 255)
-RED = (255, 0, 0)
-
-# Definir botones como rectángulos
-button1 = pygame.Rect(100, 500, 150, 50)
-button2 = pygame.Rect(300, 300, 150, 50)
 mucho_texto = (
 "Pop the Card es un juego de descubrir las palabras. Se te daran 6 letras, con"
 "las cuales deberás\nformar la mayor cantidad de palabras posibles, sin repetirlas letras."
@@ -27,62 +14,59 @@ mucho_texto = (
 "donde\nse encuentra la misma en cada palabra."
 )
 
-fuente = pygame.font.Font(r"code\data\fonts\vinque rg.otf", 28)
-comodin = pygame.image.load(r"code\data\img\spell_comodin_hover.png")
-clear = pygame.image.load(r"code\data\img\clear_button.png")
-shuffle = pygame.image.load(r"code\data\img\shuffle_button.png")
-background = pygame.image.load(r"code\data\img\Grimoire_blur.jpg")
-background_scale = pygame.transform.scale(background, (1280, 720))
+# fuente = pygame.font.Font(r"code\data\fonts\vinque rg.otf", 28)
+# comodin = pygame.image.load(r"code\data\img\spell_comodin_hover.png")
+# clear = pygame.image.load(r"code\data\img\clear_button.png")
+# shuffle = pygame.image.load(r"code\data\img\shuffle_button.png")
+# background = pygame.image.load(r"code\data\img\Grimoire_blur.jpg")
+# background_scale = pygame.transform.scale(background, (1280, 720))
 
-dict_images = {
-    "comodin": {"image": [comodin, (100, 480)],
-                "text": "Comodin",
-                "text_pos": (220, 510)},
-    "clear": {"image": [clear, (400, 460)],
-              "text": 'Botón "CLEAR"',
-              "text_pos": (500, 480)},
-    "shuffle": {"image": [shuffle, (400, 550)],
-                "text": 'Botón "SHUFFLE"',
-                "text_pos": (500, 570)},
-}
+# dict_images = {
+#     "comodin": {"image": [comodin, (100, 480)],
+#                 "text": "Comodin",
+#                 "text_pos": (220, 510)},
+#     "clear": {"image": [clear, (400, 460)],
+#               "text": 'Botón "CLEAR"',
+#               "text_pos": (500, 480)},
+#     "shuffle": {"image": [shuffle, (400, 550)],
+#                 "text": 'Botón "SHUFFLE"',
+#                 "text_pos": (500, 570)},
+# }
 
-def blit_instructions(screen, diccionario):
-    screen.blit(background_scale, (0, 0))
-    for key in diccionario.keys():
-        screen.blit(*diccionario[key]["image"])
-        screen.blit(fuente.render(diccionario[key]["text"], True, "white"), diccionario[key]["text_pos"])
+# def blit_instructions(screen, diccionario):
+#     for key in diccionario.keys():
+#         screen.blit(*diccionario[key]["image"])
+#         screen.blit(fuente.render(diccionario[key]["text"], True, "white"), diccionario[key]["text_pos"])
 
-def render_multi_line(screen, text, x, y, font_size, color):
+def render_multi_line(surface, text, x, y, font_size):
     lines = text.splitlines()
     for i, line in enumerate(lines):
-        screen.blit(fuente.render(line, 0, color), (x, (y + font_size * i)))
-
-running = True
-
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-    screen.fill("aquamarine4")
-
-    blit_instructions(screen, dict_images)
-
-    render_multi_line(screen, mucho_texto, 10, 10, 50, "white")
-
-    pygame.display.flip()
-
-
-pygame.quit()
-
+        box_line = Box((x, y + font_size * i), (50,1200))
+        box_line.draw_text(surface, line, "white", FUENTE_1, font_size, "shadow", 2, "black")
 
 class Help:
     def __init__(self, surface) -> None:
         self.surface = surface
-        self.background = Image
+        self.menu_button = HELP_ASSETS[0]["box"]
+
+        self.background = Image(HELP_BACKGROUND, (0,0), (1280,720))
+        self.comodin_button_img = Image (COMODIN, (100, 480), (100, 150))
+        self.clear_button_img = Image (r"code\data\img\clear_button.png" (400, 460), (100, 150))
+        self.shuffle_button_img = Image (r"code\data\img\shuffle_button.png", (400, 550), (100, 150))
+
+        self.config_list = HELP_ASSETS
+        self.box_list  = [self.menu_button]
+        self.image_list = [self.background, self.comodin_button_img, self.clear_button_img, self.shuffle_button_img]
 
     def render(self):
-        pass
+
+        self.surface.fill("aquamarine4")
+        
+        draw_assets(self.surface, self.box_list, self.image_list, self.config_list)
+
+        render_multi_line(self.surface, mucho_texto, 10, 10, 50)
+
+        pygame.display.update()
 
     def handle_event (self):
         pass

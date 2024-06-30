@@ -28,6 +28,7 @@ class Play:
 
         self.box_list = [PLAY_ASSETS[0]["box"], PLAY_ASSETS[1]["box"], PLAY_ASSETS[2]["box"]]
         self.lista_cfg = PLAY_ASSETS
+        
         #TEXTO
         self.timer = Box((630, 410), (50,50)) 
         self.initial_time = pygame.time.get_ticks()
