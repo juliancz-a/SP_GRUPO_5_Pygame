@@ -9,18 +9,18 @@
 
 ### _Juego que desarrollamos_
 
-* **Descubre las palabras**
+* Descubre las palabras
 
 ### _Fecha de entrega_
 
-* **4 de julio**
+* 4 de julio
 
 ### _Profesores_
 
 * Lucchetta Giovanni  **@GioLucc**
 * Germán Scarafilo  **@german2017**
 
-## ¿De qué trata el juego?
+## :question: ¿De qué trata el juego?
 
 **_Pop the Card_** es un juego de descubrir las palabras. **Se te darán 6 letras**, con las cuales deberás formar la mayor cantidad de palabras posibles, sin repetir las letras elegidas.
 
@@ -39,4 +39,4 @@ Además, contás con los siguientes botones durante una partida:
 
 > El libro mágico elige una letra aleatoria, y muestra donde se encuentra la misma en cada palabra. Solo puede ser usado una vez por partida.
 
-**El puntaje final será promediado entre la cantidad de puntos conseguida, y la cantidad de partidas jugadas.**
+### **El puntaje final será promediado entre la cantidad de puntos conseguida, y la cantidad de partidas jugadas.**
