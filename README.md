@@ -1,2 +1,14 @@
-# SP_GRUPO_5_Pygame
-Videojuego: Descubre la palabra.
+# Segundo Parcial: Pygame
+
+## Integrantes del GRUPO 5
+
+* Cáceres Julian
+* Aieta Federico
+
+## Juego que desarrollamos
+
+> Descubre las palabras
+
+## Fecha de entrega
+
+> 4 de julio
