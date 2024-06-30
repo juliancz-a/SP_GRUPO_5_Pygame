@@ -39,7 +39,7 @@ MENU_ASSETS = [play_button, help_button, quit_button, menu_title]
 join_button = {"box": Box((750,420), (80,50)),
                "colors": ["mediumpurple4", "mediumpurple3", "mediumpurple3"],
                "config" : [5, 5],
-               "text" : ["¡Unir!", "white", FUENTE_1, 40, True]
+               "text" : ["¡Unir!", "white", FUENTE_1, 60, "shadow", 1, "black", True]
                }
 
 back_button = {"box": Box((1160,650), (100,50)),

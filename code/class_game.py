@@ -50,7 +50,7 @@ class Game:
         while self.quit is False:
             self.get_events()
             self.window.render()
-
+            
             game_state = self.window.update()
             if game_state == "quit":
                 self.quit = True
@@ -61,6 +61,7 @@ class Game:
         match game_state:
 
             case "menu":
+                self.lista_palabras = read_data(r"code\data\config\palabras.json")
                 self.match = 0
                 self.score = 0
 

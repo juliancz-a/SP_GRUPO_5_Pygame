@@ -22,6 +22,8 @@ class Play:
         self.comodin_button = Image(COMODIN, (1070, 220), (100,100), image_hover_path=COMODIN_HOVER,  press_sound=PRESS_COMODIN_SOUND)
         self.clear_button = Box((200, 200), (80, 50))
         self.shuffle_button = Box((200, 265), (80, 50))
+        self.join_button = PLAY_ASSETS[0]["box"]
+        self.menu_button = PLAY_ASSETS[1]["box"]
 
         self.lista_cfg = PLAY_ASSETS
         self.box_list = [self.join_button, self.menu_button, self.clear_button, self.shuffle_button]

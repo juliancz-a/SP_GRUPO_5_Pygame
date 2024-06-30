@@ -38,7 +38,8 @@ class SetScore:
 
         while True:
             if submit:
-                self.lista_jugadores.append({"nombre" : text , "puntos" : self.score, "partidas" : self.match})
+                promedio = operacion(self.score, self.match, lambda x, y: x//y)
+                self.lista_jugadores.append({"nombre" : text , "puntos" : promedio, "partidas" : self.match})
                 
                 ordenar_elementos(self.lista_jugadores, "puntos", 2)
 
@@ -74,12 +75,12 @@ class SetScore:
                         text = text[:-1]
                     elif event.key == pygame.K_ESCAPE:
                         text = ""
-                    elif max_chars > len(text):
+                    elif max_chars > len(text) and event.key != pygame.K_RETURN:
                         text += event.unicode
             if len(text) > 3:
                 submit = self.submit_button.interaction(event)
 
-        return (text, activo, submit)
+        return (text.strip("\n"), activo, submit)
 
     def blit_buttons(self, nickname):
         self.surface.fill("red")
@@ -119,3 +120,6 @@ def swap(list:list[dict], a:int, b:int):
     aux = list[a]
     list[a] = list[b]
     list[b] = aux
+
+def operacion(x, y, operacion):
+    return operacion(x, y)
