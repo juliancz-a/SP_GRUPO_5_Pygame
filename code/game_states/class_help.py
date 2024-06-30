@@ -5,14 +5,14 @@ from game_tools.draw_functions import *
 from game_tools.event_handle import *
 
 mucho_texto = (
-"Pop the Card es un juego de descubrir las palabras. Se te daran 6 letras, con"
-"las cuales deberás\nformar la mayor cantidad de palabras posibles, sin repetirlas letras."
-"\nLas palabras a encontrar estarán compuestas de 3, 4, 5 y 6 caracteres, y cada"
+"Pop the Card es un juego de descubrir las palabras. Se te darán 6 letras, con "
+"las cuales deberás formar la mayor\ncantidad de palabras posibles, sin repetir las letras."
+"\nLas palabras a encontrar estarán compuestas de 3, 4, 5 y 6 caracteres, y cada "
 "partida durará 90 segundos,\ndebiendo jugar por lo menos 3 partidas para poder guardar tu puntaje.\n"
 "Además, contás con los siguientes botones durante una partida:\n"
-" -> SHUFFLE, que cambia el lugar de las letras.\n -> CLEAR, para deshacer"
-"el orden de las cartas que elegiste.\n -> Un comodín (libro mágico), el cual elige una letra aleatoria, y muestra "
-"donde se encuentra la misma en cada palabra.")
+" -> SHUFFLE, que cambia el lugar de las letras.\n -> CLEAR, para deshacer "
+"el orden de las cartas que elegiste.\n -> Un comodín (libro mágico), el cual elige una letra aleatoria, "
+"y muestra donde se encuentra la misma en\n cada palabra. Solo puede ser usado una vez por partida.")
 
 def render_multi_line(surface, text, x, y, font_size):
     lines = text.splitlines()
@@ -27,9 +27,9 @@ class Help:
 
         self.background = Image(HELP_BACKGROUND, (0,0), (1280,720))
 
-        self.comodin_button_img = Image (COMODIN, (100, 480), (100, 100))
-        self.clear_button_img = Image (r"code\data\img\clear_button.png", (600, 450), (160, 100))
-        self.shuffle_button_img = Image (r"code\data\img\shuffle_button.png", (400, 450), (160, 100))
+        self.comodin_button_img = Image (COMODIN, (580, 505), (100, 100))
+        self.shuffle_button_img = Image (r"code\data\img\shuffle_button.png", (400, 500), (160, 100))
+        self.clear_button_img = Image (r"code\data\img\clear_button.png", (690, 500), (160, 100))
 
         self.config_list = HELP_ASSETS
         self.box_list  = [self.menu_button]
