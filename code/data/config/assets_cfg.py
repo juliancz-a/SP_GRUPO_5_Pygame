@@ -106,7 +106,8 @@ REGISTER_SCORE_ASSETS = [input_box, game_over_title]
 back_button = {"box": Box((1160,650), (100,50)),
               "colors": ["mediumpurple4", "mediumpurple3", "mediumpurple3"],
               "config": [5, 5],
-              "text": ["Volver al menú", "white", FUENTE_1, 40, "shadow", 1, "black", True]
+              "text": ["Volver al menú", "white", FUENTE_1, 40, "shadow", 1, "black", True],
+              "interaction" : True
               }
 
 HELP_ASSETS = [back_button]
