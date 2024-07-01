@@ -51,13 +51,15 @@ HELP_BACKGROUND = r"code\data\img\Grimoire_blur.jpg"
 FINISH_MATCH_BACKGROUND = r"code\data\sound\finishmatch_music.mp3"
 
 # SONIDO
+VOLUME_BUTTON = r"code\data\img\volume_button.png"
+VOLUME_MUTE_BUTTON = r"code\data\img\mute_button.png"
 PRESS_SOUND = r"code\data\sound\press_button.wav"
 PRESS_COMODIN_SOUND = r"code\data\sound\comodin_sound.mp3"
 MENU_MUSIC = r"code\data\sound\musica_menu.mp3"
 PLAY_MUSIC = r"code\data\sound\play_music.wav"
 CARTAS_SOUND = r"code\data\sound\card_click.wav"
 
-TIEMPO_LIMITE = 90
+TIEMPO_LIMITE = 2
 
 #CONFIG PATH
 SCOREBOARD_PATH = r"code\data\config\scoreboard.csv"

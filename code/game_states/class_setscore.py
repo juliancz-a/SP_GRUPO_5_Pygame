@@ -1,7 +1,6 @@
 import pygame
 from game_tools.class_box import Box
 from constantes import *
-from data.config.assets_cfg import * 
 
 from data.config.config import *
 from game_tools.draw_functions import *
@@ -9,18 +8,19 @@ from game_tools.event_handle import *
 from game_tools.extra_functions import *
 
 class SetScore:
-    def __init__(self, surface:pygame.Surface, match, score, lista_jugadores) -> None:
+    def __init__(self, surface:pygame.Surface, match, score, lista_jugadores, setscore_assets) -> None:
         self.surface = surface
+        self.setscore_assets = setscore_assets
 
         self.lista_jugadores = lista_jugadores
         self.match = match
+
         self.score = score
         self.score_promedio = operacion(score, match, lambda x, y: x // y)
         self.score_text = (f"Tu puntaje total es: {score}\nLa cantidad de partidas jugadas es: {match}\nTu puntaje final es de: {self.score_promedio}")
 
-        self.input_box = REGISTER_SCORE_ASSETS[0]["box"]
-        self.title = REGISTER_SCORE_ASSETS[1]["box"]
-        self.cfg_list = REGISTER_SCORE_ASSETS
+        self.input_box = self.setscore_assets[0]["box"]
+        self.title = self.setscore_assets[1]["box"]
 
         self.box_list = [self.input_box, self.title]
 
@@ -39,14 +39,14 @@ class SetScore:
 
     def render(self):
 
-        set_buttons_colors(self.box_list, self.cfg_list)
+        set_buttons_colors(self.box_list, self.setscore_assets)
         
         self.title.rectangulo.centerx = self.surface.get_width() // 2
        
         self.submit_button.set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
         self.surface.fill("black")
 
-        draw_assets(self.surface, self.box_list, self.image_list, self.cfg_list)
+        draw_assets(self.surface, self.box_list, self.image_list, self.setscore_assets)
 
         if len(self.nickname_text) > 3:
             self.submit_button.draw_box(self.surface, 5, 5)

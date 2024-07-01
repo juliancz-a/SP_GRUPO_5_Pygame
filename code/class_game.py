@@ -13,16 +13,16 @@ from data.config.config import *
 
 class Game:
 
-    def __init__(self, size, title, icon:str, lista_palabras:list, lista_jugadores:list) -> None:
+    def __init__(self, size, title, icon:str, lista_palabras:list, lista_jugadores:list, game_assets:dict) -> None:
 
         pygame.init()
 
         self.surface = pygame.display.set_mode((size))
-
+        self.game_assets = game_assets
         self.lista_jugadores = lista_jugadores
         self.lista_palabras = lista_palabras
         
-        self.window = Menu(self.surface, self.lista_jugadores)
+        self.window = Menu(self.surface, self.lista_jugadores, self.game_assets["menu"])
 
         self.match = 0
         self.score = 0
@@ -63,13 +63,13 @@ class Game:
                 self.match = 0
                 self.score = 0
 
-                self.window = Menu(self.surface, self.lista_jugadores)
+                self.window = Menu(self.surface, self.lista_jugadores, self.game_assets["menu"])
 
             case "help":
-                self.window = Help(self.surface)
+                self.window = Help(self.surface,  self.game_assets["help"])
 
             case "play":   
-                self.window = Play(self.surface, self.match,  self.lista_palabras, self.score, self.comodin)
+                self.window = Play(self.surface, self.match,  self.lista_palabras, self.score, self.comodin,  self.game_assets["play"])
 
             case "finish_match":
                 
@@ -77,7 +77,8 @@ class Game:
                 self.match = data_updated[0] 
                 self.score = data_updated[1]
                 
-                self.window = FinishMatch(self.surface, self.match,  self.lista_palabras, self.score)
+                self.window = FinishMatch(self.surface, self.match, self.score, self.game_assets["finish_match"])
 
             case "setscore":
-                self.window = SetScore(self.surface, self.match , self.score, self.lista_jugadores)
+                self.window = SetScore(self.surface, self.match , self.score, self.lista_jugadores, self.game_assets["set_score"])
+                

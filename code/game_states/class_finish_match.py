@@ -6,35 +6,35 @@ from data.config.assets_cfg import *
 
 from game_tools.draw_functions import *
 class FinishMatch:
-    def __init__(self, surface:pygame.Surface, match, lista, score) -> None:
+    def __init__(self, surface:pygame.Surface, match, score, finish_match_assets) -> None:
         self.surface = surface
+        self.finish_match_assets = finish_match_assets
+
         self.match = match
-        self.lista = lista
-        self.background = Image(r"code\data\img\play_bg(blur).png", (0,0), self.surface.get_size())
+        self.background = Image(r"code\data\img\finish_match_bg.png", (0,0), self.surface.get_size())
         self.music = self.set_music()
 
         self.score = score
-        self.continue_button = FINISH_MATCH_ASSETS[0]["box"]
-        self.finish_button = FINISH_MATCH_ASSETS[1]["box"]
+        self.continue_button = self.finish_match_assets[0]["box"]
+        self.finish_button = self.finish_match_assets[1]["box"]
         self.score_text = Box((230, 100), (400,150))
 
         self.box_list = [self.continue_button]
         self.image_list = [self.background]
 
-        self.lista_cfg = FINISH_MATCH_ASSETS
 
         
         self.option = None
 
     def render(self):
-        set_buttons_colors(self.box_list, self.lista_cfg)
-        self.finish_button.set_color(*FINISH_MATCH_ASSETS[1]["colors"])
+        set_buttons_colors(self.box_list, self.finish_match_assets)
+        self.finish_button.set_color(*self.finish_match_assets[1]["colors"])
 
         self.score_text.rectangulo.centerx = self.surface.get_width() // 2
 
         self.surface.fill("black")
             
-        draw_assets(self.surface, self.box_list, self.image_list, self.lista_cfg)
+        draw_assets(self.surface, self.box_list, self.image_list, self.finish_match_assets)
 
         if self.match > 1:
             self.finish_button.draw_box(self.surface)

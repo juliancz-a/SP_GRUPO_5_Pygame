@@ -113,3 +113,11 @@ back_button = {"box": Box((1110,600), (150,100)),
               }
 
 HELP_ASSETS = [back_button]
+
+game_assets = {
+    "menu" : MENU_ASSETS,
+    "play" : PLAY_ASSETS,
+    "finish_match" : FINISH_MATCH_ASSETS,
+    "set_score" : REGISTER_SCORE_ASSETS,
+    "help" : HELP_ASSETS
+}

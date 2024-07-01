@@ -4,7 +4,6 @@ from game_tools.class_box import Box
 from game_tools.class_image import Image
 from game_tools.card import *
 
-from data.config.assets_cfg import * 
 from game_tools.draw_functions import *
 
 from data.config.config import *
@@ -14,20 +13,20 @@ import random
 
 
 class Play:
-    def __init__(self, surface:pygame.Surface, match, lista, score, comodin) -> None:
+    def __init__(self, surface:pygame.Surface, match, lista, score, comodin, play_assets) -> None:
 
         self.surface = surface
         self.match = match
+        self.play_assets = play_assets
         #BOTONES
         self.comodin_button = Image(COMODIN, (1070, 220), (100,100), image_hover_path=COMODIN_HOVER,  press_sound=PRESS_COMODIN_SOUND)
 
         self.join_button = Box((770,400), (120,70))
-        self.menu_button = PLAY_ASSETS[0]["box"]
-        self.clear_button = PLAY_ASSETS[1]["box"]
-        self.shuffle_button = PLAY_ASSETS[2]["box"]
+        self.menu_button = self.play_assets[0]["box"]
+        self.clear_button = self.play_assets[1]["box"]
+        self.shuffle_button = self.play_assets[2]["box"]
 
-        self.box_list = [PLAY_ASSETS[0]["box"], PLAY_ASSETS[1]["box"], PLAY_ASSETS[2]["box"]]
-        self.lista_cfg = PLAY_ASSETS
+        self.box_list = [self.play_assets[0]["box"], self.play_assets[1]["box"], self.play_assets[2]["box"]]
         
         #TEXTO
         self.timer = Box((618, 420), (50,50)) 
@@ -64,7 +63,7 @@ class Play:
 
     def render(self):
     
-        set_buttons_colors(self.box_list, self.lista_cfg)
+        set_buttons_colors(self.box_list, self.play_assets)
         self.join_button.set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
 
         tiempo_transcurrido = (pygame.time.get_ticks() - self.initial_time) // 1000
@@ -75,7 +74,7 @@ class Play:
 
         self.surface.fill("black")
        
-        draw_assets(self.surface, self.box_list, [self.background, self.comodin_button], self.lista_cfg)
+        draw_assets(self.surface, self.box_list, [self.background, self.comodin_button], self.play_assets)
 
         draw_cards(self.surface, self.cards_cfg["empty_card_list"], transparency=155)
         draw_cards(self.surface, self.cards_cfg["card_list"])

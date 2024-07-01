@@ -55,3 +55,16 @@ def handle_input_event (write, event, text, max_len):
                 text += event.unicode
     
     return text
+
+def change_volume (volume, volume_button, img)  -> bool:
+    match volume:
+        case True:
+            pygame.mixer.music.set_volume(0.1)
+            
+            volume_img = (img[0]["img"])
+        case False:
+            pygame.mixer.music.set_volume(0)
+        
+            volume_img = (img[1]["img"])
+    
+    return volume_img
