@@ -41,9 +41,9 @@ def draw_words (surface, matrix, words_founded:list, comodin, random_letter):
                     x -= 100
                 break
 
-def sum_score(scoreboard:int, word):
-    scoreboard += len(word)
-    return scoreboard
+def sum_score(score:int, word):
+    score += len(word)
+    return score
 
 def normalize_words (combinations) -> list[list]:
     palabras = {3: [], 4: [], 5: [], 6: []}
@@ -62,7 +62,6 @@ def normalize_words (combinations) -> list[list]:
                 matriz[i][j] = palabras[6-i][j]
 
     return matriz
-
 
 def select_random_letter (combinaciones):
     elemento_random = random.randint(0, len(combinaciones) - 1)

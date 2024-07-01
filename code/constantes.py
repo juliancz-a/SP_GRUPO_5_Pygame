@@ -41,8 +41,13 @@ COMODIN_HOVER = r"code\data\img\spell_comodin_hover.png"
 CHAINS = r"code\data\img\chains2.png"
 
 MENU_BACKGROUND = r"code\data\img\House 2.png"
+
 PLAY_BACKGROUND_1 = r"code\data\img\play_bg.png"
+PLAY_BACKGROUND_2 = r"code\data\img\play_bg2.png"
+PLAY_BACKGROUND_3 = r"code\data\img\play_bg3.png"
+
 HELP_BACKGROUND = r"code\data\img\Grimoire_blur.jpg"
+
 FINISH_MATCH_BACKGROUND = r"code\data\sound\finishmatch_music.mp3"
 
 # SONIDO
@@ -52,7 +57,7 @@ MENU_MUSIC = r"code\data\sound\musica_menu.mp3"
 PLAY_MUSIC = r"code\data\sound\play_music.wav"
 CARTAS_SOUND = r"code\data\sound\card_click.wav"
 
-TIEMPO_LIMITE = 5
+TIEMPO_LIMITE = 90
 
 #CONFIG PATH
 SCOREBOARD_PATH = r"code\data\config\scoreboard.csv"

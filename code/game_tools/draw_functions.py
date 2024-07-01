@@ -2,7 +2,6 @@ from game_tools.class_box import Box
 from game_tools.class_image import *
 
 def set_buttons_colors(button_list, lista_cfg):
-        print(len(button_list))
         for i in range(len(button_list)):
             if len(lista_cfg[i]["colors"]) > 0:
                 button_list[i].set_color(*lista_cfg[i]["colors"])

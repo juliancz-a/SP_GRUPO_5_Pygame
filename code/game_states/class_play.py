@@ -30,7 +30,7 @@ class Play:
         self.lista_cfg = PLAY_ASSETS
         
         #TEXTO
-        self.timer = Box((630, 410), (50,50)) 
+        self.timer = Box((618, 420), (50,50)) 
         self.initial_time = pygame.time.get_ticks()
 
         self.score = score
@@ -39,6 +39,7 @@ class Play:
         self.music = self.set_music()
         #IMG
         self.background = Image(PLAY_BACKGROUND_1, (0,0), (1280,720))
+        self.background_list = [PLAY_BACKGROUND_1, PLAY_BACKGROUND_2, PLAY_BACKGROUND_3]  
 
         self.images = [self.background, self.comodin_button]
 
@@ -74,7 +75,7 @@ class Play:
 
         self.surface.fill("black")
        
-        draw_assets(self.surface, self.box_list, self.images, self.lista_cfg)
+        draw_assets(self.surface, self.box_list, [self.background, self.comodin_button], self.lista_cfg)
 
         draw_cards(self.surface, self.cards_cfg["empty_card_list"], transparency=155)
         draw_cards(self.surface, self.cards_cfg["card_list"])
@@ -97,6 +98,7 @@ class Play:
         menu = False
 
         JOIN_CARDS = pygame.USEREVENT + 1
+        pygame.time.set_timer(pygame.USEREVENT + 2, 25000)
 
         if event.type == JOIN_CARDS:
             word = join_cards(self.cards_cfg["selected_letters"], self.cards_cfg["founded_words"], self.combinaciones)
@@ -104,6 +106,9 @@ class Play:
                 self.cards_cfg["founded_words"].append(word)
                 reset_pos(self.cards_cfg["card_list"], self.cards_cfg["selected_letters"], self.cards_cfg["pos_ocupadas"], self.cards_cfg["pos_libres"])
                 self.score += sum_score(score, word)
+        
+        elif event.type == pygame.USEREVENT + 2:
+            self.background = Image(select_random_element(self.background.image_path, self.background_list), (0,0), (1280,720))
 
         elif count_select_letters(self.cards_cfg["selected_letters"]) > 2:
             join = self.join_button.interaction(event)
