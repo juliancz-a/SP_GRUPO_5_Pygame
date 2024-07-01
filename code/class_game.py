@@ -11,10 +11,6 @@ from game_states.class_help import Help
 import random 
 from data.config.config import *
 
-lista_jugadores = []
-lista_palabras = read_data(r"code\data\config\palabras.json")
-lista_jugadores = read_score(r"code\data\config\scoreboard.csv", lista_jugadores)
-
 class Game:
 
     def __init__(self, size, title, icon:str, lista_palabras:list, lista_jugadores:list) -> None:
@@ -84,8 +80,3 @@ class Game:
 
             case "setscore":
                 self.window = SetScore(self.surface, self.match , self.score, self.lista_jugadores)
-
-
-juego = Game((1280,720), "POP THE CARD", ICON, lista_palabras, lista_jugadores)
-juego.run()
-

@@ -54,7 +54,7 @@ def normalize_words (combinations) -> list[list]:
                 palabras[key].append(combination)
 
     max_len = ordenar_elementos([len(palabras[3]), len(palabras[4]), len(palabras[5]), len(palabras[6])], 2)
-    print(f" : a {max_len}")
+    
     matriz = [[0] * max_len for _ in range(4)]
 
     for i in range (len(matriz)):
