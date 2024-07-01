@@ -32,7 +32,7 @@ class Menu:
 
         self.option = None
 
-        self.music = self.set_music()
+        self.music = self.set_music(0.1)
     
     def render(self):
 
@@ -63,9 +63,9 @@ class Menu:
             
         return selection
     
-    def set_music(self):
+    def set_music(self, volume):
     
         pygame.mixer.music.load(MENU_MUSIC)
         pygame.mixer.music.play(-1)
-        pygame.mixer.music.set_volume(0.1)
+        pygame.mixer.music.set_volume(volume)
 

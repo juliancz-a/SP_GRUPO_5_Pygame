@@ -1,5 +1,5 @@
 import pygame
-def button_click_event (event, assets_cfg):
+def button_click_event (event:pygame.event, assets_cfg):
     
     selection = None
     button_selected = 0

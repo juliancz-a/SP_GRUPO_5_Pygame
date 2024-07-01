@@ -4,7 +4,7 @@ from game_tools.class_box import Box
 from game_tools.extra_functions import *
 from constantes import *
 
-def draw_words (surface, matrix, words_founded:list, comodin, random_letter):
+def draw_words (surface:pygame.Surface, matrix:list, words_founded:list, comodin, random_letter):
     
     x = 55
     
