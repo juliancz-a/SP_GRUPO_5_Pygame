@@ -1,6 +1,6 @@
 # :video_game: **Segundo Parcial: Pygame**
 
-> Division 111, Turno mañana
+> Division 111-1, Turno mañana
 
 ## Integrantes del GRUPO 5
 

@@ -2,7 +2,7 @@ import pygame
 from constantes import *
 
 class Scoreboard:
-    def __init__(self, font, surface, player_list:list[dict]) -> None:
+    def __init__(self, font:pygame.font, surface:pygame.Surface, player_list:list[dict]) -> None:
         self.surface = surface
         self.player_list = player_list
         self.draw_pos = (850,200)
