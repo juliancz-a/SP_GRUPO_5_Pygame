@@ -21,7 +21,7 @@ class Game:
 
         pygame.init()
 
-        self.surface = pygame.display.set_mode((size), pygame.RESIZABLE)
+        self.surface = pygame.display.set_mode((size))
 
         self.lista_jugadores = lista_jugadores
         self.lista_palabras = lista_palabras

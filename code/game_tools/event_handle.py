@@ -17,13 +17,29 @@ def button_click_event (event, assets_cfg):
     return selection
 
 
-def handle_mouse_event (rectangulo, event):
-    estado = False
+def handle_mouse_event (rectangulo, event) -> dict:
+    estado = {
+        "presionado" : None,
+        "hover" : False,
+        "action" : False
+    }
     mouse_events = [pygame.MOUSEBUTTONDOWN, pygame.MOUSEBUTTONUP, pygame.MOUSEMOTION]
 
     for mouse_event in mouse_events:
         if event.type == mouse_event:
-            if rectangulo.collidepoint(event.pos):
-                estado = True
 
+            if mouse_event == pygame.MOUSEBUTTONUP:
+                estado["presionado"] = False
+
+            if rectangulo.collidepoint(event.pos):
+                match mouse_event:
+                    case pygame.MOUSEBUTTONDOWN:
+                        estado["presionado"] = True
+
+                    case pygame.MOUSEBUTTONUP:
+                        estado["action"] = True
+
+                    case pygame.MOUSEMOTION:
+                        estado["hover"] = True
+                    
     return estado
