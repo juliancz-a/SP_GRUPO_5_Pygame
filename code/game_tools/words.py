@@ -1,6 +1,7 @@
 import pygame
 import random
 from game_tools.class_box import Box  
+from game_tools.extra_functions import *
 from constantes import *
 
 def draw_words (surface, matrix, words_founded:list, comodin, random_letter):
@@ -52,8 +53,8 @@ def normalize_words (combinations) -> list[list]:
             if len(combination) == key:
                 palabras[key].append(combination)
 
-    max_len = ordenar_elementos([len(palabras[3]), len(palabras[4]), len(palabras[5]), len(palabras[6])], 1)
-
+    max_len = ordenar_elementos([len(palabras[3]), len(palabras[4]), len(palabras[5]), len(palabras[6])], 2)
+    print(f" : a {max_len}")
     matriz = [[0] * max_len for _ in range(4)]
 
     for i in range (len(matriz)):
@@ -109,20 +110,3 @@ def set_combination (lista:list[dict]) -> tuple:
 
     return datos
     
-def ordenar_elementos (list:list[dict], orden:int):
-
-    for i in range(len(list) - 1):
-        for j in range(i + 1, len(list)):
-            match orden:
-                case 1:
-                    if list[i] >= list[j]:
-                            swap(list, i, j)
-                case 2:
-                    if list[i] <= list[j]:
-                        swap(list, i, j)
-    return list.pop()
-
-def swap(list:list[dict], a:int, b:int):
-    aux = list[a]
-    list[a] = list[b]
-    list[b] = aux

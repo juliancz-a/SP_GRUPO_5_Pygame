@@ -87,8 +87,8 @@ finish_button = {
 FINISH_MATCH_ASSETS = [continue_button, finish_button]
 
 input_box = {
-            "box" : Box((650, 500), (275,50)),
-            "colors" : ["white", "red", "grey1"],
+            "box" : Box((500, 500), (275,50)),
+            "colors" : ["white", "grey66", "grey1"],
             "config" : [5, 5],
             "text" : [],
             "interaction" : True

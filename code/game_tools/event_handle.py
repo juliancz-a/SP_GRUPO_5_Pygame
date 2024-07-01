@@ -39,8 +39,7 @@ def handle_mouse_event (rectangulo, event) -> dict:
                     case pygame.MOUSEBUTTONUP:
                         estado["action"] = True
 
-                    case pygame.MOUSEMOTION:
-                        estado["hover"] = True
+                estado["hover"] = True
                     
     return estado
 

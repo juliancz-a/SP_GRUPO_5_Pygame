@@ -6,22 +6,23 @@ from data.config.assets_cfg import *
 from data.config.config import *
 from game_tools.draw_functions import *
 from game_tools.event_handle import *
+from game_tools.extra_functions import *
 
 class SetScore:
     def __init__(self, surface:pygame.Surface, match, score, lista_jugadores) -> None:
         self.surface = surface
 
         self.lista_jugadores = lista_jugadores
-        
         self.match = match
         self.score = score
+        self.score_promedio = operacion(score, match, lambda x, y: x // y)
+        self.score_text = (f"Tu puntaje total es: {score}\nLa cantidad de partidas jugadas es: {match}\nTu puntaje final es de: {self.score_promedio}")
 
         self.input_box = REGISTER_SCORE_ASSETS[0]["box"]
         self.title = REGISTER_SCORE_ASSETS[1]["box"]
         self.cfg_list = REGISTER_SCORE_ASSETS
 
         self.box_list = [self.input_box, self.title]
-        self.score_text = Box((230, 100), (400,150))
 
         self.nickname =  Box((self.input_box.rectangulo.x + 5, self.input_box.rectangulo.y + 2), (200,20))
         self.nickname_text = ""
@@ -41,7 +42,6 @@ class SetScore:
         set_buttons_colors(self.box_list, self.cfg_list)
         
         self.title.rectangulo.centerx = self.surface.get_width() // 2
-        self.score_text.rectangulo.centerx = self.surface.get_width() // 2
        
         self.submit_button.set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
         self.surface.fill("black")
@@ -57,9 +57,8 @@ class SetScore:
         else:
             self.nickname.draw_text(self.surface, self.nickname_text, "black", FUENTE_1, 60)
 
-        self.score_text.draw_text(self.surface, f"Tu puntaje final es de {self.score} puntos",
-                                "white", FUENTE_1, 40, center=True)
-    
+        render_multi_line(self.surface, self.score_text, 610, 250, 200, center_text= True)
+
         pygame.display.update()
     
     def handle_event (self, event):
@@ -68,7 +67,7 @@ class SetScore:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.input_box.rectangulo.collidepoint(event.pos):
                 self.activo = not self.activo
-                
+
         self.nickname_text = handle_input_event(self.activo, event, self.nickname_text, 10)
 
         if len(self.nickname_text) > 3:
@@ -82,10 +81,9 @@ class SetScore:
 
         match self.option:
             case 0:
-                promedio = operacion(self.score, self.match, lambda x, y: x//y)
-                self.lista_jugadores.append({"nombre" : self.nickname_text , "puntos" : promedio, "partidas" : self.match})
+                self.lista_jugadores.append({"nombre" : self.nickname_text , "puntos" : self.score_promedio, "partidas" : self.match})
                 
-                ordenar_elementos(self.lista_jugadores, "puntos", 2)
+                ordenar_elementos(self.lista_jugadores, 2, "puntos")
 
                 update_score(r"code\data\config\scoreboard.csv", self.lista_jugadores)
                 selection = "menu"
@@ -97,23 +95,3 @@ class SetScore:
         pygame.mixer.music.load(r"code\data\sound\566579__bainmack__chime_song_mellow_chill_short2.wav")
         pygame.mixer.music.play(-1)
         pygame.mixer.music.set_volume(0.1)
-
-def ordenar_elementos (list:list[dict], key: str, orden:int):
-
-    for i in range(len(list) - 1):
-        for j in range(i + 1, len(list)):
-            match orden:
-                case 1:
-                    if list[i][key] >= list[j][key]:
-                            swap(list, i, j)
-                case 2:
-                    if list[i][key] <= list[j][key]:
-                        swap(list, i, j)
-
-def swap(list:list[dict], a:int, b:int):
-    aux = list[a]
-    list[a] = list[b]
-    list[b] = aux
-
-def operacion(x, y, operacion):
-    return operacion(x, y)

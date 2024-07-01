@@ -3,22 +3,7 @@ from game_tools.class_image import *
 from data.config.assets_cfg import *
 from game_tools.draw_functions import *
 from game_tools.event_handle import *
-
-mucho_texto = (
-"Pop the Card es un juego de descubrir las palabras. Se te darán 6 letras, con "
-"las cuales deberás formar la mayor\ncantidad de palabras posibles, sin repetir las letras."
-"\nLas palabras a encontrar estarán compuestas de 3, 4, 5 y 6 caracteres, y cada "
-"partida durará 90 segundos,\ndebiendo jugar por lo menos 3 partidas para poder guardar tu puntaje.\n"
-"Además, contás con los siguientes botones durante una partida:\n"
-" -> SHUFFLE, que cambia el lugar de las letras.\n -> CLEAR, para deshacer "
-"el orden de las cartas que elegiste.\n -> Un comodín (libro mágico), el cual elige una letra aleatoria, "
-"y muestra donde se encuentra la misma en\n cada palabra. Solo puede ser usado una vez por partida.")
-
-def render_multi_line(surface, text, x, y, font_size):
-    lines = text.splitlines()
-    for i, line in enumerate(lines):
-        box_line = Box((x, y + font_size // 3 * i), (50,1200))
-        box_line.draw_text(surface, line, "white", FUENTE_1, font_size, "shadow", 2, "black")
+from game_tools.extra_functions import *
 
 class Help:
     def __init__(self, surface) -> None:
@@ -45,7 +30,7 @@ class Help:
         
         draw_assets(self.surface, self.box_list, self.image_list, self.config_list)
 
-        render_multi_line(self.surface, mucho_texto, 10, 10, 150)
+        render_multi_line(self.surface, HELP_TEXT, 620, 10, 150, center_text= True)
 
         pygame.display.update()
 
@@ -60,5 +45,4 @@ class Help:
                 selection = "menu"
         
         return selection
-    def set_music(self):
-        pass
+    

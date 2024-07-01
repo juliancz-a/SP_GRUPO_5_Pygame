@@ -6,6 +6,17 @@ FUENTE_2 = r"code\data\fonts\NarniaBll-2Odv.ttf"
 FUENTE_3 = r"code\data\fonts\ErinGoBragh-ZVA3x.ttf"
 FUENTE_4 = r"code\data\fonts\Trickster-Reg.ttf"
 
+HELP_TEXT = ("Pop the Card es un juego de descubrir las palabras. Se te darán 6 letras, con "
+"las cuales deberás formar la mayor\ncantidad de palabras posibles, sin repetir las letras."
+"\nLas palabras a encontrar estarán compuestas de 3, 4, 5 y 6 caracteres, y cada "
+"partida durará 90 segundos,\ndebiendo jugar por lo menos 3 partidas para poder guardar tu puntaje.\n"
+"Además, contás con los siguientes botones durante una partida:\n"
+" -> SHUFFLE, que cambia el lugar de las letras.\n -> CLEAR, para deshacer "
+"el orden de las cartas que elegiste.\n -> Un comodín (libro mágico), el cual elige una letra aleatoria, "
+"y muestra donde se encuentra la misma en\n cada palabra. Solo puede ser usado una vez por partida.")
+
+
+
 #COLORS
 TITULO = "magenta3"
 LETRAS = "gold2"
