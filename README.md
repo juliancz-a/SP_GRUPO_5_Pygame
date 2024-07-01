@@ -23,6 +23,7 @@
 ## :question: ¿De qué trata el juego?
 
 **_Pop the Card_** es un juego de descubrir las palabras. **Se te darán 6 letras**, con las cuales deberás formar la mayor cantidad de palabras posibles, sin repetir las letras elegidas.
+<img src= "https://github.com/juliancz-a/SP_GRUPO_5_Pygame/blob/aac86ca862629808fbc6bed3a04f7e954bc1bca6/code/data/markdown/selection_gif.gif" alt="Gif redim" widht= "400" height="400" class="center" > 
 
 <center> 
     <img src= "https://github.com/juliancz-a/SP_GRUPO_5_Pygame/blob/aac86ca862629808fbc6bed3a04f7e954bc1bca6/code/data/markdown/selection_gif.gif" alt="Gif redim" widht= "400" height="400"> 
