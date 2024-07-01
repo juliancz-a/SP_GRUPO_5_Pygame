@@ -21,7 +21,7 @@ class Play:
         #BOTONES
         self.comodin_button = Image(COMODIN, (1070, 220), (100,100), image_hover_path=COMODIN_HOVER,  press_sound=PRESS_COMODIN_SOUND)
 
-        self.join_button = Box((750,420), (80,50))
+        self.join_button = Box((770,400), (120,70))
         self.menu_button = PLAY_ASSETS[0]["box"]
         self.clear_button = PLAY_ASSETS[1]["box"]
         self.shuffle_button = PLAY_ASSETS[2]["box"]
@@ -81,7 +81,7 @@ class Play:
 
         if count_select_letters(self.cards_cfg["selected_letters"]) > 2:
             self.join_button.draw_box(self.surface, 10, 5)
-            self.join_button.draw_text(self.surface, "¡Unir!", "navy", FUENTE_1, 60, center=True)
+            self.join_button.draw_text(self.surface, "¡Unir!", "white", FUENTE_1, 60, "shadow", 1, "black", center=True)
         
         self.timer.draw_text(self.surface, str(tiempo_restante), "white", FUENTE_4, font_size=275, center=True,outline="shadow", outline_thickness=2)
         self.score_text.draw_text(self.surface, f"Puntaje: {str(self.score)}", "darkslateblue", FUENTE_4, font_size=125, center=True,outline="shadow", outline_thickness=2)

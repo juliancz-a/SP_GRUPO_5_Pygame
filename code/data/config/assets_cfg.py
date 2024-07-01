@@ -40,7 +40,7 @@ MENU_ASSETS = [play_button, help_button, quit_button, menu_title]
 
 
 # PLAY WINDOW ASSETS
-join_button = {"box": Box((750,420), (80,50)),
+join_button = {"box": Box((750,390), (160,70)),
                "colors": ["mediumpurple4", "mediumpurple3", "mediumpurple3"],
                "config" : [5, 5],
                "text" : ["¡Unir!", "white", FUENTE_1, 40, True]
@@ -53,14 +53,14 @@ back_button = {"box": Box((1160,650), (100,50)),
               }
 
 clear_button = {
-              "box": Box((200, 150), (80, 50)),
+              "box": Box((160, 110), (120, 70)),
               "colors": ["mediumpurple4", "mediumpurple3", "mediumpurple3"],
               "config": [5, 5],
               "text": ["CLEAR", "white", FUENTE_1, 50, "shadow", 1, "black", True]
               }
 
 shuffle_buton = {
-              "box": Box((200, 250), (80, 50)),
+              "box": Box((160, 210), (120, 70)),
               "colors": ["mediumpurple4", "mediumpurple3", "mediumpurple3"],
               "config": [5, 5],
               "text": ["SHUFFLE", "white", FUENTE_1, 50, "shadow", 1, "black", True],
