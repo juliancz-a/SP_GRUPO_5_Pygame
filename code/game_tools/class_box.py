@@ -52,40 +52,28 @@ class Box:
 
         center = self.rectangulo.center
 
-        self.presionado = handle_mouse_event(self.rectangulo, event)
-        self.hover = handle_mouse_event(self.rectangulo, event)
-       
-        if event.type == pygame.MOUSEBUTTONDOWN:  
+        estado = handle_mouse_event(self.rectangulo, event)
+        
+        if estado["presionado"] == True:
+            if self.sound != None:
+                sound = pygame.mixer.Sound(self.sound)
+                pygame.mixer.Sound.play(sound)
+                pygame.mixer.Sound.set_volume(sound, 0.10)
 
-            if self.rectangulo.collidepoint(event.pos):
-                self.presionado = True
-
-                if self.sound != None:
-                    sound = pygame.mixer.Sound(self.sound)
-                    pygame.mixer.Sound.play(sound)
-                    pygame.mixer.Sound.set_volume(sound, 0.10)
-
-                self.rectangulo.width = self.reduccion[0]
-                self.rectangulo.height = self.reduccion[1]
-                self.rectangulo.center = center
-                
-
-        elif event.type == pygame.MOUSEBUTTONUP:
-
-
-            if self.rectangulo.collidepoint(event.pos):
-                self.presionado = False
+            self.rectangulo.size = (self.reduccion[0], self.reduccion[1])
+            self.rectangulo.center = center
+        
+        elif estado["presionado"] == False:
+            if estado["action"]:
                 action = True
-                
-            self.rectangulo.width = self.dimensiones[0]
-            self.rectangulo.height = self.dimensiones[1]
+
+            self.rectangulo.size = (self.dimensiones[0], self.dimensiones[1])
             self.rectangulo.center = center
 
-        elif event.type == pygame.MOUSEMOTION:
-            if self.rectangulo.collidepoint(event.pos):
-                self.hover = True
-            else:
-                self.hover = False
+        if estado["hover"] == True:
+            self.hover = True
+        else:
+            self.hover = False
 
         return action
     
