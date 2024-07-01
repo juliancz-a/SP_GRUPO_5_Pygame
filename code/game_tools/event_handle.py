@@ -43,3 +43,16 @@ def handle_mouse_event (rectangulo, event) -> dict:
                         estado["hover"] = True
                     
     return estado
+
+def handle_input_event (write, event, text, max_len):
+
+    if event.type == pygame.KEYDOWN:
+        if write:
+            if event.key == pygame.K_BACKSPACE:
+                text = text[:-1]
+            elif event.key == pygame.K_ESCAPE:
+                text = ""
+            elif max_len > len(text) and event.key != pygame.K_RETURN:
+                text += event.unicode
+    
+    return text

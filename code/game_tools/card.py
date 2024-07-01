@@ -63,7 +63,7 @@ def set_cards(coords, cards_counter, letras = None) -> list:
 def draw_cards(surface:pygame.Surface, card_list:list[Card], transparency = 255):
 
     for i in range (len(card_list)):
-        card_list[i].draw_card(surface, COLOR_LETRAS, FUENTE_2, 86, transparency)
+        card_list[i].draw_card(surface, "white", FUENTE_2, 86, transparency)
 
 
 def set_cards_interaction(event, card_list:list[Card], selected_letters:list, position_list, free_spaces):

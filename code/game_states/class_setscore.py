@@ -5,6 +5,7 @@ from data.config.assets_cfg import *
 
 from data.config.config import *
 from game_tools.draw_functions import *
+from game_tools.event_handle import *
 
 class SetScore:
     def __init__(self, surface:pygame.Surface, match, score, lista_jugadores) -> None:
@@ -67,15 +68,9 @@ class SetScore:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.input_box.rectangulo.collidepoint(event.pos):
                 self.activo = not self.activo
+                
+        self.nickname_text = handle_input_event(self.activo, event, self.nickname_text, 10)
 
-        elif event.type == pygame.KEYDOWN:
-            if self.activo:
-                if event.key == pygame.K_BACKSPACE:
-                    self.nickname_text = self.nickname_text[:-1]
-                elif event.key == pygame.K_ESCAPE:
-                    self.nickname_text = ""
-                elif 10 > len(self.nickname_text) and event.key != pygame.K_RETURN:
-                    self.nickname_text += event.unicode
         if len(self.nickname_text) > 3:
             submit = self.submit_button.interaction(event)
         

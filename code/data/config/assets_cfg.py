@@ -91,13 +91,15 @@ input_box = {
             "colors" : ["white", "red", "grey1"],
             "config" : [5, 5],
             "text" : [],
+            "interaction" : True
                 }
 
 game_over_title = {
             "box" :  Box((230, 20), (400,150)),
             "colors" : [],
             "config" : [],
-            "text" : ["Registra tu nombre", "white", FUENTE_1, 60, "border", 2, "grey55", True]
+            "text" : ["Registra tu nombre", "white", FUENTE_1, 60, "border", 2, "grey55", True],
+            "interaction" : False
     
 }
 REGISTER_SCORE_ASSETS = [input_box, game_over_title]
