@@ -27,6 +27,7 @@ class Game:
         self.match = 0
         self.score = 0
         self.comodin = 1
+        self.volume = 1
 
         self.quit = False
 
