@@ -17,7 +17,6 @@ class Box:
         self.color_hover = None
 
         #Animación
-        self.presionado = False
         self.reduccion = (dimensiones[0] * 0.95, dimensiones[1] * 0.95)
 
         #Hover
@@ -25,8 +24,6 @@ class Box:
         
         #Sonido
         self.sound = press_sound
-
-        self.activo = False
 
     def draw_box (self, surface, border_radius = -1, border_width = 0):
 
@@ -80,7 +77,6 @@ class Box:
     def draw_text(self, surface: pygame.Surface , text: str, text_color: str| tuple, font:str, font_size:int = 20, 
                 outline = None, outline_thickness = 1, outline_color = "black",  center = False):
 
-        x,y = self.rectangulo.x, self.rectangulo.y
 
         font_size = font_size * self.rectangulo.width // 300
 
@@ -94,9 +90,9 @@ class Box:
         text_rect = text_surface.get_rect()
         
         if center:
-            text_rect.center = (x + width_center, y + height_center - 3)
+            text_rect.center = (self.rectangulo.x + width_center, self.rectangulo.y + height_center - 3)
         else:
-            text_rect.topleft = x,y
+            text_rect.topleft = self.rectangulo.x, self.rectangulo.y
     
 
         match outline:

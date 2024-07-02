@@ -6,7 +6,7 @@ from constantes import *
 
 def draw_words (surface:pygame.Surface, matrix:list, words_founded:list, comodin, random_letter):
     
-    x = 55
+    x = 60
     
     for i in range (len(matrix)):
         printed = 0

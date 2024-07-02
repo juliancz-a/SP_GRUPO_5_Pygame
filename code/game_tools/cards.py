@@ -30,7 +30,7 @@ def draw_cards(surface:pygame.Surface, card_list:list[Card], transparency = 255)
         card_list[i].draw_card(surface, "white", FUENTE_2, 86, transparency)
 
 
-def set_cards_interaction(event, card_list:list[Card], selected_letters:list, position_list, free_spaces):
+def set_cards_interaction(event, card_list:list[Card], selected_letters:list, posiciones_libres, pos_ocupadas):
     occurrences_list = []
     for card in card_list:
         occurrences_list.append(card.letter)
@@ -41,8 +41,8 @@ def set_cards_interaction(event, card_list:list[Card], selected_letters:list, po
 
             if selected_letters.count(card.letter) < occurrences and not card.append:
 
-                pos = position_list[0]
-                position_list.pop(0)
+                pos = posiciones_libres[0]
+                posiciones_libres.pop(0)
             
                 selected_letters[pos] = card.letter
                 
@@ -50,27 +50,27 @@ def set_cards_interaction(event, card_list:list[Card], selected_letters:list, po
                
                 card.card_box.rectangulo.x, card.card_box.rectangulo.y = card_list[pos].card_box.original_rectangulo.x, 250
                 
-                free_spaces.append(card.card_pos)
+                pos_ocupadas.append(card.card_pos)
                 card.card_pos = pos
                 
             elif card.append:
-                return_card(card_list, card, selected_letters, free_spaces, position_list)
+                return_card(card_list, card, selected_letters, pos_ocupadas, posiciones_libres)
 
 
-def reset_pos (card_list:list[Box], selected_letters:list, free_spaces, position_list:list):
+def reset_pos (card_list:list[Box], selected_letters:list, pos_ocupadas, posiciones_libres:list):
     for card in card_list:
         if card.append:
-            return_card(card_list, card, selected_letters, free_spaces, position_list)
+            return_card(card_list, card, selected_letters, pos_ocupadas, posiciones_libres)
 
 
-def return_card (card_list:list[Box], card, selected_letters:list, free_spaces, position_list:list):
+def return_card (card_list:list[Box], card, selected_letters:list, pos_ocupadas, posiciones_libres:list):
 
     selected_letters[card.card_pos] = ""
-    position_list.append(card.card_pos)
-    ordenar_elementos(position_list, 1)
+    posiciones_libres.append(card.card_pos)
+    ordenar_elementos(posiciones_libres, 1)
 
-    card.card_pos = free_spaces[len(free_spaces) - 1]
-    free_spaces.remove(card.card_pos)
+    card.card_pos = pos_ocupadas[len(pos_ocupadas) - 1]
+    pos_ocupadas.remove(card.card_pos)
     
     card.append = False
 

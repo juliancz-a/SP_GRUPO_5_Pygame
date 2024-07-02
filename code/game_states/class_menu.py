@@ -4,10 +4,11 @@ from constantes import *
 from game_tools.scoreboard import Scoreboard
 from game_tools.draw_functions import *
 from game_tools.event_handle import *
+from game_tools.extra_functions import *
 
 class Menu:
 
-    def __init__(self, surface:pygame.Surface, lista_jugadores, menu_assets) -> None:
+    def __init__(self, surface:pygame.Surface, lista_jugadores, menu_assets, volume) -> None:
 
         self.surface = surface
 
@@ -15,7 +16,7 @@ class Menu:
         self.assets = self.init_assets()
         
         self.lista_jugadores = lista_jugadores
-        self.volume = True
+        self.volume = volume
 
         self.option = None
 
@@ -34,6 +35,7 @@ class Menu:
         return assets
     
     def render(self):
+ 
 
         images = [self.assets["background"], self.assets["chains"], self.assets["volume_button"]]
         box_list = [self.assets["play_button"], self.assets["help_button"], self.assets["exit_button"], self.assets["title"]]
@@ -43,17 +45,16 @@ class Menu:
         self.surface.fill("white")
         
         draw_assets(self.surface, box_list , images, self.assets_config)
-        Scoreboard(FUENTE_1, self.surface, self.lista_jugadores).draw()
+        Scoreboard(FUENTE_1, self.surface, self.lista_jugadores, (850,200)).draw()
 
         pygame.display.update()
   
     def handle_event (self, event):
-        volume_img = [{"img" : VOLUME_BUTTON}, {"img" : VOLUME_MUTE_BUTTON}]
+      
         
         if self.assets["volume_button"].image_box.interaction(event):
             self.volume = not self.volume
-            self.assets["volume_button"] = Image(change_volume(self.volume, volume_img), (10,10), (100,100))
-       
+    
         self.option = button_click_event(event, self.assets_config)
 
     def update (self):
@@ -67,14 +68,24 @@ class Menu:
                 selection = "help"
             case 2:
                 selection = "quit"
-            
+    
         return selection
+
+    def update_audio(self):
+
+        if self.volume:
+            pygame.mixer.music.set_volume(0.1)
+            self.assets["volume_button"] = Image(VOLUME_BUTTON, (10, 10), (60,60))       
+        else:
+            pygame.mixer.music.set_volume(0)
+            self.assets["volume_button"] = Image(  VOLUME_MUTE_BUTTON, (10, 10), (60,60))     
+
+
+        return self.volume    
     
     def set_music(self):
-
-        pygame.mixer.music.load(MENU_MUSIC)
-        pygame.mixer.music.set_volume(0.1) 
-        pygame.mixer.music.play(-1)
         
+        pygame.mixer.music.load(MENU_MUSIC)
+        pygame.mixer.music.play(-1)
         
 

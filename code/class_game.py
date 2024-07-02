@@ -18,16 +18,17 @@ class Game:
 
         pygame.init()
 
+        self.match = 0
+        self.score = 0
+        self.volume = True
+        self.comodin = 1
+
         self.surface = pygame.display.set_mode((size))
         self.game_assets = game_assets
         self.lista_jugadores = lista_jugadores
         self.lista_palabras = lista_palabras
         
-        self.window = Menu(self.surface, self.lista_jugadores, self.game_assets["menu"])
-
-        self.match = 0
-        self.score = 0
-        self.comodin = 1
+        self.window = Menu(self.surface, self.lista_jugadores, self.game_assets["menu"], self.volume)
 
         self.quit = False
 
@@ -46,8 +47,10 @@ class Game:
     def run(self):
         
         while self.quit is False:
+
             self.get_events()
             self.window.render()
+            self.volume = self.window.update_audio()
 
             game_state = self.window.update()
             if game_state == "quit":
@@ -63,14 +66,14 @@ class Game:
                 self.match = 0
                 self.score = 0
 
-                self.window = Menu(self.surface, self.lista_jugadores, self.game_assets["menu"])
+                self.window = Menu(self.surface, self.lista_jugadores, self.game_assets["menu"], self.volume)
 
             case "help":
-                self.window = Help(self.surface,  self.game_assets["help"])
+                self.window = Help(self.surface,  self.game_assets["help"], self.volume)
 
             case "play":
                 datos_palabras = set_combination(self.lista_palabras)
-                self.window = Play(self.surface, self.match, datos_palabras , self.score, self.comodin,  self.game_assets["play"])
+                self.window = Play(self.surface, self.match, datos_palabras , self.score, self.comodin,  self.game_assets["play"], self.volume)
 
             case "finish_match":
                 
@@ -78,8 +81,7 @@ class Game:
                 self.match = data_updated[0] 
                 self.score = data_updated[1]
                 
-                self.window = FinishMatch(self.surface, self.match, self.score, self.game_assets["finish_match"])
+                self.window = FinishMatch(self.surface, self.match, self.score, self.game_assets["finish_match"], self.volume)
 
             case "setscore":
-                self.window = SetScore(self.surface, self.match , self.score, self.lista_jugadores, self.game_assets["set_score"])
-                
+                self.window = SetScore(self.surface, self.match , self.score, self.lista_jugadores, self.game_assets["set_score"], self.volume)
