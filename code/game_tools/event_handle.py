@@ -56,15 +56,15 @@ def handle_input_event (write, event, text, max_len):
     
     return text
 
-def change_volume (volume, volume_button, img)  -> bool:
+def change_volume (volume, volume_img)  -> bool:
     match volume:
         case True:
             pygame.mixer.music.set_volume(0.1)
             
-            volume_img = (img[0]["img"])
+            volume_img = (volume_img[0]["img"])
         case False:
             pygame.mixer.music.set_volume(0)
         
-            volume_img = (img[1]["img"])
+            volume_img = (volume_img[1]["img"])
     
     return volume_img

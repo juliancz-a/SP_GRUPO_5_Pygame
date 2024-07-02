@@ -7,6 +7,7 @@ from game_states.class_play import Play
 from game_states.class_finish_match import FinishMatch
 from game_states.class_setscore import SetScore
 from game_states.class_help import Help
+from game_tools.words import *
 
 import random 
 from data.config.config import *
@@ -27,7 +28,6 @@ class Game:
         self.match = 0
         self.score = 0
         self.comodin = 1
-        self.volume = 1
 
         self.quit = False
 
@@ -68,8 +68,9 @@ class Game:
             case "help":
                 self.window = Help(self.surface,  self.game_assets["help"])
 
-            case "play":   
-                self.window = Play(self.surface, self.match,  self.lista_palabras, self.score, self.comodin,  self.game_assets["play"])
+            case "play":
+                datos_palabras = set_combination(self.lista_palabras)
+                self.window = Play(self.surface, self.match, datos_palabras , self.score, self.comodin,  self.game_assets["play"])
 
             case "finish_match":
                 

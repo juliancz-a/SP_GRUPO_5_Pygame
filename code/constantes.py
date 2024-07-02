@@ -59,7 +59,7 @@ MENU_MUSIC = r"code\data\sound\musica_menu.mp3"
 PLAY_MUSIC = r"code\data\sound\play_music.wav"
 CARTAS_SOUND = r"code\data\sound\card_click.wav"
 
-TIEMPO_LIMITE = 2
+TIEMPO_LIMITE = 20
 
 #CONFIG PATH
 SCOREBOARD_PATH = r"code\data\config\scoreboard.csv"

@@ -1,8 +1,8 @@
 from constantes import *
 from game_tools.class_box import Box
+from game_tools.class_image import Image
 
-# MENU WINDOW ASSETS
-
+# MENU SCENE ASSETS
 
 quit_button = {
               "box": Box((100,540), (210,95), press_sound=PRESS_SOUND),
@@ -28,6 +28,11 @@ help_button = {
               "interaction" : True
               }
 
+menu_volume_button = {
+                "image" : Image(VOLUME_BUTTON, (10, 10), (100,100)),
+                "interaction" : False
+}
+
 menu_title = {
               "box": Box((200,100), (400,50)),
               "colors" : [],
@@ -36,15 +41,18 @@ menu_title = {
               "interaction" : False
               }
 
-MENU_ASSETS = [play_button, help_button, quit_button, menu_title]
+menu_background = {
+                "image" : Image(MENU_BACKGROUND, (0,0), (1280,720)),
+                "interaction" : False
+                }
+menu_chains = {
+                "image" : Image(CHAINS, (130, 320), (150, 270)),
+                "interaction" : False}
+
+MENU_ASSETS = [play_button, help_button, quit_button, menu_title, menu_volume_button, menu_background, menu_chains]
 
 
 # PLAY WINDOW ASSETS
-join_button = {"box": Box((750,390), (160,70)),
-               "colors": ["mediumpurple4", "mediumpurple3", "mediumpurple3"],
-               "config" : [5, 5],
-               "text" : ["¡Unir!", "white", FUENTE_1, 40, True]
-               }
 
 back_button = {"box": Box((1160,650), (100,50)),
               "colors": ["mediumpurple4", "mediumpurple3", "mediumpurple3"],
@@ -66,9 +74,33 @@ shuffle_buton = {
               "text": ["SHUFFLE", "white", FUENTE_1, 50, "shadow", 1, "black", True],
               }
 
+join_button = {"box": Box((750,390), (160,70)),
+               "colors": ["mediumpurple4", "mediumpurple3", "mediumpurple3"],
+               "config" : [5, 5],
+               "text" : ["¡Unir!", "white", FUENTE_1, 40, True]
+               }
+
+timer = {"box": Box((618, 420), (50,50)),
+        "colors": [],
+        "config" : [],
+        "text" : []
+        }
+
+score_text = {"box": Box((400, 410), (100,50)),
+            "colors": [],
+            "config" : [],
+            "text" : []
+            }
+
+comodin_button = {"image" :  Image(COMODIN, (1070, 220), (100,100), image_hover_path=COMODIN_HOVER,  press_sound=PRESS_COMODIN_SOUND)}
+
+volume_button = {"image" : Image(VOLUME_BUTTON, (10, 10), (100,100))}
+
+background = {"image" : Image(PLAY_BACKGROUND_1, (0,0), (1280,720))}
 
 
-PLAY_ASSETS = [back_button, clear_button, shuffle_buton]
+
+PLAY_ASSETS = [back_button, clear_button, shuffle_buton, join_button, timer, score_text, comodin_button, volume_button, background]
 
 continue_button = {
                   "box": Box((640, 360), (400,150)),

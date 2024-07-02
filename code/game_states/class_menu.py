@@ -10,33 +10,39 @@ class Menu:
     def __init__(self, surface:pygame.Surface, lista_jugadores, menu_assets) -> None:
 
         self.surface = surface
-        self.menu_assets = menu_assets
+
+        self.assets_config = menu_assets
+        self.assets = self.init_assets()
+        
         self.lista_jugadores = lista_jugadores
         self.volume = True
-
-        self.background = Image(MENU_BACKGROUND, (0,0), (1280,720))
-        self.chains = Image(CHAINS, (130, 320), (150, 270))
-        self.volume_button = Image(r"code\data\img\volume_button.png", (10, 10), (100,100))
-
-        self.play_button = self.menu_assets[0]["box"]
-        self.options_button = self.menu_assets[1]["box"]
-        self.exit_button = self.menu_assets[2]["box"]
-        self.title = self.menu_assets[3]["box"]
-
-        self.box_list = [self.play_button, self.options_button, self.exit_button, self.title]
-
 
         self.option = None
 
         self.music = self.set_music()
     
+    def init_assets (self):
+        assets = { "play_button" : self.assets_config[0]["box"],
+                "help_button" : self.assets_config[1]["box"],
+                "exit_button" : self.assets_config[2]["box"],
+                "title" : self.assets_config[3]["box"],
+                "volume_button" : self.assets_config[4]["image"],
+                "background" : self.assets_config[5]["image"],
+                "chains" : self.assets_config[6]["image"]
+                }
+    
+        return assets
+    
     def render(self):
-        images = [self.background, self.chains, self.volume_button]
-        set_buttons_colors(self.box_list, self.menu_assets)
+
+        images = [self.assets["background"], self.assets["chains"], self.assets["volume_button"]]
+        box_list = [self.assets["play_button"], self.assets["help_button"], self.assets["exit_button"], self.assets["title"]]
+
+        set_buttons_colors(box_list, self.assets_config)
             
         self.surface.fill("white")
         
-        draw_assets(self.surface, self.box_list, images, self.menu_assets)
+        draw_assets(self.surface, box_list , images, self.assets_config)
         Scoreboard(FUENTE_1, self.surface, self.lista_jugadores).draw()
 
         pygame.display.update()
@@ -44,11 +50,11 @@ class Menu:
     def handle_event (self, event):
         volume_img = [{"img" : VOLUME_BUTTON}, {"img" : VOLUME_MUTE_BUTTON}]
         
-        if self.volume_button.image_box.interaction(event):
+        if self.assets["volume_button"].image_box.interaction(event):
             self.volume = not self.volume
-            self.volume_button = Image(change_volume(self.volume, self.volume_button, volume_img), (10,10), (100,100))
+            self.assets["volume_button"] = Image(change_volume(self.volume, volume_img), (10,10), (100,100))
        
-        self.option = button_click_event(event, self.menu_assets)
+        self.option = button_click_event(event, self.assets_config)
 
     def update (self):
 
