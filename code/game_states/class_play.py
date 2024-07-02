@@ -65,10 +65,9 @@ class Play:
 
     def render(self):
         images_list = [self.assets["background"], self.assets["comodin_button"], self.assets["volume_button"]]
-        button_list = [self.assets["menu_button"], self.assets["clear_button"], self.assets["shuffle_button"]]
+        button_list = [self.assets["menu_button"], self.assets["clear_button"], self.assets["shuffle_button"], self.assets["join_button"]]
 
         set_buttons_colors(button_list, self.assets_cfg)
-        self.assets["join_button"].set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
 
         tiempo_transcurrido = (pygame.time.get_ticks() - self.initial_time) // 1000
         tiempo_restante = TIEMPO_LIMITE - tiempo_transcurrido

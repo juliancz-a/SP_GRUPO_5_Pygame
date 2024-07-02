@@ -10,7 +10,8 @@ from game_tools.extra_functions import *
 class SetScore:
     def __init__(self, surface:pygame.Surface, match, score, lista_jugadores, setscore_assets) -> None:
         self.surface = surface
-        self.setscore_assets = setscore_assets
+        self.assets_config = setscore_assets
+        self.assets = self.init_assets()
 
         self.lista_jugadores = lista_jugadores
         self.match = match
@@ -18,11 +19,6 @@ class SetScore:
         self.score = score
         self.score_promedio = operacion(score, match, lambda x, y: x // y)
         self.score_text = (f"Tu puntaje total es: {score}\nLa cantidad de partidas jugadas es: {match}\nTu puntaje final es de: {self.score_promedio}")
-
-        self.input_box = self.setscore_assets[0]["box"]
-        self.title = self.setscore_assets[1]["box"]
-
-        self.box_list = [self.input_box, self.title]
 
         self.nickname =  Box((self.input_box.rectangulo.x + 5, self.input_box.rectangulo.y + 2), (200,20))
         self.nickname_text = ""
@@ -37,6 +33,17 @@ class SetScore:
         self.option = None
         self.activo = False
 
+    def init_assets(self):
+        assets = {
+            "input_box" : self.assets_config[0]["box"],
+            "game_over_title" : self.assets_config[1]["box"],
+            "submit_button" : self.assets_config[2]["box"],
+            "nickname" : self.assets_config[3]["box"],
+            "background" : self.assets_config[4]["image"]
+        }
+
+        return assets
+    
     def render(self):
 
         set_buttons_colors(self.box_list, self.setscore_assets)

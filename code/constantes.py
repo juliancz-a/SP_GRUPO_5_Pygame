@@ -39,27 +39,27 @@ CARTAS = r"code\data\img\card_example.png"
 COMODIN = r"code\data\img\spell_comodin.png"
 COMODIN_HOVER = r"code\data\img\spell_comodin_hover.png"
 CHAINS = r"code\data\img\chains2.png"
+VOLUME_BUTTON = r"code\data\img\volume_button.png"
+VOLUME_MUTE_BUTTON = r"code\data\img\mute_button.png"
 
 MENU_BACKGROUND = r"code\data\img\House 2.png"
-
 PLAY_BACKGROUND_1 = r"code\data\img\play_bg.png"
 PLAY_BACKGROUND_2 = r"code\data\img\play_bg2.png"
 PLAY_BACKGROUND_3 = r"code\data\img\play_bg3.png"
-
 HELP_BACKGROUND = r"code\data\img\Grimoire_blur.jpg"
-
-FINISH_MATCH_BACKGROUND = r"code\data\sound\finishmatch_music.mp3"
+FINISH_MATCH_BACKGROUND = r"code\data\img\Runes 3.png"
 
 # SONIDO
-VOLUME_BUTTON = r"code\data\img\volume_button.png"
-VOLUME_MUTE_BUTTON = r"code\data\img\mute_button.png"
 PRESS_SOUND = r"code\data\sound\press_button.wav"
 PRESS_COMODIN_SOUND = r"code\data\sound\comodin_sound.mp3"
-MENU_MUSIC = r"code\data\sound\musica_menu.mp3"
-PLAY_MUSIC = r"code\data\sound\play_music.wav"
 CARTAS_SOUND = r"code\data\sound\card_click.wav"
 
-TIEMPO_LIMITE = 20
+MENU_MUSIC = r"code\data\sound\musica_menu.mp3"
+PLAY_MUSIC = r"code\data\sound\play_music.wav"
+FINISH_MATCH_MUSIC = r"code\data\sound\finishmatch_music.mp3"
+
+#MAX_TIME_MATCH
+TIEMPO_LIMITE = 1
 
 #CONFIG PATH
 SCOREBOARD_PATH = r"code\data\config\scoreboard.csv"
