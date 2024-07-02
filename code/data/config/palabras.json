@@ -56,15 +56,15 @@
     ],
     "C,A,E,R,T,O": 
     [
-        "tocare", "tacero", "rector", "cortar", "torea", "orca",
+        "tocare", "tacero", "rector", "torea", "orca",
         "recta", "recto", "cetro", "corte", "corta", "actor",
         "toca", "taco", "rato", "roca", "crea", "cero", "arte",
         "acre", "caro", "ora", "era", "oca", "caer", "careto",
         "arco", "tero", "toc", "tac", "acero", "roce", "trace",
         "acto", "cera", "ocre", "terco", "terca", "recta", "acote",
-        "cateo", "toce", "creo", "ateo", "rota", "topa", "top",
-        "tapo", "tocar", "eco", "tace", "cera", "roe", "aro", "reto",
-        "reo", "rea", "retoca", "reta", "trae"
+        "cateo", "toce", "creo", "ateo", "rota", "tocar", "eco",
+        "tace", "cera", "roe", "aro", "reto", "reo", "rea", "retoca",
+        "reta", "trae"
     ],
     "R,L,T,E,O,M": 
     [
@@ -87,8 +87,8 @@
         "ostra", "otras", "ramo", "ratos", "rato", "tarso",
         "rotas", "maso", "mar", "amor", "tomas", "mas",
         "osar", "aros", "amo", "rota", "toma", "armo", "mato",
-        "osta", "mora", "mota", "tamo", "tamos", "tomar", "ora",
-        "aso", "tos", "rosa", "tosa", "aro", "ara", "aras"
+        "osta", "mora", "mota", "tamo", "ora", "aso", "tos",
+        "rosa", "tosa", "aro", "ara", "aras"
     ],
     "C,I,R,O,T,S": 
     [
@@ -133,7 +133,7 @@
     ],
     "R,S,E,A,A,M":
     [
-        "amares", "amarse", "ameras", "armase", "asarme", "mareas", 
+        "amarse", "ameras", "armase", "asarme", "mareas", 
         "mearas", "mesara", "reamas", "remase", "areas", "armas", "amare", 
         "amase", "armes", "marea", "mares", "meara", "ramas", "ramea", 
         "resma", "remas", "asma", "mear", "meas", "mesa", "rama", "rema", 
