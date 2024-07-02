@@ -6,8 +6,9 @@ class Image:
     def __init__(self, image_path, coords, dimensiones, image_hover_path = None, press_sound = None) -> None:
 
         self.image_box = Box(coords, dimensiones, press_sound = press_sound)
+        self.image_path = image_path
         
-        self.image_surface = pygame.image.load(image_path)
+        self.image_surface = pygame.image.load(self.image_path)
         self.image_surface = pygame.transform.scale(self.image_surface, dimensiones)
 
         self.image_hover = None

@@ -1,40 +1,4 @@
-from game_tools.class_image import * 
-from game_tools.class_box import *
-import random
-
-class Card:
-
-    def __init__(self, dimensiones, coords, image_path, press_sound, card_pos, card_letter = None) -> None:
-
-
-        self.letter = card_letter
-        self.card_pos = card_pos
-        self.append = False
-
-        self.card_image = Image(image_path, coords, dimensiones, press_sound= press_sound)
-        self.card_box = self.card_image.image_box
-
-    def draw_card(self, surface:pygame.Surface, letter_color, font, font_size, transparency = 255):
-    
-        self.card_image.draw_image(surface, transparency)
-        self.card_box.draw_text(surface, self.letter, letter_color, font, font_size, outline="border", outline_thickness=2, center=True)
-    
-    # def move_card(self, destino, velocidad):
-    #     velocidad = 1
-    #     x = velocidad
-    #     y = velocidad
-
-    #     while self.card_box.rectangulo.y < destino[1]:
-    #         self.card_box.rectangulo.y += x
-    #     # else:
-    #     #     self.card_box.rectangulo.y = destino[1]
-            
-    #     while self.card_box.rectangulo.x < destino[0]:
-    #         self.card_box.rectangulo.x += y
-    #     # else:
-
-    #     #     self.card_box.rectangulo.y = destino[0
-
+from game_tools.class_card import *
 
 def set_cards(coords, cards_counter, letras = None) -> list:
     card_list = []
@@ -81,7 +45,7 @@ def set_cards_interaction(event, card_list:list[Card], selected_letters:list, po
                 position_list.pop(0)
             
                 selected_letters[pos] = card.letter
-                print(position_list)
+                
                 card.append = True
                
                 card.card_box.rectangulo.x, card.card_box.rectangulo.y = card_list[pos].card_box.original_rectangulo.x, 250
@@ -103,7 +67,7 @@ def return_card (card_list:list[Box], card, selected_letters:list, free_spaces, 
 
     selected_letters[card.card_pos] = ""
     position_list.append(card.card_pos)
-    position_list.sort()
+    ordenar_elementos(position_list, 1)
 
     card.card_pos = free_spaces[len(free_spaces) - 1]
     free_spaces.remove(card.card_pos)
@@ -137,12 +101,12 @@ def join_cards (selected_letters:list, words_founded:list, combinaciones):
 def shuffle (card_list):
     shuffle_card = []
     for card in card_list:
-        print(card.letter)
+        
         if card.append is False:
             shuffle_card.append(card.letter)
     for card in card_list:
         if card.append is False:
            
             card.letter = shuffle_card.pop(random.randint(0, len(shuffle_card) - 1))
-        print(card.letter)
+        
 

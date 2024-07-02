@@ -1,5 +1,6 @@
 from game_tools.class_box import *
 from constantes import *
+import random
 
 def ordenar_elementos (list:list[dict], orden:int, key = None):
 
@@ -39,3 +40,11 @@ def render_multi_line(surface, text, x, y, font_size, center_text = False):
     for i, line in enumerate(lines):
         box_line = Box((x, y + font_size // 3 * i), (50,50))
         box_line.draw_text(surface, line, "white", FUENTE_1, font_size, "shadow", 2, "black", center = center_text)
+
+def select_random_element(actual_element, lista_elementos) -> str | int:
+    
+    random_element = random.choice(lista_elementos)
+    while random_element == actual_element:
+        random_element = random.choice(lista_elementos)
+
+    return random_element

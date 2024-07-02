@@ -1,7 +1,6 @@
 import pygame
 from game_tools.class_box import Box
 from constantes import *
-from data.config.assets_cfg import * 
 
 from data.config.config import *
 from game_tools.draw_functions import *
@@ -9,20 +8,17 @@ from game_tools.event_handle import *
 from game_tools.extra_functions import *
 
 class SetScore:
-    def __init__(self, surface:pygame.Surface, match, score, lista_jugadores) -> None:
+    def __init__(self, surface:pygame.Surface, match, score, lista_jugadores, setscore_assets) -> None:
         self.surface = surface
+        self.assets_config = setscore_assets
+        self.assets = self.init_assets()
 
         self.lista_jugadores = lista_jugadores
         self.match = match
+
         self.score = score
         self.score_promedio = operacion(score, match, lambda x, y: x // y)
         self.score_text = (f"Tu puntaje total es: {score}\nLa cantidad de partidas jugadas es: {match}\nTu puntaje final es de: {self.score_promedio}")
-
-        self.input_box = REGISTER_SCORE_ASSETS[0]["box"]
-        self.title = REGISTER_SCORE_ASSETS[1]["box"]
-        self.cfg_list = REGISTER_SCORE_ASSETS
-
-        self.box_list = [self.input_box, self.title]
 
         self.nickname =  Box((self.input_box.rectangulo.x + 5, self.input_box.rectangulo.y + 2), (200,20))
         self.nickname_text = ""
@@ -37,16 +33,27 @@ class SetScore:
         self.option = None
         self.activo = False
 
+    def init_assets(self):
+        assets = {
+            "input_box" : self.assets_config[0]["box"],
+            "game_over_title" : self.assets_config[1]["box"],
+            "submit_button" : self.assets_config[2]["box"],
+            "nickname" : self.assets_config[3]["box"],
+            "background" : self.assets_config[4]["image"]
+        }
+
+        return assets
+    
     def render(self):
 
-        set_buttons_colors(self.box_list, self.cfg_list)
+        set_buttons_colors(self.box_list, self.setscore_assets)
         
         self.title.rectangulo.centerx = self.surface.get_width() // 2
        
         self.submit_button.set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
         self.surface.fill("black")
 
-        draw_assets(self.surface, self.box_list, self.image_list, self.cfg_list)
+        draw_assets(self.surface, self.box_list, self.image_list, self.setscore_assets)
 
         if len(self.nickname_text) > 3:
             self.submit_button.draw_box(self.surface, 5, 5)

@@ -2,9 +2,9 @@ import pygame
 from constantes import *
 from game_tools.class_box import Box
 from game_tools.class_image import Image
-from game_tools.card import *
+from game_tools.class_card import *
+from game_tools.cards import *
 
-from data.config.assets_cfg import * 
 from game_tools.draw_functions import *
 
 from data.config.config import *
@@ -14,41 +14,28 @@ import random
 
 
 class Play:
-    def __init__(self, surface:pygame.Surface, match, lista, score, comodin) -> None:
+    def __init__(self, surface:pygame.Surface, match, datos_palabras, score, comodin, play_assets) -> None:
 
         self.surface = surface
         self.match = match
-        #BOTONES
-        self.comodin_button = Image(COMODIN, (1070, 220), (100,100), image_hover_path=COMODIN_HOVER,  press_sound=PRESS_COMODIN_SOUND)
-
-        self.join_button = Box((770,400), (120,70))
-        self.menu_button = PLAY_ASSETS[0]["box"]
-        self.clear_button = PLAY_ASSETS[1]["box"]
-        self.shuffle_button = PLAY_ASSETS[2]["box"]
-
-        self.box_list = [PLAY_ASSETS[0]["box"], PLAY_ASSETS[1]["box"], PLAY_ASSETS[2]["box"]]
-        self.lista_cfg = PLAY_ASSETS
-        
-        #TEXTO
-        self.timer = Box((630, 410), (50,50)) 
         self.initial_time = pygame.time.get_ticks()
-
-        self.score = score
-        self.score_text = Box((400, 410), (100,50))
-    
         self.music = self.set_music()
-        #IMG
-        self.background = Image(PLAY_BACKGROUND_1, (0,0), (1280,720))
+        self.volume = True
 
-        self.images = [self.background, self.comodin_button]
+        #ASSETS
+        self.assets_cfg = play_assets
+        self.assets = self.init_assets()
+    
+        self.score = score
 
-        #CARDS
-        datos_palabras = set_combination(lista)
+        self.background_list = [PLAY_BACKGROUND_1, PLAY_BACKGROUND_2, PLAY_BACKGROUND_3]  
+
+        #CARDS/WORDS SETUP
         self.combinaciones = datos_palabras[1]
         self.letras = datos_palabras[0]
         self.matriz_combinaciones = normalize_words(self.combinaciones)
 
-        self.cards_cfg = {"cards_quantity" : 6,
+        self.game_cfg = {"cards_quantity" : 6,
                           "card_list" : set_cards((self.surface.get_width(),100), 6, self.letras),
                           "empty_card_list" : set_cards((self.surface.get_width(), 250), 6),
                           "selected_letters" : ["", "", "", "", "", ""],
@@ -58,13 +45,29 @@ class Play:
 
         self.comodin = comodin
         self.random_letter = None
-
         self.option = None
 
+    def init_assets(self):
+
+        assets = {
+                "menu_button" : self.assets_cfg[0]["box"],
+                "clear_button" : self.assets_cfg[1]["box"],
+                "shuffle_button" : self.assets_cfg[2]["box"],
+                "join_button" : self.assets_cfg[3]["box"],
+                "timer" : self.assets_cfg[4]["box"],
+                "score_text" : self.assets_cfg[5]["box"],
+                "comodin_button" : self.assets_cfg[6]["image"],
+                "volume_button" : self.assets_cfg[7]["image"],
+                "background" : self.assets_cfg[8]["image"]
+                }
+        
+        return assets
+
     def render(self):
-    
-        set_buttons_colors(self.box_list, self.lista_cfg)
-        self.join_button.set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
+        images_list = [self.assets["background"], self.assets["comodin_button"], self.assets["volume_button"]]
+        button_list = [self.assets["menu_button"], self.assets["clear_button"], self.assets["shuffle_button"], self.assets["join_button"]]
+
+        set_buttons_colors(button_list, self.assets_cfg)
 
         tiempo_transcurrido = (pygame.time.get_ticks() - self.initial_time) // 1000
         tiempo_restante = TIEMPO_LIMITE - tiempo_transcurrido
@@ -74,58 +77,64 @@ class Play:
 
         self.surface.fill("black")
        
-        draw_assets(self.surface, self.box_list, self.images, self.lista_cfg)
+        draw_assets(self.surface, button_list, images_list, self.assets_cfg)
 
-        draw_cards(self.surface, self.cards_cfg["empty_card_list"], transparency=155)
-        draw_cards(self.surface, self.cards_cfg["card_list"])
+        draw_cards(self.surface, self.game_cfg["empty_card_list"], transparency=155)
+        draw_cards(self.surface, self.game_cfg["card_list"])
 
-        if count_select_letters(self.cards_cfg["selected_letters"]) > 2:
-            self.join_button.draw_box(self.surface, 10, 5)
-            self.join_button.draw_text(self.surface, "¡Unir!", "white", FUENTE_1, 60, "shadow", 1, "black", center=True)
+        if count_select_letters(self.game_cfg["selected_letters"]) > 2:
+            self.assets["join_button"].draw_box(self.surface, 10, 5)
+            self.assets["join_button"].draw_text(self.surface, "¡Unir!", "white", FUENTE_1, 60, "shadow", 1, "black", center=True)
         
-        self.timer.draw_text(self.surface, str(tiempo_restante), "white", FUENTE_4, font_size=275, center=True,outline="shadow", outline_thickness=2)
-        self.score_text.draw_text(self.surface, f"Puntaje: {str(self.score)}", "darkslateblue", FUENTE_4, font_size=125, center=True,outline="shadow", outline_thickness=2)
+        self.assets["timer"].draw_text(self.surface, str(tiempo_restante), "white", FUENTE_4, font_size=275, center=True,outline="shadow", outline_thickness=2)
+        self.assets["score_text"].draw_text(self.surface, f"Puntaje: {str(self.score)}", "darkslateblue", FUENTE_4, font_size=125, center=True,outline="shadow", outline_thickness=2)
 
-        draw_words(self.surface, self.matriz_combinaciones, self.cards_cfg["founded_words"], self.comodin, self.random_letter)
+        draw_words(self.surface, self.matriz_combinaciones, self.game_cfg["founded_words"], self.comodin, self.random_letter)
 
         pygame.display.update()
 
     def handle_event (self, event):
 
         score = 0
-        join = False
-        menu = False
+        volume_img = [{"img" : VOLUME_BUTTON}, {"img" : VOLUME_MUTE_BUTTON}]
 
         JOIN_CARDS = pygame.USEREVENT + 1
+        pygame.time.set_timer(pygame.USEREVENT + 2, 25000)
 
         if event.type == JOIN_CARDS:
-            word = join_cards(self.cards_cfg["selected_letters"], self.cards_cfg["founded_words"], self.combinaciones)
+            word = join_cards(self.game_cfg["selected_letters"], self.game_cfg["founded_words"], self.combinaciones)
             if word != False:
-                self.cards_cfg["founded_words"].append(word)
-                reset_pos(self.cards_cfg["card_list"], self.cards_cfg["selected_letters"], self.cards_cfg["pos_ocupadas"], self.cards_cfg["pos_libres"])
+                self.game_cfg["founded_words"].append(word)
+                reset_pos(self.game_cfg["card_list"], self.game_cfg["selected_letters"], self.game_cfg["pos_ocupadas"], self.game_cfg["pos_libres"])
                 self.score += sum_score(score, word)
+        
+        elif event.type == pygame.USEREVENT + 2:
+            self.assets["background"] = Image(select_random_element(self.assets["background"].image_path, self.background_list), (0,0), (1280,720))
 
-        elif count_select_letters(self.cards_cfg["selected_letters"]) > 2:
-            join = self.join_button.interaction(event)
-            if join:
+        elif count_select_letters(self.game_cfg["selected_letters"]) > 2:
+            if self.assets["join_button"].interaction(event):
                 pygame.event.post(pygame.event.Event(JOIN_CARDS))
+        
+        elif self.assets["volume_button"].image_box.interaction(event):
+            self.volume = not self.volume
+            self.assets["volume_button"] = Image(change_volume(self.volume, volume_img), (10,10), (100,100))
 
-        menu = self.menu_button.interaction(event)
-        if menu:
+        elif self.assets["menu_button"].interaction(event):
             self.option = 0
-        set_cards_interaction(event, self.cards_cfg["card_list"], self.cards_cfg["selected_letters"], self.cards_cfg["pos_libres"], self.cards_cfg["pos_ocupadas"])
+
+        set_cards_interaction(event, self.game_cfg["card_list"], self.game_cfg["selected_letters"], self.game_cfg["pos_libres"], self.game_cfg["pos_ocupadas"])
         if self.comodin == 1:
-            action = self.comodin_button.image_box.interaction(event)
+            action = self.assets["comodin_button"].image_box.interaction(event)
             
             if action:
                 self.comodin = 0
                 self.random_letter = select_random_letter(self.combinaciones)
 
-        if self.clear_button.interaction(event):
-            reset_pos(self.cards_cfg["card_list"], self.cards_cfg["selected_letters"], self.cards_cfg["pos_ocupadas"], self.cards_cfg["pos_libres"])
+        if self.assets["clear_button"].interaction(event):
+            reset_pos(self.game_cfg["card_list"], self.game_cfg["selected_letters"], self.game_cfg["pos_ocupadas"], self.game_cfg["pos_libres"])
         
-        if self.shuffle_button.interaction(event):
-            shuffle(self.cards_cfg["card_list"])
+        if self.assets["shuffle_button"].interaction(event):
+            shuffle(self.game_cfg["card_list"])
 
     def update(self):
        

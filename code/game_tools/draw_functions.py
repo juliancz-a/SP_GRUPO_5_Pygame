@@ -2,14 +2,13 @@ from game_tools.class_box import Box
 from game_tools.class_image import *
 
 def set_buttons_colors(button_list, lista_cfg):
-        print(len(button_list))
         for i in range(len(button_list)):
             if len(lista_cfg[i]["colors"]) > 0:
                 button_list[i].set_color(*lista_cfg[i]["colors"])
 
 def draw_boxes(surface, button_list:list[Box], lista_cfg):
     for i in range(len(button_list)):
-        if len(lista_cfg[i]["colors"]) > 0:
+        if len(lista_cfg[i]["config"]) > 0:
             button_list[i].draw_box(surface, *lista_cfg[i]["config"])
 
 def draw_boxes_text(surface, button_list, lista_cfg):
