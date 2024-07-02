@@ -79,7 +79,7 @@ join_button = {"box": Box((750,390), (160,70)),
                "text" : []
                }
 
-timer = {"box": Box((618, 420), (50,50)),
+timer = {"box": Box((640, 420), (50,50)),
         "colors": [],
         "config" : [],
         "text" : []
@@ -133,18 +133,32 @@ input_box = {
             "colors" : ["white", "grey66", "grey1"],
             "config" : [5, 5],
             "text" : [],
-            "interaction" : True
+            "interaction" : False
                 }
 
+submit_button = {"box" :  Box((500, 575), (275,50)),
+                "colors" : ["mediumpurple4", "mediumpurple3", "mediumpurple3"],
+                "config" : [],
+                "text" : [],
+                "interaction" : False}
+
 game_over_title = {
-            "box" :  Box((230, 20), (400,150)),
+            "box" :  Box((0, 20), (400,150)),
             "colors" : [],
             "config" : [],
             "text" : ["Registra tu nombre", "white", FUENTE_1, 60, "border", 2, "grey55", True],
             "interaction" : False
-    
 }
-REGISTER_SCORE_ASSETS = [input_box, game_over_title]
+
+nickname  = {
+            "box" :  Box((505,502), (200,20)),
+            "colors" : [],
+            "config" : [],
+            "text" : [],
+            "interaction" : False}
+
+set_score_bg = {"image" : Image(SET_SCORE_BACKGROUND, (0,0), (1280,720))}
+REGISTER_SCORE_ASSETS = [input_box, submit_button, game_over_title, nickname, set_score_bg]
 
 #HELP SCENE ASSETS
 back_button = {"box": Box((1110,600), (150,100)),

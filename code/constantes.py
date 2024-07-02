@@ -47,7 +47,8 @@ PLAY_BACKGROUND_1 = r"code\data\img\play_bg.png"
 PLAY_BACKGROUND_2 = r"code\data\img\play_bg2.png"
 PLAY_BACKGROUND_3 = r"code\data\img\play_bg3.png"
 HELP_BACKGROUND = r"code\data\img\Grimoire_blur.jpg"
-FINISH_MATCH_BACKGROUND = r"code\data\img\Runes 3.png"
+FINISH_MATCH_BACKGROUND = r"code\data\img\finish_match_bg.png"
+SET_SCORE_BACKGROUND = r"code\data\img\set_Score_bg.png"
 
 # SONIDO
 PRESS_SOUND = r"code\data\sound\press_button.wav"
@@ -59,7 +60,7 @@ PLAY_MUSIC = r"code\data\sound\play_music.wav"
 FINISH_MATCH_MUSIC = r"code\data\sound\finishmatch_music.mp3"
 
 #MAX_TIME_MATCH
-TIEMPO_LIMITE = 1
+TIEMPO_LIMITE = 100
 
 #CONFIG PATH
 SCOREBOARD_PATH = r"code\data\config\scoreboard.csv"

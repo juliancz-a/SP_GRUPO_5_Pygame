@@ -10,7 +10,7 @@ def draw_words (surface:pygame.Surface, matrix:list, words_founded:list, comodin
     
     for i in range (len(matrix)):
         printed = 0
-        y = 530
+        y = 520
         x += 100
         for j in range (len(matrix[i])):
     
@@ -32,8 +32,8 @@ def draw_words (surface:pygame.Surface, matrix:list, words_founded:list, comodin
                 y += 20
                 printed +=1
             
-                if printed == 6 and j != len(matrix[i]) - 1:
-                    y = 530
+                if printed == 7 and j != len(matrix[i]) - 1:
+                    y = 520
                     x += 100
                     printed = 0
             else:
