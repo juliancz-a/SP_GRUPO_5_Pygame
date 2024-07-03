@@ -1,5 +1,6 @@
 from game_tools.class_box import *
 from constantes import *
+from game_tools.class_image import *
 import random
 
 def ordenar_elementos (list: list | list[dict], orden: int, key: str = None) -> str:
@@ -94,7 +95,18 @@ def select_random_element(actual_element: str | int, elements_list: list) -> str
 
     return random_element
 
-def change_volume (volume, volume_img)  -> bool:
+def change_volume(volume: bool, volume_img: Image) -> bool:
+    """
+    Cambia el estado del botón 'volume', y dependiendo del mismo
+    se activa o desactiva la música.
+
+    Args:
+        volume (bool): Estado del botón 'volume'
+        volume_img (Image): Imágen del botón 'volume'
+
+    Returns:
+        bool: Devuelve el estado del botón
+    """
     match volume:
         case True:            
             volume_img = (volume_img[0]["img"])

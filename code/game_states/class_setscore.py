@@ -8,7 +8,17 @@ from game_tools.event_handle import *
 from game_tools.extra_functions import *
 
 class SetScore:
-    def __init__(self, surface:pygame.Surface, match, score, lista_jugadores, setscore_assets, volume) -> None:
+    def __init__(self, surface:pygame.Surface, match:int, score:int, lista_jugadores:list, setscore_assets:list, volume:bool) -> None:
+        """Escena SetScore
+
+        Args:
+            surface (pygame.Surface): Superficie sobre la cual se renderizarán los recursos de la escena.
+            match (int): Numero de partidas jugadas totales.
+            score (int):  Puntaje de todas las partidas jugadas.
+            lista_jugadores (list): Lista de jugadores con sus datos, para agregar un nuevo jugador.
+            setscore_assets (list): Configuración de los assets utilizados por la escena
+            volume (bool):  Booleano que indica si se desea reproducir audio en la escena.
+        """
         self.surface = surface
         self.volume = volume
         self.assets_config = setscore_assets
@@ -29,6 +39,9 @@ class SetScore:
         self.activo = False
 
     def init_assets(self):
+        """Inicializar los recursos de la escena
+        Returns: 
+            dict: Recursos con su correspondiente configuración"""
         assets = {
             "input_box" : self.assets_config[0]["box"],
             "submit_button" : self.assets_config[1]["box"],
@@ -41,6 +54,7 @@ class SetScore:
         return assets
     
     def render(self):
+        """Renderizar los elementos de la escena SetScore. Botones, fondo y titulo """
 
         box_list = [self.assets["input_box"], self.assets["submit_button"], self.assets["game_over_title"]]
         images = [self.assets["background"], self.assets["volume_button"]]
@@ -65,7 +79,10 @@ class SetScore:
 
         pygame.display.update()
     
-    def handle_event (self, event):
+    def handle_event (self, event: pygame.event.Event):
+        """Manejar eventos necesarios para la interacción con la interfaz
+        Args:
+            event (pygame.event.Event): Evento capturado"""
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.assets["input_box"].rectangulo.collidepoint(event.pos):
@@ -81,6 +98,9 @@ class SetScore:
                 self.option = 0
 
     def update (self):
+        """Actualizar la escena en caso de haberse seleccionado una opción
+        Returns:
+            str: Nueva escena"""
         selection = None
 
         match self.option:
@@ -89,12 +109,18 @@ class SetScore:
                 
                 ordenar_elementos(self.lista_jugadores, 2, "puntos")
 
-                update_score(r"code\data\config\scoreboard.csv", self.lista_jugadores)
+                update_score(SCOREBOARD_PATH, self.lista_jugadores)
                 selection = "menu"
 
         return selection
     
     def update_audio(self):
+        """
+        Actualizar el volumen de la música según el estado de la atributo 'volume'
+        
+         Returns:
+            bool: Estado del volumen actual.
+        """
 
         if self.volume:
             pygame.mixer.music.set_volume(0.1)
@@ -106,6 +132,7 @@ class SetScore:
         return self.volume    
 
     def set_music(self):
+        """Carga la música, y la reproduce en un loop infinito."""
     
         pygame.mixer.music.load(r"code\data\sound\566579__bainmack__chime_song_mellow_chill_short2.wav")
         pygame.mixer.music.play(-1)

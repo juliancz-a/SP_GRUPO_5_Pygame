@@ -31,7 +31,7 @@ class Game:
         self.match = 0
         self.score = 0
         self.volume = True
-        self.comodin = 1
+        self.comodin_state = 1
 
         self.surface = pygame.display.set_mode((size))
         self.game_assets = game_assets
@@ -76,7 +76,7 @@ class Game:
         match game_state:
 
             case "menu":
-                self.lista_palabras = read_data(r"code\data\config\palabras.json")
+                self.lista_palabras = read_data(r"code\data\config\palabras")
                 self.match = 0
                 self.score = 0
 
@@ -86,8 +86,11 @@ class Game:
                 self.window = Help(self.surface, self.game_assets["help"], self.volume)
 
             case "play":
+                if len(self.lista_palabras[0]) == 1:
+                    self.lista_palabras = read_data(r"code\data\config\palabras")
+
                 datos_palabras = set_combination(self.lista_palabras)
-                self.window = Play(self.surface, self.match, datos_palabras , self.score, self.comodin,  self.game_assets["play"], self.volume)
+                self.window = Play(self.surface, self.match, datos_palabras , self.score, self.comodin_state,  self.game_assets["play"], self.volume)
 
             case "finish_match":
                 

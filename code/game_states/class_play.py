@@ -12,8 +12,18 @@ from game_tools.words import *
 import random
 
 class Play:
-    def __init__(self, surface:pygame.Surface, match, datos_palabras, score, comodin, play_assets, volume) -> None:
+    def __init__(self, surface:pygame.Surface, match:int, datos_palabras:tuple, score:int, comodin_state:int, play_assets:list, volume:bool) -> None:
+        """Escena principal del juego: Play.
 
+        Args:
+            surface (pygame.Surface): Superficie sobre la cual se renderizarán los recursos de la escena.
+            match (int): Numero de partidas jugadas en una misma instancia de juego.
+            datos_palabras (tuple): Tupla con letras aleatorias y sus posibles combinaciones
+            score (int): Puntaje de la partida actual.
+            comodin_state (int): Estado de uso del comodín (1: No usado | 0: Usado)
+            play_assets (list): Configuración de los assets utilizados por la escena
+            volume (bool):  Booleano que indica si se desea reproducir audio en la escena.
+        """
         self.surface = surface
         self.match = match
         self.initial_time = pygame.time.get_ticks()
@@ -41,12 +51,14 @@ class Play:
                           "pos_libres" : [0,1,2,3,4,5],
                           "pos_ocupadas" : []}
 
-        self.comodin = comodin
+        self.comodin_state = comodin_state
         self.random_letter = None
         self.option = None
 
     def init_assets(self):
-
+        """Inicializar los recursos de la escena.
+        Returns: 
+            dict: Recursos con su correspondiente configuración"""
         assets = {
                 "menu_button" : self.assets_cfg[0]["box"],
                 "clear_button" : self.assets_cfg[1]["box"],
@@ -62,6 +74,8 @@ class Play:
         return assets
 
     def render(self):
+        """Renderizar los elementos de la escena Play. Botones, fondo, cartas.
+        """
         images_list = [self.assets["background"], self.assets["comodin_button"], self.assets["volume_button"]]
         button_list = [self.assets["menu_button"], self.assets["clear_button"], self.assets["shuffle_button"], self.assets["join_button"]]
 
@@ -87,12 +101,14 @@ class Play:
         self.assets["timer"].draw_text(self.surface, str(tiempo_restante), "white", FUENTE_4, font_size=275, center=True,outline="shadow", outline_thickness=2)
         self.assets["score_text"].draw_text(self.surface, f"Puntaje: {str(self.score)}", "darkslateblue", FUENTE_4, font_size=125, center=True,outline="shadow", outline_thickness=2)
 
-        draw_words(self.surface, self.matriz_combinaciones, self.game_cfg["founded_words"], self.comodin, self.random_letter)
+        draw_words(self.surface, self.matriz_combinaciones, self.game_cfg["founded_words"], self.comodin_state, self.random_letter)
 
         pygame.display.update()
 
-    def handle_event (self, event):
-
+    def handle_event (self, event: pygame.event.Event):
+        """Manejar eventos necesarios para la interacción con la interfaz
+        Args:
+            event (pygame.event.Event): Evento capturado"""
         score = 0
 
         JOIN_CARDS = pygame.USEREVENT + 1
@@ -121,11 +137,11 @@ class Play:
 
         handle_cards_interaction(event, self.game_cfg["card_list"], self.game_cfg["selected_letters"], self.game_cfg["pos_libres"], self.game_cfg["pos_ocupadas"])
 
-        if self.comodin == 1:
+        if self.comodin_state == 1:
             action = self.assets["comodin_button"].image_box.interaction(event)
             
             if action:
-                self.comodin = 0
+                self.comodin_state = 0
                 self.random_letter = select_random_letter(self.combinaciones)
 
         if self.assets["clear_button"].interaction(event):
@@ -135,7 +151,9 @@ class Play:
             shuffle_cards(self.game_cfg["card_list"])
 
     def update(self):
-       
+        """Actualizar la escena en caso de haberse seleccionado una opción
+        Returns:
+            str: Nueva escena"""
         selection = None
 
         match self.option:
@@ -147,7 +165,11 @@ class Play:
         return selection
     
     def update_audio(self):
-
+        """Actualizar el volumen de la música según el estado de la atributo 'volume'
+        
+         Returns:
+            bool: Estado del volumen actual."""
+        
         if self.volume:
             pygame.mixer.music.set_volume(0.1)
             self.assets["volume_button"] = Image(VOLUME_BUTTON, (10, 10), (60,60))       
@@ -158,12 +180,18 @@ class Play:
         return self.volume    
     
     def set_music(self):
+        """Carga la música, y la reproduce en un loop infinito."""
 
         pygame.mixer.music.load(PLAY_MUSIC)
         pygame.mixer.music.play(-1)
         pygame.mixer.music.set_volume(0.1)
     
-    def update_play_instance (self):
+    def update_play_instance (self) -> tuple:
+        """Actualizar la instancia de juego con los nuevos valores obtenidos.
+
+        Returns:
+            tuple: El número de partida actualizado, el puntaje acumulado actualizado.
+        """
         self.match += 1
         
         data = self.match, self.score

@@ -8,7 +8,15 @@ from game_tools.extra_functions import *
 
 class Menu:
 
-    def __init__(self, surface:pygame.Surface, lista_jugadores, menu_assets, volume) -> None:
+    def __init__(self, surface:pygame.Surface, lista_jugadores:list, menu_assets:list[dict], volume:bool) -> None:
+        """Escena menú.
+
+        Args:
+            surface (pygame.Surface): Superficie sobre la cual se renderizarán los recursos de la escena.
+            lista_jugadores (list): Lista de jugadores con sus datos, para la renderización del Scoreboard
+            menu_assets (list): Configuración de los assets utilizados por la escena
+            volume (bool): Booleano que indica si se desea reproducir audio en la escena.
+        """
 
         self.surface = surface
 
@@ -22,7 +30,10 @@ class Menu:
 
         self.music = self.set_music()
     
-    def init_assets (self):
+    def init_assets (self) -> dict:
+        """Inicializar los recursos de la escena.
+        Returns: 
+            dict: Recursos con su correspondiente configuración"""
         assets = { "play_button" : self.assets_config[0]["box"],
                 "help_button" : self.assets_config[1]["box"],
                 "exit_button" : self.assets_config[2]["box"],
@@ -35,7 +46,7 @@ class Menu:
         return assets
     
     def render(self):
- 
+        """Renderizar los elementos de la escena menú. Botones, fondo y titulo """
 
         images = [self.assets["background"], self.assets["chains"], self.assets["volume_button"]]
         box_list = [self.assets["play_button"], self.assets["help_button"], self.assets["exit_button"], self.assets["title"]]
@@ -49,16 +60,21 @@ class Menu:
 
         pygame.display.update()
   
-    def handle_event (self, event):
-      
+    def handle_event (self, event: pygame.event.Event):
+        """Manejar eventos necesarios para la interacción con la interfaz
+        Args:
+            event (pygame.event.Event): Evento capturado"""
         
         if self.assets["volume_button"].image_box.interaction(event):
             self.volume = not self.volume
     
         self.option = get_option_selected(event, self.assets_config)
 
-    def update (self):
-
+    def update (self) -> str:
+        """Actualizar la escena en caso de haberse seleccionado una opción
+        Returns:
+            str: Nueva escena"""
+            
         selection = None
 
         match self.option:
@@ -72,18 +88,24 @@ class Menu:
         return selection
 
     def update_audio(self):
+        """
+        Actualizar el volumen de la música según el estado de la atributo 'volume'
+        
+         Returns:
+            bool: Estado del volumen actual."""
 
         if self.volume:
             pygame.mixer.music.set_volume(0.1)
             self.assets["volume_button"] = Image(VOLUME_BUTTON, (10, 10), (60,60))       
         else:
             pygame.mixer.music.set_volume(0)
-            self.assets["volume_button"] = Image(  VOLUME_MUTE_BUTTON, (10, 10), (60,60))     
+            self.assets["volume_button"] = Image(VOLUME_MUTE_BUTTON, (10, 10), (60,60))     
 
 
         return self.volume    
     
     def set_music(self):
+        """Carga la música, y la reproduce en un loop infinito."""
         
         pygame.mixer.music.load(MENU_MUSIC)
         pygame.mixer.music.play(-1)

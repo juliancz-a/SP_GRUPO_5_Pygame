@@ -36,7 +36,7 @@ class Scoreboard:
     
     def draw_header (surface: pygame.Surface, header_elements: list[str], font: pygame.font, initial_pos: tuple) -> list:
         """
-        Muestra en pantalla la cabecera del scoreboard, y 
+        Muestra en pantalla la cabecera del scoreboard.
 
         Args:
             surface (pygame.Surface): Superficie de la aplicación.

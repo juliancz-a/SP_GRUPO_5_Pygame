@@ -1,19 +1,27 @@
 import json
 import re
 
-def update_data (path:str, data):
-    with open(path, "w", encoding="utf8") as archive:
+# def update_data (path:str, data):
+#     with open(path, "w", encoding="utf8") as archive:
         
-        data = json.dump(data,archive,indent=4)
+#         data = json.dump(data,archive,indent=4)
 
-def read_data(path:str) -> list[dict]:
-    with open(path, "r", encoding="utf8") as archive:
+def read_data(path: str) -> list[dict]:
+    """
+    Lee un archivo JSON y lo devuelve como una lista de diccionarios.
+
+    Args:
+        path (str): Directorio donde se encuentra el archivo JSON.
+    Returns:
+        list[dict]: Lista leída desde el archivo JSON.
+    """
+    with open(rf"{path}.json", "r", encoding="utf8") as archive:
         data = json.load(archive)
     
     return data
 
-def read_score (path, lista_jugadores):
-    with open(path, "r", encoding="utf8") as archive:
+def read_score(path: str, lista_jugadores: list[dict]):
+    with open(rf"{path}.csv", "r", encoding="utf8") as archive:
         for empleado in archive:
             registro = re.split(",|\n", empleado)                
             if registro[0] != "nombre":
@@ -26,7 +34,7 @@ def update_score (path:str, lista_jugadores:list[dict]):
     """Actualiza un archivo CSV con una lista. Toma como header las keys de cada valor. Luego se escribe el contenido de cada empleado, es decir, cada diccionario.
     Args: path (ruta del archivo CSV con el contenido anterior), lista_jugadores(lista con el contenido actualizado)"""
     try:
-        with open(path, "w", encoding="utf8") as archive:
+        with open(rf"{path}.csv", "w", encoding="utf8") as archive:
         
             header = f"nombre,puntos,partidas\n"
             archive.write(header)
