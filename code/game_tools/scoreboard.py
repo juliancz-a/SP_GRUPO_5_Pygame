@@ -2,10 +2,10 @@ import pygame
 from constantes import *
 
 class Scoreboard:
-    def __init__(self, font:pygame.font, surface:pygame.Surface, player_list:list[dict]) -> None:
+    def __init__(self, font:pygame.font, surface:pygame.Surface, player_list:list[dict], draw_pos: tuple) -> None:
         self.surface = surface
         self.player_list = player_list
-        self.draw_pos = (850,200)
+        self.draw_pos = draw_pos
 
         self.header = ["nombre", "puntos", "partidas"]
 
@@ -21,6 +21,7 @@ class Scoreboard:
         y = self.draw_pos[1]
         if len(self.player_list) == 0:
             self.header = ["No se han registrado jugadores aún"]
+
         header_data = Scoreboard.draw_header(self.surface, self.header, self.font,(850, 220))
         
         for i in range(len(self.player_list)):

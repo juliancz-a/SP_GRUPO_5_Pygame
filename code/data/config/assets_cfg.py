@@ -29,7 +29,7 @@ help_button = {
               }
 
 menu_volume_button = {
-                "image" : Image(VOLUME_BUTTON, (10, 10), (100,100)),
+                "image" : Image(VOLUME_BUTTON, (10, 10), (60,60)),
                 "interaction" : False
 }
 
@@ -93,7 +93,7 @@ score_text = {"box": Box((400, 420), (100,50)),
 
 comodin_button = {"image" :  Image(COMODIN, (1070, 220), (100,100), image_hover_path=COMODIN_HOVER,  press_sound=PRESS_COMODIN_SOUND)}
 
-volume_button = {"image" : Image(VOLUME_BUTTON, (10, 10), (100,100))}
+volume_button = {"image" : Image(VOLUME_BUTTON, (10, 10), (60,60))}
 
 play_background = {"image" : Image(PLAY_BACKGROUND_1, (0,0), (1280,720))}
 
@@ -122,9 +122,11 @@ score_text = {"box" : Box((230, 100), (400,150)),
               "config" : [],
               "text" : []}
 
+volume_button = {"image" : Image(VOLUME_BUTTON, (10, 10), (60,60))}
+
 finish_match_bg = {"image" : Image(FINISH_MATCH_BACKGROUND, (0,0), (1280,720))}
 
-FINISH_MATCH_ASSETS = [continue_button, finish_button, score_text, finish_match_bg]
+FINISH_MATCH_ASSETS = [continue_button, finish_button, score_text, volume_button, finish_match_bg]
 
 
 #SET SCORE SCENE ASSETS
@@ -133,18 +135,34 @@ input_box = {
             "colors" : ["white", "grey66", "grey1"],
             "config" : [5, 5],
             "text" : [],
-            "interaction" : True
+            "interaction" : False
                 }
 
+submit_button = {"box" :  Box((500, 575), (275,50)),
+                "colors" : ["mediumpurple4", "mediumpurple3", "mediumpurple3"],
+                "config" : [],
+                "text" : [],
+                "interaction" : False}
+
 game_over_title = {
-            "box" :  Box((230, 20), (400,150)),
+            "box" :  Box((0, 20), (400,150)),
             "colors" : [],
             "config" : [],
             "text" : ["Registra tu nombre", "white", FUENTE_1, 60, "border", 2, "grey55", True],
             "interaction" : False
-    
 }
-REGISTER_SCORE_ASSETS = [input_box, game_over_title]
+
+nickname  = {
+            "box" :  Box((505,502), (200,20)),
+            "colors" : [],
+            "config" : [],
+            "text" : [],
+            "interaction" : False}
+
+volume_button = {"image" : Image(VOLUME_BUTTON, (10, 10), (60,60))}
+
+set_score_bg = {"image" : Image(SET_SCORE_BACKGROUND, (0,0), (1280,720))}
+REGISTER_SCORE_ASSETS = [input_box, submit_button, game_over_title, nickname, volume_button, set_score_bg]
 
 #HELP SCENE ASSETS
 back_button = {"box": Box((1110,600), (150,100)),
@@ -164,10 +182,13 @@ shuffle_img = {"image" : Image (r"code\data\img\shuffle_button.png", (400, 500),
 clear_img = {"image" : Image (r"code\data\img\clear_button.png", (690, 500), (160, 100)),
               "interaction" : False}
 
+volume_button = {"image" : Image(VOLUME_BUTTON, (10, 650), (60,60)),
+                 "interaction" : False}
+
 help_background = {"image" : Image(HELP_BACKGROUND, (0,0), (1280,720)),
                "interaction" : False}
 
-HELP_ASSETS = [back_button, comodin_img, shuffle_img, clear_img, help_background]
+HELP_ASSETS = [back_button, comodin_img, shuffle_img, clear_img, volume_button, help_background]
 
 
 #ALL GAME ASSETS

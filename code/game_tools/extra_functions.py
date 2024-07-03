@@ -93,3 +93,12 @@ def select_random_element(actual_element: str | int, lista_elementos: list) -> s
         random_element = random.choice(lista_elementos)
 
     return random_element
+
+def change_volume (volume, volume_img)  -> bool:
+    match volume:
+        case True:            
+            volume_img = (volume_img[0]["img"])
+        case False:        
+            volume_img = (volume_img[1]["img"])
+    
+    return volume_img

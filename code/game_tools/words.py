@@ -17,11 +17,11 @@ def draw_words (surface: pygame.Surface, matrix: list, words_founded: list, como
         comodin_state (int): Recibe el estado de uso del comodin.
         random_letter (str): Recibe la letra aleatoria que el comodin deberá mostrar.
     """
-    x = 55
+    x = 60
     
     for i in range (len(matrix)):
         printed = 0
-        y = 530
+        y = 520
         x += 100
         for j in range (len(matrix[i])):
     
@@ -43,8 +43,8 @@ def draw_words (surface: pygame.Surface, matrix: list, words_founded: list, como
                 y += 20
                 printed +=1
             
-                if printed == 6 and j != len(matrix[i]) - 1:
-                    y = 530
+                if printed == 7 and j != len(matrix[i]) - 1:
+                    y = 520
                     x += 100
                     printed = 0
             else:
@@ -52,7 +52,28 @@ def draw_words (surface: pygame.Surface, matrix: list, words_founded: list, como
                     x -= 100
                 break
 
-def sum_score(score:int, word):
+
+def join_letters (selected_letters:list, words_founded:list, combinaciones) -> bool | str:
+    retorno = False
+
+    palabra = "".join(selected_letters).lower()
+
+    set_dict = set(combinaciones)
+    
+    palabra_set = {palabra}
+
+    intersec = set_dict.intersection(palabra_set)
+
+    coincidences = words_founded.count(palabra)
+
+    if len(intersec) > 0 and coincidences == 0:
+        retorno = palabra
+    else:
+        retorno = False
+
+    return retorno
+
+def sum_score(score:int, word) -> int:
     score += len(word)
     return score
 

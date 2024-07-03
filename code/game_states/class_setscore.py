@@ -8,8 +8,9 @@ from game_tools.event_handle import *
 from game_tools.extra_functions import *
 
 class SetScore:
-    def __init__(self, surface:pygame.Surface, match, score, lista_jugadores, setscore_assets) -> None:
+    def __init__(self, surface:pygame.Surface, match, score, lista_jugadores, setscore_assets, volume) -> None:
         self.surface = surface
+        self.volume = volume
         self.assets_config = setscore_assets
         self.assets = self.init_assets()
 
@@ -20,13 +21,7 @@ class SetScore:
         self.score_promedio = operacion(score, match, lambda x, y: x // y)
         self.score_text = (f"Tu puntaje total es: {score}\nLa cantidad de partidas jugadas es: {match}\nTu puntaje final es de: {self.score_promedio}")
 
-        self.nickname =  Box((self.input_box.rectangulo.x + 5, self.input_box.rectangulo.y + 2), (200,20))
         self.nickname_text = ""
-
-        self.submit_button = Box((self.input_box.rectangulo.centerx - 275 // 2, self.input_box.rectangulo.y + 75), (275,50))
-
-        self.background = Image(r"code\data\img\Runes 3.png", (0,0), (1280,720))
-        self.image_list = [self.background]
 
         self.music = self.set_music()
 
@@ -36,52 +31,54 @@ class SetScore:
     def init_assets(self):
         assets = {
             "input_box" : self.assets_config[0]["box"],
-            "game_over_title" : self.assets_config[1]["box"],
-            "submit_button" : self.assets_config[2]["box"],
+            "submit_button" : self.assets_config[1]["box"],
+            "game_over_title" : self.assets_config[2]["box"],
             "nickname" : self.assets_config[3]["box"],
-            "background" : self.assets_config[4]["image"]
+            "volume_button" : self.assets_config[4]["image"],
+            "background" : self.assets_config[5]["image"]
         }
 
         return assets
     
     def render(self):
 
-        set_buttons_colors(self.box_list, self.setscore_assets)
+        box_list = [self.assets["input_box"], self.assets["submit_button"], self.assets["game_over_title"]]
+        images = [self.assets["background"], self.assets["volume_button"]]
+        self.assets["game_over_title"].rectangulo.centerx = self.surface.get_width() // 2
+
+        set_buttons_colors(box_list, self.assets_config)
         
-        self.title.rectangulo.centerx = self.surface.get_width() // 2
-       
-        self.submit_button.set_color("mediumpurple4", "mediumpurple3", "mediumpurple3")
         self.surface.fill("black")
 
-        draw_assets(self.surface, self.box_list, self.image_list, self.setscore_assets)
+        draw_assets(self.surface, box_list, images, self.assets_config)
 
         if len(self.nickname_text) > 3:
-            self.submit_button.draw_box(self.surface, 5, 5)
-            self.submit_button.draw_text(self.surface, "Listo", "grey90", FUENTE_1, 40, center=True)
+            self.assets["submit_button"].draw_box(self.surface, 5, 5)
+            self.assets["submit_button"].draw_text(self.surface, "Listo", "grey90", FUENTE_1, 40, center=True)
         
         if len(self.nickname_text) == 0:
-            self.nickname.draw_text(self.surface, " Nombre:", "gray59", FUENTE_1, 60)
+            self.assets["nickname"].draw_text(self.surface, " Nombre:", "gray59", FUENTE_1, 60)
         else:
-            self.nickname.draw_text(self.surface, self.nickname_text, "black", FUENTE_1, 60)
+            self.assets["nickname"].draw_text(self.surface, self.nickname_text, "black", FUENTE_1, 60)
 
         render_multi_line(self.surface, self.score_text, 610, 250, 200, center_text= True)
 
         pygame.display.update()
     
     def handle_event (self, event):
-        submit = False
 
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if self.input_box.rectangulo.collidepoint(event.pos):
+            if self.assets["input_box"].rectangulo.collidepoint(event.pos):
                 self.activo = not self.activo
+        
+        elif self.assets["volume_button"].image_box.interaction(event):
+            self.volume = not self.volume
 
         self.nickname_text = handle_input_event(self.activo, event, self.nickname_text, 10)
 
         if len(self.nickname_text) > 3:
-            submit = self.submit_button.interaction(event)
-        
-        if submit:
-            self.option = 0
+            if self.assets["submit_button"].interaction(event):
+                self.option = 0
 
     def update (self):
         selection = None
@@ -96,9 +93,21 @@ class SetScore:
                 selection = "menu"
 
         return selection
+    
+    def update_audio(self):
+
+        if self.volume:
+            pygame.mixer.music.set_volume(0.1)
+            self.assets["volume_button"] = Image(VOLUME_BUTTON, (10, 10), (60,60))       
+        else:
+            pygame.mixer.music.set_volume(0)
+            self.assets["volume_button"] = Image(VOLUME_MUTE_BUTTON, (10, 10), (60,60))       
+
+        return self.volume    
 
     def set_music(self):
     
         pygame.mixer.music.load(r"code\data\sound\566579__bainmack__chime_song_mellow_chill_short2.wav")
         pygame.mixer.music.play(-1)
         pygame.mixer.music.set_volume(0.1)
+    
