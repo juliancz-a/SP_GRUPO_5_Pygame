@@ -98,7 +98,7 @@ class Play:
         score = 0
 
         JOIN_CARDS = pygame.USEREVENT + 1
-        pygame.time.set_timer(pygame.USEREVENT + 2, 25000)
+        pygame.time.set_timer(pygame.USEREVENT + 2, 20000)
 
         if event.type == JOIN_CARDS:
             word = join_letters(self.game_cfg["selected_letters"], self.game_cfg["founded_words"], self.combinaciones)
@@ -109,18 +109,20 @@ class Play:
         
         elif event.type == pygame.USEREVENT + 2:
             self.assets["background"] = Image(select_random_element(self.assets["background"].image_path, self.background_list), (0,0), (1280,720))
+        
 
-        elif count_select_letters(self.game_cfg["selected_letters"]) > 2:
+        if count_select_letters(self.game_cfg["selected_letters"]) > 2:
             if self.assets["join_button"].interaction(event):
                 pygame.event.post(pygame.event.Event(JOIN_CARDS))
-        
-        elif self.assets["volume_button"].image_box.interaction(event):
+
+        if self.assets["volume_button"].image_box.interaction(event):
             self.volume = not self.volume
 
-        elif self.assets["menu_button"].interaction(event):
+        if self.assets["menu_button"].interaction(event):
             self.option = 0
 
-        set_cards_interaction(event, self.game_cfg["card_list"], self.game_cfg["selected_letters"], self.game_cfg["pos_libres"], self.game_cfg["pos_ocupadas"])
+        handle_cards_interaction(event, self.game_cfg["card_list"], self.game_cfg["selected_letters"], self.game_cfg["pos_libres"], self.game_cfg["pos_ocupadas"])
+        
         if self.comodin == 1:
             action = self.assets["comodin_button"].image_box.interaction(event)
             
@@ -132,7 +134,7 @@ class Play:
             reset_pos(self.game_cfg["card_list"], self.game_cfg["selected_letters"], self.game_cfg["pos_ocupadas"], self.game_cfg["pos_libres"])
         
         if self.assets["shuffle_button"].interaction(event):
-            shuffle(self.game_cfg["card_list"])
+            shuffle_cards(self.game_cfg["card_list"])
 
     def update(self):
        

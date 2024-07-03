@@ -55,7 +55,7 @@ class Menu:
         if self.assets["volume_button"].image_box.interaction(event):
             self.volume = not self.volume
     
-        self.option = button_click_event(event, self.assets_config)
+        self.option = get_option_selected(event, self.assets_config)
 
     def update (self):
 

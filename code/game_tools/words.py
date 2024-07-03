@@ -4,7 +4,7 @@ from game_tools.class_box import Box
 from game_tools.extra_functions import *
 from constantes import *
 
-def draw_words (surface:pygame.Surface, matrix:list, words_founded:list, comodin, random_letter):
+def draw_words (surface:pygame.Surface, matrix:list, words_founded:list, comodin_state, random_letter):
 
     x = 60
     
@@ -19,7 +19,7 @@ def draw_words (surface:pygame.Surface, matrix:list, words_founded:list, comodin
                 word_text = word
                 word = Box((x, y), (40, 100))
 
-                if comodin == 0:
+                if comodin_state == 0:
                     use_comodin(surface, random_letter, words_founded, word_text, x, y)
 
                 for word_founded in words_founded:

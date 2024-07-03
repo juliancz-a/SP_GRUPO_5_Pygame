@@ -37,7 +37,7 @@ class Game:
         pygame.display.set_icon(icon)
     
     def get_events (self):
-       
+        """Obtención de eventos y manejo de los mismos según la escena actual del videojuego."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.quit = True
@@ -45,7 +45,7 @@ class Game:
             self.window.handle_event(event)
         
     def run(self):
-       
+        """Ciclo de ejecución del juego. Se obtienen eventos, se renderizan elementos, se actualizan datos."""
         while self.quit is False:
 
             self.get_events()
@@ -58,7 +58,10 @@ class Game:
 
             Game.update_window(self, game_state)
             
-    def update_window(self, game_state):
+    def update_window(self, game_state:str):
+        """Actualización de la escena del juego.
+        Args:
+            game_state (str): Estado nuevo del juego. Será la nueva escena del juego."""
         match game_state:
 
             case "menu":
