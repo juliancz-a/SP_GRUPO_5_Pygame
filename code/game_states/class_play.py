@@ -11,8 +11,6 @@ from data.config.config import *
 from game_tools.words import *
 import random
 
-
-
 class Play:
     def __init__(self, surface:pygame.Surface, match, datos_palabras, score, comodin, play_assets, volume) -> None:
 
@@ -122,7 +120,7 @@ class Play:
             self.option = 0
 
         handle_cards_interaction(event, self.game_cfg["card_list"], self.game_cfg["selected_letters"], self.game_cfg["pos_libres"], self.game_cfg["pos_ocupadas"])
-        
+
         if self.comodin == 1:
             action = self.assets["comodin_button"].image_box.interaction(event)
             

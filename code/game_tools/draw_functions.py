@@ -20,7 +20,7 @@ def draw_images (surface, images_list:list[Image]):
     for image in images_list:
         image.draw_image(surface)
 
-def draw_assets(surface, box_list, images_list, list_cfg, conditionals = False):
+def draw_assets(surface, box_list, images_list, list_cfg):
     
     draw_images(surface, images_list)
     draw_boxes(surface, box_list, list_cfg)

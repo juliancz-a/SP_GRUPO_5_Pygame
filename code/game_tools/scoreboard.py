@@ -16,8 +16,8 @@ class Scoreboard:
         Dibuja el scoreboard con el nombre y la puntuación de los mejores jugadores.
 
         Args:
-            max_jugadores (int): La cantidad máxima de jugadores a mostrar en pantalla.
-        """
+            max_jugadores (int): La cantidad máxima de jugadores a mostrar en pantalla."""
+        
         y = self.draw_pos[1]
         if len(self.player_list) == 0:
             self.header = ["No se han registrado jugadores aún"]

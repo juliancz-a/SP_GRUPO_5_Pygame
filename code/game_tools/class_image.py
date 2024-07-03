@@ -3,7 +3,16 @@ from game_tools.class_box import Box
 from constantes import  *
 
 class Image:
-    def __init__(self, image_path, coords, dimensiones, image_hover_path = None, press_sound = None) -> None:
+    def __init__(self, image_path:str, coords:tuple, dimensiones:tuple, image_hover_path:str = None, press_sound:str = None) -> None:
+        """Creacion de un objeto tipo Image (imagen), para su renderización e interacción. Comparte propiedades de un objeto del tipo Box.
+
+        Args:
+            image_path (_type_): Ruta de la imagen del objeto
+            coords (_type_): Coordenadas del objeto, deben estar dentro de una superficie
+            dimensiones (_type_): Dimensiones del objeto
+            image_hover_path (_type_, optional): Ruta de la imagen hover del objeto
+            press_sound (_type_, optional): Ruta del sonido del objeto al presionarlo
+        """
 
         self.image_box = Box(coords, dimensiones, press_sound = press_sound)
         self.image_path = image_path
@@ -18,6 +27,12 @@ class Image:
 
     
     def draw_image (self, surface:pygame.Surface, transparency:int = 255):
+        """Dibujar una imagen sobre una superficie.
+
+        Args:
+            surface (pygame.Surface): Superficie sobre la cual dibujar la imagne
+            transparency (int, optional): Transparencia de la imagen
+        """
         image_alpha = self.image_surface.convert_alpha()
         image_alpha.set_alpha(transparency)
 

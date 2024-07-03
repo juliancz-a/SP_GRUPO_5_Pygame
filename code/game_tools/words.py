@@ -132,8 +132,8 @@ def use_comodin(surface: pygame.Surface, letter: str, words_founded: list, word_
         letter (str): Letra aleatoria.
         words_founded (list): Lista con todas las palabras ya encontradas.
         word_text (str): Palabra a analizar, para el uso del comodin.
-        x (int): Coordenada horizontal en la superficie.
-        y (int): Coordenada vertical en la superficie.
+        x (int): Coordenada horizontal de la palabra en la superficie.
+        y (int): Coordenada vertical de la palabra en la superficie.
     """
     pos = 0
     coincidence = False

@@ -5,7 +5,13 @@ from game_tools.event_handle import *
 class Box:
     #CONSTRUCTOR
     def __init__(self, posiciones:tuple, dimensiones:tuple, press_sound = None):
+        """Creación de objeto tipo Box (caja) para su renderización e interacción.
 
+        Args:
+            posiciones (tuple): Posiciones del objeto, deben estar dentro de una superficie
+            dimensiones (tuple): Dimensiones del objeto.
+            press_sound (_type_, optional): Sonido del objeto al ser presionado.
+        """
         self.posiciones = posiciones
         self.dimensiones = dimensiones
         self.rectangulo = pygame.Rect(self.posiciones, self.dimensiones)
@@ -26,12 +32,12 @@ class Box:
         self.sound = press_sound
 
     def draw_box (self, surface:pygame.Surface, border_radius:int = -1, border_width:int = 0):
-        """Dibujar en pantalla el rectangulo lógico craedo.
+        """Dibujar en pantalla el rectangulo lógico creado.
 
         Args:
-            surface (_type_): _description_
-            border_radius (int, optional): _description_. Defaults to -1.
-            border_width (int, optional): _description_. Defaults to 0."""
+            surface (pygame.Surface): Superficie sobre la cual dibujar el rectangulo
+            border_radius (int, optional): Radio de redondeo del rectángulo
+            border_width (int, optional): Longitud del borde del rectángulo"""
 
         pygame.draw.rect(surface, self.color_principal, self.rectangulo, border_radius = border_radius)
 
@@ -43,14 +49,27 @@ class Box:
         
 
     def set_color (self, first_color:tuple, secondary_color:tuple, hover_color:tuple):
-        
+        """Inicializar los colores de un rectángulo físico
+
+        Args:
+            first_color (tuple): Color principal
+            secondary_color (tuple): Color secundario (borde)
+            hover_color (tuple): Color de hover (puntero sobre el rectángulo)"""
         self.color_principal = first_color
 
         self.color_secundario = secondary_color
 
         self.color_hover = hover_color
 
-    def interaction (self, event) -> bool:
+    def interaction (self, event:pygame.event.Event) -> bool:
+        """Registrar la interacción del usuario con el rectángulo (bóton), según el evento capturado.
+
+        Args:
+            event (pygame.event.Event): Evento capturado
+
+        Returns:
+            bool: False [No se ha presionado el botón] True [Se ha presionado con el botón]"""
+        
         action = False
 
         center = self.rectangulo.center
@@ -81,9 +100,20 @@ class Box:
         return action
     
     def draw_text(self, surface: pygame.Surface , text: str, text_color: str| tuple, font:str, font_size:int = 20, 
-                outline = None, outline_thickness = 1, outline_color = "black",  center = False):
+                outline:bool = None, outline_thickness:int = 1, outline_color:str = "black",  center:int = False):
+        """Dibujar texto sobre el rectángulo. El rectangúlo puede estar dibujado o no.
 
-
+        Args:
+            surface (pygame.Surface): Superficie sobre la cual dibujar el texto.
+            text (str): Texto determinado a dibujar
+            text_color (str | tuple): Color de texto
+            font (str): Fuente de texto
+            font_size (int, optional): Tamaño de fuente.
+            outline (bool, optional): Utilizar contorno para el texto.
+            outline_thickness (int, optional): Espesor del contorno
+            outline_color (str, optional): Color del contorno
+            center (bool, optional): Utilizar un texto centrado en el rectángulo"""
+        
         font_size = font_size * self.rectangulo.width // 300
 
         fuente = pygame.font.Font(font, font_size)
@@ -100,7 +130,6 @@ class Box:
         else:
             text_rect.topleft = self.rectangulo.x, self.rectangulo.y
     
-
         match outline:
             case "border":
                 for dx in range(-outline_thickness, outline_thickness + 1):

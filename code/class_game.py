@@ -14,7 +14,17 @@ from data.config.config import *
 
 class Game:
 
-    def __init__(self, size, title, icon:str, lista_palabras:list, lista_jugadores:list, game_assets:dict) -> None:
+    def __init__(self, size:tuple, title:str, icon:str, lista_palabras:list, lista_jugadores:list, game_assets:dict) -> None:
+        """Clase de control del estado del juego
+
+        Args:
+            size (tuple): Tamaño de resolución
+            title (str): Titulo del juego
+            icon (str): Ruta del icono del juego
+            lista_palabras (list): Lista de palabras: posee diccionarios con letras cuyos valores son combinaciones de palabras a encontrar
+            lista_jugadores (list): Lista de jugadores con nombre,puntaje y partidas jugadas
+            game_assets (dict): Recursos del cada una de las escenas del juego.
+        """
 
         pygame.init()
 
