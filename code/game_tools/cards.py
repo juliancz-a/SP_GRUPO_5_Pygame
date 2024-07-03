@@ -20,7 +20,8 @@ def set_cards(coords:tuple , initial_pos_x, cards_counter:int, letras:list = Non
     card_pos = 0
 
     for i in range(cards_counter):
-        card = Card( (100,128), (initial_pos_x + center_x, coords[1]), CARTAS, CARTAS_SOUND, card_pos)
+        card = Card( (100,128), (initial_pos_x + center_x, coords[1]), CARTAS,
+                    CARTAS_SOUND, card_pos)
 
         if letras != None:
             card.letter = letras[i]
@@ -32,7 +33,8 @@ def set_cards(coords:tuple , initial_pos_x, cards_counter:int, letras:list = Non
 
     return card_list
 
-def draw_cards(surface:pygame.Surface, card_list:list[Card], transparency:int = 255) -> None:
+def draw_cards(surface:pygame.Surface, card_list:list[Card], 
+               transparency:int = 255) -> None:
     """Dibujar en pantalla una lista de cartas preeinicializadas.
 
     Args:
@@ -43,15 +45,22 @@ def draw_cards(surface:pygame.Surface, card_list:list[Card], transparency:int = 
     for i in range (len(card_list)):
         card_list[i].draw_card(surface, "white", FUENTE_2, 86, transparency)
 
-def handle_cards_interaction(event:pygame.event.Event, card_list:list[Card], selected_letters:list, posiciones_libres:list, posiciones_anexadas:list):
-    """Manejar la interacción del usuario con las cartas: Agregarlas o sacarlas de la selección.
+def handle_cards_interaction(event:pygame.event.Event, card_list:list[Card], 
+                            selected_letters:list, posiciones_libres:list, 
+                            posiciones_anexadas:list):
+    """Manejar la interacción del usuario con las cartas: Agregarlas o 
+    sacarlas de la selección.
 
     Args:
-        event (pygame.event.Event): Evento capturado del loop de eventos. Se llama a func "interaction" para saber si el usuario presionó una carta.
+        event (pygame.event.Event): Evento capturado del loop de eventos. 
+        Se llama a func "interaction" para saber si el usuario presionó una carta.
+
         card_list (list[Card]): Lista de cartas utilizadas.
-        selected_letters (list): Lista de letras seleccionadas, serán las letras asignadas a cada carta en particular.
+        selected_letters (list): Lista de letras seleccionadas, serán las letras 
+        asignadas a cada carta en particular.
         posiciones_libres (list): Posiciones libres (cartas no seleccionadas).
-        posiciones_anexadas (list): Posiciones anexadas (cartas seleccionadas)"""
+        posiciones_anexadas (list): Posiciones anexadas (cartas seleccionadas)
+    """
     
     occurrences_list = []
     for card in card_list:
@@ -64,18 +73,25 @@ def handle_cards_interaction(event:pygame.event.Event, card_list:list[Card], sel
             occurrences = occurrences_list.count(card.letter)
 
             if selected_letters.count(card.letter) < occurrences and not card.append:
-                card.card_pos = append_card(card_list, card, selected_letters, posiciones_anexadas, posiciones_libres)
+                card.card_pos = append_card(card_list, card, selected_letters, 
+                                            posiciones_anexadas, posiciones_libres)
                 
             elif card.append:
-                return_card(card_list, card, selected_letters, posiciones_anexadas, posiciones_libres)
+                return_card(card_list, card, selected_letters, 
+                            posiciones_anexadas, posiciones_libres)
 
 
-def append_card(card_list:list[Box], card:Card, selected_letters:list, posiciones_anexadas:list, posiciones_libres:list) -> int:
-    """Anexar una carta a la primera posición libre que encuentre. Lista de letras seleccionadas adoptará a la letra de la carta según su posición. 
+def append_card(card_list:list[Box], card:Card, selected_letters:list, 
+                posiciones_anexadas:list, posiciones_libres:list) -> int:
+    """Anexar una carta a la primera posición libre que encuentre. 
+    Lista de letras seleccionadas adoptará a la letra de la carta según su posición. 
+
     Args:
         card_list (list[Box]): Lista de cartas utilizadas.
         card (Card): Carta actual con la cual se interactuó
-        selected_letters (list): Lista de letras seleccionadas, serán las letras asignadas a cada carta en particular.
+        selected_letters (list): Lista de letras seleccionadas, serán las letras 
+        asignadas a cada carta en particular.
+
         posiciones_anexadas (list): Posiciones anexadas (pos de cartas seleccionadas) 
         posiciones_libres (list): Posiciones libres (pos de cartas no seleccionadas).
 
@@ -89,22 +105,28 @@ def append_card(card_list:list[Box], card:Card, selected_letters:list, posicione
     
     card.append = True
     
-    card.card_box.rectangulo.x, card.card_box.rectangulo.y = card_list[new_card_pos].card_box.original_rectangulo.x, 250
-    
+    # card.card_box.rectangulo.x, card.card_box.rectangulo.y = card_list[new_card_pos].card_box.original_rectangulo.x, 250
+    card.card_box.rectangulo.x = card_list[new_card_pos].card_box.original_rectangulo.x
+    card.card_box.rectangulo.y = 250
+
     posiciones_anexadas.append(card.card_pos)
 
     return new_card_pos
 
-def return_card (card_list:list[Box], card, selected_letters:list, posiciones_anexadas, posiciones_libres:list):
-    """Reestablecer una carta a una posición libre, regresandola a su estado original de preselección. Lista de letras seleccionadas volverá a no tener una carta seleccionda,
+def return_card(card_list:list[Box], card, selected_letters:list, 
+                posiciones_anexadas: list, posiciones_libres:list) -> None:
+    """Reestablecer una carta a una posición libre, regresandola a su estado original 
+    de preselección. Lista de letras seleccionadas volverá a no tener una carta seleccionda,
     segun la posición en donde ésta se encontraba.
 
     Args:
         card_list (list[Box]): Lista de cartas utilizadas.
         card (_type_): Carta actual con la cual se interactuó
-        selected_letters (list): Lista de letras seleccionadas, serán las letras asignadas a cada carta en particular.
-        posiciones_anexadas (_type_):  Posiciones anexadas (cartas seleccionadas)
-        posiciones_libres (list):  Posiciones libres (cartas no seleccionadas)."""
+        selected_letters (list): Lista de letras seleccionadas, serán las letras 
+        asignadas a cada carta en particular.
+        posiciones_anexadas (list):  Posiciones anexadas (cartas seleccionadas)
+        posiciones_libres (list):  Posiciones libres (cartas no seleccionadas).
+    """
     
     selected_letters[card.card_pos] = ""
     posiciones_libres.append(card.card_pos)
@@ -116,20 +138,25 @@ def return_card (card_list:list[Box], card, selected_letters:list, posiciones_an
     
     card.append = False
 
-    card.card_box.rectangulo.x, card.card_box.rectangulo.y = card_list[card.card_pos].card_box.original_rectangulo.x, 100
+    # card.card_box.rectangulo.x, card.card_box.rectangulo.y = card_list[card.card_pos].card_box.original_rectangulo.x, 100
+    card.card_box.rectangulo.x = card_list[card.card_pos].card_box.original_rectangulo.x
+    card.card_box.rectangulo.y = 100
 
-def reset_pos (card_list:list[Box], selected_letters:list, posiciones_anexadas:list, posiciones_libres:list):
+def reset_pos (card_list:list[Box], selected_letters:list, 
+               posiciones_anexadas:list, posiciones_libres:list) -> None:
     """Reinciar a las cartas seleccionadas a las posiciones originales
 
     Args:
         card_list (list[Box]): Lista de cartas utilizadas.
-        selected_letters (list): Lista de letras seleccionadas, serán las letras asignadas a cada carta en particular.
+        selected_letters (list): Lista de letras seleccionadas, serán las letras 
+        asignadas a cada carta en particular.
         posiciones_anexadas (list): Posiciones anexadas (cartas seleccionadas)
         posiciones_libres (list): Posiciones libres (cartas no seleccionadas)."""
     
     for card in card_list:
         if card.append:
-            return_card(card_list, card, selected_letters, posiciones_anexadas, posiciones_libres)
+            return_card(card_list, card, selected_letters, 
+                        posiciones_anexadas, posiciones_libres)
 
 def shuffle_cards (card_list:list):
     """Mezclar las letras asignadas a cada carta NO SELECCIONADA de una lista.

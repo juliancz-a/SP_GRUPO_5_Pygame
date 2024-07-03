@@ -8,14 +8,17 @@ from game_tools.event_handle import *
 from game_tools.extra_functions import *
 
 class SetScore:
-    def __init__(self, surface:pygame.Surface, match:int, score:int, lista_jugadores:list, setscore_assets:list, volume:bool) -> None:
+    def __init__(self, surface: pygame.Surface, match: int, score: int, 
+                lista_jugadores: list, setscore_assets: list, volume: bool) -> None:
         """Escena SetScore
 
         Args:
-            surface (pygame.Surface): Superficie sobre la cual se renderizarán los recursos de la escena.
+            surface (pygame.Surface): Superficie sobre la cual se renderizarán los 
+            recursos de la escena.
             match (int): Numero de partidas jugadas totales.
             score (int):  Puntaje de todas las partidas jugadas.
-            lista_jugadores (list): Lista de jugadores con sus datos, para agregar un nuevo jugador.
+            lista_jugadores (list): Lista de jugadores con sus datos, para agregar
+            un nuevo jugador.
             setscore_assets (list): Configuración de los assets utilizados por la escena
             volume (bool):  Booleano que indica si se desea reproducir audio en la escena.
         """
@@ -29,7 +32,8 @@ class SetScore:
 
         self.score = score
         self.score_promedio = operacion(score, match, lambda x, y: x // y)
-        self.score_text = (f"Tu puntaje total es: {score}\nLa cantidad de partidas jugadas es: {match}\nTu puntaje final es de: {self.score_promedio}")
+        self.score_text = (f"Tu puntaje total es: {score}\nLa cantidad de partidas jugadas es: "
+                            f"{match}\nTu puntaje final es de: {self.score_promedio}")
 
         self.nickname_text = ""
 
@@ -56,7 +60,8 @@ class SetScore:
     def render(self):
         """Renderizar los elementos de la escena SetScore. Botones, fondo y titulo """
 
-        box_list = [self.assets["input_box"], self.assets["submit_button"], self.assets["game_over_title"]]
+        box_list = [self.assets["input_box"], self.assets["submit_button"], 
+                    self.assets["game_over_title"]]
         images = [self.assets["background"], self.assets["volume_button"]]
         self.assets["game_over_title"].rectangulo.centerx = self.surface.get_width() // 2
 
@@ -68,12 +73,15 @@ class SetScore:
 
         if len(self.nickname_text) > 3:
             self.assets["submit_button"].draw_box(self.surface, 5, 5)
-            self.assets["submit_button"].draw_text(self.surface, "Listo", "grey90", FUENTE_1, 40, center=True)
+            self.assets["submit_button"].draw_text(self.surface, "Listo", 
+                                                   "grey90", FUENTE_1, 40, center=True)
         
         if len(self.nickname_text) == 0:
-            self.assets["nickname"].draw_text(self.surface, " Nombre:", "gray59", FUENTE_1, 60)
+            self.assets["nickname"].draw_text(self.surface, " Nombre:", 
+                                              "gray59", FUENTE_1, 60)
         else:
-            self.assets["nickname"].draw_text(self.surface, self.nickname_text, "black", FUENTE_1, 60)
+            self.assets["nickname"].draw_text(self.surface, self.nickname_text, 
+                                              "black", FUENTE_1, 60)
 
         render_multi_line(self.surface, self.score_text, 610, 250, 200, center_text= True)
 
@@ -105,7 +113,9 @@ class SetScore:
 
         match self.option:
             case 0:
-                self.lista_jugadores.append({"nombre" : self.nickname_text , "puntos" : self.score_promedio, "partidas" : self.match})
+                self.lista_jugadores.append({"nombre" : self.nickname_text, 
+                                             "puntos" : self.score_promedio, 
+                                             "partidas" : self.match})
                 
                 ordenar_elementos(self.lista_jugadores, 2, "puntos")
 
@@ -134,7 +144,7 @@ class SetScore:
     def set_music(self):
         """Carga la música, y la reproduce en un loop infinito."""
     
-        pygame.mixer.music.load(r"code\data\sound\566579__bainmack__chime_song_mellow_chill_short2.wav")
+        pygame.mixer.music.load(SETSCORE_MUSIC)
         pygame.mixer.music.play(-1)
         pygame.mixer.music.set_volume(0.1)
     

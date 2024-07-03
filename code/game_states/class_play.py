@@ -9,11 +9,14 @@ from data.config.config import *
 from game_tools.words import *
 
 class Play:
-    def __init__(self, surface:pygame.Surface, match:int, datos_palabras:tuple, score:int, comodin_state:int, play_assets:list, volume:bool) -> None:
+    def __init__(self, surface: pygame.Surface, match: int, datos_palabras: tuple, 
+                 score: int, comodin_state: int, play_assets: list, volume: bool) -> None:
         """Escena principal del juego: Play.
 
         Args:
-            surface (pygame.Surface): Superficie sobre la cual se renderizarán los recursos de la escena.
+            surface (pygame.Surface): Superficie sobre la cual se renderizarán 
+            los recursos de la escena.
+
             match (int): Numero de partidas jugadas en una misma instancia de juego.
             datos_palabras (tuple): Tupla con letras aleatorias y sus posibles combinaciones
             score (int): Puntaje de la partida actual.
@@ -73,8 +76,11 @@ class Play:
     def render(self):
         """Renderizar los elementos de la escena Play. Botones, fondo, cartas.
         """
-        images_list = [self.assets["background"], self.assets["comodin_button"], self.assets["volume_button"]]
-        button_list = [self.assets["menu_button"], self.assets["clear_button"], self.assets["shuffle_button"], self.assets["join_button"]]
+        images_list = [self.assets["background"], self.assets["comodin_button"],
+                       self.assets["volume_button"]]
+        
+        button_list = [self.assets["menu_button"], self.assets["clear_button"],
+                       self.assets["shuffle_button"], self.assets["join_button"]]
 
         set_buttons_colors(button_list, self.assets_cfg)
 
@@ -93,12 +99,22 @@ class Play:
 
         if count_select_letters(self.game_cfg["selected_letters"]) > 2:
             self.assets["join_button"].draw_box(self.surface, 10, 5)
-            self.assets["join_button"].draw_text(self.surface, "¡Unir!", "white", FUENTE_1, 60, "shadow", 1, "black", center=True)
-        
-        self.assets["timer"].draw_text(self.surface, str(tiempo_restante), "white", FUENTE_4, font_size=275, center=True,outline="shadow", outline_thickness=2)
-        self.assets["score_text"].draw_text(self.surface, f"Puntaje: {str(self.score)}", "darkslateblue", FUENTE_4, font_size=125, center=True,outline="shadow", outline_thickness=2)
 
-        draw_words(self.surface, self.matriz_combinaciones, self.game_cfg["founded_words"], self.comodin_state, self.random_letter)
+            self.assets["join_button"].draw_text(self.surface, "¡Unir!", "white", 
+                                                 FUENTE_1, 60, "shadow", 1, 
+                                                 "black", center = True)
+        
+        self.assets["timer"].draw_text(self.surface, str(tiempo_restante), "white", 
+                                       FUENTE_4, font_size = 275, center = True, 
+                                       outline = "shadow", outline_thickness = 2)
+        
+        self.assets["score_text"].draw_text(self.surface, f"Puntaje: {str(self.score)}", 
+                                            "darkslateblue", FUENTE_4, font_size = 125, 
+                                            center = True, outline = "shadow", 
+                                            outline_thickness=2)
+
+        draw_words(self.surface, self.matriz_combinaciones, self.game_cfg["founded_words"],
+                    self.comodin_state, self.random_letter)
 
         pygame.display.update()
 
@@ -112,14 +128,20 @@ class Play:
         pygame.time.set_timer(pygame.USEREVENT + 2, 20000)
 
         if event.type == JOIN_CARDS:
-            word = join_letters(self.game_cfg["selected_letters"], self.game_cfg["founded_words"], self.combinaciones)
+            word = join_letters(self.game_cfg["selected_letters"], 
+                                self.game_cfg["founded_words"], self.combinaciones)
+            
             if word != False:
                 self.game_cfg["founded_words"].append(word)
-                reset_pos(self.game_cfg["card_list"], self.game_cfg["selected_letters"], self.game_cfg["pos_anexadas"], self.game_cfg["pos_libres"])
+                reset_pos(self.game_cfg["card_list"], self.game_cfg["selected_letters"],
+                        self.game_cfg["pos_anexadas"], self.game_cfg["pos_libres"])
+                
                 self.score += sum_score(score, word)
         
         elif event.type == pygame.USEREVENT + 2:
-            self.assets["background"] = Image(select_random_element(self.assets["background"].image_path, self.background_list), (0,0), (1280,720))
+            self.assets["background"] = Image(select_random_element(self.assets["background"].image_path,
+                                                                    self.background_list), 
+                                                                    (0,0), (1280,720))
         
 
         if count_select_letters(self.game_cfg["selected_letters"]) > 2:
@@ -132,7 +154,9 @@ class Play:
         if self.assets["menu_button"].interaction(event):
             self.option = 0
 
-        handle_cards_interaction(event, self.game_cfg["card_list"], self.game_cfg["selected_letters"], self.game_cfg["pos_libres"], self.game_cfg["pos_anexadas"])
+        handle_cards_interaction(event, self.game_cfg["card_list"], 
+                                self.game_cfg["selected_letters"], 
+                                self.game_cfg["pos_libres"], self.game_cfg["pos_anexadas"])
 
         if self.comodin_state == 1:
             action = self.assets["comodin_button"].image_box.interaction(event)
@@ -142,7 +166,8 @@ class Play:
                 self.random_letter = select_random_letter(self.combinaciones)
 
         if self.assets["clear_button"].interaction(event):
-            reset_pos(self.game_cfg["card_list"], self.game_cfg["selected_letters"], self.game_cfg["pos_anexadas"], self.game_cfg["pos_libres"])
+            reset_pos(self.game_cfg["card_list"], self.game_cfg["selected_letters"], 
+                    self.game_cfg["pos_anexadas"], self.game_cfg["pos_libres"])
         
         if self.assets["shuffle_button"].interaction(event):
             shuffle_cards(self.game_cfg["card_list"])
@@ -169,7 +194,8 @@ class Play:
         
         if self.volume:
             pygame.mixer.music.set_volume(0.1)
-            self.assets["volume_button"] = Image(VOLUME_BUTTON, (10, 10), (60,60))       
+            self.assets["volume_button"] = Image(VOLUME_BUTTON, (10, 10), (60,60))
+        
         else:
             pygame.mixer.music.set_volume(0)
             self.assets["volume_button"] = Image(VOLUME_MUTE_BUTTON, (10, 10), (60,60))       

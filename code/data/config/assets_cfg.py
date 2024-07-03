@@ -37,7 +37,8 @@ menu_title = {
               "box": Box((200,100), (400,50)),
               "colors" : [],
               "config" : [],
-              "text" :  ["Pop The Card", COLOR_LETRAS, FUENTE_1, 80, "border", 2, TITULO, True],
+              "text" :  ["Pop The Card", COLOR_LETRAS, FUENTE_1, 80, "border", 
+                        2, TITULO, True],
               "interaction" : False
               }
 
@@ -49,14 +50,16 @@ menu_chains = {
                 "image" : Image(CHAINS, (130, 320), (150, 270)),
                 "interaction" : False}
 
-MENU_ASSETS = [play_button, help_button, quit_button, menu_title, menu_volume_button, menu_background, menu_chains]
+MENU_ASSETS = [play_button, help_button, quit_button, menu_title, menu_volume_button, 
+               menu_background, menu_chains]
 
 
 # PLAY SCENE ASSETS
 back_button = {"box": Box((1160,650), (100,50)),
               "colors": ["mediumpurple4", "mediumpurple3", "mediumpurple3"],
               "config": [5, 5],
-              "text": ["Volver al menú", "white", FUENTE_1, 40, "shadow", 1, "black", True]
+              "text": ["Volver al menú", "white", FUENTE_1, 40, "shadow", 
+                        1, "black", True]
               }
 
 clear_button = {
@@ -91,14 +94,18 @@ score_text = {"box": Box((400, 420), (100,50)),
             "text" : []
             }
 
-comodin_button = {"image" :  Image(COMODIN, (1070, 220), (100,100), image_hover_path=COMODIN_HOVER,  press_sound=PRESS_COMODIN_SOUND)}
+comodin_button = {"image" : Image(COMODIN, (1070, 220), (100,100), 
+                                image_hover_path = COMODIN_HOVER, 
+                                press_sound = PRESS_COMODIN_SOUND)
+                }
 
 volume_button = {"image" : Image(VOLUME_BUTTON, (10, 10), (60,60))}
 
 play_background = {"image" : Image(PLAY_BACKGROUND_1, (0,0), (1280,720))}
 
 
-PLAY_ASSETS = [back_button, clear_button, shuffle_buton, join_button, timer, score_text, comodin_button, volume_button, play_background]
+PLAY_ASSETS = [back_button, clear_button, shuffle_buton, join_button, timer, 
+               score_text, comodin_button, volume_button, play_background]
 
 
 
@@ -107,7 +114,8 @@ continue_button = {
                   "box": Box((640, 360), (400,150)),
                   "colors": ["violetred3", "violetred4", "violetred4"],
                   "config": [1,1],
-                  "text": ["Seguir jugando", "white", FUENTE_1, 30, "border", 2, "black", True]
+                  "text": ["Seguir jugando", "white", FUENTE_1, 30, "border", 
+                           2, "black", True]
                   }
 
 finish_button = {
@@ -126,7 +134,8 @@ volume_button = {"image" : Image(VOLUME_BUTTON, (10, 10), (60,60))}
 
 finish_match_bg = {"image" : Image(FINISH_MATCH_BACKGROUND, (0,0), (1280,720))}
 
-FINISH_MATCH_ASSETS = [continue_button, finish_button, score_text, volume_button, finish_match_bg]
+FINISH_MATCH_ASSETS = [continue_button, finish_button, score_text, volume_button, 
+                       finish_match_bg]
 
 
 #SET SCORE SCENE ASSETS
@@ -148,7 +157,8 @@ game_over_title = {
             "box" :  Box((0, 20), (400,150)),
             "colors" : [],
             "config" : [],
-            "text" : ["Registra tu nombre", "white", FUENTE_1, 60, "border", 2, "grey55", True],
+            "text" : ["Registra tu nombre", "white", FUENTE_1, 60, "border", 2, 
+                      "grey55", True],
             "interaction" : False
 }
 
@@ -162,7 +172,8 @@ nickname  = {
 volume_button = {"image" : Image(VOLUME_BUTTON, (10, 10), (60,60))}
 
 set_score_bg = {"image" : Image(SET_SCORE_BACKGROUND, (0,0), (1280,720))}
-REGISTER_SCORE_ASSETS = [input_box, submit_button, game_over_title, nickname, volume_button, set_score_bg]
+REGISTER_SCORE_ASSETS = [input_box, submit_button, game_over_title, nickname, 
+                         volume_button, set_score_bg]
 
 #HELP SCENE ASSETS
 back_button = {"box": Box((1110,600), (150,100)),
@@ -188,7 +199,8 @@ volume_button = {"image" : Image(VOLUME_BUTTON, (10, 650), (60,60)),
 help_background = {"image" : Image(HELP_BACKGROUND, (0,0), (1280,720)),
                "interaction" : False}
 
-HELP_ASSETS = [back_button, comodin_img, shuffle_img, clear_img, volume_button, help_background]
+HELP_ASSETS = [back_button, comodin_img, shuffle_img, clear_img, 
+               volume_button, help_background]
 
 
 #ALL GAME ASSETS
