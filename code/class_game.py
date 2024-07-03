@@ -37,7 +37,7 @@ class Game:
         pygame.display.set_icon(icon)
     
     def get_events (self):
-
+       
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.quit = True
@@ -45,7 +45,7 @@ class Game:
             self.window.handle_event(event)
         
     def run(self):
-        
+       
         while self.quit is False:
 
             self.get_events()
@@ -69,7 +69,7 @@ class Game:
                 self.window = Menu(self.surface, self.lista_jugadores, self.game_assets["menu"], self.volume)
 
             case "help":
-                self.window = Help(self.surface,  self.game_assets["help"], self.volume)
+                self.window = Help(self.surface, self.game_assets["help"], self.volume)
 
             case "play":
                 datos_palabras = set_combination(self.lista_palabras)

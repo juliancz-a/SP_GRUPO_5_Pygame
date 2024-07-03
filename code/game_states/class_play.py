@@ -101,7 +101,7 @@ class Play:
         pygame.time.set_timer(pygame.USEREVENT + 2, 25000)
 
         if event.type == JOIN_CARDS:
-            word = join_cards(self.game_cfg["selected_letters"], self.game_cfg["founded_words"], self.combinaciones)
+            word = join_letters(self.game_cfg["selected_letters"], self.game_cfg["founded_words"], self.combinaciones)
             if word != False:
                 self.game_cfg["founded_words"].append(word)
                 reset_pos(self.game_cfg["card_list"], self.game_cfg["selected_letters"], self.game_cfg["pos_ocupadas"], self.game_cfg["pos_libres"])

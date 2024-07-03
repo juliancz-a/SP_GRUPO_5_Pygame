@@ -77,27 +77,6 @@ def return_card (card_list:list[Box], card, selected_letters:list, pos_ocupadas,
     card.card_box.rectangulo.x, card.card_box.rectangulo.y = card_list[card.card_pos].card_box.original_rectangulo.x, 100
 
 
-def join_cards (selected_letters:list, words_founded:list, combinaciones):
-    retorno = False
-
-    palabra = "".join(selected_letters).lower()
-
-    set_dict = set(combinaciones)
-    
-    palabra_set = {palabra}
-
-    intersec = set_dict.intersection(palabra_set)
-
-    coincidences = words_founded.count(palabra)
-
-    if len(intersec) > 0 and coincidences == 0:
-        retorno = palabra
-    else:
-        retorno = False
-
-    return retorno
-
-
 def shuffle (card_list):
     shuffle_card = []
     for card in card_list:

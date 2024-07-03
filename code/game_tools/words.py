@@ -5,7 +5,7 @@ from game_tools.extra_functions import *
 from constantes import *
 
 def draw_words (surface:pygame.Surface, matrix:list, words_founded:list, comodin, random_letter):
-    
+
     x = 60
     
     for i in range (len(matrix)):
@@ -41,7 +41,28 @@ def draw_words (surface:pygame.Surface, matrix:list, words_founded:list, comodin
                     x -= 100
                 break
 
-def sum_score(score:int, word):
+
+def join_letters (selected_letters:list, words_founded:list, combinaciones) -> bool | str:
+    retorno = False
+
+    palabra = "".join(selected_letters).lower()
+
+    set_dict = set(combinaciones)
+    
+    palabra_set = {palabra}
+
+    intersec = set_dict.intersection(palabra_set)
+
+    coincidences = words_founded.count(palabra)
+
+    if len(intersec) > 0 and coincidences == 0:
+        retorno = palabra
+    else:
+        retorno = False
+
+    return retorno
+
+def sum_score(score:int, word) -> int:
     score += len(word)
     return score
 
@@ -63,7 +84,7 @@ def normalize_words (combinations) -> list[list]:
 
     return matriz
 
-def select_random_letter (combinaciones):
+def select_random_letter (combinaciones) -> str:
     elemento_random = random.randint(0, len(combinaciones) - 1)
     palabra = combinaciones[elemento_random]
     
