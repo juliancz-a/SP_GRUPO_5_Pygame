@@ -20,7 +20,8 @@ def set_cards(coords:tuple , cards_counter:int, letras:list = None) -> list:
     card_pos = 0
 
     for i in range(cards_counter):
-        card = Card( (100,128), (initial_pos_x + center_x, coords[1]), CARTAS, CARTAS_SOUND, card_pos)
+        card = Card( (100,128), (initial_pos_x + center_x, coords[1]), CARTAS,
+                    CARTAS_SOUND, card_pos)
 
         if letras != None:
             card.letter = letras[i]
@@ -32,7 +33,8 @@ def set_cards(coords:tuple , cards_counter:int, letras:list = None) -> list:
 
     return card_list
 
-def draw_cards(surface:pygame.Surface, card_list:list[Card], transparency:int = 255) -> None:
+def draw_cards(surface:pygame.Surface, card_list:list[Card], 
+               transparency:int = 255) -> None:
     """Dibujar en pantalla una lista de cartas preeinicializadas.
 
     Args:
@@ -43,15 +45,20 @@ def draw_cards(surface:pygame.Surface, card_list:list[Card], transparency:int = 
     for i in range (len(card_list)):
         card_list[i].draw_card(surface, "white", FUENTE_2, 86, transparency)
 
-def handle_cards_interaction(event:pygame.event.Event, card_list:list[Card], selected_letters:list, posiciones_libres:list, posiciones_anexadas:list):
+def handle_cards_interaction(event:pygame.event.Event, card_list:list[Card], 
+                            selected_letters:list, posiciones_libres:list, 
+                            posiciones_anexadas:list):
     """Manejar la interacción del usuario con las cartas: Agregarlas o sacarlas de la selección.
 
     Args:
-        event (pygame.event.Event): Evento capturado del loop de eventos. Se llama a func "interaction" para saber si el usuario presionó una carta.
+        event (pygame.event.Event): Evento capturado del loop de eventos. 
+        Se llama a func "interaction" para saber si el usuario presionó una carta.
         card_list (list[Card]): Lista de cartas utilizadas.
-        selected_letters (list): Lista de letras seleccionadas, serán las letras asignadas a cada carta en particular.
+        selected_letters (list): Lista de letras seleccionadas, serán las letras 
+        asignadas a cada carta en particular.
         posiciones_libres (list): Posiciones libres (cartas no seleccionadas).
-        posiciones_anexadas (list): Posiciones anexadas (cartas seleccionadas)"""
+        posiciones_anexadas (list): Posiciones anexadas (cartas seleccionadas)
+    """
     
     occurrences_list = []
     for card in card_list:

@@ -8,7 +8,8 @@ def handle_mouse_event (rectangulo: pygame.Rect, event: pygame.event.Event) -> d
         event (pygame.event.Event): Evento capturado
 
     Returns:
-        dict: Diccionario con todos los estados activos del botón al momento."""
+        dict: Diccionario con todos los estados activos del botón al momento.
+    """
     
     estado = {
         "presionado" : None,
