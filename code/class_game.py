@@ -61,7 +61,8 @@ class Game:
     def update_window(self, game_state:str):
         """Actualización de la escena del juego.
         Args:
-            game_state (str): Estado nuevo del juego. Será la nueva escena del juego."""
+            game_state (str): Estado nuevo del juego. Será la nueva escena del juego.
+        """
         match game_state:
 
             case "menu":

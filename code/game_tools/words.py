@@ -53,7 +53,20 @@ def draw_words (surface: pygame.Surface, matrix: list, words_founded: list, como
                 break
 
 
-def join_letters (selected_letters:list, words_founded:list, combinaciones) -> bool | str:
+def join_letters (selected_letters:list, words_founded:list, combinaciones: list) -> bool | str:
+    """
+    Une las letras ingresadas para crear una palabra, y verifica que esta 
+    se encuentre entre las palabras correctas.
+
+    Args:
+        selected_letters (list): Letras seleccionadas.
+        words_founded (list): Palabras encontradas.
+        combinaciones (list): Lista de palabras correctas.
+
+    Returns:
+        bool | str: Devuelve la palabra formada. Un False si no existe la palabra, 
+        o esta ya fue encontrada
+    """
     retorno = False
 
     palabra = "".join(selected_letters).lower()
