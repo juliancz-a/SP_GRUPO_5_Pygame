@@ -59,7 +59,8 @@ def operacion(x, y, operacion):
     return operacion(x, y)
 
 
-def render_multi_line(surface: pygame.Surface, text: str, x: int, y: int, font_size: int, center_text: bool = False):
+def render_multi_line(surface: pygame.Surface, text: str, x: int, y: int,
+                      font_size: int, center_text: bool = False):
     """
     Separa un texto según los saltos de línea, para mostrar línea por línea en pantalla.
 
@@ -75,7 +76,8 @@ def render_multi_line(surface: pygame.Surface, text: str, x: int, y: int, font_s
     lines = text.splitlines()
     for i, line in enumerate(lines):
         box_line = Box((x, y + font_size // 3 * i), (50,50))
-        box_line.draw_text(surface, line, "white", FUENTE_1, font_size, "shadow", 2, "black", center = center_text)
+        box_line.draw_text(surface, line, "white", FUENTE_1, font_size, "shadow",
+                           2, "black", center = center_text)
 
 def select_random_element(actual_element: str | int, elements_list: list) -> str | int:
     """
