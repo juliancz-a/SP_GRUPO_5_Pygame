@@ -58,6 +58,7 @@ CARTAS_SOUND = r"code\data\sound\card_click.wav"
 MENU_MUSIC = r"code\data\sound\musica_menu.mp3"
 PLAY_MUSIC = r"code\data\sound\play_music.wav"
 FINISH_MATCH_MUSIC = r"code\data\sound\finishmatch_music.mp3"
+SETSCORE_MUSIC = r"code\data\sound\566579__bainmack__chime_song_mellow_chill_short2.wav"
 
 #MAX_TIME_MATCH
 TIEMPO_LIMITE = 12

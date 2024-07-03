@@ -8,12 +8,15 @@ from game_tools.extra_functions import *
 
 class Menu:
 
-    def __init__(self, surface:pygame.Surface, lista_jugadores:list, menu_assets:list[dict], volume:bool) -> None:
+    def __init__(self, surface: pygame.Surface, lista_jugadores: list, 
+                menu_assets: list[dict], volume: bool) -> None:
         """Escena menú.
 
         Args:
-            surface (pygame.Surface): Superficie sobre la cual se renderizarán los recursos de la escena.
-            lista_jugadores (list): Lista de jugadores con sus datos, para la renderización del Scoreboard
+            surface (pygame.Surface): Superficie sobre la cual se renderizarán los 
+            recursos de la escena.
+            lista_jugadores (list): Lista de jugadores con sus datos, para la 
+            renderización del Scoreboard
             menu_assets (list): Configuración de los assets utilizados por la escena
             volume (bool): Booleano que indica si se desea reproducir audio en la escena.
         """
@@ -48,8 +51,10 @@ class Menu:
     def render(self):
         """Renderizar los elementos de la escena menú. Botones, fondo y titulo """
 
-        images = [self.assets["background"], self.assets["chains"], self.assets["volume_button"]]
-        box_list = [self.assets["play_button"], self.assets["help_button"], self.assets["exit_button"], self.assets["title"]]
+        images = [self.assets["background"], self.assets["chains"], 
+                    self.assets["volume_button"]]
+        box_list = [self.assets["play_button"], self.assets["help_button"], 
+                    self.assets["exit_button"], self.assets["title"]]
 
         set_buttons_colors(box_list, self.assets_config)
             

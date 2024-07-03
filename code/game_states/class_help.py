@@ -5,7 +5,7 @@ from game_tools.event_handle import *
 from game_tools.extra_functions import *
 
 class Help:
-    def __init__(self, surface:pygame.Surface, help_assets:list, volume: bool) -> None:
+    def __init__(self, surface: pygame.Surface, help_assets: list, volume: bool) -> None:
         """Escena How to Play (Help)
 
         Args:
@@ -37,13 +37,16 @@ class Help:
     
     def render(self):
         """Renderizar los elementos de la escena Play. Botones, fondo, titulo, texto, imagenes"""
-        images = [self.assets["help_background"], self.assets["comodin_img"], self.assets["shuffle_img"], self.assets["clear_img"], self.assets["volume_button"]]
+        images = [self.assets["help_background"], self.assets["comodin_img"], 
+                self.assets["shuffle_img"], self.assets["clear_img"], 
+                self.assets["volume_button"]]
 
         set_buttons_colors([self.assets["menu_button"]], self.assets_config)
 
         self.surface.fill("aquamarine4")
         
-        draw_assets(self.surface, [self.assets["menu_button"]], images, self.assets_config)
+        draw_assets(self.surface, [self.assets["menu_button"]],
+                    images, self.assets_config)
 
         render_multi_line(self.surface, HELP_TEXT, 620, 10, 150, center_text= True)
 
@@ -80,10 +83,10 @@ class Help:
 
         if self.volume:
             pygame.mixer.music.set_volume(0.1)
-            self.assets["volume_button"] = Image(VOLUME_BUTTON, (10, 650), (60,60))       
+            self.assets["volume_button"] = Image(VOLUME_BUTTON, (10, 650), (60,60))
         else:
             pygame.mixer.music.set_volume(0)
-            self.assets["volume_button"] = Image(VOLUME_MUTE_BUTTON, (10, 650), (60,60))       
+            self.assets["volume_button"] = Image(VOLUME_MUTE_BUTTON, (10, 650), (60,60))
 
         return self.volume    
 
