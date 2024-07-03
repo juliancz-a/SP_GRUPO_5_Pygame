@@ -1,4 +1,3 @@
-from game_tools.class_box import Box
 from game_tools.class_image import *
 
 def set_buttons_colors(box_list: list[Box], lista_cfg: list[dict]):

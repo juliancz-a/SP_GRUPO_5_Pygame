@@ -7,11 +7,11 @@ class Image:
         """Creacion de un objeto tipo Image (imagen), para su renderización e interacción. Comparte propiedades de un objeto del tipo Box.
 
         Args:
-            image_path (_type_): Ruta de la imagen del objeto
-            coords (_type_): Coordenadas del objeto, deben estar dentro de una superficie
-            dimensiones (_type_): Dimensiones del objeto
-            image_hover_path (_type_, optional): Ruta de la imagen hover del objeto
-            press_sound (_type_, optional): Ruta del sonido del objeto al presionarlo
+            image_path (str): Ruta de la imagen del objeto
+            coords (tuple): Coordenadas del objeto, deben estar dentro de una superficie
+            dimensiones (tuple): Dimensiones del objeto
+            image_hover_path (str, optional): Ruta de la imagen hover del objeto
+            press_sound (str, optional): Ruta del sonido del objeto al presionarlo
         """
 
         self.image_box = Box(coords, dimensiones, press_sound = press_sound)

@@ -1,15 +1,12 @@
 import pygame
 from constantes import *
-from game_tools.class_box import Box
 from game_tools.class_image import Image
 from game_tools.class_card import *
 from game_tools.cards import *
-
 from game_tools.draw_functions import *
 
 from data.config.config import *
 from game_tools.words import *
-import random
 
 class Play:
     def __init__(self, surface:pygame.Surface, match:int, datos_palabras:tuple, score:int, comodin_state:int, play_assets:list, volume:bool) -> None:
@@ -49,7 +46,7 @@ class Play:
                           "selected_letters" : ["", "", "", "", "", ""],
                           "founded_words" : [],
                           "pos_libres" : [0,1,2,3,4,5],
-                          "pos_ocupadas" : []}
+                          "pos_anexadas" : []}
 
         self.comodin_state = comodin_state
         self.random_letter = None
@@ -118,7 +115,7 @@ class Play:
             word = join_letters(self.game_cfg["selected_letters"], self.game_cfg["founded_words"], self.combinaciones)
             if word != False:
                 self.game_cfg["founded_words"].append(word)
-                reset_pos(self.game_cfg["card_list"], self.game_cfg["selected_letters"], self.game_cfg["pos_ocupadas"], self.game_cfg["pos_libres"])
+                reset_pos(self.game_cfg["card_list"], self.game_cfg["selected_letters"], self.game_cfg["pos_anexadas"], self.game_cfg["pos_libres"])
                 self.score += sum_score(score, word)
         
         elif event.type == pygame.USEREVENT + 2:
@@ -135,7 +132,7 @@ class Play:
         if self.assets["menu_button"].interaction(event):
             self.option = 0
 
-        handle_cards_interaction(event, self.game_cfg["card_list"], self.game_cfg["selected_letters"], self.game_cfg["pos_libres"], self.game_cfg["pos_ocupadas"])
+        handle_cards_interaction(event, self.game_cfg["card_list"], self.game_cfg["selected_letters"], self.game_cfg["pos_libres"], self.game_cfg["pos_anexadas"])
 
         if self.comodin_state == 1:
             action = self.assets["comodin_button"].image_box.interaction(event)
@@ -145,7 +142,7 @@ class Play:
                 self.random_letter = select_random_letter(self.combinaciones)
 
         if self.assets["clear_button"].interaction(event):
-            reset_pos(self.game_cfg["card_list"], self.game_cfg["selected_letters"], self.game_cfg["pos_ocupadas"], self.game_cfg["pos_libres"])
+            reset_pos(self.game_cfg["card_list"], self.game_cfg["selected_letters"], self.game_cfg["pos_anexadas"], self.game_cfg["pos_libres"])
         
         if self.assets["shuffle_button"].interaction(event):
             shuffle_cards(self.game_cfg["card_list"])
