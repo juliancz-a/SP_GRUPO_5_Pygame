@@ -25,7 +25,13 @@ class Box:
         #Sonido
         self.sound = press_sound
 
-    def draw_box (self, surface, border_radius = -1, border_width = 0):
+    def draw_box (self, surface:pygame.Surface, border_radius:int = -1, border_width:int = 0):
+        """Dibujar en pantalla el rectangulo lógico craedo.
+
+        Args:
+            surface (_type_): _description_
+            border_radius (int, optional): _description_. Defaults to -1.
+            border_width (int, optional): _description_. Defaults to 0."""
 
         pygame.draw.rect(surface, self.color_principal, self.rectangulo, border_radius = border_radius)
 
