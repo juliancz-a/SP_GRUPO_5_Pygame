@@ -59,7 +59,7 @@ PLAY_MUSIC = r"code\data\sound\play_music.wav"
 FINISH_MATCH_MUSIC = r"code\data\sound\finishmatch_music.mp3"
 
 #MAX_TIME_MATCH
-TIEMPO_LIMITE = 1
+TIEMPO_LIMITE = 30
 
 #CONFIG PATH
 SCOREBOARD_PATH = r"code\data\config\scoreboard.csv"

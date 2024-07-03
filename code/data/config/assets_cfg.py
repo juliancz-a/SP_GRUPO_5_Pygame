@@ -8,7 +8,7 @@ quit_button = {
               "box": Box((100,540), (210,95), press_sound=PRESS_SOUND),
               "colors": [COLOR_BOX, BORDE_BOX, HOVER_BOX],
               "config": [15, 5],
-              "text": ["Salir", LETRAS_2, FUENTE_1, 60, "shadow", 1, BORDE_2, True],
+              "text": ["Salir", LETRAS_2, FUENTE_1, 60, "shadow", 2, BORDE_2, True],
               "interaction" : True
               }
 
@@ -16,7 +16,7 @@ play_button = {
               "box": Box((100,300), (210,95), press_sound=PRESS_SOUND),
               "colors": [COLOR_BOX, BORDE_BOX, HOVER_BOX],
               "config": [15, 5],
-              "text": ["Jugar", LETRAS_2, FUENTE_1, 60, "shadow", 1, BORDE_2, True],
+              "text": ["Jugar", LETRAS_2, FUENTE_1, 60, "shadow", 2, BORDE_2, True],
               "interaction" : True
               }
 
@@ -24,7 +24,7 @@ help_button = {
               "box": Box((100,420), (210,95), press_sound=PRESS_SOUND),
               "colors": [COLOR_BOX, BORDE_BOX, HOVER_BOX],
               "config": [15, 5],
-              "text": ["Cómo jugar", LETRAS_2, FUENTE_1, 50, "shadow", 1, BORDE_2, True],
+              "text": ["Cómo jugar", LETRAS_2, FUENTE_1, 50, "shadow", 2, BORDE_2, True],
               "interaction" : True
               }
 
@@ -79,13 +79,13 @@ join_button = {"box": Box((750,390), (160,70)),
                "text" : []
                }
 
-timer = {"box": Box((618, 420), (50,50)),
+timer = {"box": Box((640, 420), (50,50)),
         "colors": [],
         "config" : [],
         "text" : []
         }
 
-score_text = {"box": Box((400, 410), (100,50)),
+score_text = {"box": Box((400, 420), (100,50)),
             "colors": [],
             "config" : [],
             "text" : []
