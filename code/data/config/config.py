@@ -53,8 +53,8 @@ def update_score (path: str, lista_jugadores: list[dict]):
             header = f"nombre,puntos,partidas\n"
             archive.write(header)
             for jugador in lista_jugadores:
-                data_jugador = (f"{jugador["nombre"]},{jugador["puntos"]},
-                                {jugador["partidas"]}\n")
+                data_jugador = (f"{jugador["nombre"]},{jugador["puntos"]},"
+                                f"{jugador["partidas"]}\n")
                 archive.write(data_jugador)
         
 
