@@ -74,6 +74,7 @@ def render_multi_line(surface: pygame.Surface, text: str, x: int, y: int,
         desde el punto central de la pantalla.
     """
     lines = text.splitlines()
+    line = enumerate(lines)
     for i, line in enumerate(lines):
         box_line = Box((x, y + font_size // 3 * i), (50,50))
         box_line.draw_text(surface, line, "white", FUENTE_1, font_size, "shadow",
