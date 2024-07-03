@@ -7,5 +7,6 @@ lista_palabras = read_data(r"code\data\config\palabras")
 lista_jugadores = read_score(r"code\data\config\scoreboard", lista_jugadores)
 ordenar_elementos(lista_jugadores, 2, "puntos")
 
-juego = Game((1280,720), "POP THE CARD", ICON, lista_palabras, lista_jugadores, game_assets)
+juego = Game((1280,720), "POP THE CARD", ICON, lista_palabras, lista_jugadores,
+            game_assets)
 juego.run()

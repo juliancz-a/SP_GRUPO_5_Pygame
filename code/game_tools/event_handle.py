@@ -35,7 +35,8 @@ def handle_mouse_event (rectangulo: pygame.Rect, event: pygame.event.Event) -> d
                     
     return estado
 
-def handle_input_event(input_box_state: bool, event: pygame.event.Event, text: str, max_len: int) -> str:
+def handle_input_event(input_box_state: bool, event: pygame.event.Event, text: str,
+                       max_len: int) -> str:
     """
     Gestiona los eventos de entrada para el nickname del usuario.
 
@@ -61,7 +62,8 @@ def handle_input_event(input_box_state: bool, event: pygame.event.Event, text: s
     return text
 
 def get_option_selected (event: pygame.event.Event, assets_cfg: list) -> int:
-    """Obtener una opción para modificar la escena a partir de la interacción con un botón.
+    """Obtener una opción para modificar la escena a partir de la interacción
+    con un botón.
 
     Args:
         event (pygame.event.Event): Evento de capturado

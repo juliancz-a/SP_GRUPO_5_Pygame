@@ -14,16 +14,19 @@ from data.config.config import *
 
 class Game:
 
-    def __init__(self, size:tuple, title:str, icon:str, lista_palabras:list, lista_jugadores:list, game_assets:dict) -> None:
+    def __init__(self, size: tuple, title: str, icon: str, lista_palabras: list,
+                lista_jugadores: list, game_assets: dict) -> None:
         """Clase de control del estado del juego
 
         Args:
             size (tuple): Tamaño de resolución
             title (str): Titulo del juego
             icon (str): Ruta del icono del juego
-            lista_palabras (list): Lista de palabras: posee diccionarios con letras cuyos valores son combinaciones de palabras a encontrar
-            lista_jugadores (list): Lista de jugadores con nombre,puntaje y partidas jugadas
-            game_assets (dict): Recursos del cada una de las escenas del juego.
+            lista_palabras (list): Lista de palabras: posee diccionarios con letras
+            cuyos valores son combinaciones de palabras a encontrar
+
+            lista_jugadores (list): Lista de jugadores con nombre, puntaje y partidas jugadas
+            game_assets (dict): Recursos de cada una de las escenas del juego.
         """
 
         pygame.init()
@@ -38,7 +41,8 @@ class Game:
         self.lista_jugadores = lista_jugadores
         self.lista_palabras = lista_palabras
         
-        self.window = Menu(self.surface, self.lista_jugadores, self.game_assets["menu"], self.volume)
+        self.window = Menu(self.surface, self.lista_jugadores, 
+                           self.game_assets["menu"], self.volume)
 
         self.quit = False
 
@@ -55,7 +59,8 @@ class Game:
             self.window.handle_event(event)
         
     def run(self):
-        """Ciclo de ejecución del juego. Se obtienen eventos, se renderizan elementos, se actualizan datos."""
+        """Ciclo de ejecución del juego. Se obtienen eventos, se renderizan elementos,
+        se actualizan datos."""
         while self.quit is False:
 
             self.get_events()
@@ -80,7 +85,8 @@ class Game:
                 self.match = 0
                 self.score = 0
 
-                self.window = Menu(self.surface, self.lista_jugadores, self.game_assets["menu"], self.volume)
+                self.window = Menu(self.surface, self.lista_jugadores, 
+                                   self.game_assets["menu"], self.volume)
 
             case "help":
                 self.window = Help(self.surface, self.game_assets["help"], self.volume)
@@ -90,7 +96,10 @@ class Game:
                     self.lista_palabras = read_data(r"code\data\config\palabras")
 
                 datos_palabras = set_combination(self.lista_palabras)
-                self.window = Play(self.surface, self.match, datos_palabras , self.score, self.comodin_state,  self.game_assets["play"], self.volume)
+
+                self.window = Play(self.surface, self.match, datos_palabras,
+                                   self.score, self.comodin_state, 
+                                   self.game_assets["play"], self.volume)
 
             case "finish_match":
                 
@@ -98,7 +107,10 @@ class Game:
                 self.match = data_updated[0] 
                 self.score = data_updated[1]
                 
-                self.window = FinishMatch(self.surface, self.match, self.score, self.game_assets["finish_match"], self.volume)
+                self.window = FinishMatch(self.surface, self.match, self.score,
+                                          self.game_assets["finish_match"], self.volume)
 
             case "setscore":
-                self.window = SetScore(self.surface, self.match , self.score, self.lista_jugadores, self.game_assets["set_score"], self.volume)
+                self.window = SetScore(self.surface, self.match , self.score,
+                                       self.lista_jugadores, self.game_assets["set_score"],
+                                       self.volume)

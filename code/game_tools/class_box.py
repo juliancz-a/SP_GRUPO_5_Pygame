@@ -1,5 +1,6 @@
 import pygame
 from game_tools.event_handle import *
+from game_tools.draw_functions import *
 #animacion: self.dimensiones | self.posiciones
 
 class Box:
@@ -31,7 +32,8 @@ class Box:
         #Sonido
         self.sound = press_sound
 
-    def draw_box (self, surface:pygame.Surface, border_radius:int = -1, border_width:int = 0):
+    def draw_box (self, surface:pygame.Surface, border_radius:int = -1, 
+                  border_width:int = 0):
         """Dibujar en pantalla el rectangulo lógico creado.
 
         Args:
@@ -39,13 +41,16 @@ class Box:
             border_radius (int, optional): Radio de redondeo del rectángulo
             border_width (int, optional): Longitud del borde del rectángulo"""
 
-        pygame.draw.rect(surface, self.color_principal, self.rectangulo, border_radius = border_radius)
+        pygame.draw.rect(surface, self.color_principal, self.rectangulo,
+                        border_radius = border_radius)
 
         if self.hover:
-            pygame.draw.rect(surface, self.color_hover, self.rectangulo, border_radius = border_radius)
+            pygame.draw.rect(surface, self.color_hover, self.rectangulo, 
+                            border_radius = border_radius)
         
         if border_width > 0: 
-            pygame.draw.rect(surface, self.color_secundario, self.rectangulo, width = border_width, border_radius = border_radius)
+            pygame.draw.rect(surface, self.color_secundario, self.rectangulo, 
+                            width = border_width, border_radius = border_radius)
         
 
     def set_color (self, first_color:tuple, secondary_color:tuple, hover_color:tuple):
@@ -62,13 +67,16 @@ class Box:
         self.color_hover = hover_color
 
     def interaction (self, event:pygame.event.Event) -> bool:
-        """Registrar la interacción del usuario con el rectángulo (bóton), según el evento capturado.
+        """Registrar la interacción del usuario con el rectángulo (bóton), 
+        según el evento capturado.
 
         Args:
             event (pygame.event.Event): Evento capturado
 
         Returns:
-            bool: False [No se ha presionado el botón] True [Se ha presionado con el botón]"""
+            bool: False [No se ha presionado el botón] 
+            True [Se ha presionado con el botón]
+        """
         
         action = False
 
@@ -99,8 +107,9 @@ class Box:
 
         return action
     
-    def draw_text(self, surface: pygame.Surface , text: str, text_color: str| tuple, font:str, font_size:int = 20, 
-                outline:bool = None, outline_thickness:int = 1, outline_color:str = "black",  center:int = False):
+    def draw_text(self, surface: pygame.Surface , text: str, text_color: str| tuple, 
+                  font:str, font_size:int = 20, outline:bool = None,
+                  outline_thickness:int = 1, outline_color:str = "black", center:int = False):
         """Dibujar texto sobre el rectángulo. El rectangúlo puede estar dibujado o no.
 
         Args:
@@ -119,30 +128,21 @@ class Box:
         fuente = pygame.font.Font(font, font_size)
         text_surface = fuente.render(text, True, text_color)
 
-        #Obtener coordenadas del centro de la caja, y asignarselas al texto en formato rect
         width_center = self.rectangulo.size[0] / 2
         height_center = self.rectangulo.size[1] / 2
 
         text_rect = text_surface.get_rect()
         
         if center:
-            text_rect.center = (self.rectangulo.x + width_center, self.rectangulo.y + height_center - 3)
+            text_rect.center = (self.rectangulo.x + width_center, 
+                                self.rectangulo.y + height_center - 3)
         else:
             text_rect.topleft = self.rectangulo.x, self.rectangulo.y
     
         match outline:
             case "border":
-                for dx in range(-outline_thickness, outline_thickness + 1):
-                    for dy in range(-outline_thickness, outline_thickness + 1):
-                        # No renderizar en la posición central (evitar duplicar el texto original)
-                        if dx != 0 or dy != 0:
-                            offset_rect = text_rect.copy()
-                            offset_rect.move_ip(dx, dy)
-
-                            surface.blit(fuente.render(text, True, outline_color), offset_rect)
+                draw_text_outline(surface, fuente, text, text_rect, outline_thickness, outline_color)
             case "shadow":
-                offset_rect = text_rect.copy()
-                offset_rect.move_ip(outline_thickness, outline_thickness)
-                surface.blit(fuente.render(text, True, outline_color), offset_rect)
+                draw_text_shadow(surface, fuente, text, text_rect, outline_thickness, outline_color)
 
         surface.blit(text_surface, text_rect)

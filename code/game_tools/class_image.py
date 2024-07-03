@@ -3,8 +3,10 @@ from game_tools.class_box import Box
 from constantes import  *
 
 class Image:
-    def __init__(self, image_path:str, coords:tuple, dimensiones:tuple, image_hover_path:str = None, press_sound:str = None) -> None:
-        """Creacion de un objeto tipo Image (imagen), para su renderización e interacción. Comparte propiedades de un objeto del tipo Box.
+    def __init__(self, image_path: str, coords: tuple, dimensiones: tuple, 
+                 image_hover_path: str = None, press_sound: str = None) -> None:
+        """Creacion de un objeto tipo Image (imagen), para su renderización e 
+        interacción. Comparte propiedades de un objeto del tipo Box.
 
         Args:
             image_path (str): Ruta de la imagen del objeto
@@ -23,10 +25,11 @@ class Image:
         self.image_hover = None
         if image_hover_path != None:
             self.image_hover = pygame.image.load(image_hover_path)
-            self.image_hover = pygame.transform.scale(self.image_hover, self.image_box.rectangulo.size)
+            self.image_hover = pygame.transform.scale(self.image_hover, 
+                                                      self.image_box.rectangulo.size)
 
     
-    def draw_image (self, surface:pygame.Surface, transparency:int = 255):
+    def draw_image (self, surface: pygame.Surface, transparency: int = 255):
         """Dibujar una imagen sobre una superficie.
 
         Args:

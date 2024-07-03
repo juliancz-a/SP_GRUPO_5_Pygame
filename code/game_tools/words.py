@@ -4,15 +4,16 @@ from game_tools.class_box import Box
 from game_tools.extra_functions import *
 from constantes import *
 
-def draw_words (surface: pygame.Surface, matrix: list, words_founded: list, comodin_state: int, random_letter: str) -> None:
+def draw_words (surface: pygame.Surface, matrix: list, words_founded: list,
+                comodin_state: int, random_letter: str) -> None:
     """
     Recorre la matriz con las palabras que se encuentran en el diccionario de la
     combinación de letras encontrada, y las muestra en pantalla, sin ser reveladas.
 
     Args:
         surface (pygame.Surface): Superficie de la aplicación.
-        matrix (list): Matriz con todas las palabras que se encuentran dentro de la combinación
-        de letras elegida.
+        matrix (list): Matriz con todas las palabras que se encuentran dentro
+        de la combinación de letras elegida.
         words_founded (list): Lista de palabras que ya fueron encontradas.
         comodin_state (int): Recibe el estado de uso del comodin.
         random_letter (str): Recibe la letra aleatoria que el comodin deberá mostrar.
@@ -35,7 +36,8 @@ def draw_words (surface: pygame.Surface, matrix: list, words_founded: list, como
 
                 for word_founded in words_founded:
                     if word_founded == matrix[i][j]:
-                        word.draw_text(surface, word_text, COLOR_PALABRA, FUENTE_3, font_size=200, outline="shadow")
+                        word.draw_text(surface, word_text, COLOR_PALABRA, FUENTE_3,
+                                        font_size=200, outline="shadow")
                         break
         
                 word.draw_text(surface, f"_"*(6-i), COLOR_PALABRA, FUENTE_3, font_size=250)
@@ -53,7 +55,8 @@ def draw_words (surface: pygame.Surface, matrix: list, words_founded: list, como
                 break
 
 
-def join_letters (selected_letters:list, words_founded:list, combinaciones: list) -> bool | str:
+def join_letters (selected_letters:list, words_founded:list,
+                  combinaciones: list) -> bool | str:
     """
     Une las letras ingresadas para crear una palabra, y verifica que esta 
     se encuentre entre las palabras correctas.
@@ -108,7 +111,8 @@ def normalize_words (combinations: list) -> list[list]:
             if len(combination) == key:
                 palabras[key].append(combination)
 
-    max_len = ordenar_elementos([len(palabras[3]), len(palabras[4]), len(palabras[5]), len(palabras[6])], 2)
+    max_len = ordenar_elementos([len(palabras[3]), len(palabras[4]), 
+                                 len(palabras[5]), len(palabras[6])], 2)
     
     matriz = [[0] * max_len for _ in range(4)]
 
@@ -135,10 +139,11 @@ def select_random_letter(combinaciones: list) -> str:
 
     return letra
 
-def use_comodin(surface: pygame.Surface, letter: str, words_founded: list, word_text: str, x: int, y: int) -> None:
+def use_comodin(surface: pygame.Surface, letter: str, words_founded: list,
+                word_text: str, x: int, y: int) -> None:
     """
-    Muestra la letra que el comodin deberá mostrar en la pantalla, en cada una de las palabras
-    que todavía no fueron encontradas.
+    Muestra la letra que el comodin deberá mostrar en la pantalla, en cada una
+    de las palabras que todavía no fueron encontradas.
 
     Args:
         surface (pygame.Surface): Superficie de la aplicación.
@@ -164,7 +169,8 @@ def use_comodin(surface: pygame.Surface, letter: str, words_founded: list, word_
     if coincidence:
         letter_box = Box((x + pos ,y), (40,100))
 
-        letter_box.draw_text(surface, letter[0], COLOR_PALABRA, FUENTE_3, font_size=200, outline="shadow")
+        letter_box.draw_text(surface, letter[0], COLOR_PALABRA, FUENTE_3,
+                             font_size=200, outline="shadow")
 
 def count_select_letters (selected_letters: list) -> int:
     """
