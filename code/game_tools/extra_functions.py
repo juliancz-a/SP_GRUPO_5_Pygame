@@ -2,12 +2,12 @@ from game_tools.class_box import *
 from constantes import *
 import random
 
-def ordenar_elementos (list: list[dict], orden: int, key: str = None) -> str:
+def ordenar_elementos (list: list | list[dict], orden: int, key: str = None) -> str:
     """
     Método de ordenamiento bubble sort.
 
     Args:
-        list (list[dict]): Lista a ordenar
+        list (list | list[dict]): Lista a ordenar
         orden (int): Tipo de orden (Ascendente o descendente)
         key (str, optional): En caso de existir, se ordena la lista según
         el valor de la key.
@@ -41,7 +41,7 @@ def ordenar_elementos (list: list[dict], orden: int, key: str = None) -> str:
 
     return first_element
 
-def swap(list:list[dict], a:int, b:int):
+def swap(list: list[dict], a: int, b: int):
     """
     Intercambia los elementos de la lista en posiciones 'a' y 'b'.
 
@@ -65,8 +65,8 @@ def render_multi_line(surface: pygame.Surface, text: str, x: int, y: int, font_s
     Args:
         surface (pygame.Surface): Superficie de la aplicación.
         text (str): Oración a mostrar en pantalla.
-        x (int): Coordenada horizontal en la superficie.
-        y (int): Coordenada vertical en la superficie.
+        x (int): Coordenada horizontal de la línea, en la superficie.
+        y (int): Coordenada vertical de la línea, en la superficie.
         font_size (int): Tamaño de las letras a mostrar en pantalla.
         center_text (bool, optional): Inicializda en False. Si es True, escribe el texto.
         desde el punto central de la pantalla.
@@ -76,21 +76,21 @@ def render_multi_line(surface: pygame.Surface, text: str, x: int, y: int, font_s
         box_line = Box((x, y + font_size // 3 * i), (50,50))
         box_line.draw_text(surface, line, "white", FUENTE_1, font_size, "shadow", 2, "black", center = center_text)
 
-def select_random_element(actual_element: str | int, lista_elementos: list) -> str | int:
+def select_random_element(actual_element: str | int, elements_list: list) -> str | int:
     """
     Elige un elemento aleatorio de una lista
 
     Args:
         actual_element (str | int): Elemento actualmente seleccionado.
-        lista_elementos (list): La lista con todos los elementos a usar.
+        elements_list (list): La lista con todos los elementos a usar.
 
     Returns:
         str | int: Devuelve el elemento seleccionado aleatoriamente.
     """
     
-    random_element = random.choice(lista_elementos)
+    random_element = random.choice(elements_list)
     while random_element == actual_element:
-        random_element = random.choice(lista_elementos)
+        random_element = random.choice(elements_list)
 
     return random_element
 

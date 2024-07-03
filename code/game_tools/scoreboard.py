@@ -11,7 +11,7 @@ class Scoreboard:
 
         self.font = pygame.font.Font(font, 18)
      
-    def draw_scoreboard(self, max_jugadores: int) -> None:
+    def draw_scoreboard(self, max_players: int) -> None:
         """
         Dibuja el scoreboard con el nombre y la puntuación de los mejores jugadores.
 
@@ -26,7 +26,7 @@ class Scoreboard:
         
         for i in range(len(self.player_list)):
             y += 50
-            if i < max_jugadores:
+            if i < max_players:
                 
                 for header in header_data:
 
