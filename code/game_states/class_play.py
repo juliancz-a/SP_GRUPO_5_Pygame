@@ -145,7 +145,6 @@ class Play:
                                                                     self.background_list), 
                                                                     (0,0), (1280,720))
         
-
         if count_select_letters(self.game_cfg["selected_letters"]) > 2:
             if self.assets["join_button"].interaction(event):
                 pygame.event.post(pygame.event.Event(JOIN_CARDS))
