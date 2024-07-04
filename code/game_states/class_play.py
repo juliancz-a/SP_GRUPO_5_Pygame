@@ -41,6 +41,7 @@ class Play:
 
         #CARDS/WORDS SETUP
         self.combinaciones = datos_palabras[1]
+        self.combinaciones_set = set(datos_palabras[1])
         self.letras = datos_palabras[0]
         self.matriz_combinaciones = normalize_words(self.combinaciones)
 
@@ -131,7 +132,7 @@ class Play:
 
         if event.type == JOIN_CARDS:
             word = join_letters(self.game_cfg["selected_letters"], 
-                                self.game_cfg["founded_words"], self.combinaciones)
+                                self.game_cfg["founded_words"], self.combinaciones_set)
             
             if word != False:
                 self.game_cfg["founded_words"].append(word)
