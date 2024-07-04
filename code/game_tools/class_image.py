@@ -40,5 +40,6 @@ class Image:
         image_alpha.set_alpha(transparency)
 
         surface.blit(image_alpha, self.image_box.rectangulo)
+        
         if self.image_hover != None and self.image_box.hover:
             surface.blit(self.image_hover, self.image_box.rectangulo)

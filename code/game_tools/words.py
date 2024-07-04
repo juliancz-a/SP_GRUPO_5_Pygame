@@ -24,9 +24,11 @@ def draw_words (surface: pygame.Surface, matrix: list, words_founded: list,
         printed = 0
         y = 520
         x += 100
+
         for j in range (len(matrix[i])):
     
             if matrix[i][j] != 0:
+
                 word = matrix[i][j]
                 word_text = word
                 word = Box((x, y), (40, 100))
@@ -49,11 +51,11 @@ def draw_words (surface: pygame.Surface, matrix: list, words_founded: list,
                     y = 520
                     x += 100
                     printed = 0
+
             else:
                 if printed == 0:
                     x -= 100
                 break
-
 
 def join_letters (selected_letters:list, words_founded:list,
                   combinaciones: list) -> bool | str:
