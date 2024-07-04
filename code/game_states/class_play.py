@@ -29,6 +29,7 @@ class Play:
         self.initial_time = pygame.time.get_ticks()
         self.music = self.set_music()
         self.volume = volume
+        self.timer_event = pygame.time.set_timer(pygame.USEREVENT + 2, 10000)
 
         #ASSETS
         self.assets_cfg = play_assets
@@ -126,7 +127,7 @@ class Play:
         score = 0
 
         JOIN_CARDS = pygame.USEREVENT + 1
-        pygame.time.set_timer(pygame.USEREVENT + 2, 20000)
+    
 
         if event.type == JOIN_CARDS:
             word = join_letters(self.game_cfg["selected_letters"], 
