@@ -69,7 +69,7 @@ class Scoreboard:
         header_data = []
 
         for header in header_elements:
-            header_text = font.render(header.upper(), True, "yellow")
+            header_text = font.render(header.capitalize(), True, "yellow")
             surface.blit(header_text, (x,y))
 
             header_data.append({header: x})
