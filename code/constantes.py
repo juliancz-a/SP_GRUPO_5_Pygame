@@ -61,7 +61,7 @@ FINISH_MATCH_MUSIC = r"code\data\sound\finishmatch_music.mp3"
 SETSCORE_MUSIC = r"code\data\sound\566579__bainmack__chime_song_mellow_chill_short2.wav"
 
 #MAX_TIME_MATCH
-TIEMPO_LIMITE = 12
+TIEMPO_LIMITE = 90
 
 #CONFIG PATH
 SCOREBOARD_PATH = r"code\data\config\scoreboard"

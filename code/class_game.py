@@ -19,7 +19,7 @@ class Game:
         """Clase de control del estado del juego
 
         Args:
-            size (tuple): Tamaño de resolución
+            size (tuple):  Resolución
             title (str): Titulo del juego
             icon (str): Ruta del icono del juego
             lista_palabras (list): Lista de palabras: posee diccionarios con letras
@@ -64,8 +64,8 @@ class Game:
         while self.quit is False:
 
             self.get_events()
-            self.window.render()
             self.volume = self.window.update_audio()
+            self.window.render()
 
             game_state = self.window.update()
             if game_state == "quit":

@@ -44,8 +44,8 @@ class Play:
         self.matriz_combinaciones = normalize_words(self.combinaciones)
 
         self.game_cfg = {"cards_quantity" : 6,
-                          "card_list" : set_cards((self.surface.get_width(),100), 6, self.letras),
-                          "empty_card_list" : set_cards((self.surface.get_width(), 250), 6),
+                          "card_list" : set_cards((self.surface.get_width(),100), -315, 6, self.letras),
+                          "empty_card_list" : set_cards((self.surface.get_width(), 250), -315, 6),
                           "selected_letters" : ["", "", "", "", "", ""],
                           "founded_words" : [],
                           "pos_libres" : [0,1,2,3,4,5],
@@ -87,7 +87,7 @@ class Play:
         tiempo_transcurrido = (pygame.time.get_ticks() - self.initial_time) // 1000
         tiempo_restante = TIEMPO_LIMITE - tiempo_transcurrido
 
-        if tiempo_restante == 0:
+        if tiempo_restante == 0 or len(self.game_cfg["founded_words"]) == len(self.combinaciones):
             self.option = 1
 
         self.surface.fill("black")

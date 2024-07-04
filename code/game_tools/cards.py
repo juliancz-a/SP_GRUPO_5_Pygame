@@ -1,6 +1,6 @@
 from game_tools.class_card import *
 
-def set_cards(coords: tuple , cards_counter: int, letras: list = None) -> list:
+def set_cards(coords:tuple , initial_pos_x, cards_counter:int, letras:list = None) -> list:
     """Inicialización de las cartas: seteo de sus posiciones, asignación de letra.
     Args:
         coords (tuple): Coordenadas para mostrar las cartas en pantallas.
@@ -16,7 +16,7 @@ def set_cards(coords: tuple , cards_counter: int, letras: list = None) -> list:
         letras = letras.split(",")
 
     center_x = coords[0] // 2 
-    initial_pos_x = -315
+    initial_pos_x = initial_pos_x #-315
     card_pos = 0
 
     for i in range(cards_counter):
@@ -73,6 +73,7 @@ def handle_cards_interaction(event:pygame.event.Event, card_list:list[Card],
             occurrences = occurrences_list.count(card.letter)
 
             if selected_letters.count(card.letter) < occurrences and not card.append:
+                
                 card.card_pos = append_card(card_list, card, selected_letters, 
                                             posiciones_anexadas, posiciones_libres)
                 
@@ -131,10 +132,8 @@ def return_card(card_list:list[Box], card, selected_letters:list,
     selected_letters[card.card_pos] = ""
     posiciones_libres.append(card.card_pos)
     ordenar_elementos(posiciones_libres, 1)
-    print(f"Card pos antes de cambiio {card.card_pos}")
-    print(posiciones_anexadas)
+   
     card.card_pos = posiciones_anexadas[len(posiciones_anexadas) - 1]
-    print(f"Card pos dsp de cambiio {card.card_pos}")
 
     posiciones_anexadas.remove(card.card_pos)
     

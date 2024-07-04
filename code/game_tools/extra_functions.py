@@ -73,12 +73,14 @@ def render_multi_line(surface: pygame.Surface, text: str, x: int, y: int,
         center_text (bool, optional): Inicializda en False. Si es True, escribe el texto.
         desde el punto central de la pantalla.
     """
-    lines = text.splitlines()
-    for i, line in enumerate(lines):
-        box_line = Box((x, y + font_size // 3 * i), (50,50))
+    count = 1
+    lines = text.split("\n")
+    for line in lines:
+        box_line = Box((x, y + font_size // 3 * count), (50,50))
         box_line.draw_text(surface, line, "white", FUENTE_1, font_size, "shadow",
                            2, "black", center = center_text)
-
+        count += 1
+  
 def select_random_element(actual_element: str | int, elements_list: list) -> str | int:
     """
     Elige un elemento aleatorio de una lista

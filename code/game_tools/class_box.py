@@ -137,7 +137,7 @@ class Box:
             text_rect.center = (self.rectangulo.x + width_center, 
                                 self.rectangulo.y + height_center - 3)
         else:
-            text_rect.topleft = self.rectangulo.x, self.rectangulo.y
+            text_rect.topleft = (self.rectangulo.x, self.rectangulo.y)
     
         match outline:
             case "border":

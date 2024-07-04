@@ -168,8 +168,8 @@ def use_comodin(surface: pygame.Surface, letter: str, words_founded: list,
 
     if coincidence:
         letter_box = Box((x + pos ,y), (40,100))
-
-        letter_box.draw_text(surface, letter[0], COLOR_PALABRA, FUENTE_3,
+        print(letter)
+        letter_box.draw_text(surface, letter, COLOR_PALABRA, FUENTE_3,
                              font_size=200, outline="shadow")
 
 def count_select_letters (selected_letters: list) -> int:
