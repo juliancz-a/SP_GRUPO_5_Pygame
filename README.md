@@ -55,4 +55,4 @@ Además, contás con los siguientes botones durante una partida:
 
 ## _Muestra del funcionamiento del juego_
 
-[![Demostración en video del juego](https://github.com/juliancz-a/SP_GRUPO_5_Pygame/blob/1a3f440aab16a716e85db82076d1da6b58e35a2e/code/data/markdown/miniatura_video_yt.png)](https://youtu.be/WkvM0X5AUk0)
+[Demostración en video del juego](https://youtu.be/WkvM0X5AUk0)
