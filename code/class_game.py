@@ -1,5 +1,4 @@
 import pygame
-import sys
 from constantes import * 
 
 from game_states.class_menu import Menu

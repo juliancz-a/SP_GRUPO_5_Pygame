@@ -48,7 +48,7 @@ class Help:
         draw_assets(self.surface, [self.assets["menu_button"]],
                     images, self.assets_config)
 
-        render_multi_line(self.surface, HELP_TEXT, 620, 10, 150, center_text= True)
+        render_multi_line(self.surface, HELP_TEXT, 620, 10, 140, center_text= True)
 
         pygame.display.update()
 

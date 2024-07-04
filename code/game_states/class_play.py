@@ -53,6 +53,7 @@ class Play:
 
         self.comodin_state = comodin_state
         self.random_letter = None
+        
         self.option = None
 
     def init_assets(self):
@@ -79,10 +80,10 @@ class Play:
         images_list = [self.assets["background"], self.assets["comodin_button"],
                        self.assets["volume_button"]]
         
-        button_list = [self.assets["menu_button"], self.assets["clear_button"],
+        box_list = [self.assets["menu_button"], self.assets["clear_button"],
                        self.assets["shuffle_button"], self.assets["join_button"]]
 
-        set_buttons_colors(button_list, self.assets_cfg)
+        set_buttons_colors(box_list, self.assets_cfg)
 
         tiempo_transcurrido = (pygame.time.get_ticks() - self.initial_time) // 1000
         tiempo_restante = TIEMPO_LIMITE - tiempo_transcurrido
@@ -92,7 +93,7 @@ class Play:
 
         self.surface.fill("black")
        
-        draw_assets(self.surface, button_list, images_list, self.assets_cfg)
+        draw_assets(self.surface, box_list, images_list, self.assets_cfg)
 
         draw_cards(self.surface, self.game_cfg["empty_card_list"], transparency=155)
         draw_cards(self.surface, self.game_cfg["card_list"])
