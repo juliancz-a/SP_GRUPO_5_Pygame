@@ -77,7 +77,7 @@ def join_letters (selected_letters:list, words_founded:list,
     palabra = "".join(selected_letters).lower()
 
     set_dict = set(combinaciones)
-    
+
     palabra_set = {palabra}
 
     intersec = set_dict.intersection(palabra_set)
@@ -91,7 +91,7 @@ def join_letters (selected_letters:list, words_founded:list,
 
     return retorno
 
-def sum_score(score:int, word) -> int:
+def sum_score(score:int, word: str) -> int:
     score += len(word)
     return score
 
@@ -114,13 +114,13 @@ def normalize_words (combinations: list) -> list[list]:
                 palabras[key].append(combination)
 
     max_len = ordenar_elementos([len(palabras[3]), len(palabras[4]), 
-                                 len(palabras[5]), len(palabras[6])], 2)
+                                len(palabras[5]), len(palabras[6])], 2)
     
     matriz = [[0] * max_len for _ in range(4)]
 
     for i in range (len(matriz)):
         for j in range (len(palabras[6-i])):
-                matriz[i][j] = palabras[6-i][j]
+            matriz[i][j] = palabras[6-i][j]
 
     return matriz
 
@@ -171,7 +171,7 @@ def use_comodin(surface: pygame.Surface, letter: str, words_founded: list,
     if coincidence:
         letter_box = Box((x + pos ,y), (40,100))
         letter_box.draw_text(surface, letter, COLOR_PALABRA, FUENTE_3,
-                             font_size=200, outline="shadow")
+                                font_size=200, outline="shadow")
 
 def count_select_letters (selected_letters: list) -> int:
     """

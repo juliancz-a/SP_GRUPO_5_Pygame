@@ -11,6 +11,10 @@
 
 * Descubre las palabras
 
+### _Fecha de inicio_
+
+* 13 de junio
+
 ### _Fecha de entrega_
 
 * 4 de julio
