@@ -53,6 +53,6 @@ Además, contás con los siguientes botones durante una partida:
 
 ### **El puntaje final será promediado entre la cantidad de puntos conseguida, y la cantidad de partidas jugadas.**
 
-## _Muestra del funcionamiento del juego_
+## :link: _Muestra del funcionamiento del juego_
 
 [Demostración en video del juego](https://youtu.be/WkvM0X5AUk0)
