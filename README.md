@@ -52,3 +52,7 @@ Además, contás con los siguientes botones durante una partida:
 ![Comodín Gif](https://github.com/juliancz-a/SP_GRUPO_5_Pygame/blob/1992f68d66814a3d8581650e804d92cb8789324d/code/data/markdown/comodin_button.gif)
 
 ### **El puntaje final será promediado entre la cantidad de puntos conseguida, y la cantidad de partidas jugadas.**
+
+## _Muestra del funcionamiento del juego_
+
+[Demostración en video del juego](https://youtu.be/WkvM0X5AUk0)
