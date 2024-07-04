@@ -96,7 +96,7 @@ class Menu:
         """
         Actualizar el volumen de la música según el estado de la atributo 'volume'
         
-         Returns:
+        Returns:
             bool: Estado del volumen actual."""
 
         if self.volume:

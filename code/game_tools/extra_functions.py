@@ -56,6 +56,7 @@ def swap(list: list[dict], a: int, b: int):
     list[b] = aux
 
 def operacion(x, y, operacion):
+    """Crea una función lambda"""
     return operacion(x, y)
 
 
@@ -80,7 +81,7 @@ def render_multi_line(surface: pygame.Surface, text: str, x: int, y: int,
         box_line.draw_text(surface, line, "white", FUENTE_1, font_size, "shadow",
                            2, "black", center = center_text)
         count += 1
-  
+
 def select_random_element(actual_element: str | int, elements_list: list) -> str | int:
     """
     Elige un elemento aleatorio de una lista

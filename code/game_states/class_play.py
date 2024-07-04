@@ -77,10 +77,10 @@ class Play:
         """Renderizar los elementos de la escena Play. Botones, fondo, cartas.
         """
         images_list = [self.assets["background"], self.assets["comodin_button"],
-                       self.assets["volume_button"]]
+                        self.assets["volume_button"]]
         
         button_list = [self.assets["menu_button"], self.assets["clear_button"],
-                       self.assets["shuffle_button"], self.assets["join_button"]]
+                        self.assets["shuffle_button"], self.assets["join_button"]]
 
         set_buttons_colors(button_list, self.assets_cfg)
 
@@ -101,12 +101,12 @@ class Play:
             self.assets["join_button"].draw_box(self.surface, 10, 5)
 
             self.assets["join_button"].draw_text(self.surface, "¡Unir!", "white", 
-                                                 FUENTE_1, 60, "shadow", 1, 
-                                                 "black", center = True)
+                                                FUENTE_1, 60, "shadow", 1, 
+                                                "black", center = True)
         
         self.assets["timer"].draw_text(self.surface, str(tiempo_restante), "white", 
-                                       FUENTE_4, font_size = 275, center = True, 
-                                       outline = "shadow", outline_thickness = 2)
+                                        FUENTE_4, font_size = 275, center = True, 
+                                        outline = "shadow", outline_thickness = 2)
         
         self.assets["score_text"].draw_text(self.surface, f"Puntaje: {str(self.score)}", 
                                             "darkslateblue", FUENTE_4, font_size = 125, 
