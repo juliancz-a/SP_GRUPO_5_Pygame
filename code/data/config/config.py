@@ -34,7 +34,8 @@ def read_score(path: str, lista_jugadores: list[dict]) -> list[dict]:
     """
     with open(rf"{path}.csv", "r", encoding="utf8") as archive:
         for empleado in archive:
-            registro = re.split(",|\n", empleado)                
+            registro = re.split(",|\n", empleado)          
+            
             if registro[0] != "nombre":
                 diccionario_jugador = crear_diccionario_jugador(registro[0], 
                                                                 registro[1], 

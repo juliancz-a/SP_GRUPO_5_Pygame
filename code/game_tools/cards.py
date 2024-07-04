@@ -73,6 +73,7 @@ def handle_cards_interaction(event:pygame.event.Event, card_list:list[Card],
             occurrences = occurrences_list.count(card.letter)
 
             if selected_letters.count(card.letter) < occurrences and not card.append:
+                
                 card.card_pos = append_card(card_list, card, selected_letters, 
                                             posiciones_anexadas, posiciones_libres)
                 

@@ -9,4 +9,5 @@ ordenar_elementos(lista_jugadores, 2, "puntos")
 
 juego = Game((1280,720), "POP THE CARD", ICON, lista_palabras, lista_jugadores,
             game_assets)
+
 juego.run()

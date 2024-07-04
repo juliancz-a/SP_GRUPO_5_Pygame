@@ -60,7 +60,7 @@ class Menu:
             
         self.surface.fill("white")
         
-        draw_assets(self.surface, box_list , images, self.assets_config)
+        draw_assets(self.surface, box_list, images, self.assets_config)
         Scoreboard(FUENTE_1, self.surface, self.lista_jugadores, (850,200)).draw_scoreboard(7)
 
         pygame.display.update()

@@ -172,6 +172,7 @@ nickname  = {
 volume_button = {"image" : Image(VOLUME_BUTTON, (10, 10), (60,60))}
 
 set_score_bg = {"image" : Image(SET_SCORE_BACKGROUND, (0,0), (1280,720))}
+
 REGISTER_SCORE_ASSETS = [input_box, submit_button, game_over_title, nickname, 
                          volume_button, set_score_bg]
 
